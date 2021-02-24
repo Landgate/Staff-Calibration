@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Forms &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Views &amp; Templates" href="4_views.html" />
+    <link rel="prev" title="URL Mapping" href="2_URLs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Range Calibration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html">URL Mapping</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Forms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-step-form">Multi-step form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rangeform1">RangeForm1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rangeform2">RangeForm2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-wizard-settings">Form Wizard &amp; Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html">Views &amp; Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html">Initial data migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Range Calibration</a> &raquo;</li>
+        
+      <li>Forms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/range_calibration/3_forms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="forms">
+<h1>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Before going to the <code class="docutils literal notranslate"><span class="pre">view</span></code>, we will need to design a form to submit/upload the Range measurement data. The form should have the following elements:</p>
+<ol class="arabic simple">
+<li><p>Select the levelling instruments - staves and digital levels</p></li>
+<li><p>Date picker to select the observaton date. Raise validation errors if a future date is selected or if the date selected is earler than Jan 2018.</p></li>
+<li><p>File uploader to upload the raw range measurements</p></li>
+<li><p>Field to enter start and end temperture for each of the two observation sets</p></li>
+</ol>
+</div>
+<div class="section" id="multi-step-form">
+<h2>Multi-step form<a class="headerlink" href="#multi-step-form" title="Permalink to this headline">¶</a></h2>
+<p>To make the process simple and clear, form data submission is done using a two-step form, i.e., by using two <code class="docutils literal notranslate"><span class="pre">Forms</span></code> spread across two different templates. <code class="docutils literal notranslate"><span class="pre">Forms</span></code> are defined in a new file called <strong>forms.py</strong> in the <strong>range_calibration</strong> directory. The two <code class="docutils literal notranslate"><span class="pre">Forms</span></code> created are (i) <code class="docutils literal notranslate"><span class="pre">RangeForm1</span></code> and (ii) <code class="docutils literal notranslate"><span class="pre">RangeForm2</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename- staff/range_calibration/forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Calibration_Update</span>
+<span class="kn">from</span> <span class="nn">staffs.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">DigitalLevel</span>
+
+<span class="c1"># make your forms</span>
+<span class="k">class</span> <span class="nc">RangeForm1</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+        <span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">RangeForm2</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Forms</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default" id="id1">
+<img alt="../_images/form_step1.png" src="../_images/form_step1.png" />
+<p class="caption"><span class="caption-text">a Step 1 - <code class="docutils literal notranslate"><span class="pre">RangeForm1</span></code></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id2">
+<img alt="../_images/form_step2.png" src="../_images/form_step2.png" />
+<p class="caption"><span class="caption-text">b Step 2 - <code class="docutils literal notranslate"><span class="pre">RangeForm2</span></code></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rangeform1">
+<h2>RangeForm1<a class="headerlink" href="#rangeform1" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RangeForm1</span></code> is a model <code class="docutils literal notranslate"><span class="pre">Form</span></code> with three fields - <code class="docutils literal notranslate"><span class="pre">staff_number</span></code>, <code class="docutils literal notranslate"><span class="pre">level_number</span></code>, and <code class="docutils literal notranslate"><span class="pre">observation_date</span></code>. Figure a) shows how the form looks like. The <code class="docutils literal notranslate"><span class="pre">staff_number</span></code> and <code class="docutils literal notranslate"><span class="pre">level_number</span></code> are fields inherited from the models <code class="docutils literal notranslate"><span class="pre">Staff</span></code> and <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code>, respectively, and are made <strong>selectable</strong> from the user’s list of staves and digital levels. If the dropdown list is empty, users will be required to click the <code class="docutils literal notranslate"><span class="pre">+</span></code> button to add them. <code class="docutils literal notranslate"><span class="pre">RangeForm1</span></code> has the following definition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RangeForm1</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+        <span class="c1"># this function will filter the staves and digital levels based on the user authority and display only those</span>
+        <span class="c1"># instruments registered with the same company</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RangeForm1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user__authority</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">authority</span><span class="p">,</span>
+                                                                    <span class="n">staff_type__staff_type__exact</span> <span class="o">=</span> <span class="s2">&quot;Invar&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;level_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">DigitalLevel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user__authority</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">authority</span><span class="p">)</span>
+
+    <span class="c1"># Select the model and the fields to be displayed</span>
+    <span class="c1"># forms.Select enables to select an item from a dropdown display of items</span>
+    <span class="c1"># forms.DateInput enables to display the calender for selecting the observation date. The date format is customised as DDMMYY (``%d-%m-%Y``).</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Calibration_Update</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">,</span> <span class="s1">&#39;level_number&#39;</span><span class="p">,</span> <span class="s1">&#39;observation_date&#39;</span><span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;staff_number&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">Select</span><span class="p">(),</span>
+            <span class="s1">&#39;level_number&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">Select</span><span class="p">(),</span>
+            <span class="s1">&#39;observation_date&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">DateInput</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">),</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;django-forms&#39;</span><span class="p">,</span> <span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Select a date&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;date&#39;</span><span class="p">}),</span>
+            <span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">+</span></code> button leads to the previously created URL <code class="docutils literal notranslate"><span class="pre">staff-create</span></code> and/or <code class="docutils literal notranslate"><span class="pre">level-create</span></code> in the <strong>staffs</strong> application.</p>
+</div>
+<div class="section" id="rangeform2">
+<h2>RangeForm2<a class="headerlink" href="#rangeform2" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RangeForm2</span></code> is a <code class="docutils literal notranslate"><span class="pre">Form</span></code> class for entering the temperature fields and upload the raw measurement file. The form is shown in Figure b) and the <code class="docutils literal notranslate"><span class="pre">Form</span></code> is defined like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RangeForm2</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+
+        <span class="c1"># this function disables the user association for this form</span>
+        <span class="c1"># without this function the form will not work</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RangeForm2</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Temperature is recorded twice - start &amp; end of each observation set</span>
+    <span class="c1"># raises a validation error if temperature entered is not within a range of 0-45 degrees</span>
+    <span class="n">start_temperature_1</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">NumberInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter 0-45&#39;</span><span class="p">}))</span>
+    <span class="n">end_temperature_1</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">NumberInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter 0-45&#39;</span><span class="p">}))</span>
+
+    <span class="n">start_temperature_2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">NumberInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter 0-45&#39;</span><span class="p">}))</span>
+    <span class="n">end_temperature_2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">NumberInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter 0-45&#39;</span><span class="p">}))</span>
+
+
+    <span class="c1"># field for loading the raw file</span>
+    <span class="c1"># type of document accepted - .txt or .asc but this is specified in the views.py</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FileField</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="form-wizard-settings">
+<h2>Form Wizard &amp; Settings<a class="headerlink" href="#form-wizard-settings" title="Permalink to this headline">¶</a></h2>
+<p>The form wizard application splits <code class="docutils literal notranslate"><span class="pre">forms</span></code> across multiple HTML templates or pages. It maintains state in one of the backends so that the full server-side processing can be delayed until the submission of the final form. It is particularly useful for projecting lengthy forms that would be too unwieldy for display on a single page. Here, <code class="docutils literal notranslate"><span class="pre">RangeForm1</span></code> and <code class="docutils literal notranslate"><span class="pre">RangeForm2</span></code> are not very complex but nevertheless warrants multi-step outlook.</p>
+<p>In Django, we can implement this using a plugin tool known as <code class="docutils literal notranslate"><span class="pre">django-formtools</span></code> which is installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django-formtools</span></code> via the command prompt. The <code class="docutils literal notranslate"><span class="pre">form-tools</span></code> application is then listed in the <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> in <strong>settings.py</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;formtools&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>For more details on the usage of <code class="docutils literal notranslate"><span class="pre">formtools</span></code>, please refer to <a class="reference external" href="https://django-formtools.readthedocs.io/en/latest/wizard.html">https://django-formtools.readthedocs.io/en/latest/wizard.html</a> but for now we will go to <strong>view</strong> and <strong>URL</strong> mapper to use the <code class="docutils literal notranslate"><span class="pre">formtools</span></code>, render them to HTML templates and process the data submissions.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="4_views.html" class="btn btn-neutral float-right" title="Views &amp; Templates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="2_URLs.html" class="btn btn-neutral float-left" title="URL Mapping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

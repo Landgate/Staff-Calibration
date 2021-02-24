@@ -1,0 +1,114 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<article class="post">
+  	<header class="post-header">
+    	<h1 class="post-title text-center"> Please sign up with your email </h1>
+  	</header>
+	<hr>
+	<br>
+	{% if form.errors %}
+		<div class="post-content alert error">
+	    {% for field in form %}
+	        {% for error in field.errors %}
+	            <p> {{ error }} </p>
+	        {% endfor %}
+	    {% endfor %}
+	    </div>
+	{% endif %}
+	
+	<div class="post-content">
+		<form class="site-form" action="/accounts/signup/" method="post">
+		    {% csrf_token %}
+		    {% for field in form %}
+
+		    	{% if field.name == "authority"%}
+		    		<p>{{ field.label_tag }} {{ field }}</p>
+
+			    	<p id="authorityDiv" name="authority_input" style="display:none;">
+					    <label for="authority_name">Company Name*:</label> 
+					    <input type="text" name="authority_name" placeholder="">
+					    <label for="authority_abbrev">Abbreviation*:</label> 
+					    <input style="width:15%" type="text" name="authority_abbrev" placeholder="Short name">
+					</p>
+			    
+		    	{% else %}
+		    		
+		    		<p>{{ field.label_tag }} {{ field }}</p>
+		    	{% endif %}
+		    	<!-- <p>{{ field.label_tag }} {{ field }}</p> -->
+		    	
+		    {% endfor %}
+		   
+		    <!-- {{ form.as_p }} -->
+
+		    {% if request.GET.next %}
+		    	<input type="hidden" name="next" value = "{{ request.GET.next }}">
+		    {% endif %}
+
+		    <div class="grid-1">
+			    <p>
+			    	<input type="checkbox" name="terms" value="Terms&Conditions" required> 
+			    	<label for="terms"> By signing in, I agree to the Terms & Conditions as stated in <a href="http://www0.landgate.wa.gov.au/privacy" target="_blank">Privacy Policy</a> </label><br>
+			    </p>
+		    </div>
+		    <br>
+		    <div class="grid-2">
+		    	<div>
+		    		<button  style="width:6em" class="px-2 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit"> Signup </button>
+		    	</div>
+		    	<div>
+		    		<a class="px-2 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'accounts:login' %}">Login &#8811;</a>
+		    	</div>
+		    </div>
+		    
+		   <!--  <input class="px-2 py-1 border border-transparent text-sm leading-2 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"type="submit" value="Signup &#8811;"> -->
+		</form>
+	</div>
+</article>
+
+<script type="text/javascript">
+	// const log = console.log;
+	const authoritySelect = document.querySelector(`[id="id_authority"]`);
+
+	authoritySelect.addEventListener(`change`, (e) => {
+	  // log(`e.target`, e.target);
+	  const select = e.target;
+	  const value = select.value;
+	  const desc = select.options[select.selectedIndex].text;
+	  // log(`value desc`, value, desc);
+	  if (desc=="Other") {
+	  	document.getElementById("authorityDiv").style.display = "block";
+	  } else {
+	  	document.getElementById("authorityDiv").style.display = "none";
+	  }
+	});
+	</script>
+ {% endblock content %}
+
+
+ <!-- {% if field.name == "authority"%}
+		    		<p> {{ field.label_tag }}
+		    			<select name="authority_dropdown" onchange="admSelectCheck(this);">
+					        {% for f in field  %}
+					       		<option value="{{ f }}">{{ f.value }}</option>
+					       	{% endfor %}
+					       	<option value="Other">Other</option>
+					    </select>
+		    		</p>
+
+		    		<p id="admDivCheck" name="authority_input" style="display:none;">
+					    <label for="authority_name">Company Name*:</label> 
+					    <input type="text" name="authority_name" placeholder="">
+					    <label for="authority_abbrev">Abbreviation*:</label> 
+					    <input style="width:15%" type="text" name="authority_abbrev" placeholder="Short name">
+					</p>
+		    		
+		    	{% else %} -->
+		    		<!-- <p>{{ field.label_tag }} {{ field }}</p> -->
+
+		    	<!-- {% endif %} -->

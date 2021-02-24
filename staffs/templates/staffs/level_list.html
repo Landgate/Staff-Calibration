@@ -1,0 +1,59 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+	<article class="post">
+		{% if messages %}
+		<ul class="alert messages">
+		    {% for message in messages %}
+		    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+		<br>
+		{% endif %}
+		<header class="post-header">
+			<h1 class="post-title text-center">List of digital levels</h1>
+		</header>
+
+		<div class="post-content">
+			{% if level_lists %}
+				<table style="width: 90%">
+					<tr>
+						<th>Digital Level Owner</th>
+						<th>Digital Level Number</th>
+	        			<th>Digital Level Make</th>
+	        			<th>Digital Level Model</th>
+					</tr>
+					{% for level in level_lists %}
+						<tr>
+							<td> {{ level.user.authority.authority_name }} </td>
+							<td><a href="{{ level.get_absolute_url }}"> {{ level.level_number }} </a> </td>
+							<td>{{ level.level_make }}</td>
+							<td>
+								{{ level.level_model }}
+								<a style="float:right" href="{% url 'staffs:level-update' level.id %}">
+						        	<button class="px-1 border border-transparent text-xs leading-1 font-small rounded text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" > 
+						        		Update &raquo;
+						        	</button>
+						        </a>
+							</td>
+						</tr>
+						
+					{% endfor %}
+				</table>
+			{% else %}
+				<p> There is currently no digital levels listed </p>
+			{% endif %}
+
+			<br>
+			<div class="post-content">
+		        <div class="mt-5 flex justify-left">
+		        	<a class="inline-flex items-center justify-center px-2 py-1 border border-transparent text-sm rounded-md text-black bg-blue-200 hover:bg-blue-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:level-create' %}">Add a new digital level
+		        	</a>
+		        </div>
+		      </div>
+			<div>
+
+		</div>
+	</article>
+{% endblock content %}

@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Django admin site &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building URLs, Views, and Templates" href="create_urls_views.html" />
+    <link rel="prev" title="Building the models" href="building_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Building the staffs application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="building_models.html">Building the models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Django admin site</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registering-the-models">Registering the models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-superuser">Creating a <code class="docutils literal notranslate"><span class="pre">superuser</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-into-the-admin-site">Logging into the Admin site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-layout-on-admin-site">Model layout on Admin site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html">Building URLs, Views, and Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html">Working with forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Building the staffs application</a> &raquo;</li>
+        
+      <li>Django admin site</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staffs_application/admin_site.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="django-admin-site">
+<h1>Django admin site<a class="headerlink" href="#django-admin-site" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Django provides an <code class="docutils literal notranslate"><span class="pre">admin</span></code> application by default. The Admin site can use the <em>models</em> to automatically build a site, which can <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">view</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and <code class="docutils literal notranslate"><span class="pre">delete</span></code> records in the database. However, access to this admin site should be restricted just for use by the system adminstrators and/or concerned people (e.g., geodetic team).</p>
+<p>All the configuration required to include the admin application in the website was done automatically when the project was first created. This includes:</p>
+<ol class="arabic">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="o">...</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>In the project <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>To access the models in the admin site, it needs to be <em>registered</em> using the <code class="docutils literal notranslate"><span class="pre">admin.py</span></code> found in the application folder (in this case, <strong>/staffs/staff/</strong>).</p>
+</div>
+<div class="section" id="registering-the-models">
+<h2>Registering the models<a class="headerlink" href="#registering-the-models" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">admin.py</span></code> in the <em>staffs</em> application (<strong>/staff/staffs/admin.py</strong>). The <code class="docutils literal notranslate"><span class="pre">django.contrib.admin</span></code> has been already imported here and has all the admin functions to give access to the models.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="c1"># Register your models here</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Import the <em>staffs</em> models and register them using the <code class="docutils literal notranslate"><span class="pre">admin.site.register</span></code> function</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">StaffType</span><span class="p">,</span> <span class="n">DigitalLevel</span>    <span class="c1"># import the models</span>
+
+<span class="c1"># Register your models here</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Staff</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">StaffType</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DigitalLevel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="creating-a-superuser">
+<h2>Creating a <code class="docutils literal notranslate"><span class="pre">superuser</span></code><a class="headerlink" href="#creating-a-superuser" title="Permalink to this headline">¶</a></h2>
+<p>In order to access the Admin site and get access to the models, the Admin site requires a <em>user account</em> who has the permission/authority to manage all objects in the site. In django, it can be achieved by creating a <strong>superuser</strong> via the <code class="docutils literal notranslate"><span class="pre">manage.py</span></code> in the command prompt. The <em>superuser</em> will have full access to the site and the required permissions to create, view, update and delete the objects and/or records. To create a superuser,</p>
+<ol class="arabic">
+<li><p>In the command prompt, type:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>It will ask for a username, email address, and a password. After inputting these information, restart the server to log into the site.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="logging-into-the-admin-site">
+<h2>Logging into the Admin site<a class="headerlink" href="#logging-into-the-admin-site" title="Permalink to this headline">¶</a></h2>
+<p>To access the admin site, open the <em>/admin</em> URL (e.g., <a class="reference external" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a>) and enter the new superuser credentials (userid and password). Once logged in, the site will display all the models grouped by the installed applications. The <code class="docutils literal notranslate"><span class="pre">superuser</span></code> is found in the <code class="docutils literal notranslate"><span class="pre">Users</span></code> under <strong>Authentication and Authorization</strong>. Click on each model to view, update, create, or delete the records.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/django_admin_site.png" src="../_images/django_admin_site.png" />
+<p class="caption"><span class="caption-text">Django adminstration site.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="model-layout-on-admin-site">
+<h2>Model layout on Admin site<a class="headerlink" href="#model-layout-on-admin-site" title="Permalink to this headline">¶</a></h2>
+<p>Create a couple of records in one of the models (e.g., DigitalLevel) by clicking on the model and clicking the <em>ADD DIGITAL LEVEL</em> button on the right. Using the methods in the <code class="docutils literal notranslate"><span class="pre">models.py</span></code> for the <strong>DigitalLevel</strong> model as</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file name - models.py</span>
+
+<span class="k">class</span> <span class="nc">DigitalLevel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+        <span class="o">...</span>
+
+        <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_model</span><span class="si">}</span><span class="s1">)&#39;</span>  <span class="c1"># level_number(level_model)</span>
+</pre></div>
+</div>
+<p>the admin site will display the list of digital levels as shown in the diagram below:</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/django_site_list_initial.png" src="../_images/django_site_list_initial.png" />
+<p class="caption"><span class="caption-text">Admin site showing the list of digital levels.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>To change how a model is displayed in the admin site, a <code class="docutils literal notranslate"><span class="pre">ModelAdmin</span></code> class (which describes the layout) should be defined and register it with the model in the <code class="docutils literal notranslate"><span class="pre">admin.py</span></code>. For the example above, the list view can be improved by using the <code class="docutils literal notranslate"><span class="pre">list_display</span></code> inside the <code class="docutils literal notranslate"><span class="pre">ModelAdmin</span></code> as shown. Also, an <code class="docutils literal notranslate"><span class="pre">ordering</span></code> is added display the list in the order of <code class="docutils literal notranslate"><span class="pre">level_make</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename - admin.py</span>
+
+<span class="c1"># Define the admin class</span>
+<span class="k">class</span> <span class="nc">DigitalLevelAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+        <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;level_number&#39;</span><span class="p">,</span> <span class="s1">&#39;level_make&#39;</span><span class="p">,</span> <span class="s1">&#39;level_model&#39;</span><span class="p">)</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;level_make&#39;</span><span class="p">,)</span>
+
+<span class="c1"># Register the admin class and the model</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DigitalLevel</span><span class="p">,</span> <span class="n">DigitalLevelAdmin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The list view now has the following look:</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/django_site_list_final.png" src="../_images/django_site_list_final.png" />
+<p class="caption"><span class="caption-text">Admin site showing the list of digital levels after re-configurating the list view.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>When records get crowded, it is also useful to be able to filter the items by fields using the <code class="docutils literal notranslate"><span class="pre">list_filter</span></code> attribute. This is added similar to <code class="docutils literal notranslate"><span class="pre">list_display</span></code> and <code class="docutils literal notranslate"><span class="pre">ordering</span></code> with or without them. A <strong>FILTER</strong> functionality will be added in the admin site for the registered model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the admin class</span>
+<span class="k">class</span> <span class="nc">DigitalLevelAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+        <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;level_number&#39;</span><span class="p">,</span> <span class="s1">&#39;level_make&#39;</span><span class="p">,</span> <span class="s1">&#39;level_model&#39;</span><span class="p">)</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;level_make&#39;</span><span class="p">,)</span>
+        <span class="n">list_filter</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;level_make&#39;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id4">
+<img alt="../_images/filter_added_admin_site.png" src="../_images/filter_added_admin_site.png" />
+<p class="caption"><span class="caption-text">Admin site showing the list of digital levels after adding the <code class="docutils literal notranslate"><span class="pre">list_filter</span></code> attribute.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>The list views of the other two models can configured in the same manner. The admin site list view will only display the fields included in the <code class="docutils literal notranslate"><span class="pre">list_display</span></code> and it is not necessary to include every field in the model. The other two models can be configured in the same way.</p>
+<p>Each application will have its own <code class="docutils literal notranslate"><span class="pre">admin.py</span></code> making it very convienent to manage the admin views specific to the application. For more information, refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/ref/contrib/admin/">https://docs.djangoproject.com/en/3.1/ref/contrib/admin/</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="create_urls_views.html" class="btn btn-neutral float-right" title="Building URLs, Views, and Templates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="building_models.html" class="btn btn-neutral float-left" title="Building the models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

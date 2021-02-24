@@ -1,0 +1,15 @@
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+	<h1>Staff details</h1>
+	<p> Here is the detail for Staff {{ staff.staff_number }}</p>
+
+	<div class="staff-detail">
+		<div class="staff">
+			<h2> Staff Number: {{ staff.staff_number }}</h2>
+			<p> <strong>Staff Length:</strong> {{ staff.staff_length }} </p>
+			<p> <strong>Date Calibrated:</strong> {{ staff.calibration_date }}</p>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building the staffs application &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building the models" href="building_models.html" />
+    <link rel="prev" title="Creating the Staff Calibration website" href="../installation-guide/project-set-up.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building the staffs application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html">Building the models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html">Django admin site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html">Building URLs, Views, and Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html">Working with forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Building the staffs application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staffs_application/contents.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-the-staffs-application">
+<h1>Building the staffs application<a class="headerlink" href="#building-the-staffs-application" title="Permalink to this headline">¶</a></h1>
+<p>Staff calibration is a django-based web application designed for Landgate and other external users such as surveyors and engineers who are engaged in measuring absolute or relative height differences on the ground, to calibrate levelling staves online and get the reports instantly. This application replaces the existing ‘staff’ software (executable written in Delphi) provided by Landgate. Written in python, html, css and some javascripts, this new application:</p>
+<ul class="simple">
+<li><p>is mathematically more robust by considering the signifcant seasonal variation in range,</p></li>
+<li><p>users have more control over their own levelling instruments and manage their staff calibration records, and</p></li>
+<li><p>has the ability to do both range and staff calibrations, which is very important for Landgate who manages the Boya Range,</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="building_models.html">Building the models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#designing-the-staffs-models">Designing the <strong>staffs</strong> models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#defining-the-models">Defining the models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#model-fields">Model Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#metadata">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#methods">Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_models.html#re-running-the-database-migrations">Re-running the database migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin_site.html">Django admin site</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#registering-the-models">Registering the models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#creating-a-superuser">Creating a <code class="docutils literal notranslate"><span class="pre">superuser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#logging-into-the-admin-site">Logging into the Admin site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#model-layout-on-admin-site">Model layout on Admin site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="create_urls_views.html">Building URLs, Views, and Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html#defining-the-resource-urls">Defining the resource URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html#creating-an-index-home-page-with-a-list-view-of-staves">Creating an index (home) page with a list view of staves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#url-mapping">URL Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#view-class-based">View (class-based)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#template">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#example-base-template">Example - Base Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#home-page-staff-list-html-template">Home page (<code class="docutils literal notranslate"><span class="pre">staff_list.html</span></code>) template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_urls_views.html#how-does-the-home-page-look-like">How does the home page look like?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_forms.html">Working with forms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html#django-form-handling-process">Django form handling process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html#form-class"><strong>Form class</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#declaring-a-form">Declaring a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#form-fields">Form fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#modelform">ModelForm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html#building-the-staff-create-form">Building the Staff Create Form</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#staff-form">Staff form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#view-function">View function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#template">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_forms.html#url-configurations">URL Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html#updating-a-staff-record">Updating a Staff record</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="building_models.html" class="btn btn-neutral float-right" title="Building the models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../installation-guide/project-set-up.html" class="btn btn-neutral float-left" title="Creating the Staff Calibration website" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

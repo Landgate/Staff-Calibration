@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Initial data migrations &mdash; Staff Calibration 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Staff Calibration
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Staff Calibration</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Initial data migrations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staff_calibration/5_data_migrations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="initial-data-migrations">
+<h1>Initial data migrations<a class="headerlink" href="#initial-data-migrations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Range measurement and calibration forms the core of the Staff Calibration application. The range calibration consists of more than two years of monthly range measurements at the Boya Staff Calibration Range. These monthly measurements are adjusted and averaged to give one set of range value for each month of the year (i.e., monthly mean).
+Therefore, we need an approach to pre-load all the existing range measurements and avoid the manual task of repeating the process through the <code class="docutils literal notranslate"><span class="pre">SessionWizardView</span></code>. As explained, this can done by creating a new migration file in the folder called <strong>migrations</strong> (i.e., <strong>staff/range_calibration/migration/</strong>) through <code class="docutils literal notranslate"><span class="pre">manage.py</span></code>.</p>
+</div>
+<div class="section" id="data-migrations">
+<h2>Data migrations<a class="headerlink" href="#data-migrations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Create a new migration file like this:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span> <span class="o">--</span><span class="n">empty</span> <span class="n">range_calibration</span>
+</pre></div>
+</div>
+<p>A new migration file with a .py format will be created under <strong>staff/range_calibration/migrations/</strong> and should have a sequence number greater than 1 as <code class="docutils literal notranslate"><span class="pre">0001_initial.py</span></code> is generated during the initial migration. For demonstration purposes, here is how the folder looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/
+└──range_calibrations/
+        └──migrations/
+                ├──__init__.py
+                ├──0001_initial.py
+                └──0002_auto_20201113_1350.py       # new migration file created
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>0002_auto_20201113_1350.py</strong> will be run only after <em>0001_initial.py</em> and all the data migrations required. The migration intially looks like this:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;range_calibration&#39;</span><span class="p">,</span> <span class="s1">&#39;0001_initial&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>So, we need to add the other dependencies and python functions to load, read, and process range information and update the database. This can be done by copying all the relevant functions from <strong>views.py</strong> to <strong>0002_auto_20201113_1350.py</strong> and tweaking them to fit the purpose. Let us first update the <code class="docutils literal notranslate"><span class="pre">Migration</span></code> class with the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># filename: 0002_auto_20201113_1350.py</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            dependencies: 0001_initial - create models and tables</span>
+<span class="sd">                          0002_auto_20201112_1023 - landgate staff data migrations under staff/staffs/migrations</span>
+<span class="sd">            upload_range_data: read, process and update range data</span>
+<span class="sd">            reverse_func: reverse the process by deleting all the data</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+    <span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+<span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;range_calibration&#39;</span><span class="p">,</span> <span class="s1">&#39;0001_initial&#39;</span><span class="p">),</span>       <span class="c1"># initial migration</span>
+    <span class="p">(</span><span class="s1">&#39;staffs&#39;</span><span class="p">,</span> <span class="s1">&#39;0002_auto_20201112_1023&#39;</span><span class="p">),</span>       <span class="c1"># data migration in staffs</span>
+<span class="p">]</span>
+
+<span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">migrations</span><span class="o">.</span><span class="n">RunPython</span><span class="p">(</span><span class="n">upload_range_data</span><span class="p">,</span> <span class="n">reverse_func</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="upload-range-data">
+<h2><code class="docutils literal notranslate"><span class="pre">upload_range_data()</span></code><a class="headerlink" href="#upload-range-data" title="Permalink to this headline">¶</a></h2>
+<p>This function sits above the <code class="docutils literal notranslate"><span class="pre">Migration</span></code> class and is the combination of functions - load, read, and process raw files and update the database. It is also dependent on the number of functions that are laid above the function itself.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">transaction</span>
+
+<span class="k">def</span> <span class="nf">upload_range_data</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+    <span class="n">Staff</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;staffs&quot;</span><span class="p">,</span> <span class="s2">&quot;Staff&quot;</span><span class="p">)</span>
+    <span class="n">DigitalLevel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;staffs&quot;</span><span class="p">,</span> <span class="s2">&quot;DigitalLevel&quot;</span><span class="p">)</span>
+
+    <span class="n">Calibration_Update</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;Calibration_Update&quot;</span><span class="p">)</span>
+    <span class="n">RawDataModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;RawDataModel&quot;</span><span class="p">)</span>
+    <span class="n">AdjustedDataModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;AdjustedDataModel&quot;</span><span class="p">)</span>
+    <span class="n">HeightDifferenceModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;HeightDifferenceModel&quot;</span><span class="p">)</span>
+    <span class="n">RangeParameters</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;RangeParameters&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Starting to read the files</span>
+    <span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;data/range_data&quot;</span>
+    <span class="c1"># Reading the temperature record</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;temperatures.csv&#39;</span><span class="p">)):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;temperatures.csv&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">csv_reader</span><span class="p">)</span>
+            <span class="n">temperatures</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
+                <span class="n">observation_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+                <span class="n">staff_number</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">level_number</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">start_temperature1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">end_temperature1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">start_temperature2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">end_temperature2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+                <span class="n">temperatures</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">observation_date</span><span class="p">,</span>
+                                    <span class="n">staff_number</span><span class="p">,</span>
+                                    <span class="n">level_number</span><span class="p">,</span>
+                                    <span class="n">start_temperature1</span><span class="p">,</span>
+                                    <span class="n">end_temperature1</span><span class="p">,</span>
+                                    <span class="n">start_temperature2</span><span class="p">,</span>
+                                    <span class="n">end_temperature2</span><span class="p">])</span>
+            <span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temperatures</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="c1"># reading thef older</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.ASC&#39;</span><span class="p">,</span> <span class="s1">&#39;.asc&#39;</span><span class="p">)):</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                <span class="c1">#print(file_path.split(&#39;/&#39;)[2].split(&#39;-&#39;)[0])</span>
+                <span class="c1">#try:</span>
+                <span class="n">observation_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+                <span class="n">staff_number</span> <span class="o">=</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">update_index</span> <span class="o">=</span> <span class="n">observation_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">staff_number</span><span class="o">.</span><span class="n">staff_number</span>
+                <span class="n">filter_staff</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[(</span><span class="n">temperatures</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">observation_date</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">temperatures</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">staff_number</span><span class="o">.</span><span class="n">staff_number</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_staff</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># k +=1</span>
+                    <span class="n">level_number</span> <span class="o">=</span> <span class="n">DigitalLevel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level_number</span> <span class="o">=</span> <span class="n">filter_staff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="n">Set_1_AvgT</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_staff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">filter_staff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                    <span class="n">Set_2_AvgT</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_staff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span><span class="o">+</span><span class="n">filter_staff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">6</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                    <span class="c1"># read the file</span>
+                    <span class="n">staff_reading</span> <span class="o">=</span> <span class="n">Process_File</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+                    <span class="n">Staff_Attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dCorrectionFactor&#39;</span><span class="p">:</span> <span class="mf">3.81</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span>
+                                        <span class="s1">&#39;dStdTemperature&#39;</span><span class="p">:</span> <span class="mf">19.8</span><span class="p">,</span>
+                                        <span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">:</span><span class="mf">0.81</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">}</span>
+                    <span class="n">range_measurement</span> <span class="o">=</span> <span class="n">rawdata_to_table</span><span class="p">(</span><span class="n">staff_reading</span><span class="p">,</span> <span class="n">Set_1_AvgT</span><span class="p">,</span> <span class="n">Set_2_AvgT</span><span class="p">,</span> <span class="n">Staff_Attributes</span><span class="p">)</span>
+
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">range_measurement</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+                    <span class="c1"># switch columns = move standard deviation to end</span>
+                    <span class="n">data</span><span class="p">[:,[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+                    <span class="n">this_ulist</span> <span class="o">=</span> <span class="n">unique_list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">output_ht_diff</span><span class="p">,</span> <span class="n">output_adjustement</span> <span class="o">=</span> <span class="n">adjustment</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">this_ulist</span><span class="p">)</span>
+
+                    <span class="c1"># Update Calibration_Update Model</span>
+                    <span class="k">if</span> <span class="n">Calibration_Update</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">Calibration_Update</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                                                        <span class="n">update_index</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">,</span>
+                                                        <span class="n">staff_number</span><span class="o">=</span><span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="o">.</span><span class="n">staff_number</span><span class="p">),</span>
+                                                        <span class="n">level_number</span> <span class="o">=</span> <span class="n">DigitalLevel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level_number</span><span class="o">=</span><span class="n">level_number</span><span class="o">.</span><span class="n">level_number</span><span class="p">),</span>
+                                                        <span class="n">observation_date</span> <span class="o">=</span> <span class="n">observation_date</span><span class="p">)</span>
+                        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+                        <span class="c1"># print(k)</span>
+
+
+
+                        <span class="c1"># Insert raw data</span>
+                        <span class="k">if</span> <span class="n">RawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">):</span>
+                            <span class="n">RawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                        <span class="c1"># re-insert</span>
+                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">range_measurement</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+                                <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                                    <span class="n">RawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                                                    <span class="n">update_index</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">,</span>
+                                                    <span class="n">staff_number</span> <span class="o">=</span><span class="n">staff_number</span><span class="o">.</span><span class="n">staff_number</span><span class="p">,</span>
+                                                    <span class="n">observation_date</span> <span class="o">=</span> <span class="n">observation_date</span><span class="p">,</span>
+                                                    <span class="n">obs_set</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">pin</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="n">temperature</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="n">frm_pin</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                                    <span class="n">to_pin</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                                                    <span class="n">standard_deviation</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                                                    <span class="n">observed_ht_diff</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                                                    <span class="n">corrected_ht_diff</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+                        <span class="c1"># Insert the height differences</span>
+                        <span class="k">if</span> <span class="n">HeightDifferenceModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">):</span>
+                            <span class="n">HeightDifferenceModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                        <span class="c1"># re-insert</span>
+                        <span class="k">for</span> <span class="n">pin</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">output_ht_diff</span><span class="p">:</span>
+                            <span class="n">HeightDifferenceModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">observation_date</span><span class="o">=</span> <span class="n">observation_date</span><span class="p">,</span>
+                                                                  <span class="n">update_index</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">,</span>
+                                                                  <span class="n">pin</span><span class="o">=</span><span class="n">pin</span><span class="p">,</span>
+                                                                  <span class="n">adjusted_ht_diff</span><span class="o">=</span><span class="n">d</span><span class="p">,</span>
+                                                                  <span class="n">uncertainty</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
+                                                                  <span class="n">observation_count</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+                        <span class="c1"># Save the adjustments</span>
+                        <span class="k">if</span> <span class="n">AdjustedDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">):</span>
+                            <span class="n">AdjustedDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                        <span class="c1"># re-insert</span>
+                        <span class="k">for</span> <span class="n">pin</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">resd</span><span class="p">,</span> <span class="n">ostd</span><span class="p">,</span> <span class="n">sdevr</span><span class="p">,</span> <span class="n">stdres</span> <span class="ow">in</span> <span class="n">output_adjustement</span><span class="p">:</span>
+                            <span class="n">AdjustedDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">observation_date</span> <span class="o">=</span> <span class="n">observation_date</span><span class="p">,</span>
+                                                              <span class="n">update_index</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">,</span>
+                                                              <span class="n">pin</span> <span class="o">=</span> <span class="n">pin</span><span class="p">,</span>
+                                                              <span class="n">observed_ht_diff</span> <span class="o">=</span> <span class="n">obs</span><span class="p">,</span>
+                                                              <span class="n">adjusted_ht_diff</span> <span class="o">=</span> <span class="n">adj</span><span class="p">,</span>
+                                                              <span class="n">residuals</span> <span class="o">=</span> <span class="n">resd</span><span class="p">,</span>
+                                                              <span class="n">standard_deviation</span> <span class="o">=</span> <span class="n">ostd</span><span class="p">,</span>
+                                                              <span class="n">std_dev_residual</span> <span class="o">=</span> <span class="n">sdevr</span><span class="p">,</span>
+                                                              <span class="n">standard_residual</span> <span class="o">=</span><span class="n">stdres</span><span class="p">)</span>
+
+    <span class="c1"># Update the range parameters</span>
+    <span class="n">p_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1-2&#39;</span><span class="p">,</span><span class="s1">&#39;2-3&#39;</span><span class="p">,</span><span class="s1">&#39;3-4&#39;</span><span class="p">,</span><span class="s1">&#39;4-5&#39;</span><span class="p">,</span><span class="s1">&#39;5-6&#39;</span><span class="p">,</span><span class="s1">&#39;6-7&#39;</span><span class="p">,</span><span class="s1">&#39;7-8&#39;</span><span class="p">,</span><span class="s1">&#39;8-9&#39;</span><span class="p">,</span><span class="s1">&#39;9-10&#39;</span><span class="p">,</span><span class="s1">&#39;10-11&#39;</span><span class="p">,</span><span class="s1">&#39;11-12&#39;</span><span class="p">,</span><span class="s1">&#39;12-13&#39;</span><span class="p">,</span><span class="s1">&#39;13-14&#39;</span><span class="p">,</span><span class="s1">&#39;14-15&#39;</span><span class="p">,</span><span class="s1">&#39;15-16&#39;</span><span class="p">,</span><span class="s1">&#39;16-17&#39;</span><span class="p">,</span><span class="s1">&#39;17-18&#39;</span><span class="p">,</span><span class="s1">&#39;18-19&#39;</span><span class="p">,</span><span class="s1">&#39;19-20&#39;</span><span class="p">,</span><span class="s1">&#39;20-21&#39;</span><span class="p">]</span>
+
+    <span class="c1"># check if there are new calibrations not included in the range parameter</span>
+    <span class="n">staff</span> <span class="o">=</span> <span class="n">Calibration_Update</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_table__isnull</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">staff</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">staff</span> <span class="o">=</span> <span class="n">staff</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;update_index&#39;</span><span class="p">,</span> <span class="s1">&#39;observation_date&#39;</span><span class="p">)</span>
+        <span class="n">staff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+        <span class="n">monthlist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%b&#39;</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">month</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">staff</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="c1"># staff = np.append(staff,np.array(monthlist).T, axis=1)</span>
+        <span class="n">staff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">monthlist</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">monthlist</span><span class="p">,</span> <span class="n">indices</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">staff</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">month_text</span> <span class="o">=</span> <span class="n">staff</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">monthlist</span><span class="p">)):</span>
+            <span class="n">m_number</span> <span class="o">=</span> <span class="n">monthlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">m_text</span> <span class="o">=</span> <span class="n">month_text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ht_diff</span> <span class="o">=</span> <span class="n">HeightDifferenceModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">observation_date__month</span><span class="o">=</span><span class="n">m_number</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span>
+                                <span class="s1">&#39;pin&#39;</span><span class="p">,</span><span class="s1">&#39;adjusted_ht_diff&#39;</span><span class="p">,</span><span class="s1">&#39;uncertainty&#39;</span><span class="p">)</span>
+            <span class="n">ht_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ht_diff</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ht_diff</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+                    <span class="n">diff</span> <span class="o">=</span> <span class="n">ht_diff</span><span class="p">[</span><span class="n">ht_diff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">p</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">m_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">5</span><span class="p">)})</span>
+                        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">mdiff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">m_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mdiff</span><span class="p">,</span><span class="mi">5</span><span class="p">)})</span>
+                        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">mdiff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="n">mad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="o">-</span><span class="n">mdiff</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">mad</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="n">mdiff2</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">madev</span> <span class="o">=</span> <span class="mf">0.6745</span><span class="o">*</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="o">-</span><span class="n">mdiff</span><span class="p">))</span><span class="o">/</span><span class="n">mad</span>
+                                <span class="n">ind</span> <span class="o">=</span> <span class="n">madev</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+                                <span class="n">mdiff2</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="c1"># print(mdiff2)</span>
+                            <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">m_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mdiff2</span><span class="p">,</span><span class="mi">5</span><span class="p">)})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="n">obj</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">m_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">5</span><span class="p">)})</span>
+                        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">mdiff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="n">obj</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">m_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mdiff</span><span class="p">,</span><span class="mi">5</span><span class="p">)})</span>
+                        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">mdiff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="n">mad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="o">-</span><span class="n">mdiff</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+                            <span class="n">madev</span> <span class="o">=</span> <span class="mf">0.6745</span><span class="o">*</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="o">-</span><span class="n">mdiff</span><span class="p">))</span><span class="o">/</span><span class="n">mad</span>
+                            <span class="n">ind</span> <span class="o">=</span> <span class="n">madev</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="n">mdiff2</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                            <span class="n">obj</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span><span class="n">pin</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">month_text</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mdiff2</span><span class="p">,</span><span class="mi">5</span><span class="p">)})</span>
+        <span class="c1"># update calibration table</span>
+        <span class="k">for</span> <span class="n">update_index</span> <span class="ow">in</span> <span class="n">staff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">Calibration_Update</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">update_table</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-files">
+<h2>Reading the files<a class="headerlink" href="#reading-the-files" title="Permalink to this headline">¶</a></h2>
+<p>The following must be noted while reading the files:</p>
+<ol class="arabic simple">
+<li><p>The input data in <code class="docutils literal notranslate"><span class="pre">root_dir</span></code> contains <strong>temperature.csv</strong> file containing the most of the field metadata and a folder called <strong>range_data/</strong> containing the ascii files.</p></li>
+</ol>
+<p>2.The staff number and observation date are combined to generate a primary key (called <code class="docutils literal notranslate"><span class="pre">update_index</span></code>). The primary key links the metadata in the csv with the folder names containing the ascii files</p>
+<ol class="arabic simple" start="3">
+<li><p>The function first reads the csv and generates an array (<code class="docutils literal notranslate"><span class="pre">temperatures</span> <span class="pre">=</span> <span class="pre">np.array(temperatures,</span> <span class="pre">dtype=object)</span></code>). This makes it easier to filter them while linking them with the ascii files.</p></li>
+<li><p>The ascii files are ready one by one and linked to the appropriate metadata contained in the <code class="docutils literal notranslate"><span class="pre">temperatures</span></code> array, i.e., through <code class="docutils literal notranslate"><span class="pre">filter_staff</span> <span class="pre">=</span> <span class="pre">temperatures[(temperatures[:,0]==observation_date)</span> <span class="pre">&amp;</span> <span class="pre">(temperatures[:,1]</span> <span class="pre">==</span> <span class="pre">staff_number.staff_number)]</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The dependencies are provided below and generally sits above the above function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IsNumber</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="s2">&quot;Checks if string is a number&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">check</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ImportBFOD_v18</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># # Start reading the level run and store them in blocks</span>
+        <span class="n">readerLines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span><span class="c1"># .decode(&#39;UTF-8&#39;)</span>
+        <span class="n">Blocks</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">block</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">readerLines</span><span class="p">:</span><span class="c1"># f:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+
+            <span class="c1"># Start level run</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;|---------|---------|---------|---------|------------&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
+                    <span class="n">Blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+                    <span class="n">block</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+                <span class="n">block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
+            <span class="n">Blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+        <span class="c1">#----------------------------------------------------------------------</span>
+        <span class="c1"># Finally store the staff readings into a table/list format and store</span>
+        <span class="n">new_staff_reading</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Blocks</span><span class="p">)):</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">Blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">7</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">staff_data</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])):</span>
+                        <span class="k">if</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">NoOfMeasurement</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+                        <span class="k">elif</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">NoOfMeasurement</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+                        <span class="k">elif</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">NoOfMeasurement</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+                        <span class="n">staff_data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">Pin</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">Readings</span><span class="p">),</span> <span class="n">NoOfMeasurement</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">Stdev</span><span class="p">)])</span>
+                <span class="c1">#print(i)</span>
+                <span class="n">staff_data</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">staff_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PIN&#39;</span><span class="p">,</span><span class="s1">&#39;READING&#39;</span><span class="p">,</span><span class="s1">&#39;COUNT&#39;</span><span class="p">,</span><span class="s1">&#39;STD_DEVIATION&#39;</span><span class="p">])</span>
+                <span class="c1"># Save to dictionary</span>
+                <span class="n">new_staff_reading</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;Set&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">):</span><span class="n">staff_data</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">new_staff_reading</span>
+
+<span class="k">def</span> <span class="nf">ImportDNA</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Start reading the level run and store them in blocks</span>
+        <span class="n">readerLines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span><span class="c1"># .decode(&#39;UTF-8&#39;)</span>
+        <span class="n">Blocks</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">block</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">readerLines</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="c1"># Start level run</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;| MS |___DEV__|___________|&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
+                    <span class="n">Blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+                    <span class="n">block</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
+            <span class="n">Blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+        <span class="c1">#----------------------------------------------------------------------</span>
+        <span class="c1"># Finally store the staff readings into a table/list format and store</span>
+        <span class="n">new_staff_reading</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Blocks</span><span class="p">)):</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">Blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">7</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># Append items</span>
+                <span class="n">Pin</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">NoOfMeasurement</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">staff_data</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">block</span><span class="p">:</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])):</span>
+                        <span class="k">if</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span> <span class="n">NoOfMeasurement</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+                        <span class="k">elif</span> <span class="n">IsNumber</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                            <span class="n">Pin</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="n">Readings</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">Stdev</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+
+                        <span class="n">staff_data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">Pin</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">Readings</span><span class="p">),</span> <span class="n">NoOfMeasurement</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">Stdev</span><span class="p">)])</span>
+                <span class="n">staff_data</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">staff_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PIN&#39;</span><span class="p">,</span><span class="s1">&#39;READING&#39;</span><span class="p">,</span><span class="s1">&#39;COUNT&#39;</span><span class="p">,</span><span class="s1">&#39;STD_DEVIATION&#39;</span><span class="p">])</span>
+                <span class="n">new_staff_reading</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;Set&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">):</span><span class="n">staff_data</span><span class="p">})</span>
+    <span class="c1"># return data</span>
+    <span class="k">return</span> <span class="n">new_staff_reading</span>
+
+<span class="k">def</span> <span class="nf">Process_File</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">fileType</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;BFOD&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">fileType</span> <span class="o">=</span> <span class="s2">&quot;BFOD&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;Level Type&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">fileType</span> <span class="o">=</span> <span class="s2">&quot;DNA03&quot;</span>
+                <span class="k">break</span>
+    <span class="k">if</span> <span class="n">fileType</span> <span class="o">==</span> <span class="s2">&quot;BFOD&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ImportBFOD_v18</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">fileType</span> <span class="o">==</span> <span class="s2">&quot;DNA03&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ImportDNA</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calculate_length</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cf</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">t_0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">oset</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="n">data_table</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># if data is array:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">pini</span><span class="p">,</span> <span class="n">obsi</span><span class="p">,</span> <span class="n">nmeasi</span><span class="p">,</span> <span class="n">stdi</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">pinj</span><span class="p">,</span> <span class="n">obsj</span><span class="p">,</span> <span class="n">nmeasj</span><span class="p">,</span> <span class="n">stdj</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">stdi</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stdi</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span>
+        <span class="k">if</span> <span class="n">stdj</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stdj</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span>
+        <span class="n">dMeasuredLength</span> <span class="o">=</span> <span class="n">obsj</span><span class="o">-</span> <span class="n">obsi</span>
+        <span class="n">dCorrection</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">cf</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">t_0</span><span class="p">))</span>
+        <span class="n">cMeasuredLength</span> <span class="o">=</span> <span class="n">dMeasuredLength</span><span class="o">*</span><span class="n">dCorrection</span>
+        <span class="n">dStdDeviation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stdi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">stdj</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">data_table</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">oset</span><span class="p">),</span> <span class="n">pini</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">pinj</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span>
+                                    <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obsi</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obsj</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.6f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dStdDeviation</span><span class="p">),</span>
+                                    <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dMeasuredLength</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cMeasuredLength</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">data_table</span>
+<span class="c1"># Correct staff readings</span>
+<span class="k">def</span> <span class="nf">rawdata_to_table</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">staff_atrs</span><span class="p">):</span> <span class="c1"># cf, alpha, T_o):</span>
+    <span class="n">dCorrectionFactor</span> <span class="o">=</span> <span class="n">staff_atrs</span><span class="p">[</span><span class="s1">&#39;dCorrectionFactor&#39;</span><span class="p">]</span>
+    <span class="n">dThermalCoefficient</span> <span class="o">=</span> <span class="n">staff_atrs</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">]</span>
+    <span class="n">dStdTemperature</span> <span class="o">=</span> <span class="n">staff_atrs</span><span class="p">[</span><span class="s1">&#39;dStdTemperature&#39;</span><span class="p">]</span>
+    <span class="n">rawReportTable</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Set1&quot;</span><span class="p">):</span>
+            <span class="n">obs_set</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="c1">#print(value.values)</span>
+            <span class="n">set1</span> <span class="o">=</span> <span class="n">calculate_length</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dCorrectionFactor</span><span class="p">,</span> <span class="n">dThermalCoefficient</span><span class="p">,</span> <span class="n">dStdTemperature</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">obs_set</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Set2&quot;</span><span class="p">):</span>
+            <span class="n">obs_set</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="c1">#print(value)</span>
+            <span class="n">set2</span> <span class="o">=</span> <span class="n">calculate_length</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dCorrectionFactor</span><span class="p">,</span> <span class="n">dThermalCoefficient</span><span class="p">,</span> <span class="n">dStdTemperature</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">obs_set</span><span class="p">)</span>
+    <span class="c1"># rawReportTable  = pd.DataFrame(rawReportTable, columns=[&#39;SET&#39;,&#39;PIN&#39;,&#39;TEMPERATURE&#39;,&#39;FROM&#39;,&#39;TO&#39;, &#39;STD_DEVIATION&#39;, &#39;MEASURED&#39;, &#39;CORRECTED&#39;])</span>
+    <span class="n">rawReportTable</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;SET&#39;</span><span class="p">,</span><span class="s1">&#39;PIN&#39;</span><span class="p">,</span><span class="s1">&#39;TEMPERATURE&#39;</span><span class="p">,</span><span class="s1">&#39;FROM&#39;</span><span class="p">,</span><span class="s1">&#39;TO&#39;</span><span class="p">,</span> <span class="s1">&#39;STD_DEVIATION&#39;</span><span class="p">,</span> <span class="s1">&#39;MEASURED&#39;</span><span class="p">,</span> <span class="s1">&#39;CORRECTED&#39;</span><span class="p">],</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">set1</span><span class="o">+</span><span class="n">set2</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">rawReportTable</span><span class="c1"># .to_dict()</span>
+
+<span class="c1"># Unique list</span>
+<span class="k">def</span> <span class="nf">unique_list</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+    <span class="n">ulist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ulist</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ulist</span>
+
+<span class="c1"># adjust</span>
+<span class="k">def</span> <span class="nf">adjustment</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">uniquelist</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="c1"># output</span>
+    <span class="n">output_adj</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">output_hdiff</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">uniquelist</span><span class="p">)):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">uniquelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">dato</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dato</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">interval</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">adjusted_hdiff</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]));</span>
+                <span class="n">observed_hdiff</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]));</span>
+                <span class="n">residual</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">obs_std_dev</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+                <span class="n">stdev_residual</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">std_residual</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">uncertainty</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">1.96</span><span class="p">)</span>
+                <span class="n">output_adj</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span> <span class="n">adjusted_hdiff</span><span class="p">,</span> <span class="n">observed_hdiff</span><span class="p">,</span> <span class="n">residual</span><span class="p">,</span>
+                               <span class="n">obs_std_dev</span><span class="p">,</span> <span class="n">stdev_residual</span><span class="p">,</span> <span class="n">std_residual</span><span class="p">])</span>
+                <span class="n">output_hdiff</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span> <span class="n">adjusted_hdiff</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dato</span><span class="p">)])</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">dato</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">interval</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">dato</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dato</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+                <span class="c1"># Perform Least squares - Refer to J.Klinge &amp; B. Hugessen document on Calibration of Barcode staffs</span>
+                <span class="n">W</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[:,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">);</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">dato</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">))</span>
+                <span class="n">adjusted_hdiff</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">)))</span>
+                <span class="n">residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">adjusted_hdiff</span>  <span class="o">-</span> <span class="n">W</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+                <span class="n">obs_std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">stdev_residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">1.</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">uncertainty</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">)))</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">1.96</span><span class="p">)</span>
+                <span class="n">std_residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round_</span><span class="p">(</span><span class="n">residual</span><span class="o">/</span><span class="n">stdev_residual</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)):</span>
+                    <span class="n">output_adj</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">adjusted_hdiff</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">residual</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span>
+                                 <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obs_std_dev</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stdev_residual</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span>
+                                 <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">std_residual</span><span class="p">[</span><span class="n">j</span><span class="p">])])</span>
+                <span class="n">output_hdiff</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">adjusted_hdiff</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uncertainty</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">dato</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">output_hdiff</span><span class="p">,</span> <span class="n">output_adj</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reverse-func">
+<h2><code class="docutils literal notranslate"><span class="pre">reverse_func()</span></code><a class="headerlink" href="#reverse-func" title="Permalink to this headline">¶</a></h2>
+<p>The reverse function here simply deletes all range data uploaded in the database:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reverse_func</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+    <span class="n">Calibration_Update</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;Calibration_Update&quot;</span><span class="p">)</span>
+    <span class="n">RawDataModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;RawDataModel&quot;</span><span class="p">)</span>
+    <span class="n">AdjustedDataModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;AdjustedDataModel&quot;</span><span class="p">)</span>
+    <span class="n">HeightDifferenceModel</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;HeightDifferenceModel&quot;</span><span class="p">)</span>
+    <span class="n">RangeParameters</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;range_calibration&quot;</span><span class="p">,</span> <span class="s2">&quot;RangeParameters&quot;</span><span class="p">)</span>
+
+    <span class="n">Calibration_Update</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="n">RawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="n">AdjustedDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="n">HeightDifferenceModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="migrate">
+<h2>migrate<a class="headerlink" href="#migrate" title="Permalink to this headline">¶</a></h2>
+<p>Once everything is complete and the class <code class="docutils literal notranslate"><span class="pre">Migration</span></code> has all the elements to run the function <code class="docutils literal notranslate"><span class="pre">RunPython</span></code>, it is now time to migrate them. This is again done in the command prompts by running the <code class="docutils literal notranslate"><span class="pre">migrate</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+<p>It can take some time to understand the migration errors and try to fix them in order them to run it successfully.</p>
+<p>Once the migration is successfull, you will see that all the tables in the <strong>range_calibration</strong> app will be updated.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

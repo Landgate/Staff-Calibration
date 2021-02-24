@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<article class="post">
+	{% if messages %}
+	<ul class="alert messages">
+	    {% for message in messages %}
+	    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	<br>
+	{% endif %}
+
+	<header class="post-header">
+    	<h1>Range calibration</h1>
+    </header>
+    <h2 class="post-title text-center">Step {{ wizard.steps.step1 }} of  {{ wizard.steps.count }} </h2>
+
+
+	<div class="post-content">
+		<form class="site-form" action="." method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+				{{ wizard.management_form }}
+				{% if wizard.form.forms %}
+			        {{ wizard.form.management_form }}
+			        {% for form in wizard.form.forms %}
+			            {{ form }}
+			        {% endfor %}
+			    {% else %}
+			        <tr>
+						<td> <h3>Enter start temperature 1:</h3> </td>
+					    <td> <h3> {{ form.start_temperature_1 }} </h3> </td>
+					</tr>
+
+					<tr>
+				    	<td> <h3> Enter end temperature 1: </h3> </td>
+				    	<td> <h3> {{ form.end_temperature_1 }} </h3> </td>
+				    </tr>
+				    <tr>
+						<td> <h3>Enter start temperature 2:</h3> </td>
+					     <td> <h3> {{ form.start_temperature_2 }} </h3> </td>
+					</tr>
+
+					<tr>
+				    	<td> <h3> Enter end temperature 2: </h3> </td>
+				    	<td> <h3> {{ form.end_temperature_2 }} </h3> </td>
+				    </tr>
+			    {% endif %}
+			</table>
+			<table>
+				<tr style="line-height:3em">
+					<td style='text-align:center;vertical-align:middle'> <p> <strong>Select a file:</strong></p> </td>
+					<td> {{ form.document }} </td>
+				</tr>
+			</table>
+
+			{% if wizard.steps.prev %}
+			<div class="grid-3">
+				<button  style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}" formnovalidate="formnovalidate">{% trans "First" %}</button>
+				
+				<button style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit" value="continue"> Continue&#8811; </button> 
+				
+				<button style="width:8em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit" value="{{ 
+					wizard.steps.prev }}" formnovalidate="formnovalidate">{% trans "&laquo; Previous" %}</button>
+			</div>
+
+			{% else %}
+			<button style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit" value="continue"> Continue&#8811; </button> 
+			{% endif %}
+		</form>
+	</div>
+</article>
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<article class="post">
+  {% if messages %}
+  <div class="post-content">
+      {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+          {% if 'safe' in message.tags %}
+              <h2> {{ message|safe }} </h2>
+          {% else %}
+              <h2> {{ message }} </h2>
+          {% endif %}
+      </div>
+      <br>
+      <br>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+  <header class="post-header">
+    <div class="grid-2">
+      <div class="title-grid">
+        <h1 class="post-title text-center">Staff Calibration Report </h1>
+      </div>
+      <div class="btn-update">
+        <a href="{% url 'staff_calibration:generate-report' update_index %}">
+        <button class="px-2 py-1 border border-transparent text-sm leading-4 font-small rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" target="_blank">Print pdf &raquo;</button></a>
+      </div>
+    </div>
+  </header>
+  <hr>
+  <div class="post-content">
+    <div class="grid-2">
+      <div>
+        <div>
+          Staff Number: <strong>{{ update_index }} </strong>
+        </div>
+        <div>
+          Staff Owner: <strong> {{ observation_date }} </strong>
+        </div>
+      </div>
+      <div>
+        <div>
+          Length: <strong> {{ staff_length }} </strong> meters
+        </div>
+        <div>
+          Material: <strong> {{ staff_type }} </strong>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="grid-2">
+      <div>
+        <h2>This test information</h2>
+        <div>
+          Unique ID: <strong>{{ update_index }} </strong>
+        </div>
+        <div>
+          Observation Date: <strong> {{ observation_date }} </strong>
+        </div>
+        <br>
+        <div>
+          Observer: <strong> {{ observer }} </strong>
+        </div>
+      </div>
+      <div>
+        <h2> Lab Information </h2>
+        <div>
+          Name: <strong> Boya Staff Calibration Range </strong>
+        </div>
+        <div>
+          Location: Victor Road, Darlington WA 6070 </strong>
+        </div>
+        <br>
+        <div>
+          Average Temperature: <strong> {{ average_temperature|floatformat:1 }}&#8451; </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <p>
+      Correction Factor: <strong>{{ ScaleFactor|floatformat:6 }}</strong> at 25.0&#8451;. Note that Correction Factor is temperature dependent.
+    </p>
+    <p>
+      Graduation Uncertainty: <strong>{{ GraduationUncertainty|floatformat:5 }}</strong> metres at 95% confidence interval
+    </p>
+  </div>
+
+  <hr>
+  <div class="post-content">
+    <h3>Staff readings/corrections </h3>
+    <table style="width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  "> 
+      <tr style="border-top:1px solid;border-bottom:1px solid">
+        {% for header in StaffCorrections.headers %}
+            <th> <h4> {{ header }} </h4> </th>
+        {% endfor %}
+      </tr>
+
+      {% for data in StaffCorrections.data %}
+        <tr style="text-align:center;">    
+          {% for value in data %}
+            {% if not '-' in value %}
+              <td>{{ value|floatformat:5 }}</td>
+            {% else %}
+              <td>{{ value }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tr>
+    </table>
+  </div>
+  <hr style="margin-bottom:5px; margin-top: 5px">
+
+  <div>
+    <p>
+      Correction Factor: <strong>{{ ScaleFactor0|floatformat:8 }} (1+({{ thermal_coefficient |floatformat:5 }}(Temperature-{{ average_temperature|floatformat:1 }})))</strong>
+    <p>
+      Correction Factor= 1.00000 when the temperature is <strong>{{ Temperatre_at_1|floatformat:1 }}&#8451;</strong>
+    </p>
+  </div>
+  <hr class="style1">
+  <div class="post-content">
+    <h2>Staff corrections </h2>
+    <table style="width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  "> 
+      <tr style="border-top:1px solid;border-bottom:1px solid">
+        {% for header in CorrectionList.headers %}
+            <th> <h4> {{ header }} </h4> </th>
+        {% endfor %}
+      </tr>
+
+      {% for data in CorrectionList.data %}
+        <tr style="text-align:center;">    
+          {% for value in data %}
+            <td>{{ value }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tr>
+    </table>
+  </div>
+</article>
+
+{% endblock content %}

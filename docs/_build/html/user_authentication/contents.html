@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User authentication and permissions &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up the Custom User Model" href="1_user_model.html" />
+    <link rel="prev" title="Next" href="../staffs_application/next.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User authentication and permissions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html">Setting up the Custom User Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html">Customise User Forms and Admin Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html">Setting up your authentication views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#modifying-the-default-authentication">Modifying the default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html">Password Validators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html">Loading user information during migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>User authentication and permissions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_authentication/contents.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-authentication-and-permissions">
+<h1>User authentication and permissions<a class="headerlink" href="#user-authentication-and-permissions" title="Permalink to this headline">¶</a></h1>
+<p>Staff calibration is a django-based web application designed for Landgate and other external users such as surveyors and engineers who are engaged in measuring absolute or relative height differences on the ground, to calibrate levelling staves online and get the reports instantly.</p>
+<p>To acheive that Django provides an authentication and authorization (“permission”) system that allows users to sign up, log in and customize actions specific to them. The Django framework also has built-in models for <strong>Users</strong> and <strong>Groups</strong> to apply permissions to a group of users.</p>
+<p>For the Staff Calibration application, users will be asked to <strong>sign up</strong> and <strong>log in</strong> with their emails to add records or calibrate their staves and print calibration recrods. A custom user (<strong>CustomUser</strong>) model is created to manage the users and two groups (<strong>Landgate</strong> and <strong>Others</strong>) are created to allow two permission modes. Landgate users or more specfically the Survey Services are able to do range calibration, which is different from calibrating a staff.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="1_user_model.html">Setting up the Custom User Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html#custom-user-model">Custom User model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2_forms.html">Customise User Forms and Admin Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html#customise-the-form">Customise the Form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html#customise-the-admin">Customise the Admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html#django-admin-page">Django admin page</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_authentication_views.html">Setting up your authentication views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_authentication_views.html#overview">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_authentication_views.html#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_authentication_views.html#modifying-the-default-authentication">Modifying the default authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#project-url">Project URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#accounts-url">Accounts URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#logging-in">Logging in</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#logging-out">Logging out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#password-reset">Password reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#sign-up-registration">Sign up/registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#permissions-decorators">Permissions &amp; decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="4_password_validation.html">Password Validators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html#settings">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html#customising-password-validation">Customising password validation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5_pre_load.html">Loading user information during migration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html#initial-migrations">Initial Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html#example-migration">Example Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html#data-migrations">Data Migrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="5_pre_load.html#loading-to-the-authority-model">Loading to the Authority model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5_pre_load.html#creating-groups-and-superuser">Creating groups and superuser</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="1_user_model.html" class="btn btn-neutral float-right" title="Setting up the Custom User Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../staffs_application/next.html" class="btn btn-neutral float-left" title="Next" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

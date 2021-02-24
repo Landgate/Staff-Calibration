@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Django application framework &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Staff Calibration Project" href="app-features.html" />
+    <link rel="prev" title="Overview" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Django application framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-does-django-application-look-like">How does django application look like?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sending-the-request-to-the-right-view-urls-py">Sending the request to the right view (urls.py)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-the-request-views-py">Handling the request (views.py)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-data-models-models-py">Defining data models (models.py)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#querying-data-views-py">Querying data (views.py)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rendering-data-html-templates">Rendering data (HTML templates)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-django-features">Other Django features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app-features.html">The Staff Calibration Project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Overview</a> &raquo;</li>
+        
+      <li>Django application framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/app-framework.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="django-application-framework">
+<h1>Django application framework<a class="headerlink" href="#django-application-framework" title="Permalink to this headline">¶</a></h1>
+<p>Django web framework follows the MVT or Model View Template architechture which is based on the MVC or Model View Controller architechture. Django itself acts as the controller (i.e., the business logic or rules) to interact between the model and the view. A brief description of the MVT architechture is provided below:</p>
+<ul class="simple">
+<li><p><strong>MODEL</strong> - A <em>model</em> is a Python class that helps to handle database by providing access to the database. The Python class object contains all the required fields and behaviors of the data that is being stored. Models help developers to create, read, update, and delete objects (CRUD operations) in the database. Models also contain the business logic, custom methods, properties, and other things related to data manipulation.</p></li>
+<li><p><strong>VIEW</strong> - The <em>view</em> executes the business logic by interacting with the model(s) and renders the data to the template(s). Apart from interacting with the model and rendering the data to the templates, the view also accepts HTTP requests, applies business logic provided by Python classes and methods, and provides HTTP responses to the client requests.</p></li>
+<li><p><strong>TEMPLATE</strong> - The <em>template</em> is the presentation layer (i.e., the front-end) that handles the user interface. Templates are files written in HTML and also renders the data passed by the view.</p></li>
+</ul>
+<p>The figure below shows how each of the above elements work together to form a web application. The template is the front-end that interacts with the view and the model is the back-end that interacts with the database. The view has access to both the model and the templates and finally maps it to a <strong>URL</strong>. The <strong>Manager</strong> acts as the interface between the <em>model</em> and the database.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/django_model.jpg" src="../_images/django_model.jpg" />
+<p class="caption"><span class="caption-text">The django web framework.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="how-does-django-application-look-like">
+<h1>How does django application look like?<a class="headerlink" href="#how-does-django-application-look-like" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sending-the-request-to-the-right-view-urls-py">
+<h2>Sending the request to the right view (urls.py)<a class="headerlink" href="#sending-the-request-to-the-right-view-urls-py" title="Permalink to this headline">¶</a></h2>
+<p>A URL mapper is stored in a file called <strong>urls.py</strong>. In the example below, the mapper (<code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code>) defines a list of mappings between routes (specific URL patterns) and corresponding view functions. If an HTTP Request is received that has a URL matching a specified pattern, then the associated view function will be called and passed to the request.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staff/&lt;int:id&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">staff_details</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;staff_detail&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staff/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;staff.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code> object is a list of <code class="docutils literal notranslate"><span class="pre">path()</span></code> and/or <code class="docutils literal notranslate"><span class="pre">re_path()</span></code> functions (Python lists are defined using square brackets, where items are separated by commas and may have an optional trailing comma. For example: <code class="docutils literal notranslate"><span class="pre">[item1,</span> <span class="pre">item2,</span> <span class="pre">item3,]</span></code>). The first argument defines the route (pattern) that will be matched. The second argument, for example <code class="docutils literal notranslate"><span class="pre">views.staff_detail</span></code> is the function that is being called to render the defined route. <code class="docutils literal notranslate"><span class="pre">staff_detail()</span></code> is found in the <code class="docutils literal notranslate"><span class="pre">views.py</span></code>.</p>
+</div>
+<div class="section" id="handling-the-request-views-py">
+<h2>Handling the request (views.py)<a class="headerlink" href="#handling-the-request-views-py" title="Permalink to this headline">¶</a></h2>
+<p>Views are the heart of Django web application, receiving HTTP requests from web clients and returning HTTP responses. In the process, views interact with models and templates and facilitate all the tasks in between. Views are usually stored in a file called <code class="docutils literal notranslate"><span class="pre">views.py</span></code>.</p>
+<p>The example below shows a minimal view function <code class="docutils literal notranslate"><span class="pre">index()</span></code>, which could have been called by our URL mapper in the previous section. The view receives a <code class="docutils literal notranslate"><span class="pre">HttpRequest</span></code> object as a parameter (<code class="docutils literal notranslate"><span class="pre">request</span></code>) and returns an <code class="docutils literal notranslate"><span class="pre">HttpResponse</span></code> object. Here, nothing is done with the request, and the response simply returns a text field.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: views.py (Django view functions)</span>
+
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Get an HttpRequest - the request parameter</span>
+    <span class="c1"># perform operations using information from the request.</span>
+    <span class="c1"># Return HttpResponse</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;Hello from Django!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-data-models-models-py">
+<h2>Defining data models (models.py)<a class="headerlink" href="#defining-data-models-models-py" title="Permalink to this headline">¶</a></h2>
+<p>Django web applications manage and query data through Python class objects referred to as <strong>models</strong>. Models define the structure of data being stored, including the field types and their maximum size, default values, selection list options, help text for documentation, label text for forms, etc. The model is independent of the underlying database and therefore, can choose one of several existing databases as part of the project settings.</p>
+<p>As an example, a very simple Django model called <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code> is defined below. The <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code> class is derived from the django class <code class="docutils literal notranslate"><span class="pre">models.Model</span></code>. It defines the <code class="docutils literal notranslate"><span class="pre">level_number</span></code> and <code class="docutils literal notranslate"><span class="pre">level_model</span></code> as character fields and specifies a maximum number of characters to be stored for each record. The <code class="docutils literal notranslate"><span class="pre">level_make</span></code> can be one of several values, so we define it as a choice field and provide a mapping between choices to be displayed and data to be stored, along with a default value.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: models.py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="k">class</span> <span class="nc">DigitalLevel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">level_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+    <span class="n">level_make</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;LEI&#39;</span><span class="p">,</span> <span class="s1">&#39;LEICA&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;TRIM&#39;</span><span class="p">,</span> <span class="s1">&#39;TRIMBLE&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;SOK&#39;</span><span class="p">,</span> <span class="s1">&#39;SOKIA&#39;</span><span class="p">),</span>
+        <span class="o">...</span>  <span class="c1">#list other makes</span>
+    <span class="p">)</span>
+
+    <span class="n">level_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="querying-data-views-py">
+<h2>Querying data (views.py)<a class="headerlink" href="#querying-data-views-py" title="Permalink to this headline">¶</a></h2>
+<p>The code snippet below shows a view function for displaying all our Trimble digital levels by using the model query (<code class="docutils literal notranslate"><span class="pre">filter</span></code>) and render the list to a <code class="docutils literal notranslate"><span class="pre">staff_list.html</span></code> template.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">## filename: views.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Team</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">list_levels</span> <span class="o">=</span> <span class="n">DigitalLevels</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">level_make__exact</span><span class="o">=</span><span class="s2">&quot;TRIM&quot;</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;list_levels&#39;</span><span class="p">:</span> <span class="n">list_levels</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;/staff/staff_list.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">render()</span></code> function creates a HttpResponse that is sent back to the browser. It renders the HTML file by integrating the HTML template with the data provided through the <code class="docutils literal notranslate"><span class="pre">context</span></code> python object.</p>
+</div>
+<div class="section" id="rendering-data-html-templates">
+<h2>Rendering data (HTML templates)<a class="headerlink" href="#rendering-data-html-templates" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>template</strong> specifies the structure of an output document, using placeholders for data that will be filled in when a page is generated. Templates are often used to create HTML, but can also create other types of document.</p>
+<p>The code snippet shows what the HTML template called by the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function in the previous section might look like. This template has been written under the assumption that it will have access to a list variable called <code class="docutils literal notranslate"><span class="pre">list_levels</span></code> when it is rendered (this is contained in the <code class="docutils literal notranslate"><span class="pre">context</span></code> variable inside the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function above). Inside the HTML skeleton we have an expression that first checks if the list_levels variable exists, and then iterates it in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. On each iteration the template displays level details in an <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> element.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## filename: staff/templates/staff/level_list.html
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Home page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  {% if list_levels %}
+    &lt;ul&gt;
+      {% for level in list_levels %}
+        &lt;li&gt;Level Number: {{ level.level_number }}&lt;/li&gt;
+        &lt;li&gt;Level Make: {{ level.level_make }}&lt;/li&gt;
+        &lt;li&gt;Level Model: {{ level.level_model }}&lt;/li&gt;
+      {% endfor %}
+    &lt;/ul&gt;
+  {% else %}
+    &lt;p&gt;No levels are found at the moment. You can add your digital level by logging in.&lt;/p&gt;
+  {% endif %}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-django-features">
+<h2>Other Django features<a class="headerlink" href="#other-django-features" title="Permalink to this headline">¶</a></h2>
+<p>Additionally, Django framework includes many functions and interfaces including:</p>
+<ul class="simple">
+<li><p><strong>Forms</strong>: HTML Forms are used to collect user data for processing on the server. Django simplifies form creation, validation, and processing.</p></li>
+<li><p><strong>User authentication, permissions and groups</strong>: Django includes a robust user authentication and permission system that has been built with security in mind.</p></li>
+<li><p><strong>Caching</strong>: Creating content dynamically is much more computationally intensive (and slow) than serving static content. Django provides flexible caching so that you can store all or part of a rendered page so that it doesn’t get re-rendered except when necessary.</p></li>
+<li><p><strong>Administration site</strong>: The Django administration site is included by default when you create an app using the basic skeleton. It makes it trivially easy to provide an admin page for site administrators to create, edit, and view any data models in your site.</p></li>
+<li><p><strong>Serialising data</strong>: Django makes it easy to serialise and serve your data as XML or JSON. This can be useful when creating a web service (a website that purely serves data to be consumed by other applications or sites, and doesn’t display anything itself), or when creating a website in which the client-side code handles all the rendering of data.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app-features.html" class="btn btn-neutral float-right" title="The Staff Calibration Project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

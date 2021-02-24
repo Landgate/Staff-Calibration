@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Staff Calibration Project &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting started" href="../installation-guide/install-guide.html" />
+    <link rel="prev" title="Django application framework" href="app-framework.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app-framework.html">Django application framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app-framework.html#how-does-django-application-look-like">How does django application look like?</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Staff Calibration Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-outlook">Project outlook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#design-of-the-staff-calibration-project">Design of the staff calibration project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#staff-calibration-django-project-design">Staff Calibration - Django project design</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Overview</a> &raquo;</li>
+        
+      <li>The Staff Calibration Project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/app-features.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-staff-calibration-project">
+<h1>The Staff Calibration Project<a class="headerlink" href="#the-staff-calibration-project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="project-outlook">
+<h2>Project outlook<a class="headerlink" href="#project-outlook" title="Permalink to this headline">¶</a></h2>
+<p>The staff calibration application must have the following features:</p>
+<ol class="arabic simple">
+<li><p>A login system for the users to manage levelling staves and calibration</p></li>
+<li><p>An administrator account (<code class="docutils literal notranslate"><span class="pre">superuser</span></code>) system to manage the application (create, add, update and delete)</p></li>
+<li><p>A staff account to manage the range calibration</p></li>
+<li><p>A data migration plan to load all the existing information in order to avoid loading the data again and again through the portal.</p></li>
+</ol>
+<p>In brief, the user logs into the application, adds the levelling instruments (staves, levels), calibrate the staves, and generates the calibration report (as a pdf file). The user should be able to see all the level instruments and calibration details, including those entered by others working for the same company/firm.</p>
+<p>The staff account holder (Survey Services, Landgate) logs into the application and should have the added <strong>Range Calibration</strong> section to carry out range calibration and update the reference range measurement.</p>
+</div>
+<div class="section" id="design-of-the-staff-calibration-project">
+<h2>Design of the staff calibration project<a class="headerlink" href="#design-of-the-staff-calibration-project" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id1">
+<img alt="../_images/staff_calibration_project.png" src="../_images/staff_calibration_project.png" />
+<p class="caption"><span class="caption-text">Design of the staff calibration project.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>In consideration of the above, the Staff Calibration Application has four modules (also called apps in django terms) as provided below and described in the figure above.</p>
+<ol class="arabic simple">
+<li><p>The “accounts” app manages the user accounts, registration, login and logouts.</p></li>
+<li><p>The “staffs” app manages and maintains the records of levelling staves and level instruments. Users must be logged in to add new records or update existing records. Landgate staves and levelling instruments having measurement records until September 30, 2020 and related to this project have been added automatically during data migration.</p></li>
+<li><p>The “range_calibration” app manages the range calibration dataset and the computations required to calculate the height differences between the consecutive pins. The module also computes and/or updates the height differences between the pins for each month (January to December) by averaging all the range observations conducted from January 2018. The updated range then becomes the reference data for calibrating the staves. The behaviour of the Boya Staff Calibration range is depicted by a chart in the home page.</p></li>
+<li><p>The “staff_calibration” app is the principle driver behind developing this application. Through a least squares adjustment of reference values (from 3) and staff readings (using their own staff) submitted by the user, the module computes scalar derivative called a scale factor, which is then applied as a multiplicative fator on the height differences meausred by that particular user staff. Additionally, the app also manages the staff calibration records.</p></li>
+</ol>
+<p>The app aministrator/manager can login into the admin page (…../landgate) to manage one or all of the backend components of the application. The app adminstrator/manager has the privilledge to add/update/delete one or all of the records related to the above.</p>
+</div>
+<div class="section" id="staff-calibration-django-project-design">
+<h2>Staff Calibration - Django project design<a class="headerlink" href="#staff-calibration-django-project-design" title="Permalink to this headline">¶</a></h2>
+<p>The staff calibration application with the name <strong>staff</strong> is set up as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                                       &lt;- application root folder
+├── manage.py
+├── staff/                                   &lt;- application settings folder
+|  ├──asgi.py
+|  ├──passwordValidators.py
+|  ├──settings.py
+|  ├──urls.py
+|  ├──views.py
+|  ├──wsgi.py
+│  └──__init__.py
+├── accounts/                                &lt;- accounts app with user custom model
+│       ├── migrations/                          &lt;- data migration with preload
+│       │       ├── 0001_initial.py
+│       │       ├──     0002_auto_20201110_0811.py
+│       │       ├──     0003_auto_20201112_0820.py
+│       │       └──     __init__.py
+│       ├── templates                            &lt;- html templates for sign up, login, and others
+│       │       └── accounts
+│       │               ├── accounts_home.html
+│       │               ├──     login.html
+│       │               ├──     signup.html
+│       │               ├──     user_list_view.html
+│       │               └──     user_profile.html
+│       ├──     admin.py
+│       ├──     apps.py
+│       ├──     forms.py
+│       ├──     managers.py
+│       ├──     models.py
+│       ├──     tests.py
+│       ├──     token_generator.py
+│       ├──     urls.py
+│       ├──     views.py
+│       └──     __init__.py
+├── staffs/                                  &lt;- staffs app - create, update, delete staves/other instruments
+│       ├── migrations/                          &lt;- data migration with preload of landgate instruments
+│       │       ├── 0001_initial.py
+│       │       ├──     0002_auto_20201112_1023.py
+│       │       ├──     0003_auto_20201126_1507.py
+│       │       └──     __init__.py
+│       ├── templates                            &lt;- html templates relating to staves/other levelling instruments
+│       │       └── staffs
+│       │               ├── stafftype_create.html
+│       │               ├──     stafftype_list.html
+│       │               ├──     stafftype_update.html
+│       │               └── ... more...
+│       ├──     admin.py
+│       ├──     apps.py
+│       ├──     forms.py
+│       ├──     managers.py
+│       ├──     models.py
+│       ├──     tests.py
+│       ├──     urls.py
+│       ├──     views.py
+│       └──     __init__.py
+├── range_calibration                        &lt;- range_calibration app - for calibrating the Boya Range
+│       ├── migrations ....                      &lt;- data migration with preload of range measurements
+│       ├── templates ....
+│       └── more ....
+├── staff_calibration                        &lt;- staff_calibration app - for calibrating staves
+│       ├── migrations ....
+│       ├── templates ....
+│       └── ... more...
+├── assets                                   &lt;- static files - css/js/images/data
+│       ├── ..css/..js
+│       ├── logo
+│       ├── images
+│       └── ... more ...
+├── data                                     &lt;- range data for preloaded
+│       └── range_data
+├── templates                                &lt;- general templates directory inlcuding base template and accounts
+│       ├── registrations
+│       │       ├──     activate_account.html
+│       │       ├──     activation_sent.html
+│       │       ├──     password_reset_complete.html
+│       │       ├──     password_reset_confirm.html
+│       │       ├──     password_reset_done.html
+│       │       ├──     password_reset_email.html
+│       │       └──     password_reset_form.html
+│       ├──     password_reset_email.htmlbase_generic.html
+│       └──home_page.html
+├── .gitignore                               &lt;- git ignore list - list of files/folders to be ignored for production
+├── .venv                                    &lt;- python virtual environement - holding modules only required for this
+├── docs                                     &lt;- documentation
+│       └── ... more...
+├── db.sqlite3                               &lt;- database
+├── LICENSE
+├── Procfile                                 &lt;- list of commands executed by the app on startup - required for Heroku
+├── README.md
+├── requirements.txt                         &lt;- list of python modules (i.e., those installed in the .venv)
+└── runtime.txt                              &lt;- text file specifying the python version
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation-guide/install-guide.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app-framework.html" class="btn btn-neutral float-left" title="Django application framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

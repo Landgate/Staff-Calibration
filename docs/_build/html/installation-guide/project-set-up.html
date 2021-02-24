@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating the Staff Calibration website &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building the staffs application" href="../staffs_application/contents.html" />
+    <link rel="prev" title="Installing Python &amp; Django" href="django-install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="install-guide.html">Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="django-install.html">Installing Python &amp; Django</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating the Staff Calibration website</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-project">Creating the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-staffs-application">Creating the <em>staffs</em> application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registering-the-staffs-application">Registering the <em>staffs</em> application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-the-database">Specifying the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#url-mappings">URL mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#templates">Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-settings-css-javascript-images">Other settings - CSS/JavaScript/Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-the-django-website-framework">Testing the Django website framework</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="install-guide.html">Getting started</a> &raquo;</li>
+        
+      <li>Creating the Staff Calibration website</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation-guide/project-set-up.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-the-staff-calibration-website">
+<h1>Creating the Staff Calibration website<a class="headerlink" href="#creating-the-staff-calibration-website" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>For this Staff Calibration website, the website and the project folder is named <em>staff</em> and includes four applications named: (1) <em>accounts</em>, (2) <em>staffs</em>, (3) <em>range_calibration</em>, and (4) <em>staff_calibration</em> with the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                             &lt;- main website folder
+├──manage.py                      &lt;- script to run django tools
+├──staff/                         &lt;- website/project folder
+├──accounts/                      &lt;- application folder
+├──staffs/                        &lt;- application folder
+├──range_calibration/             &lt;- application folder
+└──staff_calibration/             &lt;- application folder
+</pre></div>
+</div>
+<p>The general logics are:</p>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">django-admin</span></code> to generate the main website/project folder</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">manage.py</span></code> to create <em>applications</em></p></li>
+<li><p>Register the new applications to include them in the project via <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> and <code class="docutils literal notranslate"><span class="pre">url.py</span></code> found inside the project folder</p></li>
+</ol>
+</div>
+<div class="section" id="creating-the-project">
+<h2>Creating the project<a class="headerlink" href="#creating-the-project" title="Permalink to this headline">¶</a></h2>
+<p>Like the <em>mytestsite</em>, <strong>staff</strong> website/project can be created as follows:</p>
+<ol class="arabic simple">
+<li><p>In the command prompts, navigate to the main directory (e.g., <em>django_projects</em>). Also activate the virtual environment for the Django to work.</p></li>
+<li><p>Create the project and navigate into the folder as shown</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">staff</span>
+<span class="n">cd</span> <span class="n">staff</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>The folder structure will look like this:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/
+├──manage.py               &lt;- main engine - create applications, run servers, work with databases, and more
+└──staff/
+   ├──settings.py         &lt;- contains all the website settings, app registrations, database configurations &amp;   location
+   ├──urls.   y             &lt;- URL mappings including urls to the other application
+   ├──__init__.py         &lt;- empty file telling Python to treat it as a director
+   ├──wsgi.py             &lt;- Web server interface
+   └──asgi.py             &lt;- Asynchronous server interface compatible with WSGI
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-the-staffs-application">
+<h2>Creating the <em>staffs</em> application<a class="headerlink" href="#creating-the-staffs-application" title="Permalink to this headline">¶</a></h2>
+<p>Follow the instructions below to create the <em>staffs</em> application. The rest of the applications can be created in the same way.</p>
+<ol class="arabic simple">
+<li><p>In the same command prompts, run the following:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">startapp</span> <span class="n">staffs</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>This will create a new folder called <em>staffs</em> with the number of <em>.py</em> files and a folder called <em>migrations</em>. The updated project directory will look like below:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/
+├──manage.py
+├──staff/
+└──staffs/                   &lt;- application folder
+   ├──admin.py              &lt;- settings used for the admin site
+   ├──apps.py               &lt;- speficying the application
+   ├──models.py             &lt;- create models for this application
+   ├──tests.py
+   ├──views.py              &lt;- create views for this application
+   ├──__init__.py           &lt;- empty file for django to recognise as a python package
+   └──migrations/                     &lt;- folder to store migration files required to update the database
+</pre></div>
+</div>
+</div>
+<div class="section" id="registering-the-staffs-application">
+<h2>Registering the <em>staffs</em> application<a class="headerlink" href="#registering-the-staffs-application" title="Permalink to this headline">¶</a></h2>
+<p>All new applications created by <code class="docutils literal notranslate"><span class="pre">manage.py</span> <span class="pre">startapp</span></code> as registered under <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> inside the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>. Open the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> in the project folder <em>staff</em> and add the application <code class="docutils literal notranslate"><span class="pre">staffs</span></code> to the <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> list:</p>
+<pre class="literal-block"># Application definition
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    <strong>'staffs'</strong>,
+]</pre>
+<p>This added line will link with <code class="docutils literal notranslate"><span class="pre">apps.py</span></code> inside the <em>staffs</em> folder.</p>
+</div>
+<div class="section" id="specifying-the-database">
+<h2>Specifying the database<a class="headerlink" href="#specifying-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The database is configured in the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> as shown below. This SQLite database is configured automatically by django for development purposes but will need to be configured to a diffrent database for production (see, <a class="reference external" href="https://docs.djangoproject.com/en/3.1/ref/databases/">https://docs.djangoproject.com/en/3.1/ref/databases/</a> for other database connections)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;db.sqlite3&#39;</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="url-mappings">
+<h2>URL mappings<a class="headerlink" href="#url-mappings" title="Permalink to this headline">¶</a></h2>
+<p>The project folder contains a URL mapper file (<code class="docutils literal notranslate"><span class="pre">url.py</span></code>). This file can be used to manage all URL mappings for the website. However, urls associated with the applications are stored in a separate <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> inside the application (e.g., <em>staffs</em>) and connected to the project <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> using the django <code class="docutils literal notranslate"><span class="pre">include</span></code> function.</p>
+<ol class="arabic simple">
+<li><p>Open <strong>staff/staff/urls.py</strong>. The <code class="docutils literal notranslate"><span class="pre">url.py</span></code> file has a set of instructions and followed by:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename - staff/staff/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>The applications (e.g., <em>staff</em>) are mapped like this:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename - staff/staff/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>              <span class="c1"># add include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staffs/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;staffs.url&#39;</span><span class="p">)),</span>        <span class="c1"># new line inserted</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>The <em>staffs</em> application can now be accessed at <code class="docutils literal notranslate"><span class="pre">127.0.0.1:8000/staffs/</span></code>.</p></li>
+<li><p>Application specific URLs are mapped by creating a file called <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> in the application folder. For the <em>staffs</em> application, the <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> might look like this:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename - staff/staffs/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>                                                <span class="c1"># import views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">staff_list</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;staff_list&quot;&quot;),               # mapping the staff_list from views function</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;levels/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">levels_list</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;levels_list&quot;</span><span class="p">),</span>        <span class="c1"># mapping the list_list from views function</span>
+    <span class="o">....</span>
+    <span class="o">....</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>Templates are html files defining the structure of the presentation in web browsers. It uses placeholders to represent the actual content. Templates are usually stored in a folder called <strong>templates</strong> in the main project directory or inside the application and are called by the <code class="docutils literal notranslate"><span class="pre">views.py</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                                   &lt;- project folder
+├──templates/                           &lt;- general templates folder (e.g., base template)
+|       └──base.html                        &lt;- base template for use in other templates
+└──staffs/                              &lt;- application folder
+   └──templates/                       &lt;- templates folder for the application
+          └──staffs/                      &lt;- application name
+                 ├──staff_list.html          &lt;- application specific templates
+         └──level_list.html          &lt;- &#39;&#39;
+</pre></div>
+</div>
+<p>The following code snippet is a sample base template from a <strong>base_generic.html</strong> file. This base template is being modifed and inserted into all the other templates for the staff calibration project.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  {% block title %}<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Staff Calibration<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>{% endblock %}
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  {% block sidebar %}<span class="c">&lt;!-- insert default navigation text for every page --&gt;</span>{% endblock %}
+  {% block content %}<span class="c">&lt;!-- default content text (typically empty) --&gt;</span>{% endblock %}
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This <strong>base_generic.html</strong> template is inserted into other templates using a <code class="docutils literal notranslate"><span class="pre">extends</span></code> template tag at the top line. The contents are inserted inside the <code class="docutils literal notranslate"><span class="pre">block</span> <span class="pre">content</span></code> element. An example home page for the staff calibration project may be written as:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base_generic.html&quot; %}
+
+{% block content %}
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Staff calibration online<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Welcome to Landgate&#39;s online staff calibration page, an web application developed by <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span>Survey Services, Landgate<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<p>For more information on templates, refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/topics/templates/">https://docs.djangoproject.com/en/3.1/topics/templates/</a>. If the view function cannot find the required template, the browser will through in the message <code class="docutils literal notranslate"><span class="pre">TemplateDoesNotExist</span></code> with other information.</p>
+</div>
+<div class="section" id="other-settings-css-javascript-images">
+<h2>Other settings - CSS/JavaScript/Images<a class="headerlink" href="#other-settings-css-javascript-images" title="Permalink to this headline">¶</a></h2>
+<p>CSS and JavaScripts are integral for a website. Django templates are customised and styled using CSS and Javascripts that sits inside the main project/website folder and mapped in the following way:</p>
+<ol class="arabic simple">
+<li><p>Create two folders called <strong>assets</strong> and <strong>images</strong> inside the main project/website folder and copy all the relevant files into the newly created folders.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>assets/
+├──style.css
+└──script.js
+
+images/
+└──logo.png
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>, add the following lines:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Static files (CSS, JavaScript, Images)</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.1/howto/static-files/</span>
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s1">&#39;/static/&#39;</span>
+<span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;assets&#39;</span><span class="p">),]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Update the project <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> with the following lines:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename - staff/staff/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>                  <span class="c1"># import settings</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls.static</span> <span class="kn">import</span> <span class="n">static</span>        <span class="c1"># import static</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staffs/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;staffs.url&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">static</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span> <span class="n">document_root</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_ROOT</span><span class="p">)</span> <span class="c1"># connect to the STATIC_URL in settings.py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-django-website-framework">
+<h2>Testing the Django website framework<a class="headerlink" href="#testing-the-django-website-framework" title="Permalink to this headline">¶</a></h2>
+<p>With the above settings and configurations, the <strong>staff</strong> project/website now has the following:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">settings.py</span></code> with a <em>staffs</em> application registered, SQLite database, a pointer to the static file locations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urls.py</span></code> with a Administration url mapping, <em>staffs</em> application, and connections to the static file locations</p></li>
+<li><p><em>staffs</em> application with a <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> listed with two <em>views</em></p></li>
+</ol>
+<p>The website can be run but does not do anything yet. To check if everything is working as expected, run through the following instructions:</p>
+<ol class="arabic simple">
+<li><p>Run the data migrations - Django maps model definitions in the model code (<code class="docutils literal notranslate"><span class="pre">models.py</span></code>) to the data structure used by the database and keeps track of the changes in the migration folder (<strong>/staff/staffs/migrations/</strong>) in the form of python scripts. Django automatically adds a number of models for use by the <em>adminstrator</em> including users, groups, permissions, sessions, etc. To add these models, run the following commands in the command prompt. Re-run them every time a field is added or removed from the <code class="docutils literal notranslate"><span class="pre">models.py</span></code> file.</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>Run the <strong>staff</strong> website using the <em>runserver</em> command:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+
+        <span class="n">Watching</span> <span class="k">for</span> <span class="n">file</span> <span class="n">changes</span> <span class="k">with</span> <span class="n">StatReloader</span>
+        <span class="n">Performing</span> <span class="n">system</span> <span class="n">checks</span><span class="o">...</span>
+
+        <span class="n">System</span> <span class="n">check</span> <span class="n">identified</span> <span class="n">no</span> <span class="n">issues</span> <span class="p">(</span><span class="mi">0</span> <span class="n">silenced</span><span class="p">)</span><span class="o">.</span>
+
+        <span class="n">You</span> <span class="n">have</span> <span class="mi">18</span> <span class="n">unapplied</span> <span class="n">migration</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="n">Your</span> <span class="n">project</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">work</span> <span class="n">properly</span> <span class="n">until</span> <span class="n">you</span> <span class="n">apply</span> <span class="n">the</span> <span class="n">migrations</span> <span class="k">for</span> <span class="n">app</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">admin</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">contenttypes</span><span class="p">,</span> <span class="n">sessions</span><span class="o">.</span>
+        <span class="n">Run</span> <span class="s1">&#39;python manage.py migrate&#39;</span> <span class="n">to</span> <span class="n">apply</span> <span class="n">them</span><span class="o">.</span>
+        <span class="n">December</span> <span class="mi">07</span><span class="p">,</span> <span class="mi">2020</span> <span class="o">-</span> <span class="mi">15</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">35</span>
+        <span class="n">Django</span> <span class="n">version</span> <span class="mf">3.1</span><span class="p">,</span> <span class="n">using</span> <span class="n">settings</span> <span class="s1">&#39;staff.settings&#39;</span>
+        <span class="n">Starting</span> <span class="n">development</span> <span class="n">server</span> <span class="n">at</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8000</span><span class="o">/</span>
+        <span class="n">Quit</span> <span class="n">the</span> <span class="n">server</span> <span class="k">with</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">BREAK</span><span class="o">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>By navigating to <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/staffs/</span></code> in the web browser, it will give a <em>page not found</em> error. This shows that it has a url pointing to it but the page does not yet exist. The link to this page will have to created from <code class="docutils literal notranslate"><span class="pre">staff/staffs/views.py</span></code> and the <em>html</em> template defined in the view shoud be connected to the <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../staffs_application/contents.html" class="btn btn-neutral float-right" title="Building the staffs application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="django-install.html" class="btn btn-neutral float-left" title="Installing Python &amp; Django" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

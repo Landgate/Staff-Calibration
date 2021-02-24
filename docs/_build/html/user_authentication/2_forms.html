@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Customise User Forms and Admin Views &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up your authentication views" href="3_authentication_views.html" />
+    <link rel="prev" title="Setting up the Custom User Model" href="1_user_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">User authentication and permissions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html">Setting up the Custom User Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Customise User Forms and Admin Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customise-the-form">Customise the Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customise-the-admin">Customise the Admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#django-admin-page">Django admin page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html">Setting up your authentication views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#modifying-the-default-authentication">Modifying the default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html">Password Validators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html">Loading user information during migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">User authentication and permissions</a> &raquo;</li>
+        
+      <li>Customise User Forms and Admin Views</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_authentication/2_forms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="customise-user-forms-and-admin-views">
+<h1>Customise User Forms and Admin Views<a class="headerlink" href="#customise-user-forms-and-admin-views" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The new <strong>CustomUser</strong> model has been set up but Django still does not know how to use it. This is because Django uses the default authentication (<em>auth</em>) form that will accept only the default Django <strong>User</strong> model. In order to tell Django to use the <strong>CustomUser</strong> model, we will have to modify the default authentication form by subclassing the <code class="docutils literal notranslate"><span class="pre">UserCreationForm</span></code> and <code class="docutils literal notranslate"><span class="pre">UserChangeForm</span></code>.</p>
+<p>After that we will need to tell Django <strong>admin</strong> to use the customised form and model so that admin have the appropriate form views and user model.</p>
+</div>
+<div class="section" id="customise-the-form">
+<h2>Customise the Form<a class="headerlink" href="#customise-the-form" title="Permalink to this headline">¶</a></h2>
+<p>Let’s subclass the <code class="docutils literal notranslate"><span class="pre">UserCreationForm</span></code> and <code class="docutils literal notranslate"><span class="pre">UserChangeForm</span></code> forms so that Django can now use the new <strong>CustomUser</strong> model.</p>
+<p>Create a new file in <em>accounts</em> directory called <strong>forms.py</strong> and copy the following lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span><span class="p">,</span> <span class="n">UserChangeForm</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">ReadOnlyPasswordHashField</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">CustomUser</span><span class="p">,</span> <span class="n">Authority</span>
+
+<span class="k">class</span> <span class="nc">NonstickyTextInput</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Input widget for preserving the form errors but forgets the submitted fields&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Clear the submitted value.</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">CustomUserCreationForm</span><span class="p">(</span><span class="n">UserCreationForm</span><span class="p">):</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">NonstickyTextInput</span><span class="p">())</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">NonstickyTextInput</span><span class="p">())</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">NonstickyTextInput</span><span class="p">())</span>
+    <span class="c1">#phone_number = forms.CharField(widget=NonstickyTextInput())</span>
+    <span class="n">password1</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Password&#39;</span><span class="p">,</span>
+                                <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">PasswordInput</span><span class="p">)</span>
+    <span class="n">password2</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Password confirmation&#39;</span><span class="p">,</span>
+                                <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">PasswordInput</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="n">UserCreationForm</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CustomUser</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span> <span class="s1">&#39;authority&#39;</span><span class="p">,</span> <span class="s1">&#39;password1&#39;</span><span class="p">,</span> <span class="s1">&#39;password2&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clean_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">email_qs</span> <span class="o">=</span> <span class="n">CustomUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">email_qs</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;User already exists. Please use a different email address to sign up.&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">email_qs</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Your account is not active yet. Please log in to request a new activation code.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ObjectDoesNotExist</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">email</span>
+
+    <span class="k">def</span> <span class="nf">clean_password2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">password1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password1&quot;</span><span class="p">)</span>
+        <span class="n">password2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password2&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">password1</span> <span class="ow">and</span> <span class="n">password2</span> <span class="ow">and</span> <span class="n">password1</span> <span class="o">!=</span> <span class="n">password2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Passwords don&#39;t match&quot;</span><span class="p">)</span>
+        <span class="n">password_validation</span><span class="o">.</span><span class="n">validate_password</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password1&#39;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">password2</span>
+
+    <span class="k">def</span> <span class="nf">clean_first_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">first_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">first_name</span>
+
+    <span class="k">def</span> <span class="nf">clean_last_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">last_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">last_name</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CustomUserCreationForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s2">&quot;password1&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">commit</span><span class="p">:</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">user</span>
+
+<span class="k">class</span> <span class="nc">CustomUserChangeForm</span><span class="p">(</span><span class="n">UserChangeForm</span><span class="p">):</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">ReadOnlyPasswordHashField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CustomUser</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;authority&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;is_staff&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;is_superuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;is_active&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;date_joined&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clean_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that several methods have been put in place to indicate how the input texts are interpreted and raise <em>Validation</em> errors. Custom validations include:</p>
+<ol class="arabic simple">
+<li><p>Preserving the unique email address by enquring the <strong>CustomUser</strong> model</p></li>
+<li><p>Checking if the two passwords match</p></li>
+<li><p>The <strong>CustomUserChangeForm</strong> uses a <code class="docutils literal notranslate"><span class="pre">ReadOnlyPasswordHashField</span></code> which tells Django not to store the raw passwords.</p></li>
+</ol>
+<p>Please refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/topics/auth/customizing/">https://docs.djangoproject.com/en/3.1/topics/auth/customizing/</a> for more information about customising the authentication form.</p>
+</div>
+<div class="section" id="customise-the-admin">
+<h2>Customise the Admin<a class="headerlink" href="#customise-the-admin" title="Permalink to this headline">¶</a></h2>
+<p>Now, we need to tell Django to use the above forms by subclassing <code class="docutils literal notranslate"><span class="pre">UserAdmin</span></code> in the <strong>admin.py</strong> in the same directory (<strong>staff/accounts/</strong>).</p>
+<p>Let’s open the <strong>admin.py</strong> and register the custom models and Forms like this:</p>
+<p>Thats all the steps required to enable Django to use the email authentication instead of its default username. Note that are many different ways to acheive this and developers are free to adopt any one of them.</p>
+</div>
+<div class="section" id="django-admin-page">
+<h2>Django admin page<a class="headerlink" href="#django-admin-page" title="Permalink to this headline">¶</a></h2>
+<p>Run the sever (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></code>) in the command prompt and log in to the admin site (<a class="reference external" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a>) using the superuser credentials created through <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">createsuperuser</span></code>. The <code class="docutils literal notranslate"><span class="pre">superuser</span></code> us now able to add and change users as before.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/custom_admin_page.png" src="../_images/custom_admin_page.png" />
+<p class="caption"><span class="caption-text">Custom admin site showing the fields required to add a new user</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="3_authentication_views.html" class="btn btn-neutral float-right" title="Setting up your authentication views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1_user_model.html" class="btn btn-neutral float-left" title="Setting up the Custom User Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

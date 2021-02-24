@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up the Custom User Model &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Customise User Forms and Admin Views" href="2_forms.html" />
+    <link rel="prev" title="User authentication and permissions" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">User authentication and permissions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up the Custom User Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-user-model">Custom User model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html">Customise User Forms and Admin Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html">Setting up your authentication views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#modifying-the-default-authentication">Modifying the default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html">Password Validators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html">Loading user information during migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">User authentication and permissions</a> &raquo;</li>
+        
+      <li>Setting up the Custom User Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_authentication/1_user_model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-the-custom-user-model">
+<h1>Setting up the Custom User Model<a class="headerlink" href="#setting-up-the-custom-user-model" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The authentication has been set up automatically by django when the skeleton website (or project) was created, i.e., when executing the <code class="docutils literal notranslate"><span class="pre">django-admin</span> <span class="pre">startproject</span> <span class="pre">staff</span></code> command. The database tables for users and model permissions were then created after the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">mananage.py</span> <span class="pre">migrate</span></code> was run for the first time. The authentication configuration are set up in:</p>
+<ol class="arabic">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>                  <span class="c1"># admin interface</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>                   <span class="c1"># core authentication framework</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>           <span class="c1"># content type system for setting permissions</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>And the following lines associated to the above applications.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.middleware.security.SecurityMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>In the project (<strong>staff/</strong>) <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>         <span class="c1"># URL configuration to the admin site</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>After running the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">mananage.py</span> <span class="pre">migrate</span></code>, Django allows us to create the <code class="docutils literal notranslate"><span class="pre">superuser</span></code> using the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">createsupersuer</span></code> command. It requires a <strong>username</strong>, <strong>email address</strong>, and a <strong>password</strong> to register, which can be used to log into the <strong>admin</strong> interface or page (e.g., <a class="reference external" href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">superuser</span></code> has all the permissions to create <strong>users</strong>, <strong>Groups</strong> and <strong>Permissions</strong> that sit under <strong>AUTHENTICATION AND AUTHORISATION</strong> section. It is the quickest way to add/update/delete records including the users/groups/permissions. Try to click on each one of them to see how they work.</p>
+</div>
+<div class="section" id="custom-user-model">
+<h2>Custom User model<a class="headerlink" href="#custom-user-model" title="Permalink to this headline">¶</a></h2>
+<p>While the default Django authentication system has everything required for the Staff Calibration website, it still requires a <strong>username</strong> to sign up and log into the website. So it takes a few extra steps to get rid of the <em>username</em> and apply the normal practice of using <strong>email</strong> for authentication. There are four very important steps that should be followed:</p>
+<ol class="arabic simple">
+<li><p>Create a custom <strong>User</strong> model and a <strong>Manager</strong></p></li>
+<li><p>Update the <em>settings.py</em> file</p></li>
+<li><p>Customise the <code class="docutils literal notranslate"><span class="pre">UserCreationForm</span></code> and <code class="docutils literal notranslate"><span class="pre">UserChangeForm</span></code> forms</p></li>
+<li><p>Update the <em>admin.py</em> file</p></li>
+</ol>
+<p>Now let us follow these steps and create a <code class="docutils literal notranslate"><span class="pre">CustomUser</span></code> model a <code class="docutils literal notranslate"><span class="pre">CustomUserManager</span></code>:</p>
+<ol class="arabic">
+<li><p>Open command prompts &gt; activate the virtual environment &gt; Navigate to the project directory (<strong>staffs/</strong>).</p></li>
+<li><p>Create a new application called <strong>accounts</strong> and add it to <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> in <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Create the <strong>accounts</strong> application</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">startapp</span> <span class="n">accounts</span>
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="2">
+<li><p>Add the accounts app to project settings</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="o">...</span><span class="p">,</span>
+        <span class="n">accounts</span><span class="p">,</span>
+        <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add a custom Manager by subclassing <code class="docutils literal notranslate"><span class="pre">BaseUserManager</span></code>, in order to use email as the unique identifier instead of a default <em>username</em>.</p>
+<blockquote>
+<div><p>Create a <strong>managers.py</strong> file in the <em>accounts</em> app (<strong>staff/accounts/managers.py</strong>) and add the following lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="p">:</span> <span class="n">staff</span><span class="o">/</span><span class="n">accounts</span><span class="o">/</span><span class="n">managers</span><span class="o">.</span><span class="n">py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib.auth.base_user</span> <span class="kn">import</span> <span class="n">BaseUserManager</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span>
+
+
+<span class="k">class</span> <span class="nc">CustomUserManager</span><span class="p">(</span><span class="n">BaseUserManager</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom user model manager where email is the unique identifiers</span>
+<span class="sd">    for authentication instead of usernames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and save a User with the given email and password.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;The Email must be set&#39;</span><span class="p">))</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">user</span>
+
+    <span class="k">def</span> <span class="nf">create_superuser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and save a SuperUser with the given email and password.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_staff&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_superuser&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_active&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">extra_fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is_staff&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Superuser must have is_staff=True.&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">extra_fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is_superuser&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Superuser must have is_superuser=True.&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Next, in the <strong>models.py</strong> file, create a <em>CustomUser</em> model by subclassing <code class="docutils literal notranslate"><span class="pre">AbstractBaseUser</span></code> from django model class. Import <code class="docutils literal notranslate"><span class="pre">CustomUserManager</span></code> from <em>managers.py</em> and <code class="docutils literal notranslate"><span class="pre">PermissionMixin</span></code> by subclassing the django auth models. Add the required fields and set the <code class="docutils literal notranslate"><span class="pre">USERNAME_FIELD</span></code> to <code class="docutils literal notranslate"><span class="pre">email</span></code>. See below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="p">:</span> <span class="n">staff</span><span class="o">/</span><span class="n">accounts</span><span class="o">/</span><span class="n">models</span><span class="o">.</span><span class="n">py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">AbstractBaseUser</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">PermissionsMixin</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">.managers</span> <span class="kn">import</span> <span class="n">CustomUserManager</span>
+
+<span class="c1"># Create your models here.</span>
+<span class="k">class</span> <span class="nc">Authority</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">authority_abbrev</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">authority_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">authority_name</span>
+
+<span class="k">class</span> <span class="nc">CustomUser</span><span class="p">(</span><span class="n">AbstractBaseUser</span><span class="p">,</span> <span class="n">PermissionsMixin</span><span class="p">):</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;email address&#39;</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">authority</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Authority</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># to allow for a blank/null value if Authority table is blank</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">is_staff</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_joined</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+
+    <span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="s1">&#39;email&#39;</span>
+    <span class="n">REQUIRED_FIELDS</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">CustomUserManager</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span>
+</pre></div>
+</div>
+<p>A new <code class="docutils literal notranslate"><span class="pre">Authority</span></code> class is created to store the user’s company name and abbreviation, which is being passed to the <strong>CustomUser</strong> model as a <code class="docutils literal notranslate"><span class="pre">ForeignKey</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Update the <em>settings.py</em> in the project so that Django can use the new <code class="docutils literal notranslate"><span class="pre">CustomUser</span></code> model:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="p">:</span> <span class="n">staff</span><span class="o">/</span><span class="n">staff</span><span class="o">/</span><span class="n">settings</span><span class="o">.</span><span class="n">py</span>
+
+<span class="o">...</span>
+
+<span class="n">AUTH_USER_MODEL</span> <span class="o">=</span> <span class="s1">&#39;accounts.CustomUser&#39;</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create and apply migrations</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Before applying the CustomUser model, the database will have the default <code class="docutils literal notranslate"><span class="pre">auth</span></code> <strong>User</strong> model and other detault groups and permissions. Open a new command prompt window, navigate to the project diretory, and run &gt; <code class="docutils literal notranslate"><span class="pre">sqlite3</span> <span class="pre">db.sqlite3</span></code> and <code class="docutils literal notranslate"><span class="pre">.tables</span></code> to see all the tables as below:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">auth_group</span>                  <span class="n">django_content_type</span>
+<span class="n">auth_group_permissions</span>      <span class="n">django_migrations</span>
+<span class="n">auth_permission</span>             <span class="n">django_session</span>
+<span class="n">auth_user</span>                   <span class="n">staffs_digitallevel</span>
+<span class="n">auth_user_groups</span>            <span class="n">staffs_staff</span>
+<span class="n">auth_user_user_permissions</span>  <span class="n">staffs_stafftype</span>
+<span class="n">django_admin_log</span>
+</pre></div>
+</div>
+<ol class="loweralpha" start="2">
+<li><p>Apply migrations to incorporate the new <em>CustomUser</em> model and <em>CustomUserManager</em> as follows:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manager</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+<p>A new migration file - <em>accountsmigrations0001_initial.py</em> is created. Open the file and see what it is like. The sqilte3 database command for creating the <em>CustomUser</em> table looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In the command prompts window run &gt; sqlite3 db.sqlite3. Type &gt; .tables to see the tables and type &gt; .schema accounts_customuser to see the results below:</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">NOT</span> <span class="n">EXISTS</span> <span class="s2">&quot;accounts_customuser&quot;</span> <span class="p">(</span>
+        <span class="s2">&quot;id&quot;</span> <span class="n">integer</span> <span class="n">NOT</span> <span class="n">NULL</span> <span class="n">PRIMARY</span> <span class="n">KEY</span> <span class="n">AUTOINCREMENT</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;last_login&quot;</span> <span class="n">datetime</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">254</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span> <span class="n">UNIQUE</span><span class="p">,</span>
+        <span class="s2">&quot;first_name&quot;</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;last_name&quot;</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;is_staff&quot;</span> <span class="nb">bool</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;is_superuser&quot;</span> <span class="nb">bool</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;is_active&quot;</span> <span class="nb">bool</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;date_joined&quot;</span> <span class="n">datetime</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+        <span class="s2">&quot;authority_id&quot;</span> <span class="n">integer</span> <span class="n">NOT</span> <span class="n">NULL</span> <span class="n">REFERENCES</span> <span class="s2">&quot;accounts_authority&quot;</span> <span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="n">DEFERRABLE</span> <span class="n">INITIALLY</span> <span class="n">DEFERRED</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Open the django admin page (<a class="reference external" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a>) in the internet browser and check if it asks for the email address instead of a username.</p></li>
+</ol>
+<div class="figure align-center" id="id1">
+<img alt="../_images/admin_interface.png" src="../_images/admin_interface.png" />
+<p class="caption"><span class="caption-text">Admin user login interface with email address as login.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>Next, we will need to customise the forms to accept the <strong>CustomUser</strong> model.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="2_forms.html" class="btn btn-neutral float-right" title="Customise User Forms and Admin Views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral float-left" title="User authentication and permissions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

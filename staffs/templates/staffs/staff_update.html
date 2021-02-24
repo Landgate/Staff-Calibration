@@ -1,0 +1,29 @@
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+	
+<article class="post">
+  	<header class="post-header">
+    	<h1 class="post-title text-center">Updating an existing staff record </h1>
+  	</header>
+	<hr>
+	<br>
+	<div class="post-content">
+		<form class="site-form" method="post">
+		    {% csrf_token %}
+		    {{ form.as_p }}
+		    <br>
+		    <div class="grid-2">
+		    	<div>
+		    		<button class="px-3 py-1 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit"> Next &raquo; </button>
+		    	</div>
+		    	<div>
+				    <a class="px-3 py-2 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:staff-delete' staff_id %}">Delete</a>
+				</div>
+		    </div>
+		</form>
+	</div>
+</article>
+
+ {% endblock %}

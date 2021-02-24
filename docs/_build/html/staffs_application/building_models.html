@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building the models &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Django admin site" href="admin_site.html" />
+    <link rel="prev" title="Building the staffs application" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Building the staffs application</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building the models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#designing-the-staffs-models">Designing the <strong>staffs</strong> models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-the-models">Defining the models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-fields">Model Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metadata">Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#re-running-the-database-migrations">Re-running the database migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html">Django admin site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html">Building URLs, Views, and Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html">Working with forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Building the staffs application</a> &raquo;</li>
+        
+      <li>Building the models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staffs_application/building_models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-the-models">
+<h1>Building the models<a class="headerlink" href="#building-the-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Django web applications access and manage data through Python objects referred to as models. Models define the structure of stored data, including the field types and possibly also their maximum size, default values, selection list options, help text for documentation, label text for forms, etc. The definition of the model is independent of the underlying database (see <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>) and django officially supports <em>SQLite</em>, <em>PostgreSQL</em>, <em>MariaDB</em>, <em>MySQL</em>, and <em>Oracle</em> at the time of this writing (see details on <a class="reference external" href="https://docs.djangoproject.com/en/3.1/ref/databases/">https://docs.djangoproject.com/en/3.1/ref/databases/</a>).</p>
+</div>
+<div class="section" id="designing-the-staffs-models">
+<h2>Designing the <strong>staffs</strong> models<a class="headerlink" href="#designing-the-staffs-models" title="Permalink to this headline">¶</a></h2>
+<p>In this Staff Calibration project/website, the <strong>staffs</strong> application is designed to deal with all the functions related to the levelling instruments - inlcuding staves and digital levels. It will store all the relevant information required for calibrating a staff and is able to display/print the individual calibration results for each staff calibrated. With this in mind, the <strong>staffs</strong> model design is built according to the following diagram.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/staffs_model.png" src="../_images/staffs_model.png" />
+<p class="caption"><span class="caption-text">Design of the <strong>staffs</strong> models.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>The <strong>staffs</strong> application is made up of three models (i.e., <code class="docutils literal notranslate"><span class="pre">Staff</span></code>, <code class="docutils literal notranslate"><span class="pre">StaffType</span></code>, and <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code>) and the <code class="docutils literal notranslate"><span class="pre">Staffs</span></code> and <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code> are linked to the <strong>User</strong> using the <code class="docutils literal notranslate"><span class="pre">ForeignKey</span></code> method.</p>
+</div>
+<div class="section" id="defining-the-models">
+<h2>Defining the models<a class="headerlink" href="#defining-the-models" title="Permalink to this headline">¶</a></h2>
+<p>Models are usually defined in an application’s <code class="docutils literal notranslate"><span class="pre">models.py</span></code> file, which is automatically generated when the <strong>staffs</strong> application was created via <code class="docutils literal notranslate"><span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">staffs</span></code>. Models can include fields, methods, and metadata. Excluding the User model, the above model design is implemented in the <code class="docutils literal notranslate"><span class="pre">staff/staffs/models.py</span></code> as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">MaxValueValidator</span><span class="p">,</span> <span class="n">MinValueValidator</span>
+
+<span class="c1"># Create your models here.</span>
+
+<span class="k">class</span> <span class="nc">StaffType</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">staff_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;e.g., Invar, Fibre glass&quot;</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">thermal_coefficient</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Staff coefficient in ppm&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;staffs:stafftype-detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">staff_type</span>
+
+<span class="k">class</span> <span class="nc">Staff</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">staff_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                    <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Staff serial number&quot;</span><span class="p">,</span>
+                                    <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="p">)</span>
+    <span class="n">staff_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">StaffType</span><span class="p">,</span> <span class="n">on_delete</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">,</span> <span class="n">null</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">staff_length</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">validators</span> <span class="o">=</span> <span class="p">[</span><span class="n">MinValueValidator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">MaxValueValidator</span><span class="p">(</span><span class="mf">7.0</span><span class="p">)],</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Staff length in meters&quot;</span><span class="p">)</span>
+    <span class="n">standard_temperature</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">25.0</span><span class="p">)</span>
+    <span class="n">correction_factor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">calibration_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">,</span> <span class="s1">&#39;-calibration_date&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">staff_number</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">staff_type</span><span class="o">.</span><span class="n">staff_type</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="k">class</span> <span class="nc">DigitalLevel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">level_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter the instrument serial number&quot;</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">level_make</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;e.g., Leica&quot;</span><span class="p">)</span>
+    <span class="n">level_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;e.g., LS15 or DNA03&quot;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;level_number&#39;</span><span class="p">,</span><span class="s1">&#39;level_make&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;staffs:level-detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_model</span><span class="si">}</span><span class="s1">)&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-fields">
+<h2>Model Fields<a class="headerlink" href="#model-fields" title="Permalink to this headline">¶</a></h2>
+<p>A model can have any number of fields, of any type. Each field represents a column in a database table and the values are stored as records (or rows). For example, <code class="docutils literal notranslate"><span class="pre">staff_number</span></code> field is defined as</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">staff_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Staff serial number&quot;</span><span class="p">,</span>
+                                <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">staff_number</span></code> is a <em>string field</em> defined by the <code class="docutils literal notranslate"><span class="pre">models.CharField</span></code> and will contain strings of alphanumeric characters. The field type has the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_length=20</span></code> - maximum length of 20 characters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help_text=&quot;Staff</span> <span class="pre">Serial</span> <span class="pre">Number&quot;</span></code> - a text label to display to help users know what to provide</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unique=True</span></code> - indicating that it will only hold one record for that staff_number</p></li>
+</ul>
+<p>Other field arguments include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> - a human-readable name for the field used in field labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> - a default value for the field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">null</span></code> - if <code class="docutils literal notranslate"><span class="pre">True</span></code>, django will store blank values as <code class="docutils literal notranslate"><span class="pre">NULL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blank</span></code> - if <code class="docutils literal notranslate"><span class="pre">True</span></code>, the field is allowed to be blank in forms.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">choices</span></code> - a set of choices for this field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">primary_key</span></code> - if <code class="docutils literal notranslate"><span class="pre">True</span></code>, sets the field as primary key for the model. If not specified, django will automatically add a field for this purpose.</p></li>
+</ul>
+<p>Model field types commonly include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TextField</span></code> - used for large arbitary-length string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IntegerField</span></code> - used for integer values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DateField</span></code> and <code class="docutils literal notranslate"><span class="pre">DateTimeField</span></code> - used for dates and date/time. Additional parameters include <code class="docutils literal notranslate"><span class="pre">auto_now=True</span></code> (set to current date/time, <code class="docutils literal notranslate"><span class="pre">auto_now_add</span></code> (set the date the model was first created), and default (set a default date))</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EmailField</span></code> - used for emails</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileField</span></code> and <code class="docutils literal notranslate"><span class="pre">ImageField</span></code> - used for files and images respectively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ForeignKey</span></code> - used to specify one-to-many relationship to another database model (e.g., a staff may be of any type - invar, fibreglass, steel)</p></li>
+</ul>
+<p>For more information, refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/ref/models/fields/">https://docs.djangoproject.com/en/3.1/ref/models/fields/</a>.</p>
+</div>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<p>Metadata in a django model is “anything that’s not a field”, such as ordering options (<code class="docutils literal notranslate"><span class="pre">ordering</span></code>), database table name (<code class="docutils literal notranslate"><span class="pre">db_table</span></code>), or human-readable singular and plural names (<code class="docutils literal notranslate"><span class="pre">verbose_nam``e</span> <span class="pre">and</span> <span class="pre">``verbose_name_plural</span></code>). This is done by adding a <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Meta</span></code> to the model but it is completely optional. The <code class="docutils literal notranslate"><span class="pre">Staff</span></code> model has a <code class="docutils literal notranslate"><span class="pre">ordering</span></code> option applied to the records to display them by staff_number (ascending order) and calibration date (latest date - descending order).</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">,</span> <span class="s1">&#39;-calibration_date&#39;</span><span class="p">]</span>    <span class="c1"># order by staff number (ascending) and calibration date (latest date at the top)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<p>Models can have methods to add “row-level” functionality to the class object. For the <code class="docutils literal notranslate"><span class="pre">DigitalLevel</span></code> model, two methods are provided.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DigitalLevel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;staffs:level-detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level_model</span><span class="si">}</span><span class="s1">)&#39;</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_absolute_url()</span></code> returns the URL mapping for rendering the invidual model records in a html file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__str__</span></code> returns a human-readable string for the class object. Without this method, it will be almost impossible to understand what the class object (or model) is about.</p></li>
+</ol>
+</div>
+<div class="section" id="re-running-the-database-migrations">
+<h2>Re-running the database migrations<a class="headerlink" href="#re-running-the-database-migrations" title="Permalink to this headline">¶</a></h2>
+<p>After creating the three models, it is time to add them to the database. This is done by running the migration commands</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+<p>Output of <code class="docutils literal notranslate"><span class="pre">makemigrations</span></code>:</p>
+<pre class="literal-block">Migrations for 'staffs':
+  staffsmigrations0001_initial.py
+    - Create model DigitalLevel
+    - Create model StaffType
+    - Create model Staff</pre>
+<p>Output of <code class="docutils literal notranslate"><span class="pre">migrate</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Operations</span> <span class="n">to</span> <span class="n">perform</span><span class="p">:</span>
+  <span class="n">Apply</span> <span class="nb">all</span> <span class="n">migrations</span><span class="p">:</span> <span class="n">admin</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">contenttypes</span><span class="p">,</span> <span class="n">sessions</span><span class="p">,</span> <span class="n">staffs</span>
+<span class="n">Running</span> <span class="n">migrations</span><span class="p">:</span>
+  <span class="n">Applying</span> <span class="n">contenttypes</span><span class="o">.</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">admin</span><span class="o">.</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">admin</span><span class="o">.</span><span class="mi">0002</span><span class="n">_logentry_remove_auto_add</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">admin</span><span class="o">.</span><span class="mi">0003</span><span class="n">_logentry_add_action_flag_choices</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">contenttypes</span><span class="o">.</span><span class="mi">0002</span><span class="n">_remove_content_type_name</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0002</span><span class="n">_alter_permission_name_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0003</span><span class="n">_alter_user_email_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0004</span><span class="n">_alter_user_username_opts</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0005</span><span class="n">_alter_user_last_login_null</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0006</span><span class="n">_require_contenttypes_0002</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0007</span><span class="n">_alter_validators_add_error_messages</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0008</span><span class="n">_alter_user_username_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0009</span><span class="n">_alter_user_last_name_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0010</span><span class="n">_alter_group_name_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0011</span><span class="n">_update_proxy_permissions</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">auth</span><span class="o">.</span><span class="mi">0012</span><span class="n">_alter_user_first_name_max_length</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">sessions</span><span class="o">.</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">...</span> <span class="n">OK</span>
+  <span class="n">Applying</span> <span class="n">staffs</span><span class="o">.</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">...</span> <span class="n">OK</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="admin_site.html" class="btn btn-neutral float-right" title="Django admin site" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral float-left" title="Building the staffs application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

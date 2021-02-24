@@ -1,0 +1,200 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block content %}
+
+	<article class="post">
+    {% if messages %}
+    <ul class="alert messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <header class="post-header">
+      <div class="grid-2">
+        <div class="title-grid">
+          <h1 class="post-title text-center">Range Parameters </h1>
+        </div>
+        <div class="btn-update">
+          <a href="{% url 'range_calibration:range_param_update' %}">
+          <button class="px-2 py-1 border border-transparent text-sm leading-4 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" >Update table</button></a>
+        </div>
+      </div>
+    </header>
+    <hr>
+    <br>
+
+    <div class="post-content">
+      <div class="grid-2">
+        <div>
+          <div>Laboratory Name: <strong>Boya</strong></div>
+          <div>Description: Barcode Staff Calibration Range </div>
+        </div>
+        <div>
+          <div>Authority Name: <strong>Landgate</strong></div>
+          <div>Location: Victor Road, Darlington, WA 6070 </div>
+        </div>
+      </div>
+      <hr> 
+      <br>
+      <h3> Mean monthly height differences between pillars </h3>
+      <table> 
+        <tr>
+          {% for header in param.headers %}
+              <th> <h3> {{ header }} </h3> </th>
+          {% endfor %}
+        </tr>
+
+        {% for data in param.data %}
+          <tr style="text-align:center">    
+            {% for value in data %}
+              {% if "-" in value %}
+                <td style="font-size: 1.0em">{{ value }}</td>
+              {% else %}
+                <td style="font-size: 1.0em">{{ value|floatformat:5 }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+        <tr class="table-summary">
+          {% for value in total %}
+            {% if "Sum" in value %}
+              <td> <h3> {{ value }} </h3> </td>
+            {% else %}
+              <td> <h3> {{ value|floatformat:5 }} </h3> </td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      </table>
+      </div>
+    <!--Pagination-->
+
+  {% if is_paginated %}
+  	<ul class="pagination pg-blue">
+  	{% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+     {% endif %}
+
+	<li class="page-item active">
+		<a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+	      <span class="sr-only">(current)</span>
+	    </a>
+	</li>
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+       <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+       <span aria-hidden="true">&raquo;</span>
+       <span class="sr-only">Next</span>
+       </a>
+    </li>
+    {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+  <hr>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <br> <br>
+  {% if isChart %}
+    <div class="post-content" style="width:100%">
+      <h3> Difference from mean height difference between Pin 1 & 21</h3>
+      <canvas id="myChart" style="background-color:#fff"></canvas>
+    </div>
+  {% endif %}
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    Chart.defaults.global.defaultFontColor = 'black';
+    Chart.defaults.global.defaultFontSize = '12';
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+            labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
+            datasets: [{
+                label: 'Difference from mean',
+                data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
+                backgroundColor: [
+                    '#00876c',
+                    '#39956a',
+                    '#5ba268',
+                    '#7caf67',
+                    '#9dbb66',
+                    '#bfc669',
+                    '#e2cf6f',
+                    '#e5b95d',
+                    '#e6a250',
+                    '#e68a49',
+                    '#e37248',
+                    '#dd584b',
+                ],
+                borderColor: [
+                    '#00876c',
+                    '#39956a',
+                    '#5ba268',
+                    '#7caf67',
+                    '#9dbb66',
+                    '#bfc669',
+                    '#e2cf6f',
+                    '#e5b95d',
+                    '#e6a250',
+                    '#e68a49',
+                    '#e37248',
+                    '#dd584b',
+                ],
+                pointRadius: 5,
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+              position: 'bottom',
+            },
+            hover: {
+              mode: 'index'
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Month'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Difference in mm'
+                }
+              }]
+            },
+            title: {
+              display: true,
+              //text: 'Difference from mean height difference between Pin 1 & 21 '
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += tooltipItem.yLabel.toFixed(2);
+                        return label;
+                    }
+                }
+            }
+        }
+    });
+  </script>
+ </article>
+
+{% endblock content %}

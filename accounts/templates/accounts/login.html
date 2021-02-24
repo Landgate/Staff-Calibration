@@ -1,0 +1,76 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+<article class="post">
+  	<header class="post-header">
+    	<h1 class="post-title text-center"> Please sign in with your email address </h1>
+  	</header>
+	<hr>
+	<br>
+	{% if messages %}
+	<div class="post-content">
+	    {% for message in messages %}
+	    <div class="alert {{ message.tags }}">
+	        {% if 'safe' in message.tags %}
+	            <h2> {{ message|safe }} </h2>
+	        {% else %}
+	            <h2> {{ message }} </h2>
+	        {% endif %}
+	    </div>
+	    {% endfor %}
+	</div>
+	{% endif %}
+
+	<br>
+
+	{% if form.errors or form.non_field_errors %}
+		<div class="post-content alert error">
+	    {% for field in form %}
+	        {% for error in field.errors %}
+	            <p> {{ error }} </p>
+	        {% endfor %}
+	    {% endfor %}
+
+		{% for error in form.non_field_errors %}
+		    <p> {{ error }} </p>
+		{% endfor %}
+		</div>
+	{% endif %}
+
+	<div class="post-content">
+		<form class="site-form" action="/accounts/login/" method="post">
+		    {% csrf_token %}
+		    {% for field in form %}
+		    	<p>{{ field.label_tag }} {{ field }}</p>
+		    {% endfor %}
+		    <!-- {{ form.as_p }} -->
+
+		    {% if request.GET.next %}
+		    	<input type="hidden" name="next" value = "{{ request.GET.next }}">
+		    {% endif %}
+		    <br>
+		    <div class="grid-1">
+		    	<a href="{% url 'accounts:password_reset' %}">Forgotten your password?</a>
+		    </div>
+		    <br>
+		    <div class="grid-2">
+		    	<div>
+		    		<button class="px-4 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit"> Login </button>
+		    	</div>
+		    	<div>
+		    		<a class="px-2 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'accounts:signup' %}">Sign up &#8811;</a>
+		    	</div>
+		    </div>
+		    
+		    <br> <br>
+
+		    
+		</form>
+
+	</div>
+</article>
+
+
+
+ {% endblock content %}

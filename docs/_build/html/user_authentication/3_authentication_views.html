@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up your authentication views &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Password Validators" href="4_password_validation.html" />
+    <link rel="prev" title="Customise User Forms and Admin Views" href="2_forms.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">User authentication and permissions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html">Setting up the Custom User Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html">Customise User Forms and Admin Views</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up your authentication views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modifying-the-default-authentication">Modifying the default authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-url">Project URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accounts-url">Accounts URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-in">Logging in</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-out">Logging out</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#password-reset">Password reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sign-up-registration">Sign up/registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#permissions-decorators">Permissions &amp; decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html">Password Validators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_pre_load.html">Loading user information during migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">User authentication and permissions</a> &raquo;</li>
+        
+      <li>Setting up your authentication views</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_authentication/3_authentication_views.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-your-authentication-views">
+<h1>Setting up your authentication views<a class="headerlink" href="#setting-up-your-authentication-views" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Django web framework provides almost everything that is required to create authentication pages to handle login, log out, and password management by default. This includes a URL mapper, views and forms. However, it does not include the templates and should be created to enable the above functions by users/clients.</p>
+</div>
+<div class="section" id="django-s-default-authentication">
+<h1>Django’s default authentication<a class="headerlink" href="#django-s-default-authentication" title="Permalink to this headline">¶</a></h1>
+<p>Apart from the templates, the whole of the authentication views and urls can be achieved by just adding the below one liner code in the project <strong>urls.py</strong> (i.e., <em>staff/staff/urls.py</em>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/urls.py</span>
+
+<span class="o">...</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;accounts/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;django.contrib.auth.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Views related to the above URLs are defined using class-based views and uses the templates located in a folder called <em>registration</em> in the <em>templates</em> directory in the project folder (i.e., <strong>staff/templates/registration/</strong>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LoginView</span><span class="p">(</span><span class="n">SuccessURLAllowedHostsMixin</span><span class="p">,</span> <span class="n">FormView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/login.html&#39;</span>
+<span class="k">class</span> <span class="nc">LogoutView</span><span class="p">(</span><span class="n">SuccessURLAllowedHostsMixin</span><span class="p">,</span> <span class="n">TemplateView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/logged_out.html&#39;</span>
+<span class="k">class</span> <span class="nc">PasswordResetView</span><span class="p">(</span><span class="n">PasswordContextMixin</span><span class="p">,</span> <span class="n">FormView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/password_reset_form.html&#39;</span>
+<span class="k">class</span> <span class="nc">PasswordResetDoneView</span><span class="p">(</span><span class="n">PasswordContextMixin</span><span class="p">,</span> <span class="n">TemplateView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/password_reset_done.html&#39;</span>
+<span class="k">class</span> <span class="nc">PasswordResetConfirmView</span><span class="p">(</span><span class="n">PasswordContextMixin</span><span class="p">,</span> <span class="n">FormView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/password_reset_confirm.html&#39;</span>
+<span class="k">class</span> <span class="nc">PasswordChangeView</span><span class="p">(</span><span class="n">PasswordContextMixin</span><span class="p">,</span> <span class="n">FormView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/password_change_form.html&#39;</span>
+<span class="k">class</span> <span class="nc">PasswordChangeDoneView</span><span class="p">(</span><span class="n">PasswordContextMixin</span><span class="p">,</span> <span class="n">TemplateView</span><span class="p">):</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;registration/password_change_done.html&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-the-default-authentication">
+<h1>Modifying the default authentication<a class="headerlink" href="#modifying-the-default-authentication" title="Permalink to this headline">¶</a></h1>
+<p>As we have a CustomUser model and customised the user forms, we will need to modify the <em>views</em> and <em>URLs</em> to adapt to the model and forms and create <em>templates</em> to accept the forms from views.</p>
+<p>Additionally, the <strong>password reset/change</strong> views and templates are designed to allow users/clients to reset/change the password directly on the website. For the Staff Calibration website, users/clients will be asked to reset/change their passwords by sending a activation code to their registered emails. This will require significant changes to the <em>views</em>, <em>URL</em>, and <em>templates</em>. Let’s start by creating a Log in view, it’s URL mapper and template.</p>
+<div class="section" id="project-url">
+<h2>Project URL<a class="headerlink" href="#project-url" title="Permalink to this headline">¶</a></h2>
+<p>Open the project <strong>urls.py</strong> (<strong>staff/staff/urls.py</strong>) and create a link to the <strong>accounts</strong> application:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: staff/staff/urls.py</span>
+
+<span class="o">...</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="c1"># path(&#39;accounts/&#39;, include(&#39;django.contrib.auth.urls&#39;)), # Comment this for now</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;accounts/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;accounts.urls&#39;</span><span class="p">)),</span>              <span class="c1"># Added now</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staffs/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;staffs.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">static</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span> <span class="n">document_root</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_ROOT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accounts-url">
+<h2>Accounts URL<a class="headerlink" href="#accounts-url" title="Permalink to this headline">¶</a></h2>
+<p>Create a file called <strong>urls.py</strong> in the <strong>accounts</strong> directory and add the following lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: staff/accounts/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;accounts&#39;</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># will add one by one later</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging-in">
+<h2>Logging in<a class="headerlink" href="#logging-in" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><em>User Login Form</em>: Django provides a built-in <code class="docutils literal notranslate"><span class="pre">AuthenticationForm</span></code> for logging users with a <strong>username</strong> and <strong>password</strong> and also raises a number of <code class="docutils literal notranslate"><span class="pre">ValidationErrors</span></code> for incorrect authentications. In this project however, the authentication form must use an <strong>email</strong> and a <strong>password</strong> for logging users in. So instead of the default AuthenticationForm, we will create a new log in <em>Form</em> called <code class="docutils literal notranslate"><span class="pre">UserLoginForm</span></code> as shown below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/forms.py</span>
+
+<span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">UserLoginForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span> <span class="c1"># Note: forms.Form NOT forms.ModelForm</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">NonstickyTextInput</span><span class="p">(</span>
+        <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter email address&#39;</span><span class="p">}),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Email&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">PasswordInput</span><span class="p">(</span>
+        <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span><span class="s1">&#39;Enter password&#39;</span><span class="p">}),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Password&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Sorry, that login was invalid. Please try again.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span>
+
+    <span class="k">def</span> <span class="nf">authenticate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">email</span>  <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">CustomUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email__iexact</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]):</span>
+                    <span class="k">return</span> <span class="n">user</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;Login failed! Incorrect email and/or password given&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">ObjectDoesNotExist</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><em>View</em> - In the <strong>views.py</strong> file, add the lines as shown below.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/views.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span><span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">login</span><span class="p">,</span> <span class="n">logout</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">UserLoginForm</span>
+<span class="c1"># Create your views here.</span>
+
+<span class="k">def</span> <span class="nf">login_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">UserLoginForm</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                    <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">user</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;staffs:staff_list_home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">UserLoginForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;accounts/login.html&#39;</span><span class="p">,{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">,})</span>
+</pre></div>
+</div>
+<p>The view takes in the <code class="docutils literal notranslate"><span class="pre">UserLoginForm</span></code>, authenticates the user using its <code class="docutils literal notranslate"><span class="pre">authenticate_via_email()</span></code> method, checks if the user is active and logs in the user if authenticated and active, and finally redirects to the <code class="docutils literal notranslate"><span class="pre">staff_list_home</span></code> page. If not authenticated, it will raise a number of <code class="docutils literal notranslate"><span class="pre">ValidationErrors</span></code> indicating what has gone wrong (see below).</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/Login_authentication_error.png" src="../_images/Login_authentication_error.png" />
+<p class="caption"><span class="caption-text">Login view showing authentication error</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p><em>URL Mapper</em> - In the <strong>accounts</strong> URL mapper(<strong>urls.py</strong>), add these new lines:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="n">views</span> <span class="kn">import</span> <span class="nn">views</span>                              <span class="c1"># import the views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;login/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">),</span>    <span class="c1"># add the login_view</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Import <code class="docutils literal notranslate"><span class="pre">views</span></code> from <strong>views.py</strong> and add the <code class="docutils literal notranslate"><span class="pre">login_view</span></code> function to the URL path <code class="docutils literal notranslate"><span class="pre">login</span></code>. A name is given to this URL as an <em>identifier</em> and can be used for redirecting paths in views and templates.</p>
+</div></blockquote>
+</li>
+<li><p><em>Templates</em> - We will keep all the authentication related templates in the <strong>accounts</strong> folder (<strong>staff/accounts/templates/accounts/</strong>). As indicated in <strong>views.py</strong>, create a file with a name <strong>login.html</strong> in the <strong>acounts</strong> template folder and copy the following html lines:</p>
+<blockquote>
+<div><div class="highlight-html notranslate"><div class="highlight"><pre><span></span># filename: accounts/templates/accounts/login.html
+
+{% extends &quot;base_generic.html&quot; %}
+{% block content %}
+  {% if form.errors or form.non_field_errors %}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-content alert error&quot;</span><span class="p">&gt;</span>
+      {% for field in form %}
+          {% for error in field.errors %}
+              <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> {{ error }} <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+          {% endfor %}
+      {% endfor %}
+    {% for error in form.non_field_errors %}
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> {{ error }} <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    {% endfor %}
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Your account doesn&#39;t have access to this page. To proceed,
+    please login with an account that has access.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  {% else %}
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Please login to see this page.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{% url &#39;accounts:login&#39; %}&quot;</span><span class="p">&gt;</span>
+        {% csrf_token %}
+        <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ form.email.label_tag }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ form.email }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ form.password.label_tag }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ form.password }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span> Log in <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ next }}&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  {% endif %}
+{% endblock %}
+</pre></div>
+</div>
+<p>The <em>login</em> template extends on the base template (<strong>base_generic.html</strong>). The template does the following actions:</p>
+<ul class="simple">
+<li><p>Display any form errors, if ValidationError is raised</p></li>
+<li><p>Checks if user is already logged in (or authenticated), and if already logged in, it will display the message - <em>Your account doesn’t have access ….</em></p></li>
+<li><p>Otherwise, it will display the login form for users to fill in the email and password</p></li>
+<li><p>It has a submit button with a name <strong>Log in</strong> so that users can log in by clicking the button. ValidationErrors will be raised during this time if authentication is not successful.</p></li>
+<li><p>Note the form <code class="docutils literal notranslate"><span class="pre">method</span></code> (specifying type of request) and <code class="docutils literal notranslate"><span class="pre">action</span></code> (specifying where to send the form-data when submitted). The action <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">url</span> <span class="pre">`accounts:login'</span> <span class="pre">%}</span></code> will send send the form-data to the <code class="docutils literal notranslate"><span class="pre">login_view</span></code> through the URL mapper identified by <strong>login</strong>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Trying logging in - If the local server is already running, go to <a class="reference external" href="http://127.0.0.1:8000/accounts/login">http://127.0.0.1:8000/accounts/login</a> and login by the superuser credentials. If successful, the page will divert to <strong>staff_list_home</strong> page.</p>
+<blockquote>
+<div><div class="figure align-center" id="id2">
+<img alt="../_images/Login_view.png" src="../_images/Login_view.png" />
+<p class="caption"><span class="caption-text">Log in interface</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="logging-out">
+<h2>Logging out<a class="headerlink" href="#logging-out" title="Permalink to this headline">¶</a></h2>
+<p>Logging out is quite simple compared to logging in. In this case, we will define a URL, a view to redirect after logging out and add some buttons in the base template to let users know if they are logged in or logged out.</p>
+<ol class="arabic">
+<li><p><em>View</em> - Add the following lines in the <strong>views.py</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logout_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;staffs:staff_list_home&#39;</span><span class="p">)</span>    <span class="c1"># redirect to staff home page</span>
+</pre></div>
+</div>
+<p>The view uses the <code class="docutils literal notranslate"><span class="pre">logout</span></code> function from <code class="docutils literal notranslate"><span class="pre">django.contrib.auth</span></code> to log out once the request is received (typically by clicking a button or navigating to the log out URL) and redirects to the <code class="docutils literal notranslate"><span class="pre">staff_list_home</span></code> page.</p>
+</div></blockquote>
+</li>
+<li><p><em>URL Mapper</em> - Add the <code class="docutils literal notranslate"><span class="pre">logout_view</span></code> function to the <code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code> in <strong>urls.py</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;login/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;logout/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">logout_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;logout&#39;</span><span class="p">),</span>    <span class="c1"># add the logout_view</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>To test the logout, navigate to <a class="reference external" href="http://127.0.0.1:8000/accounts/logout/">http://127.0.0.1:8000/accounts/logout/</a> and press ENTER. That’s it, no template required for this one. However, it can also work with a template, as seen in the default view earlier.</p>
+</div></blockquote>
+</li>
+<li><p><em>Log out button</em> - It was able to <strong>log in</strong> and <strong>log out</strong> but the template does not say if the user is logged in our logged out. To help with this, we can add a <strong>Log in</strong> and a <strong>Log out</strong> button in the navigation column in the base template (<strong>base_generic.html</strong>). Also, replace the <strong>Log in</strong> with the user email when logged in and not display the log out button once the users logged out.</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-html notranslate"><div class="highlight"><pre><span></span>    # filename: staff/templates/base_generic.html
+
+    ...
+
+    <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">hr</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      {% if user.is_authenticated %}
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>You are logged in as <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{user.email}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;px-2 py-1 text-sm leading-3 rounded text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url &#39;accounts:logout&#39; %}&quot;</span><span class="p">&gt;</span>Log out<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      {% else %}
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;px-2 py-1 text-sm leading-3 rounded text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url &#39;accounts:login&#39; %}&quot;</span><span class="p">&gt;</span>Log in<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      {% endif %}
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <cite>&lt;a&gt;</cite> tags will act as buttons and by clicking them will redirect to the URLs indicated by the <code class="docutils literal notranslate"><span class="pre">href</span></code>. For log in, it will be redirected to the log in page and vice versa. Once logged in, it will also retrieve and display the authenticated email above the log out button. Notice that the template checks if the user is authenticated by using the python-like script <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">user.is_authenticated</span></code>.</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/Logout_view.png" src="../_images/Logout_view.png" />
+<p class="caption"><span class="caption-text">User logged in with user email and log out button displayed</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="password-reset">
+<h2>Password reset<a class="headerlink" href="#password-reset" title="Permalink to this headline">¶</a></h2>
+<p>The process of resetting passwords involves sending a cryptographically secure email with a one-time link to a <code class="docutils literal notranslate"><span class="pre">reset</span></code> page. As seen before, Django has everything covered with veiews and URLs provided by the Django <code class="docutils literal notranslate"><span class="pre">auth</span></code> app. Let’s use them and modify the required templates. All password reset templates are normally placed in <strong>staff/templates/registration/</strong>.</p>
+<ol class="arabic">
+<li><p>Create a password reset link alongside the <code class="docutils literal notranslate"><span class="pre">Log</span> <span class="pre">in</span></code> button in the login template (<strong>accounts/templates/accounts/login.html</strong>). Name it as “Lost password” and redirect the URL to <code class="docutils literal notranslate"><span class="pre">password_reset</span></code> as shown below:</p>
+<blockquote>
+<div><div class="highlight-html notranslate"><div class="highlight"><pre><span></span>  #filename: accounts/templates/accounts/login.html
+
+  ...
+
+  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;grid-2 items-center justify-center&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Log in<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>  <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ next }}&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url &#39;accounts:password_reset&#39; %}&quot;</span><span class="p">&gt;</span>Lost password?<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>           # link to password reset page
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id4">
+<img alt="../_images/Login_password_reset_link.png" src="../_images/Login_password_reset_link.png" />
+<p class="caption"><span class="caption-text">Log in page with a lost password link.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Settings: To be able to send emails to users, we need to configure the email in the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>.</dt><dd><ul>
+<li><p>For the development version, we can just add <code class="docutils literal notranslate"><span class="pre">EMAIL_BACKEND</span> <span class="pre">=</span> <span class="pre">'django.core.mail.backends.console.EmailBackend'</span></code> in a new line in <strong>settings.py</strong>. No emails will be send but it will be displayed in the console</p></li>
+<li><p>For the production version, here is an example using gmail:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+<span class="o">...</span>
+
+<span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.smtp.EmailBackend&#39;</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.gmail.com&#39;</span>
+<span class="n">EMAIL_USE_SSL</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># use port 465</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">True</span>    <span class="c1"># use port 587</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;geodetic.landgate@gmail.com&#39;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;*******&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>URLs: In the <strong>accounts</strong> URL mapper (<strong>urls.py</strong>), import <code class="docutils literal notranslate"><span class="pre">views</span></code> as <code class="docutils literal notranslate"><span class="pre">auth_views</span></code> (as we already have a <code class="docutils literal notranslate"><span class="pre">view</span></code> from <strong>views.py</strong>) from Django <code class="docutils literal notranslate"><span class="pre">auth</span></code> and add the four paths required to reset the passwords as shown below.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: accounts/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">views</span> <span class="ow">and</span> <span class="n">auth_views</span>           <span class="c1"># import Django auth views</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse_lazy</span>                           <span class="c1"># import this one to redirect URLs</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="o">....</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;password_reset/&#39;</span><span class="p">,</span> <span class="n">auth_views</span><span class="o">.</span><span class="n">PasswordResetView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;registration/password_reset_form.html&quot;</span><span class="p">,</span> <span class="n">email_template_name</span> <span class="o">=</span> <span class="s2">&quot;registration/password_reset_email.html&quot;</span><span class="p">,</span> <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;accounts:password_reset_done&quot;</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;password_reset&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;password_reset_done/&#39;</span><span class="p">,</span> <span class="n">auth_views</span><span class="o">.</span><span class="n">PasswordResetDoneView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span> <span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;registration/password_reset_done.html&quot;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;password_reset_done&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;password_reset_confirm/&lt;uidb64&gt;/&lt;token&gt;&#39;</span><span class="p">,</span> <span class="n">auth_views</span><span class="o">.</span><span class="n">PasswordResetConfirmView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;registration/password_reset_confirm.html&quot;</span><span class="p">,</span> <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;accounts:password_reset_complete&quot;</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;password_reset_confirm&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;password_reset_complete/&#39;</span><span class="p">,</span> <span class="n">auth_views</span><span class="o">.</span><span class="n">PasswordResetCompleteView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span> <span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;registration/password_reset_complete.html&quot;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;password_reset_complete&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><em>password_reset</em> uses the <code class="docutils literal notranslate"><span class="pre">PasswordResetView</span></code> subclass to render the <em>password reset form</em> (to insert email) and an <em>email template</em> (containing the link to password reset page). After inserting the email and submitting the request (through a button - usually called <em>Send email</em>), it will direct the user to a <em>password_reset_done</em> URL, which says the check email, if the request is successful.</p></li>
+<li><p><em>password_reset_done</em> is explained above.</p></li>
+<li><p><em>password_reset_confirm</em> creates a token link that is inserted in the email and when clicked, it will direct to the <em>password_reset_confirm</em> page for users to change the password. After submitting the new password, it will redirect to the <em>password_reset_complete</em> page saying that the password has changed.</p></li>
+<li><p>A Log in button can be placed on the page so that users can immediately go to the log in page.</p></li>
+</ul>
+<div class="figure align-center" id="id5">
+<img alt="../_images/Login_password_reset_page.png" src="../_images/Login_password_reset_page.png" />
+<p class="caption"><span class="caption-text">Password reset form and the submit button (named <em>Reset</em>)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="sign-up-registration">
+<h2>Sign up/registration<a class="headerlink" href="#sign-up-registration" title="Permalink to this headline">¶</a></h2>
+<p>Now that we are able to log in and reset or change passwords, if required, we would like the users to register and sign up on the Staff Calibration website. The registration process needs to be secure so that the user is verified through their email address provided before being able to log in, i.e., the user will be set to <code class="docutils literal notranslate"><span class="pre">is_active=False</span></code> and will be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> only when it is verified - similar to <code class="docutils literal notranslate"><span class="pre">password_reset</span></code>.</p>
+<ol class="arabic">
+<li><p><em>URL</em> - Let’s start by defining a URL mapper to the sign up view. In the <strong>accounts</strong> URL (<strong>urls.py</strong>),</p>
+<blockquote>
+<div><ul>
+<li><p>add path = “signup”, view=”signup_view” and name=”signup” as shown below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/urls.py</span>
+<span class="o">...</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;signup/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">signup_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signup&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>add a path to generate an activation token and link to be inserted into the email</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;signup/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">signup_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signup&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;activate/&lt;slug:uidb64&gt;/&lt;slug:token&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">activate_account</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;activate_account&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>finally, add a path to redirect to a page saying that activate link has been sent to the registered email.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;signup/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">signup_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signup&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;activate/&lt;slug:uidb64&gt;/&lt;slug:token&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">activate_account</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;activate_account&#39;</span><span class="p">),</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;sent/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">activation_sent_view</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;activation_sent&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>View</em> - In the <strong>views.py</strong>, add the <code class="docutils literal notranslate"><span class="pre">signup_view</span></code> function (as defined in the URL above) as shown below. The view uses the <code class="docutils literal notranslate"><span class="pre">CustomUserCreationForm</span></code> from <strong>forms.py</strong>, <code class="docutils literal notranslate"><span class="pre">Group</span></code> model from <code class="docutils literal notranslate"><span class="pre">django.auth</span></code>, creates an email message and <code class="docutils literal notranslate"><span class="pre">EmailMessage</span></code> from <code class="docutils literal notranslate"><span class="pre">django.core.mail</span></code> to send activation links after signing up. If the user is already logged in (or <code class="docutils literal notranslate"><span class="pre">is_authenticated</span></code>), the user will be logged out and redirected back to log in with a message telling the user to log in.</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">signup_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;You have already signed up. Please log in.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;accounts:login&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">CustomUserCreationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="n">email</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="o">=</span><span class="kc">False</span>
+                <span class="c1"># Populate and save the user authority if Other</span>
+                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">authority</span><span class="o">.</span><span class="n">authority_name</span><span class="o">==</span><span class="s2">&quot;Other&quot;</span><span class="p">:</span>
+                    <span class="n">authority_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;authority_name&#39;</span><span class="p">]</span>
+                    <span class="n">authority_abbrev</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;authority_abbrev&#39;</span><span class="p">]</span>
+                    <span class="n">Authority</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span>
+                        <span class="n">authority_name</span><span class="o">=</span><span class="n">authority_name</span><span class="p">,</span>
+                        <span class="n">authority_abbrev</span> <span class="o">=</span> <span class="n">authority_abbrev</span>
+                    <span class="p">)</span>
+                    <span class="n">user</span><span class="o">.</span><span class="n">authority</span> <span class="o">=</span> <span class="n">Authority</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">authority_name__exact</span><span class="o">=</span><span class="n">authority_name</span><span class="p">)</span>
+                <span class="c1"># save user</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="c1"># Get the group and assign them</span>
+                <span class="n">geodesy_group</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;kent.wheeler@landgate.wa.gov.au&#39;</span><span class="p">,</span> <span class="s1">&#39;khandu.k@landgate.wa.gov.au&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;vanessa.ung@landgate.wa.gov.au&#39;</span><span class="p">,</span> <span class="s1">&#39;brendon.hellmund@landgate.wa.gov.au&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;tony.castelli@landgate.wa.gov.au&#39;</span><span class="p">,</span> <span class="s1">&#39;ireneusz.baran@landgate.wa.gov.au&#39;</span><span class="p">]</span>
+                <span class="n">geodesy</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Geodesy&#39;</span><span class="p">)</span>
+                <span class="n">landgate</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Landgate&#39;</span><span class="p">)</span>
+                <span class="n">others</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Others&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;landgate.wa.gov.au&#39;</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+                    <span class="n">user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">landgate</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                   <span class="n">user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+                <span class="c1"># More authority to geodesity group</span>
+                <span class="k">if</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">geodesy_group</span><span class="p">:</span>
+                    <span class="n">user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">geodesy</span><span class="p">)</span>
+                    <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># Prepare to send activation code</span>
+                <span class="n">current_site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                <span class="n">email_subject</span> <span class="o">=</span> <span class="s1">&#39;Activate Your Account&#39;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;registration/activate_account.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
+                    <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">current_site</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                    <span class="s1">&#39;uid&#39;</span><span class="p">:</span> <span class="n">urlsafe_base64_encode</span><span class="p">(</span><span class="n">force_bytes</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pk</span><span class="p">)),</span> <span class="c1">#.decode(),</span>
+                    <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">account_activation_token</span><span class="o">.</span><span class="n">make_token</span><span class="p">(</span><span class="n">user</span><span class="p">),</span>
+                <span class="p">})</span>
+                <span class="n">to_email</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+                <span class="n">email</span> <span class="o">=</span> <span class="n">EmailMessage</span><span class="p">(</span><span class="n">email_subject</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="p">[</span><span class="n">to_email</span><span class="p">])</span>
+                <span class="n">email</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+                <span class="c1"># return HttpResponse(&#39;We have sent you an email, please confirm your email address to complete registration&#39;)</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;accounts:activation_sent&#39;</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">CustomUserCreationForm</span><span class="p">()</span> <span class="c1"># UserCreationForm()</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;accounts/signup.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">activation_sent_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;registration/activation_sent.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">activate_account</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">uidb64</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">uid</span> <span class="o">=</span> <span class="n">force_bytes</span><span class="p">(</span><span class="n">urlsafe_base64_decode</span><span class="p">(</span><span class="n">uidb64</span><span class="p">))</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">CustomUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">uid</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">OverflowError</span><span class="p">,</span> <span class="n">CustomUser</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">):</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">account_activation_token</span><span class="o">.</span><span class="n">check_token</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Your account has been activated successfully. You can now log in.&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;accounts:login&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Your activation link appears to be invalid.&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;accounts:signup&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the sign up process is very much similar to the <code class="docutils literal notranslate"><span class="pre">password_reset</span></code> process except that we now a custom function-based view linking the various templates and views. It will also use the <strong>Email</strong> configuration set in <strong>settings.py</strong>.</p>
+<p>Here is a snapshot of location of authentication templates:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/
+├──staff/
+|       └──templates/
+|               └──registration/
+|                       ├──password_change_done.html
+|                       ├──password_reset_complete.html
+|                       ├──password_reset_confirm.html
+|                       ├──password_reset_done.html
+|                       ├──password_reset_email.html
+|                       ├──password_reset_form.html
+|                       ├──activate_account.html
+|                       └──activation_sent.html
+|
+|
+└──staff/accounts/
+        └──accounts/
+                └──templates/
+                        └──accounts/
+                                ├──login.html
+                                └──signup.html
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="permissions-decorators">
+<h2>Permissions &amp; decorators<a class="headerlink" href="#permissions-decorators" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><strong>Permissions</strong>: Django comes with a built-in permissions system. It provides a way to assign permissions to specific users and groups of users. Django automatically gives <em>add</em>, <em>change</em>, and <em>delete</em> permissions to all models, which allow users with the permissions to perform the associated actions via the admin site. It is possible to define custom permissions to models and grant them to specific users.</p>
+<blockquote>
+<div><p>Permissions can be tested in function view using the <code class="docutils literal notranslate"><span class="pre">permission_required</span></code> decorator or in a class-based view using the <code class="docutils literal notranslate"><span class="pre">PermissionRequiredMixin</span></code>. For details, go to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/topics/auth/default/">https://docs.djangoproject.com/en/3.1/topics/auth/default/</a>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Authorisation</strong>: Django uses sessions and middleware to hook the authentication system into request objects. These provide a <code class="docutils literal notranslate"><span class="pre">request.user</span></code> attribute on every request which represents the current user. If the current user has not logged in, this attribute will be set to an instance of AnonymousUser, otherwise it will be an instance of User.</p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p>In the view, we can do this with <code class="docutils literal notranslate"><span class="pre">is_authenticated</span></code> like:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+    <span class="c1"># Do something for authenticated users.</span>
+    <span class="o">...</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Do something for anonymous users.</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>In the template, we do it with the same but without the <code class="docutils literal notranslate"><span class="pre">request</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;--</span> <span class="n">show</span> <span class="n">something</span> <span class="k">for</span> <span class="n">authenticated</span> <span class="n">users</span> <span class="o">--&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;--</span> <span class="n">display</span> <span class="n">none</span> <span class="ow">or</span> <span class="n">display</span> <span class="n">something</span> <span class="k">for</span> <span class="n">anonymous</span> <span class="n">users</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Other used permissions and authorisations are <code class="docutils literal notranslate"><span class="pre">is_staff</span></code>, <code class="docutils literal notranslate"><span class="pre">is_superuser</span></code> and other custom permissions do allow actions such as <em>add</em>, <em>delete</em> or <em>change</em> model objects.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>Decorators</strong>: Django also has many decorators that can be used to limit views and/or templates. Examples include <code class="docutils literal notranslate"><span class="pre">&#64;login_required</span></code> (for <code class="docutils literal notranslate"><span class="pre">is_authenticated</span></code>), <code class="docutils literal notranslate"><span class="pre">&#64;permission_required</span></code> (for <code class="docutils literal notranslate"><span class="pre">has_perm</span></code>), <code class="docutils literal notranslate"><span class="pre">&#64;staff_member_required</span></code> (for <code class="docutils literal notranslate"><span class="pre">is_staff</span></code>), among others. For example, we can insert a <code class="docutils literal notranslate"><span class="pre">&#64;login_required</span></code> on the <code class="docutils literal notranslate"><span class="pre">staff_create</span></code> function so that only authenticated users can add a new staff record. We can also provide URL path to <code class="docutils literal notranslate"><span class="pre">login</span></code> if the user is not logged in already like this:</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: staff/staffs/views.py</span>
+
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s2">&quot;/accounts/login&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">staff_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">StaffForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">&#64;login_required</span></code> decorator will only apply to that view function</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="4_password_validation.html" class="btn btn-neutral float-right" title="Password Validators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="2_forms.html" class="btn btn-neutral float-left" title="Customise User Forms and Admin Views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

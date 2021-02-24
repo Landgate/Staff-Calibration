@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Range Calibration &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Settings" href="0_settings.html" />
+    <link rel="prev" title="Loading user information during migration" href="../user_authentication/5_pre_load.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Range Calibration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="0_settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html">URL Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html">Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html">Views &amp; Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html">Initial data migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Range Calibration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/range_calibration/contents.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="range-calibration">
+<h1>Range Calibration<a class="headerlink" href="#range-calibration" title="Permalink to this headline">¶</a></h1>
+<p>This application will manage the various tasks required to do the range calibration: including uploading and storing range measurements, calculations, and preparing html/pdf reports. The general procedure is:</p>
+<ol class="arabic simple">
+<li><p>A Landgate Surveyor (from Survey Services) will carry out regular measurements of the Boya Staff Calibration Range using a calibrated invar staff.</p></li>
+<li><p>The new range measurements are uploaded to the Staff Calibration website to update the range parameters (i.e., height differences between the existing pins in consecutive pairs: <code class="docutils literal notranslate"><span class="pre">1-2,</span> <span class="pre">2-3,</span> <span class="pre">3-4,</span> <span class="pre">...,</span> <span class="pre">20-21</span></code>).</p></li>
+<li><p>The web application will perform all the necessary computations required to update the range parameters and be able to calculate them and display them dynamically on button clicks.</p></li>
+</ol>
+<p>The data processing flow is as follows:</p>
+<ul class="simple">
+<li><p>Each measurement is loaded and processed separately to determine the height differences between the pillars based on the repeat observations.</p></li>
+<li><p>Each measurement set consists of two sets of observations on a 3 metre Invar staff: i) At Pillar A (SSM MV 83) - From Pin 1 to Pins 2, 3,…, 15, and (ii) At Pillar B - From Pin 7 to Pins 8, 9,…, 21. Thus, there are two sets of observations for Pins 7, 8, …, 15.</p></li>
+<li><p>These staff readings (backsight, intermediate and foresights) are reduced to height differences between the Pins.</p></li>
+<li><p>Repeat height differences (between Pins 7-8, 8-9,…, 14-15) are processed via weighted least squares method to determine the average height difference and their assocaited standard residuals to identify potential gross and systematic errors.</p></li>
+<li><p>Temperature corrections are applied to each height difference to account for the temperature correction.</p></li>
+<li><p>The adjustment results is stored by its staff number and date of measurement, e.g., YYYYMMDD_staffnumber.</p></li>
+<li><p>As the Range is being rapidly monitored since 2018, we have at least two sets of measurements for each month (from Jan - December). And it will be continued to be monitored to determine any anomolous shifts in height differences and/or its established seasonal cycle.</p></li>
+<li><p>Finally, the adjustment results are further processed to obtain an average height difference set for each month, which will be the reference dataset (referred here as <em>range parameters</em>) for calibrating other staves.</p></li>
+</ul>
+<p>In order to achieve the above requirements and procedures, the Range Calibration application will need:</p>
+<ol class="arabic simple">
+<li><p><strong>models</strong> to store raw staff readings and adjustment results including foreign keys to the <strong>accounts</strong> and <strong>staffs</strong> application.</p></li>
+<li><p><strong>forms</strong> to upload range measurements and other metadata.</p></li>
+<li><p><strong>views</strong> to process range measurements and liaise between models and templates.</p></li>
+<li><p><strong>URLs</strong> to map the views to templates.</p></li>
+<li><p><strong>templates</strong> to render the views and adjustment results.</p></li>
+<li><p><strong>initial migrations</strong> to pre-load historical range measurement data.</p></li>
+</ol>
+<p>With the knowledge of how Django works and how models, views, URLs and templates are constructed, as well as the initial data migrations, its time to add the <strong>Range Calibration</strong> application to the website/project. As many of the features have been already explained when creating <strong>staffs</strong> and <strong>accounts</strong> app, this will be kept relatively short and will have the following file structure.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                                      &lt;- application root folder
+│
+├──range_calibration/                       &lt;- application name
+│  ├──migrations/
+│  │  ├──0001_initial.py
+│  │  ├──0002_auto_20201113_1350.py         &lt;- pre-load historical range observations
+│  │  └──__init__.py
+│  ├──templates                             &lt;- html templates for sign up, login, and others
+│  │  └── range_calibration
+│  │      ├──staff_data_form_1.html
+│  │      ├──staff_data_form_2.html
+│  │      ├──adjustment_report.html
+│  │      ├──pdf_range_report.html
+│  │      ├──range_calibration_guide.html
+│  │      ├──range_calibration_home.html
+│  │      ├──range_parameters.html
+│  │      └──range_reading_report.html
+│  ├──admin.py
+│  ├──apps.py
+│  ├──forms.py
+│  ├──managers.py
+│  ├──models.py
+│  ├──tests.py
+│  ├──urls.py
+│  ├──views.py
+│  └──__init__.py
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="0_settings.html">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="0_settings.html#project-settings">Project settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_settings.html#historical-range-measurements">Historical range measurements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="1_models.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#calibration-update">Calibration_Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#rawdatamodel">RawDataModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#adjusteddatamodel">AdjustedDataModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#heightdifferencemodel">HeightDifferenceModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html#rangeparameters">RangeParameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2_URLs.html">URL Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html#urls">URLs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_forms.html">Forms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html#multi-step-form">Multi-step form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html#rangeform1">RangeForm1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html#rangeform2">RangeForm2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html#form-wizard-settings">Form Wizard &amp; Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="4_views.html">Views &amp; Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#sessionwizardview">SessionWizardView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#rangecalibrationwizard-form-view">RangeCalibrationWizard - Form View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#handling-storing-the-uploaded-ascii-file">Handling &amp; storing the uploaded ascii file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#pre-processing-the-ascii-file">Pre-processing the ascii file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#calculate-height-differences-from-staff-reading">Calculate height differences from <code class="docutils literal notranslate"><span class="pre">staff_reading</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#rangecalibrationwizard-url-mapper">RangeCalibrationWizard - URL Mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#rangecalibrationwizard-template">RangeCalibrationWizard - Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#adjustment-of-staff-readings-range-adjust">Adjustment of Staff Readings - <code class="docutils literal notranslate"><span class="pre">range_adjust()</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#url-mapper">URL Mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#adjustment-view-range-adjust">Adjustment View - <code class="docutils literal notranslate"><span class="pre">range_adjust()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="4_views.html#adjustment-reports">Adjustment reports</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html#range-calibration-how-it-looks">Range Calibration - How it looks?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5_data_migrations.html">Initial data migrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#data-migrations">Data migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#upload-range-data"><code class="docutils literal notranslate"><span class="pre">upload_range_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#reading-the-files">Reading the files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#reverse-func"><code class="docutils literal notranslate"><span class="pre">reverse_func()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html#migrate">migrate</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="0_settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../user_authentication/5_pre_load.html" class="btn btn-neutral float-left" title="Loading user information during migration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

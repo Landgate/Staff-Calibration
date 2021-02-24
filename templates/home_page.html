@@ -1,0 +1,160 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+
+<article class="post">
+	{% if messages %}
+		<div class="post-content">
+		  {% for message in messages %}
+		  <div class="alert {{ message.tags }}">
+		      {% if 'safe' in message.tags %}
+		          <p> {{ message|safe }} </p>
+		      {% else %}
+		          <p> {{ message }} </p>
+		      {% endif %}
+		  </div>
+		  <br>
+		  <br>
+		  {% endfor %}
+		</div>
+	{% endif %}
+	<header class="post-header">
+	    <h1 class="post-title">Welcome to Landgate's staff calibration website.</h1>
+	</header>
+
+	<div class="post-content">
+		<p> You can now calibrate your barcode staff online. Read the procedures <a href="{% url 'staff_calibration:staff-guide' %}">here</a>. </p>
+		
+		<br> 
+		{% if user.is_authenticated %}
+		<div class="single-item-container">
+			<button class="mr-4 px-2 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='staff_calibration/staff_calibrate/'">Start calibration now</button>
+		</div>
+		{% else %}
+			<p>Please login or signup to manage and calibrate your staff.</p>
+			<div class="single-item-container">
+				<button class="mr-4 px-3 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/login/'">Log in</button>
+				or 
+				<button class="ml-4 px-3 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/signup/'">Sign up</button>
+			</div>
+		{% endif %}
+		<br> <br>
+
+	  	<div class="post-content">
+		    <h3> Monitoring the Boya barcode calibration range</h3>
+		    <p> 
+		    	Digital levelling systems have long been used by the surveying and engineering industry to determine height differences between any two or multiple locations for various applications. In Western Australia, Landgate is responsible for providing the physical height datum (known as the Australian Height Datum or AHD). AHD is defined by the marks known as Benchmarks (BMs) that have been established on the ground across the State. AHD can be transferred to any new point or a location bymeasuring the height difference from one of these closest BMs using a levelling instrument such as a digital level (refer to <a href="https://www.icsm.gov.au/sites/default/files/2018-02/Guideline-for-Control-Surveys-by-Differential-Levelling_v2.1.pdf">Guideline for Control Surveys by Differential Levelling</a> for more details). 
+		    </p>
+		    <p>
+		    	In an effort to provide an accurate and tracible system for levelling across the State, Landgate maintains a <em>staff calibration range </em> at <a class="page-link" href="https://goo.gl/maps/kvMVaSmtpqZ6spNG9" target="_blank">Boya</a> and provides associated guidelines and this online processing system to ensure that a same height differences is achieved by any levelling staff. The range comprises of 2 observing pillars and 21 pins set in a granite outcrop. Click <a class="page-link" href="{% static 'boya/Boya Pin Configuration.pdf' %}" target="_blank">here</a> to see the pin configuration. 
+		    </p>
+		    <p>	
+		    	Regular measurements were conducted on the range by Landgate over the years to determine any potential seasonal variations and also generate a time-dependent calibration system. From the monitoring, we find that the height changes between pillar 1 and 21 is about 1 mm featuring a seasonal cycle (see the graph below). Thus, in order to compensate for the seasonal fluctuation, Landgate has now developed this online web application to generate a time-dependent multiplicative correction factor for the digital bar code staves. </p>
+
+		    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+		    {% if data %}
+			    <div>
+			    	<canvas id="myChart"></canvas>
+		  		</div>
+		  	{% else %}
+		  		<div class="px-2 py2">
+		  			<p> <strong>The calibrated values cannot be currently shown.</strong></p>
+		  		</div>
+		  	{% endif %}
+	  	</div>
+  		
+  		<script>
+		    var ctx = document.getElementById('myChart').getContext('2d');
+		    Chart.defaults.global.defaultFontColor = 'black';
+		    Chart.defaults.global.defaultFontSize = '12';
+		    var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		            labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
+		            datasets: [{
+		                label: 'Difference from mean',
+		                data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
+		                backgroundColor: [
+		                    '#00876c',
+		                    '#39956a',
+		                    '#5ba268',
+		                    '#7caf67',
+		                    '#9dbb66',
+		                    '#bfc669',
+		                    '#e2cf6f',
+		                    '#e5b95d',
+		                    '#e6a250',
+		                    '#e68a49',
+		                    '#e37248',
+		                    '#dd584b',
+		                ],
+		                borderColor: [
+		                    '#00876c',
+		                    '#39956a',
+		                    '#5ba268',
+		                    '#7caf67',
+		                    '#9dbb66',
+		                    '#bfc669',
+		                    '#e2cf6f',
+		                    '#e5b95d',
+		                    '#e6a250',
+		                    '#e68a49',
+		                    '#e37248',
+		                    '#dd584b',
+		                ],
+		                pointRadius: 5,
+		            }]
+		        },
+		        options: {
+		            responsive: true,
+		            legend: {
+		              position: 'bottom',
+		            },
+		            hover: {
+		              mode: 'index'
+		            },
+		            scales: {
+		              xAxes: [{
+		                display: true,
+		                scaleLabel: {
+		                  display: true,
+		                  labelString: 'Month'
+		                }
+		              }],
+		              yAxes: [{
+		                display: true,
+		                scaleLabel: {
+		                  display: true,
+		                  labelString: 'Difference in mm'
+		                }
+		              }]
+		            },
+		            title: {
+		              display: true,
+		              //text: 'Difference from mean height difference between Pin 1 & 21 '
+		            },
+		            tooltips: {
+		                callbacks: {
+		                    label: function(tooltipItem, data) {
+		                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+		                        if (label) {
+		                            label += ': ';
+		                        }
+		                        label += tooltipItem.yLabel.toFixed(2);
+		                        return label;
+		                    }
+		                }
+		            }
+		        }
+		    });
+		</script>
+
+		
+	</div>	
+</article>
+
+
+
+{% endblock %}

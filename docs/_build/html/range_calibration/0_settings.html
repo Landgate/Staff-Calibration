@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Settings &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Models" href="1_models.html" />
+    <link rel="prev" title="Range Calibration" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Range Calibration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-settings">Project settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#historical-range-measurements">Historical range measurements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html">URL Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html">Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_views.html">Views &amp; Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_data_migrations.html">Initial data migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Range Calibration</a> &raquo;</li>
+        
+      <li>Settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/range_calibration/0_settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Let’s call this application <strong>range_calibration</strong>.</p>
+<p>Create it using the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">range_calibration</span></code>.</p>
+<div class="section" id="project-settings">
+<h2>Project settings<a class="headerlink" href="#project-settings" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>project <strong>staff/staff/settings.py</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+
+<span class="o">...</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="o">...</span>
+        <span class="s1">&#39;accounts&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;staffs&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;range_calibration&#39;</span><span class="p">,</span>           <span class="c1"># this application</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>project <strong>staff/staff/urls.py</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;range_calibration/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;range_calibration.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="historical-range-measurements">
+<h2>Historical range measurements<a class="headerlink" href="#historical-range-measurements" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned, we have many historical range measurements that must be pre-loaded during data migration. By pre-loading them we do not have to process them one by one and therefore, saves a lot of time. To enable pre-loading, we need to copy the range measurement files into the project folder and pre-process them to our convenience.</p>
+<p>In our case, we have all the range measurements stored in a directory (under Job No. 20172297) and each observation set is stored a directory named by date, and observer inside the main directory. The observation set consist of a fieldbook (a scanned pdf file), a raw observation file (e.g., <strong>.raw</strong>), and a converted <strong>ASCII</strong> version as shown below:</p>
+<div class="figure align-center">
+<img alt="../_images/observation_directory.png" src="../_images/observation_directory.png" />
+</div>
+<p>To enable pre-loading, copy these observation folders to a new directory called <strong>data/range_data/20172297/</strong> in the project directory (<strong>staff/</strong>). Edit the observation directory names to add the staff number as shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                                      &lt;- application root folder
+│
+├──data/                                    &lt;- new folder
+│  ├──range_data/
+│  │  ├──20172297                           &lt;- job folder
+│  │  │  ├──20180111_26296_TC               &lt;- observation set
+│  │  │  ├──20180226_26296_TC               &lt;- observation set
+│  │  │  ├──20180327_26296_VU               &lt;- observation set
+│  │  │  ...
+│  │  └──temperature.csv                    &lt;- metadata
+</pre></div>
+</div>
+<p>Create a csv file called <strong>temperature.csv</strong> inside the directory <strong>range_data</strong> and tabulate all the required fields from the scanned pdf field book. This includes date of observation, staff number, level number, and start and end temperatures. The table below shows the information from Jan 2018 to November 2020.</p>
+<div class="figure align-center">
+<img alt="../_images/temperature_table.png" src="../_images/temperature_table.png" />
+</div>
+<p>Each row in the csv file is linked to the observation directory by their observation date and staff number. This is exactly how the data submission form will be designed later on. Lets look at how each of the project components looks before we can load these observations.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="1_models.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral float-left" title="Range Calibration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1075 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Views &amp; Templates &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Home Page and Guide" href="5_other_pages.html" />
+    <link rel="prev" title="Forms" href="3_forms.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Staff Calibration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_URLs.html">URL Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_forms.html">Forms</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Views &amp; Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-based-view">Function-based View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#template-to-views">Template to Views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdf-report">PDF Report</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="5_other_pages.html">Home Page and Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Staff Calibration</a> &raquo;</li>
+        
+      <li>Views &amp; Templates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staff_calibration/4_views.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="views-templates">
+<h1>Views &amp; Templates<a class="headerlink" href="#views-templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>View takes a web request (through a URL) and returns a web response (such as a web page). In between, it does everything including retreiving and updating database, reading and processing form data, and many others to return the requested response.</p>
+<p>Here, the view will first render the <code class="docutils literal notranslate"><span class="pre">StaffForm</span></code>, process the submitted data, update the tables in the database, generate a staff calibrate report, and finally render it in a pdf format.</p>
+<p>The most complex part here is the least squares computation to perform the staff calibration and the functions that are required by the view.</p>
+</div>
+<div class="section" id="function-based-view">
+<h2>Function-based View<a class="headerlink" href="#function-based-view" title="Permalink to this headline">¶</a></h2>
+<p>Let’s create a function-based view called <code class="docutils literal notranslate"><span class="pre">calibrate</span></code> in the file <strong>views.py</strong>. This view will take the request and render the <code class="docutils literal notranslate"><span class="pre">StaffForm</span></code>, fetch data from the models, read and process the submitted form data, update the database, and display the staff calibration report as a web page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: staff/staff_calibration/views.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+<span class="kn">import</span> <span class="nn">csv</span><span class="o">,</span> <span class="nn">io</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">StaffForm</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">uCalibrationUpdate</span><span class="p">,</span> <span class="n">uRawDataModel</span>
+<span class="kn">from</span> <span class="nn">staffs.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">StaffType</span>
+<span class="kn">from</span> <span class="nn">range_calibration.models</span> <span class="kn">import</span> <span class="n">RangeParameters</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">staffs.models</span> <span class="kn">import</span> <span class="n">Staff</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+
+<span class="k">def</span> <span class="nf">calibrate</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StaffForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span>
+
+            <span class="c1"># Staff Attributes from Form</span>
+            <span class="n">staff_number</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">staff_number</span>
+            <span class="n">level_number</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;level_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">level_number</span>
+            <span class="n">observation_date</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;calibration_date&#39;</span><span class="p">]</span>
+            <span class="n">update_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;calibration_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">staff_number</span>
+            <span class="n">st_tmp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;start_temperature&#39;</span><span class="p">];</span> <span class="n">end_tmp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;end_temperature&#39;</span><span class="p">]</span>
+            <span class="n">ave_temperature</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">st_tmp</span><span class="p">)</span><span class="o">+</span><span class="nb">float</span><span class="p">(</span><span class="n">end_tmp</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+
+            <span class="c1"># Ge staff attributes from model</span>
+            <span class="n">this_staff</span> <span class="o">=</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span>
+            <span class="n">Staff_Attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">:</span> <span class="n">ave_temperature</span><span class="p">,</span>
+                            <span class="s1">&#39;dStdTemperature&#39;</span><span class="p">:</span> <span class="n">this_staff</span><span class="o">.</span><span class="n">standard_temperature</span><span class="p">,</span>
+                            <span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">:</span> <span class="n">this_staff</span><span class="o">.</span><span class="n">staff_type</span><span class="o">.</span><span class="n">thermal_coefficient</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">}</span>
+            <span class="n">month</span> <span class="o">=</span> <span class="n">observation_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%b&#39;</span><span class="p">)</span>
+            <span class="c1"># Getting the range</span>
+            <span class="n">range_value</span> <span class="o">=</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;pin&#39;</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">range_value</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="c1"># read file and data</span>
+                <span class="n">thisFile</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;document&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">thisFile</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">thisFile</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.txt&#39;</span><span class="p">):</span>
+                    <span class="n">io_string</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">thisFile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+                    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">io_string</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+                    <span class="nb">next</span><span class="p">(</span><span class="n">csv_reader</span><span class="p">)</span>
+                    <span class="n">staff_reading</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
+                        <span class="n">staff_reading</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="c1"># save raw data to model</span>
+                <span class="k">if</span> <span class="n">uRawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">pin_number</span><span class="p">,</span> <span class="n">reading</span><span class="p">,</span> <span class="n">no_of_readings</span><span class="p">,</span> <span class="n">stdev</span> <span class="ow">in</span> <span class="n">staff_reading</span><span class="p">:</span>
+                        <span class="n">uRawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                                                <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                                                <span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">,</span>
+                                                <span class="n">calibration_date</span><span class="o">=</span><span class="n">observation_date</span><span class="p">,</span>
+                                                <span class="n">pin_number</span><span class="o">=</span><span class="n">pin_number</span><span class="p">,</span>
+                                                <span class="n">staff_reading</span> <span class="o">=</span> <span class="n">reading</span><span class="p">,</span>
+                                                <span class="n">number_of_readings</span> <span class="o">=</span> <span class="n">no_of_readings</span><span class="p">,</span>
+                                                <span class="n">standard_deviations</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+                <span class="c1"># preprocess data</span>
+                <span class="n">staff_reading2</span> <span class="o">=</span> <span class="n">preprocess_staff</span><span class="p">(</span><span class="n">staff_reading</span><span class="p">)</span>
+
+                <span class="c1"># compute scale factor</span>
+                <span class="n">CF</span><span class="p">,</span> <span class="n">GradUnc</span><span class="p">,</span> <span class="n">StaffCorrections</span><span class="p">,</span> <span class="n">CF0</span><span class="p">,</span> <span class="n">T_at_CF_1</span><span class="p">,</span> <span class="n">Correction_Lists</span> <span class="o">=</span> <span class="n">process_correction_factor</span><span class="p">(</span><span class="n">staff_reading2</span><span class="p">,</span>
+                                                                                                            <span class="n">range_value</span><span class="p">,</span>
+                                                                                                            <span class="n">Staff_Attributes</span><span class="p">)</span>
+                <span class="c1"># update calibration_update table</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">):</span>
+                    <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                                    <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                                    <span class="n">staff_number</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">],</span>
+                                    <span class="n">level_number</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;level_number&#39;</span><span class="p">],</span>
+                                    <span class="n">calibration_date</span> <span class="o">=</span> <span class="n">observation_date</span><span class="p">,</span>
+                                    <span class="n">processed_date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span>
+                                    <span class="n">correction_factor</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">CF</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span>
+                                    <span class="n">observed_temperature</span> <span class="o">=</span> <span class="n">ave_temperature</span><span class="p">,</span>
+                                    <span class="n">correction_factor_temperature</span> <span class="o">=</span> <span class="n">this_staff</span><span class="o">.</span><span class="n">standard_temperature</span><span class="p">)</span>
+
+                    <span class="n">this_staff</span><span class="o">.</span><span class="n">calibration_date</span> <span class="o">=</span> <span class="n">observation_date</span>
+                    <span class="n">this_staff</span><span class="o">.</span><span class="n">correction_factor</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">CF</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+                    <span class="n">this_staff</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+                <span class="n">observer</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span> <span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">last_name</span>
+                <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;update_index&#39;</span><span class="p">:</span> <span class="n">update_index</span><span class="p">,</span>
+                    <span class="s1">&#39;observation_date&#39;</span><span class="p">:</span> <span class="n">observation_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">),</span>
+                    <span class="s1">&#39;staff_number&#39;</span><span class="p">:</span> <span class="n">staff_number</span><span class="p">,</span>
+                    <span class="s1">&#39;staff_length&#39;</span><span class="p">:</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">staff_length</span><span class="p">,</span>
+                    <span class="s1">&#39;staff_type&#39;</span><span class="p">:</span> <span class="n">StaffType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff__staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">staff_type</span><span class="p">,</span>
+                    <span class="s1">&#39;thermal_coefficient&#39;</span><span class="p">:</span><span class="n">StaffType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff__staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">thermal_coefficient</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span>
+                    <span class="s1">&#39;level_number&#39;</span><span class="p">:</span> <span class="n">level_number</span><span class="p">,</span>
+                    <span class="s1">&#39;observer&#39;</span><span class="p">:</span> <span class="n">observer</span><span class="p">,</span>
+                    <span class="s1">&#39;average_temperature&#39;</span><span class="p">:</span> <span class="n">ave_temperature</span><span class="p">,</span>
+                    <span class="s1">&#39;ScaleFactor&#39;</span><span class="p">:</span> <span class="n">CF</span><span class="p">,</span>
+                    <span class="s1">&#39;GraduationUncertainty&#39;</span><span class="p">:</span> <span class="n">GradUnc</span><span class="p">,</span>
+                    <span class="s1">&#39;StaffCorrections&#39;</span><span class="p">:</span> <span class="n">StaffCorrections</span><span class="p">,</span>
+                    <span class="s1">&#39;ScaleFactor0&#39;</span><span class="p">:</span> <span class="n">CF0</span><span class="p">,</span>
+                    <span class="s1">&#39;Temperatre_at_1&#39;</span><span class="p">:</span> <span class="n">T_at_CF_1</span><span class="p">,</span>
+                    <span class="s1">&#39;CorrectionList&#39;</span><span class="p">:</span> <span class="n">Correction_Lists</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;staff_calibration/staff_calibration_report.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+                <span class="c1">#return redirect(&#39;staff_calibration:staff-guide&#39;)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;No range measurements exist for the month of &#39;</span><span class="o">+</span><span class="n">month</span><span class="o">+</span><span class="s1">&#39;. Please try again later.&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;staff_calibration/staff_calibrate.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StaffForm</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;staff_calibration/staff_calibrate.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Associated functions include:</p>
+<ol class="arabic">
+<li><p>File-handling</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># handle data file</span>
+<span class="k">def</span> <span class="nf">handle_uploaded_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span><span class="o">+</span><span class="n">f</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;wb+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">destination</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">chunks</span><span class="p">():</span>
+            <span class="n">destination</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_path</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Pre-processing - staff reading to height differences</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preprocess staff readings to calculate the height differences between pins</span>
+<span class="k">def</span> <span class="nf">preprocess_staff</span><span class="p">(</span><span class="n">data_set</span><span class="p">):</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="n">observation_set</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">pini</span><span class="p">,</span> <span class="n">obsi</span><span class="p">,</span> <span class="n">nmeasi</span><span class="p">,</span> <span class="n">stdi</span> <span class="o">=</span> <span class="n">data_set</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">pinj</span><span class="p">,</span> <span class="n">obsj</span><span class="p">,</span> <span class="n">nmeasj</span><span class="p">,</span> <span class="n">stdj</span> <span class="o">=</span> <span class="n">data_set</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">stdi</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stdi</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span>
+        <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">stdj</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stdj</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span>
+        <span class="n">dMeasuredLength</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">obsj</span><span class="p">)</span><span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">obsi</span><span class="p">)</span>
+        <span class="n">dStdDeviation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stdi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">stdj</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">observation_set</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">pini</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">pinj</span><span class="p">),</span>
+                            <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">obsi</span><span class="p">)),</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">obsj</span><span class="p">)),</span>
+                            <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dMeasuredLength</span><span class="p">),</span>
+                            <span class="s1">&#39;</span><span class="si">{:.7f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dStdDeviation</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">observation_set</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Least Squares Adjustment</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate correction factor from below</span>
+<span class="k">def</span> <span class="nf">generate_correction_factor</span><span class="p">(</span><span class="n">uncorrected_scale_factor</span><span class="p">,</span> <span class="n">staff_meta</span><span class="p">):</span>
+    <span class="n">list_scale_factors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start_temperature</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">end_temperature</span> <span class="o">=</span> <span class="mf">40.</span>
+    <span class="n">interval</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="k">while</span> <span class="n">start_temperature</span> <span class="o">&lt;=</span> <span class="n">end_temperature</span><span class="p">:</span>
+        <span class="n">scale_factor</span> <span class="o">=</span> <span class="p">(((</span><span class="n">start_temperature</span><span class="o">-</span><span class="n">staff_meta</span><span class="p">[</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">staff_meta</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">uncorrected_scale_factor</span>
+        <span class="n">correction</span> <span class="o">=</span> <span class="p">(</span><span class="n">scale_factor</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">1000.</span>
+        <span class="n">list_scale_factors</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start_temperature</span><span class="p">)),</span> <span class="s1">&#39;</span><span class="si">{:.6f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">correction</span><span class="p">)])</span>
+
+        <span class="n">start_temperature</span> <span class="o">+=</span> <span class="n">interval</span>
+    <span class="k">return</span> <span class="n">list_scale_factors</span>
+
+<span class="c1"># Calculate the correction factor</span>
+<span class="k">def</span> <span class="nf">process_correction_factor</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">reference_set</span><span class="p">,</span> <span class="n">meta</span><span class="p">):</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="n">reference_set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">reference_set</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="c1"># output tables</span>
+    <span class="n">adjusted_corrections</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#allocate arrays</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)])</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)])</span>
+    <span class="n">sum_sq_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)])</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data_set</span><span class="p">)])</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)):</span>
+        <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">pin</span><span class="p">,</span> <span class="n">frm</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">data_set</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">reference_set</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">known_length</span> <span class="o">=</span> <span class="n">reference_set</span><span class="p">[</span><span class="n">reference_set</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">pin</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">measured_length</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">*</span> <span class="p">(((</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dStdTemperature&#39;</span><span class="p">])</span><span class="o">*</span>
+                                   <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">known_length</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">measured_length</span><span class="p">)</span>
+            <span class="c1"># squared differences</span>
+            <span class="n">sum_sq_diff</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">known_length</span><span class="p">)</span> <span class="o">-</span> <span class="n">measured_length</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="c1"># Variance</span>
+            <span class="n">variance</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+            <span class="c1"># Scale factor</span>
+            <span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">known_length</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">measured_length</span><span class="p">)</span>
+            <span class="c1"># Table 1</span>
+            <span class="n">adjusted_corrections</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pin</span><span class="p">,</span> <span class="n">frm</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">known_length</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">measured_length</span><span class="p">),</span><span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">correction</span><span class="p">)])</span>
+    <span class="c1"># Now do the least squares adjustment</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">variance</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dCorrectionFactor1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">)))</span>
+    <span class="n">dCorrectionFactor1</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">dCorrectionFactor1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="c1"># Correction Factors</span>
+    <span class="n">dCorrectionFactor0</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">dCorrectionFactor1</span><span class="o">/</span><span class="p">(((</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dStdTemperature&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">])</span><span class="o">*</span>
+                                 <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>            <span class="c1"># at 25degC</span>
+    <span class="n">alt_temperature</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">dCorrectionFactor0</span><span class="o">*</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                            <span class="o">/</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">dCorrectionFactor0</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>                             <span class="c1"># Correction Factor = 1</span>
+    <span class="c1"># Graduation Uncertainty at 95% Confidence Interval</span>
+    <span class="n">graduation_uncertainty</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sum_sq_diff</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mf">1.96</span>
+    <span class="c1"># tables 1</span>
+    <span class="n">adjusted_corrections</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;PIN&#39;</span><span class="p">,</span><span class="s1">&#39;FROM&#39;</span><span class="p">,</span><span class="s1">&#39;TO&#39;</span><span class="p">,</span> <span class="s1">&#39;REFERENCE&#39;</span><span class="p">,</span> <span class="s1">&#39;MEASURED&#39;</span><span class="p">,</span> <span class="s1">&#39;CORRECTIONS&#39;</span><span class="p">],</span>
+                            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">adjusted_corrections</span><span class="p">}</span>
+    <span class="c1"># tables 2</span>
+    <span class="n">list_factors_corrections</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span><span class="s1">&#39;Correction Factor&#39;</span><span class="p">,</span><span class="s1">&#39;Correction/metre [mm]&#39;</span><span class="p">],</span>
+                                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">generate_correction_factor</span><span class="p">(</span><span class="n">dCorrectionFactor1</span><span class="p">,</span> <span class="n">meta</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">dCorrectionFactor1</span><span class="p">,</span> <span class="n">graduation_uncertainty</span><span class="p">,</span> <span class="n">adjusted_corrections</span><span class="p">,</span> <span class="n">dCorrectionFactor0</span><span class="p">,</span> <span class="n">alt_temperature</span><span class="p">,</span> <span class="n">list_factors_corrections</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="template-to-views">
+<h2>Template to Views<a class="headerlink" href="#template-to-views" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>/staff/staff_calibration/templates/staff_calibration/staff_calibrate.html</strong> - This templates is being rendered by the view function <code class="docutils literal notranslate"><span class="pre">calibrate(request)</span></code> and contains the <code class="docutils literal notranslate"><span class="pre">StaffForm</span></code> for data entry. It is a <code class="docutils literal notranslate"><span class="pre">POST</span></code> request form allowing for selection of staff and digital level, entry of temperatures, and file loader to attach the staff reading (in csv or ascii format). If no record is found in the drop down selection, it can be easily added by clickig the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">New</span></code> button displayed on the right hand side.</p>
+<blockquote>
+<div><p>It also contains a JavaScript at the end to search for only csv or asc files in the folder selected.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff_calibrate.html</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s2">&quot;base_generic.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">i18n</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">messages</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;page-content&quot;</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert {{ message.tags }}&quot;</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s1">&#39;safe&#39;</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">tags</span> <span class="o">%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">message</span><span class="o">|</span><span class="n">safe</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">message</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="o">&lt;</span><span class="n">article</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">header</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-header&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">h1</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-title text-center&quot;</span><span class="o">&gt;</span><span class="n">Enter</span> <span class="n">the</span> <span class="n">following</span> <span class="n">information</span> <span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;text-center&quot;</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Note</span> <span class="n">that</span> <span class="n">your</span> <span class="nb">input</span> <span class="n">csv</span><span class="o">/</span><span class="n">txt</span> <span class="n">file</span> <span class="n">must</span> <span class="n">have</span> <span class="n">a</span> <span class="n">header</span> <span class="k">as</span> <span class="n">described</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staff_calibration:staff-guide&#39; %}&quot;</span><span class="o">&gt;</span><span class="n">this</span> <span class="n">guideline</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">header</span><span class="o">&gt;</span>
+
+        <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-content&quot;</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">form</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;site-form&quot;</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;.&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="n">enctype</span><span class="o">=</span><span class="s2">&quot;multipart/form-data&quot;</span><span class="o">&gt;</span>
+                        <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+                        <span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+                                        <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Select</span> <span class="ow">or</span> <span class="n">Enter</span> <span class="n">Staff</span> <span class="n">Number</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">staff_number</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">Add</span> <span class="n">New</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+                                        <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staffs:staff-create&#39; %}?next={{request.path}}&quot;</span><span class="o">&gt;</span>
+                                                <span class="o">&lt;</span><span class="n">svg</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;1.5em&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;1.5em&quot;</span> <span class="n">viewBox</span><span class="o">=</span><span class="s2">&quot;0 0 16 16&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;bi bi-plus-circle&quot;</span> <span class="n">rowspan</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;green&quot;</span> <span class="n">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/2000/svg&quot;</span><span class="o">&gt;</span>
+                                                                 <span class="o">&lt;</span><span class="n">path</span> <span class="n">fill</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;evenodd&quot;</span> <span class="n">d</span><span class="o">=</span><span class="s2">&quot;M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z&quot;</span><span class="o">&gt;&lt;/</span><span class="n">path</span><span class="o">&gt;</span>
+                                                                <span class="o">&lt;</span><span class="n">path</span> <span class="n">fill</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;evenodd&quot;</span> <span class="n">d</span><span class="o">=</span><span class="s2">&quot;M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z&quot;</span><span class="o">&gt;&lt;/</span><span class="n">path</span><span class="o">&gt;</span>
+                                                        <span class="o">&lt;/</span><span class="n">svg</span><span class="o">&gt;</span>
+                                                <span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+                                    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+
+                                <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="n">Select</span> <span class="ow">or</span> <span class="n">Enter</span> <span class="n">Digit</span> <span class="n">Level</span> <span class="n">Number</span><span class="p">:</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">level_number</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">Add</span> <span class="n">New</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staffs:level-create&#39; %}?next={{request.path}}&quot;</span><span class="o">&gt;</span>
+                                                <span class="o">&lt;</span><span class="n">svg</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;1.5em&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;1.5em&quot;</span> <span class="n">viewBox</span><span class="o">=</span><span class="s2">&quot;0 0 16 16&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;bi bi-plus-circle&quot;</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;green&quot;</span> <span class="n">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/2000/svg&quot;</span><span class="o">&gt;</span>
+                                                                 <span class="o">&lt;</span><span class="n">path</span> <span class="n">fill</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;evenodd&quot;</span> <span class="n">d</span><span class="o">=</span><span class="s2">&quot;M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z&quot;</span><span class="o">&gt;&lt;/</span><span class="n">path</span><span class="o">&gt;</span>
+                                                                <span class="o">&lt;</span><span class="n">path</span> <span class="n">fill</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;evenodd&quot;</span> <span class="n">d</span><span class="o">=</span><span class="s2">&quot;M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z&quot;</span><span class="o">&gt;&lt;/</span><span class="n">path</span><span class="o">&gt;</span>
+                                                        <span class="o">&lt;/</span><span class="n">svg</span><span class="o">&gt;</span>
+                                                <span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+                                        <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+                            <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="n">Enter</span> <span class="n">Observation</span> <span class="n">Date</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span> <span class="n">colspan</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">calibration_date</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+                            <span class="o">&lt;</span><span class="n">tr</span> <span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="n">Enter</span> <span class="n">the</span> <span class="n">start</span> <span class="n">temperature</span><span class="p">:</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">start_temperature</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+                            <span class="o">&lt;</span><span class="n">tr</span> <span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="n">Enter</span> <span class="n">the</span> <span class="n">ending</span> <span class="n">temperature</span><span class="p">:</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">end_temperature</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+                            <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span> <span class="n">Select</span> <span class="n">your</span> <span class="n">data</span><span class="p">:</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">document</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+                            <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+                        <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;grid-2&quot;</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;single-item-container&quot;</span><span class="o">&gt;</span>
+                                        <span class="o">&lt;</span><span class="n">button</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;px-2 py-1 border border-transparent text-sm leading-3 rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">&gt;</span><span class="n">Submit</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+                                <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                                <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;single-item-container&quot;</span><span class="o">&gt;</span>
+                                        <span class="o">&lt;</span><span class="n">a</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;px-2 py-1 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staff_calibration:staff-home&#39; %}&quot;</span><span class="o">&gt;</span><span class="n">Cancel</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+                                <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">article</span><span class="o">&gt;</span>
+
+        <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+         <span class="n">let</span> <span class="n">file</span><span class="p">;</span>
+         <span class="n">function</span> <span class="n">checkFile</span><span class="p">()</span> <span class="p">{</span>
+          <span class="n">file</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">querySelector</span><span class="p">(</span><span class="s1">&#39;input[type=file]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">&#39;.csv&#39;</span> <span class="o">|</span> <span class="n">file</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">file</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+           <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;id_document&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">remove</span><span class="p">();</span>
+          <span class="p">}</span>
+         <span class="p">}</span>
+        <span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The form template looks like this:</p>
+<div class="figure align-center">
+<img alt="../_images/staff_calibrate.png" src="../_images/staff_calibrate.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>/staff/staff_calibration/templates/staff_calibration/staff_calibration_report.html</strong>: This template displays the staff calibration results in a HTML page based on the <code class="docutils literal notranslate"><span class="pre">context</span></code> provided through the <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">render()</span></code>, if the calibration was successful. If range calibration data is not found for that particular month of observation, it will display a warning message.</p>
+<blockquote>
+<div><p>The template also has a button for generating a pdf report. The HTML template is given below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s1">&#39;base_generic.html&#39;</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="o">&lt;</span><span class="n">article</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">messages</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-content&quot;</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert {{ message.tags }}&quot;</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s1">&#39;safe&#39;</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">tags</span> <span class="o">%</span><span class="p">}</span>
+              <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">message</span><span class="o">|</span><span class="n">safe</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+              <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">message</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+
+  <span class="o">&lt;</span><span class="n">header</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-header&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;grid-2&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;title-grid&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">h1</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-title text-center&quot;</span><span class="o">&gt;</span><span class="n">Staff</span> <span class="n">Calibration</span> <span class="n">Report</span> <span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;btn-update&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staff_calibration:generate-report&#39; update_index %}&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">button</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;px-2 py-1 border border-transparent text-sm leading-4 font-small rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;_blank&quot;</span><span class="o">&gt;</span><span class="n">Print</span> <span class="n">pdf</span> <span class="o">&amp;</span><span class="n">raquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">header</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-content&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;grid-2&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Staff</span> <span class="n">Number</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">update_index</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Staff</span> <span class="n">Owner</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">observation_date</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Length</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">staff_length</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">meters</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Material</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">staff_type</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;grid-2&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">This</span> <span class="n">test</span> <span class="n">information</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Unique</span> <span class="n">ID</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">update_index</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Observation</span> <span class="n">Date</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">observation_date</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Observer</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">observer</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span> <span class="n">Lab</span> <span class="n">Information</span> <span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Name</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">Boya</span> <span class="n">Staff</span> <span class="n">Calibration</span> <span class="n">Range</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Location</span><span class="p">:</span> <span class="n">Victor</span> <span class="n">Road</span><span class="p">,</span> <span class="n">Darlington</span> <span class="n">WA</span> <span class="mi">6070</span> <span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+          <span class="n">Average</span> <span class="n">Temperature</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">average_temperature</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">1</span> <span class="p">}}</span><span class="o">&amp;</span><span class="c1">#8451; &lt;/strong&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+      <span class="n">Correction</span> <span class="n">Factor</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">ScaleFactor</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">6</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">at</span> <span class="mf">25.0</span><span class="o">&amp;</span><span class="c1">#8451;. Note that Correction Factor is temperature dependent.</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+      <span class="n">Graduation</span> <span class="n">Uncertainty</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">GraduationUncertainty</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">5</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span> <span class="n">metres</span> <span class="n">at</span> <span class="mi">95</span><span class="o">%</span> <span class="n">confidence</span> <span class="n">interval</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-content&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Staff</span> <span class="n">readings</span><span class="o">/</span><span class="n">corrections</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">table</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  &quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">tr</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;border-top:1px solid;border-bottom:1px solid&quot;</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">StaffCorrections</span><span class="o">.</span><span class="n">headers</span> <span class="o">%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">th</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h4</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">header</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h4</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">th</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">StaffCorrections</span><span class="o">.</span><span class="n">data</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="n">tr</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;text-align:center;&quot;</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span> <span class="o">%</span><span class="p">}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;-&#39;</span> <span class="ow">in</span> <span class="n">value</span> <span class="o">%</span><span class="p">}</span>
+              <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">value</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">5</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+              <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">value</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+          <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">hr</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;margin-bottom:5px; margin-top: 5px&quot;</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+      <span class="n">Correction</span> <span class="n">Factor</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">ScaleFactor0</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">8</span> <span class="p">}}</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">({{</span> <span class="n">thermal_coefficient</span> <span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">5</span> <span class="p">}}(</span><span class="n">Temperature</span><span class="o">-</span><span class="p">{{</span> <span class="n">average_temperature</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">1</span> <span class="p">}})))</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+      <span class="n">Correction</span> <span class="n">Factor</span><span class="o">=</span> <span class="mf">1.00000</span> <span class="n">when</span> <span class="n">the</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">Temperatre_at_1</span><span class="o">|</span><span class="n">floatformat</span><span class="p">:</span><span class="mi">1</span> <span class="p">}}</span><span class="o">&amp;</span><span class="c1">#8451;&lt;/strong&gt;</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">hr</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;style1&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;post-content&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Staff</span> <span class="n">corrections</span> <span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">table</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  &quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">tr</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;border-top:1px solid;border-bottom:1px solid&quot;</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">CorrectionList</span><span class="o">.</span><span class="n">headers</span> <span class="o">%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">th</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h4</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">header</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h4</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">th</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">CorrectionList</span><span class="o">.</span><span class="n">data</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="n">tr</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;text-align:center;&quot;</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span> <span class="o">%</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">value</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">article</span><span class="o">&gt;</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>And the template looks like this:</p>
+<div class="figure align-center">
+<img alt="../_images/staff_calibration_report.png" src="../_images/staff_calibration_report.png" />
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="pdf-report">
+<h2>PDF Report<a class="headerlink" href="#pdf-report" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>URL Mapping</strong>: The pdf report needs to be generated separately using a different view function and a HTML to pdf converter. As demonstrated before, we are using a django package called <code class="docutils literal notranslate"><span class="pre">django_xhtml2pdf</span></code>. We will create a view function called <code class="docutils literal notranslate"><span class="pre">generate_report_view()</span></code> and add it the <strong>urls.py</strong>. The view will take in a request and an id of the target staff given by <code class="docutils literal notranslate"><span class="pre">update_index</span></code>.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff_calibration/urls.py</span>
+
+<span class="o">...</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;generate_report/&lt;update_index&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">generate_report_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;generate-report&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>View</strong>: The view function is very similar to <code class="docutils literal notranslate"><span class="pre">calibrate()</span></code>, except that it now takes in the target staff and uses the HTML to pdf converter file object to render the specific HTML template (<em>pdf_staff_report.html</em>).</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff_calibration/views.py</span>
+
+<span class="o">...</span>
+
+<span class="kn">from</span> <span class="nn">django_xhtml2pdf.utils</span> <span class="kn">import</span> <span class="n">generate_pdf</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">generate_report_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">update_index</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;application/pdf&#39;</span><span class="p">)</span>
+    <span class="c1"># Fetch data from database</span>
+    <span class="n">raw_data</span> <span class="o">=</span> <span class="n">uRawDataModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">update_index</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">)</span>
+    <span class="n">ave_temperature</span> <span class="o">=</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span> <span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">observed_temperature</span>
+    <span class="n">staff_number</span> <span class="o">=</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">staff_number</span><span class="o">.</span><span class="n">staff_number</span>
+    <span class="n">level_number</span> <span class="o">=</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">level_number</span>
+    <span class="n">observation_date</span> <span class="o">=</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span> <span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">calibration_date</span>
+
+    <span class="c1"># define the staff attributes</span>
+    <span class="n">Staff_Attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dObsTemperature&#39;</span><span class="p">:</span> <span class="n">ave_temperature</span><span class="p">,</span>
+                        <span class="s1">&#39;dStdTemperature&#39;</span><span class="p">:</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">standard_temperature</span><span class="p">,</span>
+                        <span class="s1">&#39;dThermalCoefficient&#39;</span><span class="p">:</span> <span class="n">StaffType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff__staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">thermal_coefficient</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">}</span>
+
+    <span class="c1"># Find the range value from the range database</span>
+    <span class="n">month</span> <span class="o">=</span> <span class="n">observation_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%b&#39;</span><span class="p">)</span>
+    <span class="n">range_value</span> <span class="o">=</span> <span class="n">RangeParameters</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;pin&#39;</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span>
+
+    <span class="c1"># extract data</span>
+    <span class="n">staff_reading</span> <span class="o">=</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span>
+                        <span class="s1">&#39;pin_number&#39;</span><span class="p">,</span><span class="s1">&#39;staff_reading&#39;</span><span class="p">,</span><span class="s1">&#39;number_of_readings&#39;</span><span class="p">,</span><span class="s1">&#39;standard_deviations&#39;</span><span class="p">)</span>
+    <span class="n">staff_reading</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">staff_reading</span><span class="p">]</span>
+    <span class="c1"># preprocess data</span>
+    <span class="n">staff_reading2</span> <span class="o">=</span> <span class="n">preprocess_staff</span><span class="p">(</span><span class="n">staff_reading</span><span class="p">)</span>
+
+    <span class="c1"># compute scale factor</span>
+    <span class="n">CF</span><span class="p">,</span> <span class="n">GradUnc</span><span class="p">,</span> <span class="n">StaffCorrections</span><span class="p">,</span> <span class="n">CF0</span><span class="p">,</span> <span class="n">T_at_CF_1</span><span class="p">,</span> <span class="n">Correction_Lists</span> <span class="o">=</span> <span class="n">process_correction_factor</span><span class="p">(</span><span class="n">staff_reading2</span><span class="p">,</span>
+                                                                                                <span class="n">range_value</span><span class="p">,</span>
+                                                                                                <span class="n">Staff_Attributes</span><span class="p">)</span>
+    <span class="c1"># Observer</span>
+    <span class="n">observer</span> <span class="o">=</span> <span class="n">uCalibrationUpdate</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">update_index</span><span class="o">=</span><span class="n">update_index</span><span class="p">)</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">observer</span><span class="o">.</span><span class="n">first_name</span><span class="p">:</span>
+        <span class="n">observer</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">email</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">observer</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">first_name</span> <span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">observer</span><span class="o">.</span><span class="n">last_name</span>
+    <span class="c1">#print(Correction_Lists)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;update_index&#39;</span><span class="p">:</span> <span class="n">update_index</span><span class="p">,</span>
+                <span class="s1">&#39;observation_date&#39;</span><span class="p">:</span> <span class="n">observation_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;staff_number&#39;</span><span class="p">:</span> <span class="n">staff_number</span><span class="p">,</span>
+                <span class="s1">&#39;staff_length&#39;</span><span class="p">:</span> <span class="n">Staff</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">staff_length</span><span class="p">,</span>
+                <span class="s1">&#39;staff_type&#39;</span><span class="p">:</span> <span class="n">StaffType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff__staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">staff_type</span><span class="p">,</span>
+                <span class="s1">&#39;thermal_coefficient&#39;</span><span class="p">:</span><span class="n">StaffType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">staff__staff_number</span><span class="o">=</span><span class="n">staff_number</span><span class="p">)</span><span class="o">.</span><span class="n">thermal_coefficient</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="p">,</span>
+                <span class="s1">&#39;level_number&#39;</span><span class="p">:</span> <span class="n">level_number</span><span class="p">,</span>
+                <span class="s1">&#39;observer&#39;</span><span class="p">:</span> <span class="n">observer</span><span class="p">,</span>
+                <span class="s1">&#39;average_temperature&#39;</span><span class="p">:</span> <span class="n">ave_temperature</span><span class="p">,</span>
+                <span class="s1">&#39;ScaleFactor&#39;</span><span class="p">:</span> <span class="n">CF</span><span class="p">,</span>
+                <span class="s1">&#39;GraduationUncertainty&#39;</span><span class="p">:</span> <span class="n">GradUnc</span><span class="p">,</span>
+                <span class="s1">&#39;StaffCorrections&#39;</span><span class="p">:</span> <span class="n">StaffCorrections</span><span class="p">,</span>
+                <span class="s1">&#39;ScaleFactor0&#39;</span><span class="p">:</span> <span class="n">CF0</span><span class="p">,</span>
+                <span class="s1">&#39;Temperatre_at_1&#39;</span><span class="p">:</span> <span class="n">T_at_CF_1</span><span class="p">,</span>
+                <span class="s1">&#39;CorrectionList&#39;</span><span class="p">:</span> <span class="n">Correction_Lists</span><span class="p">,</span>
+                <span class="s1">&#39;today&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y  %I:%M:%S %p&#39;</span><span class="p">),</span>
+            <span class="p">}</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">generate_pdf</span><span class="p">(</span><span class="s1">&#39;staff_calibration/pdf_staff_report.html&#39;</span><span class="p">,</span> <span class="n">file_object</span><span class="o">=</span><span class="n">resp</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">return</span>  <span class="n">result</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Template</strong>: The HTML templates for pdf report is generally designed differently as per the requirements of the PDF converter. Our HTML template - <strong>pdf_staff_report.html</strong> passed to the view function above looks like this:</p>
+<blockquote>
+<div><pre class="literal-block">{% load static %}
+&lt;html&gt;
+&lt;head&gt;
+        &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+        &lt;style&gt;
+                <em>, html {
+                        font-family:Arial
+                }
+                table { -pdf-keep-with-next: true;
+                        font-size:9pt;
+                        text-align: left;}
+                table, td {
+                border-spacing: 0px;
+                padding-top: 1px;
+            }
+            hr {
+                        clear: both; /</em> takes care of you floated elements <em>/
+                        margin:0;
+                        margin-top:5px;
+                        margin-bottom:5px;
+                }
+            p { margin: 0; font-size:9pt; -pdf-keep-with-next: true; }
+
+            &#64;page {
+                size: a4 portrait;
+                &#64;frame header_frame {           /</em> Static Frame <em>/
+                    -pdf-frame-content: header_content;
+                    left: 50pt; width: 512pt; top: 20pt; height: 70pt;
+                }
+                &#64;frame content_frame {          /</em> Content Frame <em>/
+                    left: 50pt; width: 512pt; top: 90pt; height: 610pt;
+                }
+                &#64;frame footer_frame {           /</em> Another static Frame <em>/
+                    -pdf-frame-content: footer_content;
+                    left: 50pt; width: 512pt; top: 772pt; height: 42pt;
+                }
+
+
+            }
+            td.td-bottom {
+                border-bottom:1px solid #a9a9a9;
+            }
+            tr.tr-bottom {
+                border-bottom:1px solid #a9a9a9;
+
+            }
+            tr.tr-top {
+                border-top:1px solid #a9a9a9;
+                /*margin-bottom:10px;</em>/
+            }
+        &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;!-- Content for Static Frame 'header_frame' --&gt;
+    &lt;div id=&quot;header_content&quot;&gt;
+        &lt;table&gt;
+                &lt;tr&gt;
+                        &lt;td style=&quot;width:20%&quot;&gt; &lt;img src=&quot;{% static 'logo.png' %}&quot; style=&quot;width:30%; max-width:100px;&quot;&gt; &lt;td&gt;
+                        &lt;td style=&quot;width:60%;&quot;&gt;
+                                &lt;table style=&quot;font-size:16pt; text-align:center&quot;&gt;
+                                        &lt;tr&gt;
+                                                &lt;td&gt;&lt;strong&gt; Levelling Staff Calibration &lt;/strong&gt;&lt;/td&gt;
+                                        &lt;/tr&gt;
+                                        &lt;tr&gt;
+                                                &lt;td style=&quot;font-size:9pt&quot;&gt;Version: 2020.0.1 (November 2020) &lt;/td&gt;
+                                        &lt;/tr&gt;
+                                &lt;/table&gt;
+
+                        &lt;/td&gt;
+                        &lt;td style=&quot;width:20%&quot;&gt;
+                                Page
+                                &lt;pdf:pagenumber&gt;
+                                of
+                                &lt;pdf:pagecount&gt;
+                        &lt;/td&gt;
+                &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;!-- Content for Static Frame 'footer_frame' --&gt;
+    &lt;div id=&quot;footer_content&quot;&gt;
+        &lt;table&gt;
+                &lt;tr class=&quot;tr-top&quot;&gt;
+                        &lt;td style=&quot;font-size:8pt;font-weight:bold;text-align:center&quot;&gt;© Western Australia Land Information Authority 2007&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td style=&quot;font-size:8pt;font-weight:bold;text-align:center&quot;&gt; {{ today }}&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td style=&quot;font-size:7pt;text-align:center&quot;&gt;This calibration is only valid for a maximum duration of six months. Damage or wear can affect length and regular re-testing is recommended.&lt;/td&gt;
+                &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content1&quot;&gt;
+        &lt;hr&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; Laboratory Name: &lt;strong&gt; Boya &lt;/strong&gt; &lt;/td&gt;
+                  &lt;td&gt; Authority: &lt;strong&gt; Landgate &lt;/strong&gt; &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; Description: Barcode Staff Calibration Range &lt;/td&gt;
+                  &lt;td&gt; Location: Victor Road, Darlington, WA 6070 &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;hr&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;&lt;u&gt;This test information&lt;/u&gt;&lt;/th&gt;
+                  &lt;th&gt;&lt;u&gt;Level &amp;amp; staff details&lt;/u&gt; &lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; Unique ID: &lt;strong&gt;{{ update_index }} &lt;/strong&gt; &lt;/td&gt;
+                  &lt;td&gt; Staff Number: &lt;strong&gt; {{ staff_number }} &lt;/strong&gt; &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;Observation Date: {{observation_date }}&lt;/td&gt;
+                        &lt;td&gt;Level Number: &lt;strong&gt; {{ level_number}} &lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;&lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;Average Temperature: &lt;strong&gt; {{ average_temperature|floatformat:1 }}°C&lt;/strong&gt;&lt;/td&gt;
+                        &lt;td&gt;Observer: &lt;strong&gt; {{ observer }} &lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;table&gt;
+            &lt;hr&gt;
+            &lt;p&gt;Correction Factor: &lt;strong&gt;{{ScaleFactor|floatformat:6}} &lt;/strong&gt;at 25.0°C. Note that Correction Factor is temperature dependent.&lt;/p&gt;
+                &lt;p&gt;Graduation Uncertainty: &lt;strong&gt;{{GraduationUncertainty|floatformat:5}} &lt;/strong&gt; metres at 95% confidence interval&lt;/p&gt;
+                &lt;hr&gt;
+            &lt;table&gt;
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                        &lt;td width=&quot;8%&quot;&gt;&lt;/td&gt;
+                        &lt;td width=&quot;8%&quot;&gt;&lt;/td&gt;
+                        &lt;td width=&quot;14%&quot;&gt;&lt;/td&gt;
+                        &lt;td width=&quot;14%&quot;&gt;&lt;/td&gt;
+                        &lt;td width=&quot;14%&quot;&gt;Observed&lt;/td&gt;
+                        &lt;td width=&quot;14%&quot;&gt;Corrected&lt;/td&gt;
+                        &lt;td width=&quot;14%&quot;&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                        &lt;td colspan=&quot;2&quot; class=&quot;td-bottom&quot;&gt;Staff Readings&lt;/td&gt;
+                        &lt;td&gt;Height&lt;/td&gt;
+                        &lt;td&gt;Height&lt;/td&gt;
+                        &lt;td&gt;Corrected&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                        &lt;td&gt;From&lt;/td&gt;
+                        &lt;td&gt;To&lt;/td&gt;
+                        &lt;td&gt;Difference&lt;/td&gt;
+                        &lt;td&gt;Difference&lt;/td&gt;
+                        &lt;td&gt;Difference&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr class=&quot;tr-bottom&quot; style=&quot;text-align:center;&quot;&gt;
+                        &lt;td&gt;Set&lt;/td&gt;
+                        &lt;td&gt;Pins&lt;/td&gt;
+                        &lt;td&gt;(metres)&lt;/td&gt;
+                        &lt;td&gt;(metres)&lt;/td&gt;
+                        &lt;td&gt;(metres)&lt;/td&gt;
+                        &lt;td&gt;(metres)&lt;/td&gt;
+                        &lt;td&gt;(metres)&lt;/td&gt;
+                &lt;/tr&gt;
+                {% for a, b,c,d,e,f in StaffCorrections.data %}
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                  &lt;td&gt; 1 &lt;/td&gt;
+                  &lt;td&gt; {{a}}&lt;/td&gt;
+                  &lt;td&gt; {{b|floatformat:5}}&lt;/td&gt;
+                  &lt;td&gt; {{c|floatformat:5}}&lt;/td&gt;
+                  &lt;td&gt; {{d|floatformat:5}}&lt;/td&gt;
+                  &lt;td&gt; {{e|floatformat:5}}&lt;/td&gt;
+                  &lt;td&gt; {{f|floatformat:5}}&lt;/td&gt;
+                &lt;/tr&gt;
+                {% endfor %}
+
+            &lt;/table&gt;
+            &lt;hr&gt;
+        &lt;/div&gt;
+        &lt;pdf:nextpage /&gt;
+
+         &lt;div id=&quot;content2&quot;&gt;
+            &lt;hr&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;&lt;u&gt;This test information&lt;/u&gt;&lt;/th&gt;
+                  &lt;th&gt;&lt;u&gt;Level &amp;amp; staff details&lt;/u&gt; &lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; Unique ID: &lt;strong&gt;{{ update_index }} &lt;/strong&gt; &lt;/td&gt;
+                  &lt;td&gt; Staff Number: &lt;strong&gt; {{ staff_number }} &lt;/strong&gt; &lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;Observation Date: {{observation_date }}&lt;/td&gt;
+                        &lt;td&gt;Level Number: &lt;strong&gt; {{ level_number}} &lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;&lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;Average Temperature: &lt;strong&gt; {{ average_temperature|floatformat:1 }}°C&lt;/strong&gt;&lt;/td&gt;
+                        &lt;td&gt;Observer: &lt;strong&gt; {{ observer }} &lt;/strong&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;table&gt;
+            &lt;hr&gt;
+            &lt;p&gt;Correction Factor = &lt;strong&gt;{{ScaleFactor0|floatformat:6}}(1+({{thermal_coefficient|floatformat:5}}(Temperature-{{average_temperature}}))) &lt;/strong&gt;at 25.0°C. Note that correction factor is temperature dependent.&lt;/p&gt;
+                &lt;p&gt;Correction Factor = &lt;strong&gt; 1.00000 &lt;/strong&gt; when the temperature is &lt;strong&gt;{{ Temperatre_at_1 }}°C&lt;/strong&gt;&lt;/p&gt;
+                &lt;hr&gt;
+            &lt;table width=75%&gt;
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                        &lt;td&gt;Correction&lt;/td&gt;
+                        &lt;td&gt;Correction/metre&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr class=&quot;tr-bottom&quot; style=&quot;text-align:center;&quot;&gt;
+                        &lt;td&gt;Temperature&lt;/td&gt;
+                        &lt;td&gt;Factor&lt;/td&gt;
+                        &lt;td&gt;(mm)&lt;/td&gt;
+                &lt;/tr&gt;
+                {% for a,b,c in CorrectionList.data %}
+                &lt;tr style=&quot;text-align:center;&quot;&gt;
+                  &lt;td&gt; {{a}}&lt;/td&gt;
+                  &lt;td&gt; {{b|floatformat:5}}&lt;/td&gt;
+                  &lt;td&gt; {{c|floatformat:2}}&lt;/td&gt;
+                &lt;/tr&gt;
+                {% endfor %}
+
+            &lt;/table&gt;
+            &lt;hr&gt;
+         &lt;/div&gt;
+         &lt;!-- &lt;pdf:nextpage /&gt; --&gt;
+
+         &lt;!-- &lt;pdf:nextpage /&gt; --&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+        var today = new Date();
+        document.getElementById('current_time').innerHTML=today.toLocaleString('en-AU');
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>And the report looks like this:</p>
+<div class="figure align-center">
+<img alt="../_images/pdf_staff_report.png" src="../_images/pdf_staff_report.png" />
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="5_other_pages.html" class="btn btn-neutral float-right" title="Home Page and Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="3_forms.html" class="btn btn-neutral float-left" title="Forms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

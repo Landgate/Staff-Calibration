@@ -1,0 +1,116 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+
+<article class="post">
+	{% if not user.is_authenticated %}
+		<p>Please login or signup to manage and calibrate your staff.</p>
+		<div class="single-item-container">
+			<button class="mr-4 px-3 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/login/'">Log in</button>
+			or 
+			<button class="ml-4 px-3 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/signup/'">Sign up</button>
+		</div>
+		<br>
+	{% endif %}
+
+	<header class="post-header">
+	    <h1 class="post-title">Your guide to calibration of Barcoded Staves</h1>
+	    <p> Last updated November 2020 </p>
+	</header>
+
+	<div class="post-content introduction">
+		<p> The Landgate barcode staff calibration range is located at the Land Surveyors Licensing Board's examination site at Boya and consists of 2 observing pillars and a series of 21 stainless steel pins set in a solid granite outcrop. The pins have been placed at optimum distances from the pillars and cater for testing over a 4 metre height difference. The relative height differences between the pins have been accurately determined by repeat observations using precision levels in conjunction with calibrated invar staves. Landgate regularly monitor and re-measure the test range to ensure its ongoing accuracy and stability.  </p>
+
+		<div class="cf nr3 nl3">
+        	<div class="fl w-50-ns ph3">
+	            <h2 class="mt0">Landgate's Service</h2>
+	            <p>
+	              The barcode staff calibration range is re-calibrated on a regular basis. Landgate now offers a barcode staff calibration data processing service to ensure staves are calibrated using the latest range data. Please download the following documents from the Landgate instrument calibration webpage 
+	              <ul>
+		              <li><a href="{% static 'boya/2017_Access-sketch-Boya-barcode-staff-calibration.pdf' %}" target="_blank">Access details</a> of the Boya barcode staff calibration range</li>
+		              <li><a href="{% static 'boya/Boya Pin Configuration.pdf' %}" target="_blank">Diagram of the pin configuration</a></li>
+		              <li><a href="{% static 'boya/Barcoded_booking_sheet.pdf' %}" target="_blank">Barcode Staff Booking Sheet</a></li>
+		              <li><a href="{% static 'sample_data/staff_calibration_file_load.txt' %}" target="_blank">Sample ASCII file</a></li>
+	              </ul>
+	            </p>
+          	</div>
+          	<div class="fl w-50-ns ph3">
+	            <h2 class="mt0">How to calibrate barcode staves</h2>
+	            <ol>
+	            	<li>Use the barcode staff booking sheet to record all tests and calibrations made on the range. Check the bubble of the digital level and adjust if necessary. Check the staff bubble to be used and adjust if necessary. Do a collimation test on the digital level and use its software to compute and store the constants calculated. For this purpose, four co-linear spikes in concrete 20 m apart have been established adjacent to the range.</li>
+					<li>Set the digital level on the high observing pillar (MV 83) and shade it from the sun or observe on an overcast day. Pillar B (low pillar) is utilised by Landgate when calibrating the range.</li>
+					<li>Position staff on the highest pin and allow several minutes for it to settle and adjust to the ambient air temperature. Record the air temperature with a shaded thermometer.</li> 
+					<li>If the level used can take multiple measurements and record the mean and standard deviation (e.g. Leica LS15 & DNA03), set it to record at least five measurements at each pin and do one set of observations. If not, do a minimum of three complete sets of observations for redundancy. A set of observations for a standard four metre staff consist of:</li>
+					<ul>
+						<li>backsight to the staff at Pin Number 1 </li>
+						<li>intermediate sights to the staff at Pin Numbers 2 to 20 </li>
+						<li>foresight to the staff at Pin Number 21 </li>
+					</ul>
+					<li>Record the air temperature at the completion of the test.</li>
+					<li>Download the level data and create a csv file in the correct format (see below).</li>
+					<li>Click <a href="{% url 'staff_calibration:staff-calibrate' %}">here</a> to process your staff readings and print the pdf report.</li>
+					<!-- <li>Landgate recommends that staves be re-calibrated at least every 5 years or more often if joints exhibit noticeable wear or any other repairs are made to the staff.</li> -->
+				</ol>
+          	</div>
+          	<div class="fl w-50-ns ph3">
+	            <h2 class="mt0"> Sample data to be uploaded </h2>
+	            <p>
+	            	Data should be uploaded in a correctly formatted text or csv file as per the file format.
+	            </p>
+	            <p>
+	            	File Format - All fields are separated by a comma and should have a header line
+	            	<ul>
+	            		<li>Field 1 = Pin number</li>
+	            		<li>Field 2 = Staff reading</li>
+	            		<li>Field 3 = Number of readings</li>
+	            		<li>Field 4 = Standard deviations</li>
+	            	</ul>  
+	            </p>
+
+	            <p> Example of a text/csv file. The file can also be downloaded from <a href="{% static 'sample_data/staff_calibration_file_load.txt' %}" target="_blank">here</a>. </p>
+
+	            <table id="sample-data">
+	            	<tr>
+	            		<th>Pin number,</th>
+	            		<th>Staff reading,</th>
+	            		<th>Number of readings,</th>
+	            		<th>Standard deviations </th>
+	            	</tr>
+	            	<tr><td>1,</td><td>0.07417,</td><td>10,</td><td>0.000090</td></tr>
+	            	<tr><td>2,</td><td>0.16503,</td><td>10,</td><td>0.000070</td></tr>
+					<tr><td>3,</td><td>0.32868,</td><td>10,</td><td>0.000020</td></tr>
+					<tr><td>4,</td><td>0.47489,</td><td>10,</td><td>0.000090</td></tr>
+					<tr><td>5,</td><td>0.68799,</td><td>10,</td><td>0.000070</td></tr>
+					<tr><td>6,</td><td>0.87413,</td><td>10,</td><td>0.000040</td></tr>
+					<tr><td>9,</td><td>1.52628,</td><td>10,</td><td>0.000030</td></tr>
+					<tr><td>7,</td><td>1.07422,</td><td>10,</td><td>0.000030</td></tr>
+					<tr><td>8,</td><td>1.27955,</td><td>10,</td><td>0.000050</td></tr>
+					<tr><td>10,</td><td>1.79376,</td><td>10,</td><td>0.000040</td></tr>
+					<tr><td>11,</td><td>2.12703,</td><td>10,</td><td>0.000080</td></tr>
+					<tr><td>12,</td><td>2.3912,</td><td>10,</td><td>0.000050</td></tr>
+					<tr><td>13,</td><td>2.51647,</td><td>10,</td><td>0.000110</td></tr>
+					<tr><td>14,</td><td>2.64608,</td><td>10,</td><td>0.000050</td></tr>
+					<tr><td>15,</td><td>2.87513,</td><td>10,</td><td>0.000120</td></tr>
+					<tr><td>16,</td><td>3.05758,</td><td>10,</td><td>0.000060</td></tr>
+					<tr><td>17,</td><td>3.20978,</td><td>10,</td><td>0.000040</td></tr>
+					<tr><td>18,</td><td>3.36207,</td><td>10,</td><td>0.000120</td></tr>
+					<tr><td>19,</td><td>3.52057,</td><td>10,</td><td>0.000200</td></tr>
+					<tr><td>20,</td><td>3.6692,</td><td>10,</td><td>0.000070</td></tr>
+					<tr><td>21,</td><td>3.87885,</td><td>10,</td><td>0.000100 </td></tr>
+	            </table>
+
+          	</div>
+          	<p> Other information required are the staff and observation metadata which is recorded in the booking sheet at the time of observation. </p>
+
+          	<p> While it is not mandatory to submit the booking sheet, it is recommended to store a digital copy for at six months or until the next calibration. </p>
+
+          	<p> For further information, or to have your barcode staff independently tested contact Survey Services. </p>
+          	<br>
+			<p>Phone: +61 (0)8 9273 7114 </p>
+			<p>Email: Geodesy@landgate.wa.gov.au</p>
+        </div>
+    </div>
+</article>
+
+{% endblock %}

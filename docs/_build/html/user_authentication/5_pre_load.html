@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Loading user information during migration &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Range Calibration" href="../range_calibration/contents.html" />
+    <link rel="prev" title="Password Validators" href="4_password_validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">User authentication and permissions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_user_model.html">Setting up the Custom User Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_forms.html">Customise User Forms and Admin Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html">Setting up your authentication views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#django-s-default-authentication">Django’s default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_authentication_views.html#modifying-the-default-authentication">Modifying the default authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_password_validation.html">Password Validators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Loading user information during migration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-migrations">Initial Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-migration">Example Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-migrations">Data Migrations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#loading-to-the-authority-model">Loading to the Authority model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-groups-and-superuser">Creating groups and superuser</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">User authentication and permissions</a> &raquo;</li>
+        
+      <li>Loading user information during migration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_authentication/5_pre_load.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="loading-user-information-during-migration">
+<h1>Loading user information during migration<a class="headerlink" href="#loading-user-information-during-migration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>For a data analytics application such as this Staff Calibration project, it is a requirement to pre-load a lot of the historical data into the database, which would otherwise take an enormous amount of time to populate them one by one. In Django, it is possible to provide initial data with <code class="docutils literal notranslate"><span class="pre">migrations</span></code> or <code class="docutils literal notranslate"><span class="pre">fixtures</span></code>.</p>
+<p>For this project, for example, we will load all range measurements automatically during data <code class="docutils literal notranslate"><span class="pre">migration</span></code>. We will also provide data for model <code class="docutils literal notranslate"><span class="pre">Authority</span></code> and <code class="docutils literal notranslate"><span class="pre">StaffTypes</span></code> and load the landgate staves and levels by default.</p>
+</div>
+<div class="section" id="initial-migrations">
+<h2>Initial Migrations<a class="headerlink" href="#initial-migrations" title="Permalink to this headline">¶</a></h2>
+<p>The “initial migrations” for an app are the migrations that create the first version of that app’s tables. Usually an app will have only one initial migration, but in some cases of complex model interdependencies it may have two or more. Initial migrations are marked with an <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">=</span> <span class="pre">True</span></code> class attribute on the migration class. If an <code class="docutils literal notranslate"><span class="pre">initial</span></code> class attribute is not given, a migration will be considered initial if it is the first migration in the app (i.e. if it has no dependencies on any other migration in the same application).</p>
+<p>Let’s look at the <strong>accounts</strong> app migration (<strong>staff/accounts/migrations/</strong>). Note that the migration files (<em>.py</em>) are generated during <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">makemigrations</span></code> in command prompt. In this case, it has created two migration files: <code class="docutils literal notranslate"><span class="pre">0001</span></code>- initial migration and <code class="docutils literal notranslate"><span class="pre">0002</span></code> - subsequent migration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/
+└──accounts/
+        └──migrations/
+                ├──__init__.py
+                ├──0001_initial.py
+                └──0002_auto_20201221_0943.py
+</pre></div>
+</div>
+<p>The initial migration <code class="docutils literal notranslate"><span class="pre">0001</span></code> was created when <code class="docutils literal notranslate"><span class="pre">makemigration</span></code> was run for the first time and creates all the models, fields, and associated structures defined at that time. The <code class="docutils literal notranslate"><span class="pre">makemigrations</span></code> and <code class="docutils literal notranslate"><span class="pre">migrate</span></code> commands must be run everytime a change is made to a model or models and will automatically create subsequent migration files. In this case, the subsequent migration <code class="docutils literal notranslate"><span class="pre">0002</span></code> was created because <code class="docutils literal notranslate"><span class="pre">blank==True</span></code> and <code class="docutils literal notranslate"><span class="pre">null=True</span></code> was applied to the <code class="docutils literal notranslate"><span class="pre">Authority</span></code> model to allow blank and null values during the initial testing phase.</p>
+</div>
+<div class="section" id="example-migration">
+<h2>Example Migration<a class="headerlink" href="#example-migration" title="Permalink to this headline">¶</a></h2>
+<p>The migration file for <code class="docutils literal notranslate"><span class="pre">0002</span></code> looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/migrations/0002_auto_20201221_0943.py   # it may have a different name after 0002</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">import</span> <span class="nn">django.db.models.deletion</span>
+
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;0001_initial&#39;</span><span class="p">),</span>                <span class="c1"># implies that this migration depends on the initial migration 0001</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>                                   <span class="c1"># type of operation performed - AlterField to ForeignKey - Authority</span>
+        <span class="n">migrations</span><span class="o">.</span><span class="n">AlterField</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;customuser&#39;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;authority&#39;</span><span class="p">,</span>
+            <span class="n">field</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">django</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">deletion</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;accounts.authority&#39;</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>What Django looks for when it loads a migration file (as a Python module) is a subclass of <code class="docutils literal notranslate"><span class="pre">django.db.migrations.Migration</span></code> called <code class="docutils literal notranslate"><span class="pre">Migration</span></code>. It then inspects this object for four attributes, only two of which are used most of the time:</p>
+<ul class="simple">
+<li><p><strong>dependencies</strong> -  a list of migrations this one depends on.</p></li>
+<li><p><strong>operations</strong> - a list of Operation classes that define what this migration does.</p></li>
+</ul>
+<p>The operations are a set of declarative instructions which tell Django what schema changes need to be made. Django scans them and builds an in-memory representation of all of the schema changes to all apps, and uses this to generate the SQL which makes the schema changes.</p>
+<p>That in-memory structure is also used to work out what the differences are between your models and the current state of your migrations; Django runs through all the changes, in order, on an in-memory set of models to come up with the state of your models last time you ran makemigrations. It then uses these models to compare against the ones in your <strong>models.py</strong> files to work out what you have changed.</p>
+<p>It should be noted that the <code class="docutils literal notranslate"><span class="pre">makemigrations</span></code> must be always followed by <code class="docutils literal notranslate"><span class="pre">migrate</span></code> to apply the migrations to the database and ensure that they are working properly. For more information on migrations, refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/topics/migrations/">https://docs.djangoproject.com/en/3.1/topics/migrations/</a>.</p>
+</div>
+<div class="section" id="data-migrations">
+<h2>Data Migrations<a class="headerlink" href="#data-migrations" title="Permalink to this headline">¶</a></h2>
+<p>Migrations that alter data are usually called <strong>data migrations</strong> and they are best written as separate migrations, sitting alongside your schema migrations. Django can’t automatically generate data migrations, as it does with schema migrations, but we can write them with ease. Migration files in Django are made up of <strong>Operations</strong>, and the main operation that needs to be used or data migrations is <code class="docutils literal notranslate"><span class="pre">RunPython</span></code>.</p>
+<p>In this <strong>accounts</strong> application, we will pre-load data for <code class="docutils literal notranslate"><span class="pre">Authority</span></code> from a csv file, create a <code class="docutils literal notranslate"><span class="pre">superuser</span></code>, and create a some groups using <code class="docutils literal notranslate"><span class="pre">Group</span></code> from <cite>django.auth`</cite>.</p>
+<div class="section" id="loading-to-the-authority-model">
+<h3>Loading to the Authority model<a class="headerlink" href="#loading-to-the-authority-model" title="Permalink to this headline">¶</a></h3>
+<p>Here is the <code class="docutils literal notranslate"><span class="pre">Authority</span></code> model from <strong>models.py</strong> consisting of two fields: <code class="docutils literal notranslate"><span class="pre">authority__abbrev</span></code> and <code class="docutils literal notranslate"><span class="pre">authority_name</span></code>:</p>
+<p>The csv file (named <strong>authority.csv</strong>) was created and stored under the <code class="docutils literal notranslate"><span class="pre">STATIC</span></code> folder directory <strong>staff/assets/authority/</strong>. The csv file looks like this:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>AUTHORITY_ABBREV</p></th>
+<th class="head"><p>AUTHORITY_NAME</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Other</p></td>
+<td><p>Other</p></td>
+</tr>
+<tr class="row-odd"><td><p>LG</p></td>
+<td><p>Landgate</p></td>
+</tr>
+<tr class="row-even"><td><p>35</p></td>
+<td><p>35 Degrees South</p></td>
+</tr>
+<tr class="row-odd"><td><p>AW&amp;P</p></td>
+<td><p>A.R. Williams &amp; Partners</p></td>
+</tr>
+<tr class="row-even"><td><p>A1</p></td>
+<td><p>A1 Minerals Limited</p></td>
+</tr>
+<tr class="row-odd"><td><p>AAS</p></td>
+<td><p>AA Surveys</p></td>
+</tr>
+<tr class="row-even"><td><p>AAMG</p></td>
+<td><p>AAM Group</p></td>
+</tr>
+<tr class="row-odd"><td><p>AAMHATCH</p></td>
+<td><p>AAMHatch Pty Ltd</p></td>
+</tr>
+<tr class="row-even"><td><p>ABAXA</p></td>
+<td><p>Abaxa</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>more below</strong></p></td>
+<td><p><strong>more below</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>To start, create an empty migration file using the command <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">makemigrations</span> <span class="pre">--empty</span> <span class="pre">app_name</span></code> in the command prompt. <code class="docutils literal notranslate"><span class="pre">app_name</span></code> here is our <strong>accounts</strong> app. Django will put the file in the right place.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span> <span class="o">--</span><span class="n">empty</span> <span class="n">accounts</span>
+</pre></div>
+</div>
+<p>This will create a new migration file called <strong>0003_auto_20201224_1015.py</strong> in the migrations folder under <strong>accounts</strong>. The filename may be different in each case but the sequence will follow consecutive order (in this case, its <code class="docutils literal notranslate"><span class="pre">0003</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Migrations</span> <span class="k">for</span> <span class="s1">&#39;accounts&#39;</span><span class="p">:</span>
+        <span class="n">accounts</span><span class="o">/</span><span class="n">migrations</span><span class="o">/</span><span class="mi">0003</span><span class="n">_auto_20201224_1015</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The new migration file will look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: accounts/migrations/0003_auto_20201224_1015.py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;0002_auto_20201221_0943&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, all we need to do is create a new function and have <code class="docutils literal notranslate"><span class="pre">RunPython</span></code> use it. <code class="docutils literal notranslate"><span class="pre">RunPython</span></code> expects a function that takes in two arguments: <strong>apps registry</strong> (denoted by <code class="docutils literal notranslate"><span class="pre">apps</span></code>) and a <strong>SchemaEditor</strong> (denoted by <code class="docutils literal notranslate"><span class="pre">schema_editor</span></code>). The app registry contains the historical versions of all the models loaded into it to match where in your history the migration sits, and the SchemaEditor is used to manually effect database schema changes.</p>
+<p>Let’s create a function called <strong>load_authority</strong> to read the csv file (do not forget to <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">csv</span></code>) and load it to the <code class="docutils literal notranslate"><span class="pre">Authority</span></code> model and add it to the <code class="docutils literal notranslate"><span class="pre">operations</span></code> list to run with <code class="docutils literal notranslate"><span class="pre">RunPython</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: accounts/migrations/0003_auto_20201224_1015.py</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<span class="k">def</span> <span class="nf">load_authority</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+
+        <span class="c1"># import the model</span>
+        <span class="n">Authority</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;accounts&quot;</span><span class="p">,</span> <span class="s2">&quot;Authority&quot;</span><span class="p">)</span>
+
+        <span class="c1"># open and read the csv file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/authority/authority_names.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>                  <span class="c1"># skip the header</span>
+
+                <span class="c1"># get each row and assign the columns to the appropriate field</span>
+                <span class="c1"># for example: first one (row[0]) corresponds to ``authority_abbrev`` and so on</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                        <span class="n">authority</span> <span class="o">=</span> <span class="n">Authority</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">authority_abbrev</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">authority_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;0002_auto_20201221_0943&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="o">.</span><span class="n">RunPython</span><span class="p">(</span><span class="n">load_authority</span><span class="p">),</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Save it and run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code> to apply the data migration. It will look like this if its successful:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+
+        <span class="n">Operations</span> <span class="n">to</span> <span class="n">perform</span><span class="p">:</span>
+          <span class="n">Apply</span> <span class="nb">all</span> <span class="n">migrations</span><span class="p">:</span> <span class="n">accounts</span><span class="p">,</span> <span class="n">admin</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">contenttypes</span><span class="p">,</span> <span class="n">sessions</span><span class="p">,</span> <span class="n">staffs</span>
+        <span class="n">Running</span> <span class="n">migrations</span><span class="p">:</span>
+          <span class="n">Applying</span> <span class="n">accounts</span><span class="o">.</span><span class="mi">0003</span><span class="n">_auto_20201224_1015</span><span class="o">...</span> <span class="n">OK</span>
+</pre></div>
+</div>
+<p>Next, log in the <strong>admin</strong> page (<a class="reference external" href="http://127.0.0.1:8000/admin">http://127.0.0.1:8000/admin</a>) or open the default sqlite database in the project folder to find out if the data has been loaded or not. It should be all under the <code class="docutils literal notranslate"><span class="pre">authority</span></code> table.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/data_migrations_authority_table.png" src="../_images/data_migrations_authority_table.png" />
+<p class="caption"><span class="caption-text">List of authorities added to the Authority model via migration</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="creating-groups-and-superuser">
+<h3>Creating groups and superuser<a class="headerlink" href="#creating-groups-and-superuser" title="Permalink to this headline">¶</a></h3>
+<p>Similarly, we can generate another empty migration in the <strong>accounts</strong> and copy the following lines to create groups and a superuser. Three groups are created: Landgate, Geodesy, and Others so that we can add different levels of permissions to them. It is possible to create <code class="docutils literal notranslate"><span class="pre">superuser</span></code> through the console (command prompt) and it can be created in a migration file as well.</p>
+<p>Copy the following lines in the new migration file (here it is calle <strong>0004_auto_20201224_1049.py</strong>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/accounts/migrations/0004_auto_20201224_1049.py</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+<span class="c1"># import the required models</span>
+<span class="kn">from</span> <span class="nn">accounts.models</span> <span class="kn">import</span> <span class="n">CustomUser</span><span class="p">,</span> <span class="n">Authority</span>
+
+<span class="k">def</span> <span class="nf">forwards_func</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+        <span class="c1"># import Group from django.auth</span>
+    <span class="n">Group</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;auth&quot;</span><span class="p">,</span> <span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+    <span class="n">db_alias</span> <span class="o">=</span> <span class="n">schema_editor</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">alias</span>
+
+    <span class="c1"># create groups</span>
+    <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">using</span><span class="p">(</span><span class="n">db_alias</span><span class="p">)</span><span class="o">.</span><span class="n">bulk_create</span><span class="p">([</span>
+        <span class="n">Group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Landgate&#39;</span><span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Geodesy&#39;</span><span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Others&#39;</span><span class="p">),</span>
+    <span class="p">])</span>
+
+    <span class="c1"># create superuser</span>
+    <span class="n">CustomUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_superuser</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="s1">&#39;geodesy@landgate.wa.gov.au&#39;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s1">&#39;landgate.geodetic&#39;</span><span class="p">,</span>
+        <span class="n">authority</span><span class="o">=</span> <span class="n">Authority</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">authority_abbrev</span><span class="o">=</span><span class="s1">&#39;LG&#39;</span><span class="p">)</span>   <span class="c1"># Gives an authority from Authority</span>
+        <span class="p">)</span>
+
+<span class="c1"># Reverses the action performed above by deleting everything, if migration needs to be revesed</span>
+<span class="k">def</span> <span class="nf">reverse_func</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+        <span class="n">Group</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;auth&quot;</span><span class="p">,</span> <span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+        <span class="n">Group</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+        <span class="n">CustomUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;0002_auto_20201110_0811&#39;</span><span class="p">),</span>             <span class="c1"># previous migration</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">migrations</span><span class="o">.</span><span class="n">RunPython</span><span class="p">(</span>
+                    <span class="n">forwards_func</span><span class="p">,</span> <span class="n">reverse_func</span>                  <span class="c1"># actions performed</span>
+                <span class="p">),</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that a <code class="docutils literal notranslate"><span class="pre">reverse_func</span></code> has been added to the migration file so that the custom migration can be reversed with <code class="docutils literal notranslate"><span class="pre">migrate</span></code> if required. The reverse migration is performed by passing the sequence number of previous migration, e.g., to reverse this migration <code class="docutils literal notranslate"><span class="pre">accounts.004</span></code>, we can just run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span> <span class="pre">accounts.0003</span></code>.</p>
+<p>If the custom migration does not have the reverse function, it cannot be reversed.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../range_calibration/contents.html" class="btn btn-neutral float-right" title="Range Calibration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="4_password_validation.html" class="btn btn-neutral float-left" title="Password Validators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

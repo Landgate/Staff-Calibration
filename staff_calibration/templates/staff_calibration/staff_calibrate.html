@@ -1,0 +1,117 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+
+
+<article class="post">
+	{% if messages %}
+		<div class="page-content">
+		    {% for message in messages %}
+		    <div class="alert {{ message.tags }}">
+		        {% if 'safe' in message.tags %}
+		            <p> {{ message|safe }} </p>
+		        {% else %}
+		            <p> {{ message }} </p>
+		        {% endif %}
+		    </div>
+		    <br>
+		    {% endfor %}
+		</div>
+	{% endif %}
+
+	{% if form.errors %}
+		<div class="post-content alert error">
+		    {% for field in form %}
+		        {% for error in field.errors %}
+		            <p> {{ error }} </p>
+		        {% endfor %}
+		    {% endfor %}
+	    </div>
+	    <br>
+	    <br>
+	{% endif %}
+	<header class="post-header">
+	    <h1 class="post-title text-center">Enter the following information </h1>
+	    <p class="text-center">(Note that your input csv/txt file must have a header as described at the end of <a href="{% url 'staff_calibration:staff-guide' %}">this guideline</a>) </p>
+	</header>
+
+	<div class="post-content">
+		<form class="site-form" action="." method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+		        <tr>
+					<td> <h3>Select or Enter Staff Number:</h3></td>
+				    <td> <h3> {{ form.staff_number }} </h3></td>
+				    <td> <span> 
+					    	<strong> Add New </strong>
+					     	<a class="a-icon" href="{% url 'staffs:staff-create' %}?next={{request.path}}">
+					        	<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-plus-circle" rowspan="1", fill="green" xmlns="http://www.w3.org/2000/svg">
+									 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+									<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+								</svg>
+							</a>
+						</span>
+				    </td>
+				</tr>
+
+				<tr>
+			    	<td> <h3> Select or Enter Digit Level Number: </h3> </td>
+			    	<td> <h3> {{ form.level_number }} </h3> </td>
+			    	<td>  
+			    		<span>
+		    				<strong> Add New </strong>
+		    				<a class="a-icon" href="{% url 'staffs:level-create' %}?next={{request.path}}">
+			         			<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="green" xmlns="http://www.w3.org/2000/svg">
+							 		<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+									<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+								</svg>
+							</a> 
+						</span>
+					</td>
+			    </tr>
+			    <tr>
+			    	<td> <h3> Enter Observation Date </h3> </td>
+			    	<td colspan="2"> <h3> {{ form.calibration_date }} </h3> </td>
+			    </tr>
+			    <tr >
+			    	<td> <h3> Enter observer's name (if different): </h3></td>
+			    	<td> <h3> {{ form.first_name }} </h3></td>
+			    	<td> <h3> {{ form.last_name }} </h3></td>
+			    </tr>
+			    <tr >
+			    	<td> <h3> Enter the start temperature: </h3></td>
+			    	<td> <h3> {{ form.start_temperature }} </h3></td>
+			    </tr>
+			    <tr >
+			    	<td> <h3> Enter the finish temperature: </h3></td>
+			    	<td> <h3> {{ form.end_temperature }} </h3></td>
+			    </tr>
+			    <tr>
+			    	<td> <h3> Select your csv file: </h3></td>
+			    	<td> {{ form.document }}</td>
+			    </tr>
+			</table>
+			<div class="grid-2">
+				<div class="single-item-container">
+					<button class="px-2 py-1 border border-transparent text-sm leading-3 rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit">Submit</button>
+				</div>
+				<div class="single-item-container">
+					<a class="px-2 py-1 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staff_calibration:staff-home' %}">Cancel</a>
+				</div>
+			</div>	
+		</form>
+	</div>
+</article>
+
+	<script type="text/javascript">
+	 let file;
+	 function checkFile() {
+	  file = document.querySelector('input[type=file]').files[0];
+	  if (file.type != '.csv' | file.type != '.txt') {
+	   	file = null;
+	   document.getElementById('id_document').remove();
+	  }
+	 }
+	</script>
+{% endblock %}

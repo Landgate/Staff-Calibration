@@ -1,0 +1,89 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+
+
+<article class="post">
+	{% if messages %}
+	<ul class="alert messages">
+	    {% for message in messages %}
+	    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	<br>
+	{% endif %}
+
+	<header class="post-header">
+		<h1>Range calibration</h1>
+	</header>
+	<h2 class="post-title text-center">Step {{ wizard.steps.step1 }} of  {{ wizard.steps.count }} </h2>
+	
+	<div class="post-content">
+		<form class="site-form" action="." method="post">
+			{% csrf_token %}
+			<table>
+				{{ wizard.management_form }}
+				{% if wizard.form.forms %}
+			        {{ wizard.form.management_form }}
+			        {% for form in wizard.form.forms %}
+			            {{ form }}
+			        {% endfor %}
+			    {% else %}
+			        <tr>
+						<td> <h3>Select or Enter Staff Number:</h3> </td>
+					    <td> <h3> {{ form.staff_number }} </h3> </td>
+					    <td> <strong> Add New </strong>
+					     	<a class="a-icon" href="{% url 'staffs:staff-create' %}?next={{request.path}}">
+					        	<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-plus-circle" rowspan="1", fill="green" xmlns="http://www.w3.org/2000/svg">
+									 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+									<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+								</svg>
+							</a>
+					    </td>
+					</tr>
+
+					<tr>
+				    	<td> <h3> Select or Enter Digit Level Number: </h3> </td>
+				    	<td> <h3> {{ form.level_number }} </h3> </td>
+				    	<td>  <strong> Add New </strong>
+				    		<a  class="a-icon" href="{% url 'staffs:level-create' %}?next={{request.path}}">
+					         	<svg width="16" height="16" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="green" xmlns="http://www.w3.org/2000/svg">
+									 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+									<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+								</svg>
+							</a> 
+						</td>
+				    </tr>
+				    <tr>
+				    	<td> <h3> Enter Observation Date </h3> </td>
+				    	<td colspan="2"> <h3> {{ form.observation_date }} </h3> </td>
+				    </tr>
+			    {% endif %}
+			</table>
+
+			{% if wizard.steps.prev %}
+				<div class="grid-3">
+					<button  style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}" formnovalidate="formnovalidate">{% trans "First" %}</button>
+					
+					<button style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit" value="continue"> Continue&#8811; </button> 
+					
+					<button style="width:8em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit" value="{{ 
+						wizard.steps.prev }}" formnovalidate="formnovalidate">{% trans "&laquo; Previous" %}</button>
+				</div>
+
+				{% else %}
+				<div class="grid-2">
+					<div>
+						<button style="width:6em" class="px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit" value="continue"> Continue&#8811; </button> 
+					</div>
+					<div class="single-item-container">
+						<a class="px-2 py-2 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'range_calibration:range-home' %}">Cancel</a>
+					</div>
+				</div>
+				{% endif %}
+			
+		</form>
+	</div>
+</article>
+{% endblock %}

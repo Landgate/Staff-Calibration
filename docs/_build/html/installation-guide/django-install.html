@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Python &amp; Django &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating the Staff Calibration website" href="project-set-up.html" />
+    <link rel="prev" title="Getting started" href="install-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="install-guide.html">Getting started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing Python &amp; Django</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python">Installing Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-virtual-environment">Installing the virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-django">Installing Django</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-the-django-installation">Testing the Django installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-set-up.html">Creating the Staff Calibration website</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="install-guide.html">Getting started</a> &raquo;</li>
+        
+      <li>Installing Python &amp; Django</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation-guide/django-install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-python-django">
+<h1>Installing Python &amp; Django<a class="headerlink" href="#installing-python-django" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-python">
+<h2>Installing Python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h2>
+<p>Django web applications can run on any operating system (e.g., Windows, macOS, Linux/Unix, Solaris, among others) that can run Python.</p>
+<ol class="arabic simple">
+<li><p>On the Window’s OS, install Python from their official link <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> or using package managers such as <em>anaconda</em> (<a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>).</p></li>
+<li><p>Install it on <code class="docutils literal notranslate"><span class="pre">C:/Data/Software</span></code>.</p></li>
+<li><p>Be sure to check the box labeled <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Python</span> <span class="pre">to</span> <span class="pre">PATH</span></code>.</p></li>
+<li><p>Python comes with a <code class="docutils literal notranslate"><span class="pre">pip</span></code> (package manager) by default that is used to install various python modules.</p></li>
+<li><p>Check the list of installed packages by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code> in command prompt (or cmd).</p></li>
+</ol>
+</div>
+<div class="section" id="installing-the-virtual-environment">
+<h2>Installing the virtual environment<a class="headerlink" href="#installing-the-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>After installing python, create a virtual environment to only have the packages required to run the Django web application (i.e., Staff calibration). This is done by:</p>
+<ol class="arabic simple">
+<li><p>Install the <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Open the <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Prompt</span></code> in Windows Desktop and type:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Go to the working directory, for example, by typing in the <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Prompt</span></code>:</p></li>
+</ol>
+<pre class="literal-block">cd C:\Data\Development\django_projects</pre>
+<ol class="arabic simple" start="3">
+<li><p>Create a new virtual environment with the <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> command. Name it <code class="docutils literal notranslate"><span class="pre">venv</span></code> or by any other name.</p></li>
+</ol>
+<pre class="literal-block">virtualenv venv
+
+| (venv) (base) C:\Data\Development\django_projects&gt;virtualenv venv
+| created virtual environment CPython3.8.3.final.0-64 in 1887ms
+| creator CPython3Windows(dest=C:DataDevelopmentdjango_projectsvenv, clear=False, global=False)
+| seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=C:\Users\Likxx00\AppData\Localpypa\virtualenv)
+| added seed packages: pip==20.2.1, setuptools==49.2.1, wheel==0.34.2
+| activators BashActivator,BatchActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator</pre>
+<ol class="arabic simple" start="4">
+<li><p>If successfull, a new folder called <strong>venv</strong> can be seen in the same directory and <code class="docutils literal notranslate"><span class="pre">(venv)</span></code> appears alongside <code class="docutils literal notranslate"><span class="pre">(base)</span></code> in the command prompt saying that the virtual environment is now active. This is where all packages related to the Staff Calibration is installed including <code class="docutils literal notranslate"><span class="pre">Django</span></code>. For example, type <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">django</span></code> and enter to install django.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> to exit from the virtual environment.</p></li>
+<li><p><strong>Note</strong>: Always remember to <code class="docutils literal notranslate"><span class="pre">activate</span></code> the virtual environment to run the Django web application. In the Command Prompts, type and enter the following lines:</p></li>
+</ol>
+<pre class="literal-block">cd C:\Data\Development\django_projects
+.\venv\Scripts\activate</pre>
+</div>
+<div class="section" id="installing-django">
+<h2>Installing Django<a class="headerlink" href="#installing-django" title="Permalink to this headline">¶</a></h2>
+<p>Remember to install <code class="docutils literal notranslate"><span class="pre">django</span></code> in the virtual environment. See (6) above to activate it if not active.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">django</span>
+</pre></div>
+</div>
+<p>Check the django version</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">django</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-django-installation">
+<h2>Testing the Django installation<a class="headerlink" href="#testing-the-django-installation" title="Permalink to this headline">¶</a></h2>
+<p>Its now time to see if Django is working. To check this, create a new folder with a name <strong>django_test</strong> and follow the instructions below.</p>
+<ol class="arabic simple">
+<li><p>In the command prompt, activate the virtual environment and navigate the the django_test folder</p></li>
+</ol>
+<pre class="literal-block">cd C:\Data\Development\django_projects                   &lt;- go to the main directory
+.\venv\Scripts\activate                                  &lt;- activate the virtual environment
+cd django_test                                              &lt;- go to the test directory</pre>
+<ol class="arabic simple" start="2">
+<li><p>Create a skeleton project called <em>mytestsite</em> using <code class="docutils literal notranslate"><span class="pre">django-admin</span></code> and navigate into the folder</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">mytestsite</span>
+<span class="n">cd</span> <span class="n">mytestsite</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Run the <em>web server</em> using the the <code class="docutils literal notranslate"><span class="pre">manage.py</span></code> as shown:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+
+        <span class="n">Watching</span> <span class="k">for</span> <span class="n">file</span> <span class="n">changes</span> <span class="k">with</span> <span class="n">StatReloader</span>
+        <span class="n">Performing</span> <span class="n">system</span> <span class="n">checks</span><span class="o">...</span>
+
+        <span class="n">System</span> <span class="n">check</span> <span class="n">identified</span> <span class="n">no</span> <span class="n">issues</span> <span class="p">(</span><span class="mi">0</span> <span class="n">silenced</span><span class="p">)</span><span class="o">.</span>
+
+        <span class="n">You</span> <span class="n">have</span> <span class="mi">18</span> <span class="n">unapplied</span> <span class="n">migration</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="n">Your</span> <span class="n">project</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">work</span> <span class="n">properly</span> <span class="n">until</span> <span class="n">you</span> <span class="n">apply</span> <span class="n">the</span> <span class="n">migrations</span> <span class="k">for</span> <span class="n">app</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">admin</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">contenttypes</span><span class="p">,</span> <span class="n">sessions</span><span class="o">.</span>
+        <span class="n">Run</span> <span class="s1">&#39;python manage.py migrate&#39;</span> <span class="n">to</span> <span class="n">apply</span> <span class="n">them</span><span class="o">.</span>
+        <span class="n">December</span> <span class="mi">07</span><span class="p">,</span> <span class="mi">2020</span> <span class="o">-</span> <span class="mi">10</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">38</span>
+        <span class="n">Django</span> <span class="n">version</span> <span class="mf">3.1</span><span class="p">,</span> <span class="n">using</span> <span class="n">settings</span> <span class="s1">&#39;mytestsite.settings&#39;</span>
+        <span class="n">Starting</span> <span class="n">development</span> <span class="n">server</span> <span class="n">at</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8000</span><span class="o">/</span>
+        <span class="n">Quit</span> <span class="n">the</span> <span class="n">server</span> <span class="k">with</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">BREAK</span><span class="o">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Now on the web browser (e.g., chrome, firefox), type <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/</span></code> as shown in the command prompt. The django site looks like this:</p></li>
+</ol>
+<div class="figure align-center">
+<img alt="../_images/django-web.png" src="../_images/django-web.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="project-set-up.html" class="btn btn-neutral float-right" title="Creating the Staff Calibration website" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-guide.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

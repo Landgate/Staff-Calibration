@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating an application repository in Github &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deploying the Staff Calibration Apps on Heroku" href="heroku-deploy.html" />
+    <link rel="prev" title="Deploying the Staff Calibration Apps on Heroku" href="heroku-intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="deployment.html">Deploying Staff Calibration to production</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="heroku-intro.html">Deploying the Staff Calibration Apps on Heroku</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating an application repository in Github</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-github-account">Create a github account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-git">Install git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronising-the-github-repository">Synchronising the github repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="heroku-deploy.html">Deploying the Staff Calibration Apps on Heroku</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="deployment.html">Deploying Staff Calibration to production</a> &raquo;</li>
+        
+      <li>Creating an application repository in Github</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/installation-guide/github-repo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-an-application-repository-in-github">
+<h1>Creating an application repository in Github<a class="headerlink" href="#creating-an-application-repository-in-github" title="Permalink to this headline">¶</a></h1>
+<p>Heroku is closely integrated with the git source code version control system, using it to upload/synchronise any changes you make to the live system. It does this by adding a new heroku “remote” repository named heroku pointing to a repository for your source on the Heroku cloud. During development you use git to store changes on your own repository. When you want to deploy your site, you sync your changes to the Heroku repository.</p>
+<p>Note: If you’re used to following good software development practices you are probably already using git or some other SCM system. If you already have a git repository, then you can skip this step.</p>
+<p>There are a lot of ways to work with git, but one of the easiest is to first set up an account on Github, create the repository there, and then sync to it locally:</p>
+<div class="section" id="create-a-github-account">
+<h2>Create a github account<a class="headerlink" href="#create-a-github-account" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Visit <a class="reference external" href="https://github.com/">https://github.com/</a> and create an account.</p></li>
+<li><p>Once you are logged in, click the + link in the top toolbar and select New repository.</p></li>
+<li><p>Fill in all the fields on this form. While these are not compulsory, they are strongly recommended.</p></li>
+<li><p>Enter a new repository name (e.g. staff_calibration), and description (e.g. “Staff Calibration website written in Django”.</p></li>
+<li><p>Choose Python in the Add .gitignore selection list.</p></li>
+<li><p>Choose your preferred license in the Add license selection list.</p></li>
+<li><p>Check Initialize this repository with a README.</p></li>
+<li><p>Press Create repository.</p></li>
+<li><p>Click the green “Clone or download” button on your new repo page.</p></li>
+<li><p>Copy the URL value from the text field inside the dialog box that appears (it should be something like: <a class="reference external" href="https://github.com">https://github.com</a>/&lt;your_git_user_id&gt;/staff_calibration.git).</p></li>
+</ol>
+<p>Now that the repository (“repo”) is created we are going to want to clone it on our local computer:</p>
+</div>
+<div class="section" id="install-git">
+<h2>Install git<a class="headerlink" href="#install-git" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Install git for your local computer (you can find versions for different platforms on <a class="reference external" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>).</p></li>
+<li><p>Open a command prompt/terminal and clone your repository using the URL you copied above. Type the following into your prompt/terminal.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your_git_user_id</span><span class="o">&gt;/</span><span class="n">staff_calibration</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">staff_calibration</span>
+</pre></div>
+</div>
+<p>Now copy the django application into this “staff_calibration” directory and then add (or “push”, in git lingo) the local repository to your remote Github repository:</p>
+</div>
+<div class="section" id="synchronising-the-github-repository">
+<h2>Synchronising the github repository<a class="headerlink" href="#synchronising-the-github-repository" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Copy your Django application into this folder (all the files at the same level as manage.py and below, not their containing staff_calibration folder).</p></li>
+<li><p>Open the .gitignore file, copy the following lines into the bottom of it, and then save (this file is used to identify files that should not be uploaded to git by default):</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">venv</span><span class="o">/</span>                  <span class="c1"># virtual environment</span>
+<span class="o">*.</span><span class="n">bak</span>                   <span class="c1"># Text backup files</span>
+<span class="o">*.</span><span class="n">sqlite3</span>               <span class="c1"># Database</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Open a command prompt/terminal and navigate to your github project directory. Use the add command to add all files to git. This adds the files which aren’t ignored by the .gitignore file to the “staging area”</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Use the status command to check that all files you are about to commit are correct (you want to include source files, not binaries, temporary files etc.). It should look a bit like the listing below.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+        <span class="n">Your</span> <span class="n">branch</span> <span class="ow">is</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span> <span class="k">with</span> <span class="s1">&#39;origin/main&#39;</span><span class="o">.</span>
+        <span class="n">Changes</span> <span class="n">to</span> <span class="n">be</span> <span class="n">committed</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git reset HEAD &lt;file&gt;...&quot;</span> <span class="n">to</span> <span class="n">unstage</span><span class="p">)</span>
+             <span class="n">modified</span><span class="p">:</span>   <span class="o">.</span><span class="n">gitignore</span>
+             <span class="n">new</span> <span class="n">file</span><span class="p">:</span>   <span class="n">catalog</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+             <span class="o">...</span>
+             <span class="n">new</span> <span class="n">file</span><span class="p">:</span>   <span class="n">catalog</span><span class="o">/</span><span class="n">migrations</span><span class="o">/</span><span class="mi">0001</span><span class="n">_initial</span><span class="o">.</span><span class="n">py</span>
+             <span class="o">...</span>
+             <span class="n">new</span> <span class="n">file</span><span class="p">:</span>   <span class="n">templates</span><span class="o">/</span><span class="n">registration</span><span class="o">/</span><span class="n">password_reset_form</span><span class="o">.</span><span class="n">html</span>
+        <span class="n">On</span> <span class="n">branch</span> <span class="n">main</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>When you’re satisfied, commit the files to your local repository. This is essentially equivalent to signing off on the changes and making them an official part of the local repository.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;First version of application moved into github&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>At this point, the remote repository has not been changed. Synchronise (push) your local repository to the remote Github repository using the following command:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>When this operation completes, you should be able to go back to the page on Github where you created your repo, refresh the page, and see that your whole application has now been uploaded. You can continue to update your repository as files change using this add/commit/push cycle.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="heroku-deploy.html" class="btn btn-neutral float-right" title="Deploying the Staff Calibration Apps on Heroku" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="heroku-intro.html" class="btn btn-neutral float-left" title="Deploying the Staff Calibration Apps on Heroku" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

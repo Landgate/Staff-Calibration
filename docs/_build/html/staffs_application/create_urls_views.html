@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building URLs, Views, and Templates &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working with forms" href="working_with_forms.html" />
+    <link rel="prev" title="Django admin site" href="admin_site.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Building the staffs application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="building_models.html">Building the models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html">Django admin site</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building URLs, Views, and Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-the-resource-urls">Defining the resource URLs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-index-home-page-with-a-list-view-of-staves">Creating an index (home) page with a list view of staves</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#url-mapping">URL Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-class-based">View (class-based)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template">Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-base-template">Example - Base Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#home-page-staff-list-html-template">Home page (<code class="docutils literal notranslate"><span class="pre">staff_list.html</span></code>) template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-does-the-home-page-look-like">How does the home page look like?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_forms.html">Working with forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Building the staffs application</a> &raquo;</li>
+        
+      <li>Building URLs, Views, and Templates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staffs_application/create_urls_views.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-urls-views-and-templates">
+<h1>Building URLs, Views, and Templates<a class="headerlink" href="#building-urls-views-and-templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The records added to the models through the admin site before will need to be presented to users or clients in the form of web pages. After determining the information that needs to be displayed on a web page, django data flow requires the following components:</p>
+<ul class="simple">
+<li><p><strong>URL</strong> mappers to forward the supported URLs (and any information encoded in the URLs) to the appropriate view functions</p></li>
+<li><p><strong>View</strong> functions to get the requested data from the models, create HTML pages that display the data, and return the pages to the user to view in the browser.</p></li>
+<li><p><strong>Templates</strong> to use when rendering data in the views.</p></li>
+</ul>
+</div>
+<div class="section" id="defining-the-resource-urls">
+<h2>Defining the resource URLs<a class="headerlink" href="#defining-the-resource-urls" title="Permalink to this headline">¶</a></h2>
+<p>For the Staff Calibration website, users will be able to see their list of instruments (e.g., staves, digital levels), add new instruments and update their details (if required) for the <strong>staffs</strong> application. To do this functions, the following URLs are defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/</span></code> - the staffs application home page (index page) showing the list of staves</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/stafftype</span></code> - the staffs application home page showing the list of staff types</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/levels</span></code> - the staffs application home page showing the list of digital levels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/staff_create/</span></code> - view for inserting new staff records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/stafftype_create/</span></code> - view for inserting new staff type records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/levels_create/</span></code> - view for inserting new digital level records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/stafftype/&lt;id&gt;/update/</span></code> - update view for staff types with the primary key of <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/levels/&lt;id&gt;/update/</span></code> - update view for digital levels with the primary key of <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staffs/&lt;id&gt;/update/</span></code> - update view for staves with the primary key of <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code></p></li>
+</ul>
+<p>The first three pages will present a list of staves, staff types and digital levels. The view function will fetch the data from the respective models and pass them onto the templates for display. No additional information is provided apart from rendering the list.</p>
+<p>The middle three pages are used for creating or adding new records through the <code class="docutils literal notranslate"><span class="pre">form.py</span></code>, which will be explained later in more detail.</p>
+<p>The final three pages with <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> presents detailed information on the <em>stafftype</em>, <em>digital level</em>, and the staff. The <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> represents the identity of the individual item to display and also acts like a form to edit the fields. The URL mapper will extract the encoded information (<code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code>) and pass it to the view and the view will dynamically determine what information to get from the database.</p>
+</div>
+<div class="section" id="creating-an-index-home-page-with-a-list-view-of-staves">
+<h2>Creating an index (home) page with a list view of staves<a class="headerlink" href="#creating-an-index-home-page-with-a-list-view-of-staves" title="Permalink to this headline">¶</a></h2>
+<p>The home page of the <strong>staffs</strong> application (<a class="reference external" href="http://127.0.0.1:8000/staffs/">http://127.0.0.1:8000/staffs/</a> or simply denoted as <code class="docutils literal notranslate"><span class="pre">staffs/</span></code>) will be a list of all the levelling staves created by the user including their details in the form of a table. To make this work, it requires a URL mapping, a view, and a template.</p>
+<div class="section" id="url-mapping">
+<h3>URL Mapping<a class="headerlink" href="#url-mapping" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>The application (i.e., <strong>staffs</strong>) URL mapping has already been added to the project - <strong>staff/staff/urls.py</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: staff/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>        <span class="c1"># &#39;include&#39; added</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>             <span class="c1"># added</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls.static</span> <span class="kn">import</span> <span class="n">static</span>   <span class="c1"># added</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staffs/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;staffs.urls&#39;</span><span class="p">)),</span>  <span class="c1"># added</span>
+<span class="p">]</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">static</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span> <span class="n">document_root</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_ROOT</span><span class="p">)</span>    <span class="c1"># added</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new python file called <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> in <strong>staff/staffs/</strong> and add the following lines:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staffs/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">StaffListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;staff-home&#39;</span><span class="p">),</span>
+
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">StaffListView</span></code> is a python class defined in the <code class="docutils literal notranslate"><span class="pre">views.py</span></code> for creating a list view. The <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter is a unique identifier for this particular URL mapping and can be used in the templates to dynamically point to the resource URL. For example, one can simply add the name to the pointer as shown in red color below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% u</span><span class="s2">rl &#39;staff-home&#39; %}&quot;</span><span class="o">&gt;</span><span class="n">Home</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="view-class-based">
+<h3>View (class-based)<a class="headerlink" href="#view-class-based" title="Permalink to this headline">¶</a></h3>
+<p>A view is a function that processes an HTTP request, fetches the required data from the database, renders the data in an HTML page using an HTML template, and then returns the generated HTML in an HTTP response to display the page to the user. Django has built-in class-based views which can automatically perform these tasks. The only thing it requires is the <code class="docutils literal notranslate"><span class="pre">model</span></code> and a template name (if its different from its usual naming convention).</p>
+<p>Open the <strong>staffs/views.py</strong> and add the lines below. Note that it has already imported the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function, which is used to generate an HTML file using the template and data. This is not required for a class-based view and will be compensated by the <code class="docutils literal notranslate"><span class="pre">ListView</span></code> imported from <code class="docutils literal notranslate"><span class="pre">django.views.generic</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">ListView</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">StaffType</span>             <span class="c1"># import the models</span>
+<span class="c1"># Create your views here.</span>
+
+<span class="k">class</span> <span class="nc">StaffListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">Staff</span>                                  <span class="c1"># define the specific model</span>
+
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;staffs/staff_list.html&#39;</span>     <span class="c1"># define the template. The default template name will be &quot;staffs_list.html&quot;</span>
+</pre></div>
+</div>
+<p>The data from the model (i.e., <strong>Staff</strong>) will be passed to the html template as <code class="docutils literal notranslate"><span class="pre">self.object_list</span></code>, which is a list of objects representing the individual staff records.</p>
+</div>
+<div class="section" id="template">
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>Templates define the structure or layout of a file (such as an HTML page) and it uses placeholders to represent actual content. Django applications created using <strong>startapp</strong> will look for templates in a subdirectory named <strong>templates</strong> in the application (i.e., <strong>/staffs/templates</strong>). For convenience, templates are placed in a subdirectory named <strong>staffs</strong> in the <strong>templates</strong> directory - <strong>/staffs/templates/staffs/</strong>). If no templates are provided when accessing the resource URL, it will raise a <code class="docutils literal notranslate"><span class="pre">TemplateDoesNotExist</span></code> error and other details. For the templates to work properly, the following points must be noted:</p>
+<ol class="arabic">
+<li><p>In the project <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>, add the templates directory (<code class="docutils literal notranslate"><span class="pre">DIRS</span></code>) in the <code class="docutils literal notranslate"><span class="pre">TEMPLATES</span></code> section.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">),</span> <span class="s1">&#39;templates&#39;</span><span class="p">],</span>     <span class="c1"># import os at the top</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>For web applications such as this, templates are main html pages. Hence, it is important to understand the basics of html, css, and javascript to make the pages presentable to the users. The location of css/javascript and/or other static files (such as logo images) put in a folder in the main project directory (in this project - <strong>staff/assets/</strong>)and its path is defined:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">settings.py</span></code> as:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Static files (CSS, JavaScript, Images)</span>
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s1">&#39;/static/&#39;</span>
+<span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;assets&#39;</span><span class="p">),]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">urls.py</span></code> as:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>             <span class="c1"># added</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls.static</span> <span class="kn">import</span> <span class="n">static</span>   <span class="c1"># added</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">static</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span> <span class="n">document_root</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">STATIC_ROOT</span><span class="p">)</span>  <span class="c1"># added</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Here is how a <strong>staffs</strong> template directory looks like:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>staff/                                &lt;- main website folder
+└──staffs/                            &lt;- application folder
+        └──templates
+                ├──base_generic.html          &lt;- base html template
+                └──staffs/                    &lt;- application specific templates
+                        ├──staff_list.html
+                        ├──levels_lst.html
+                        ├──staff_create.html
+                        ├──levels_create.html
+                        └──staff_update.html
+                        ... more ...
+├── assets                             &lt;- static files folder
+         ├──images/                        &lt;- images
+         ├──style.css                      &lt;- css file
+         └──script.js                      &lt;- java script file
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>The <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code> is a base template defining the basic layout of the html page and may contain -</dt><dd><ul class="simple">
+<li><p>title, navigation menu, sidebar, footer, logos, etc</p></li>
+<li><p>links to css/javascript and other files through <code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">static</span></code></p></li>
+<li><p>sections with <code class="docutils literal notranslate"><span class="pre">block</span></code> and <code class="docutils literal notranslate"><span class="pre">endblock</span></code> tags for rendering contents of other pages</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>The template files inside <strong>/templates/staffs/</strong> will employ the <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code> by using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> tag  to render the contents inside the <code class="docutils literal notranslate"><span class="pre">block</span></code> codes.</p></li>
+</ol>
+</div>
+<div class="section" id="example-base-template">
+<h3>Example - Base Template<a class="headerlink" href="#example-base-template" title="Permalink to this headline">¶</a></h3>
+<p>A simple <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code> can look like this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Staff Calibration Online<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+  {% load static %}
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% static &#39;styles.css&#39; %}&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container-fluid&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-sm-2&quot;</span><span class="p">&gt;</span>
+      {% block sidebar %}
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar-nav&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url &#39;staff-home&#39; %}&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Digital Levels<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Add a new staff<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+     {% endblock %}
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-sm-10 &quot;</span><span class="p">&gt;</span>
+        {% block content %}
+
+        {% endblock %}
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>It has a title, sidebar navigation, link to css through <code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">static</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> template tags, <code class="docutils literal notranslate"><span class="pre">url</span></code> tag linking to the <code class="docutils literal notranslate"><span class="pre">staff-home</span></code> resource URL, and two <code class="docutils literal notranslate"><span class="pre">blocks</span></code>.</p>
+</div>
+<div class="section" id="home-page-staff-list-html-template">
+<h3>Home page (<code class="docutils literal notranslate"><span class="pre">staff_list.html</span></code>) template<a class="headerlink" href="#home-page-staff-list-html-template" title="Permalink to this headline">¶</a></h3>
+<p>In order to create the home page or any other HTML pages with the same outlook as the <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code>, it is now just a matter of inserting the required texts or data inside the <code class="docutils literal notranslate"><span class="pre">content</span></code> block. Create a new HTML file staff_list.html in /staff/staffs/templates/staffs/ and paste the following code in the file. This code extends the <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code> base template, and then replaces the default <code class="docutils literal notranslate"><span class="pre">content</span></code> block for the template.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &#39;base_generic.html&#39; %}                /* imports the base template */
+{% block content %}                              /* insert all required texts/data inside this block*/
+
+        <span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-header&quot;</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-title text-center&quot;</span><span class="p">&gt;</span>List of staves<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-content&quot;</span><span class="p">&gt;</span>
+                        {% if object_list %}
+                                <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Staff Number<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Staff Type<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Staff Length<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Correction Factor<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Standard Temperature<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Last Calibrated<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+                                {% for staff in object_list %}
+                                        <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span> {{ staff.staff_number }} <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ staff.staff_type }} <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ staff.staff_length }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ staff.correction_factor|floatformat:7 }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ staff.standard_temperature|floatformat:1 }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+                                                        {{ staff.calibration_date }}
+                                                <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                                        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+                                {% endfor %}
+                                <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+                        {% else %}
+                                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> There are currently no staves listed <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                        {% endif %}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<p>In the above <strong>list-view</strong> template, the following must be noted:</p>
+<ol class="arabic">
+<li><p><em>View context</em>: The class-based view passes the context (list of staves) by default as <code class="docutils literal notranslate"><span class="pre">object_list</span></code>. The template receives the <code class="docutils literal notranslate"><span class="pre">object_list</span></code> as a list of objects.</p></li>
+<li><p><em>Conditional execution</em>: Like python or any other programming languages, django html templates use <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">else</span></code>, and <code class="docutils literal notranslate"><span class="pre">endif</span></code> template tags to check the <code class="docutils literal notranslate"><span class="pre">object_list</span></code>- to check if any records exists inside the object. In the above html template, if <code class="docutils literal notranslate"><span class="pre">object_list</span></code> is empty, the <code class="docutils literal notranslate"><span class="pre">else</span></code> clause will display the text - <em>“There are currently no staves listed”</em>. Otherwise, it iterates through the lists to display the fields of each staff.</p>
+<blockquote>
+<div><div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% if object_list %}
+  <span class="c">&lt;!-- code here to list the staves --&gt;</span>
+{% else %}
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> There are currently no staves listed <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{% endif %}
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><em>For Loops</em>: The template also uses the <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">endfor</span></code> template tags to iterate through the <code class="docutils literal notranslate"><span class="pre">object_list</span></code> as shown below:</p>
+<blockquote>
+<div><div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% for staff in object_list %}
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span> <span class="c">&lt;!-- code here get information from each staff item --&gt;</span> <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+{% endfor %}
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><em>Accessing variables/items</em>: Each <code class="docutils literal notranslate"><span class="pre">staff</span></code> object in the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop can be accessed with its model <strong>field</strong> names using a <strong>dot</strong> notation - e.g., <code class="docutils literal notranslate"><span class="pre">staff.staff_number</span></code>. It is also possible to call functions that sit inside the models, e.g., <code class="docutils literal notranslate"><span class="pre">get_absolute_urls()</span></code> to get URLs to display details on a different HTML template.</p></li>
+<li><p><em>Table</em>: Tables are a convenient way to present list information to the users. The above template HTML table template tags (<code class="docutils literal notranslate"><span class="pre">&lt;table&gt;...&lt;/table&gt;</span></code>) to present the list of staves. The field names are hardcoded in the headers (<code class="docutils literal notranslate"><span class="pre">&lt;th&gt;...&lt;/th&gt;</span></code>) and the list items are displayed in the rows (<code class="docutils literal notranslate"><span class="pre">&lt;tr&gt;...&lt;/tr&gt;</span></code>) below under each appropriate column (<code class="docutils literal notranslate"><span class="pre">&lt;td&gt;...&lt;/td&gt;</span></code>).</p></li>
+</ol>
+</div>
+<div class="section" id="how-does-the-home-page-look-like">
+<h3>How does the home page look like?<a class="headerlink" href="#how-does-the-home-page-look-like" title="Permalink to this headline">¶</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">base_generic.html</span></code> designed for this Staff Calibration project, the home page looks like this:</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/homepage.png" src="../_images/homepage.png" />
+<p class="caption"><span class="caption-text">First home (index) page showing the list of staves registered in the project</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="working_with_forms.html" class="btn btn-neutral float-right" title="Working with forms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="admin_site.html" class="btn btn-neutral float-left" title="Django admin site" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

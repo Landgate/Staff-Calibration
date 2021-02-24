@@ -1,0 +1,43 @@
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+	<article class="post">
+		{% if messages %}
+		<ul class="alert messages">
+		    {% for message in messages %}
+		    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+		<br>
+		{% endif %}
+		<header class="post-header">
+			<h1 class="post-title text-center">Updating record </h1>
+		</header>
+
+		<div class="post-content">
+			<form class="site-form" method="post">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <br>
+			    <div class="grid-2">
+			    	<div>
+			    		<button class="px-3 py-1 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit"> Next </button>
+			    	</div>
+			    	<div>
+					    <a class="px-3 py-2 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:level-delete' level_id %}">Delete</a>
+					</div>
+			    </div>
+			    
+			</form>
+		</div>
+	</article>
+
+ {% endblock %}
+
+ <!-- <a style="float:right" href="{% url 'staffs:level-delete' level.id %}">
+					<svg class="trashcan" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash">
+					 	<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+					 	<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+					</svg>
+				</a> -->

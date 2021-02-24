@@ -1,0 +1,140 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+
+{% if messages %}
+<div class="page-content">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }}">
+        {% if 'safe' in message.tags %}
+            <h2> {{ message|safe }} </h2>
+        {% else %}
+            <h2> {{ message }} </h2>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>
+{% endif %}
+
+  <article class="post">
+    <header class="post-header">
+      <div class="grid-2">
+        <div class="title-grid">
+          <h1 class="post-title text-center">Staff Calibration Report </h1>
+        </div>
+        <div class="btn-update">
+          <a href="{% url 'range_calibration:print-report' update_index %}">
+          <button class="px-3 py-1 border border-transparent text-base leading-4 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" >Print pdf &raquo;</button></a>
+        </div>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <div class="grid-2">
+        <div>
+          <h2>This test information</h2>
+          <div>
+            Unique ID: <strong>{{ update_index }} </strong>
+          </div>
+          <div>
+            Observation Date: <strong> {{ observation_date }} </strong>
+          </div>
+          <br> <br>
+          <div>
+            Average Temperature: <strong> {{ average_temperature|floatformat:1 }}&#8451; </strong>
+          </div>
+        </div>
+        <div>
+          <h2>Level &amp; staff details </h2>
+          <div>
+            Staff Number: <strong> {{ staff_number }} </strong>
+          </div>
+          <div>
+            Level Number: <strong> {{ level_number}} </strong>
+          </div>
+          <br> <br>
+          <div>
+            Observer: <strong> {{ observer }} </strong>
+          </div>
+        </div>
+      </div>
+
+    <hr>
+    <div class="post-content">
+      <h2>Displaying staff readings </h2>
+      <table> 
+        <col width=10%>
+        <tr>
+          {% for header in raw_data.headers %}
+              <th> <strong> {{ header }} </strong> </th>
+          {% endfor %}
+        </tr>
+
+        {% for a,b,c,d,e,f,g,h in raw_data.data %}
+        <tr style="text-align:center;">   
+          <td> {{a}}</td>
+          <td> {{b}}</td>
+          <td> {{c}}</td>
+          <td> {{d|floatformat:5}}</td>
+          <td> {{e|floatformat:5}}</td>
+          <td> {{f|floatformat:5}}</td>
+          <td> {{g|floatformat:5}}</td>
+          <td> {{h|floatformat:6}}</td>
+        </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+    <hr>
+    <div class="page-content">
+      <h2>Displaying adjusted height differences</h2>
+      <table style="width:75%; margin-left:auto;margin-right:auto"> 
+        <tr>
+          {% for header in ht_diff_data.headers %}
+              <th> <strong> {{ header }} </strong> </th>
+          {% endfor %}
+        </tr>
+
+        {% for a,b,c,d in ht_diff_data.data %}
+          <tr style="text-align:center;">    
+             <td>{{ a }}</td>
+             <td> {{b|floatformat:5}}</td>
+             <td> {{c|floatformat:2}}</td>
+             <td> {{d|floatformat:0}}</td>
+          </tr>
+          {% endfor %}
+        </tr>
+      </table>
+    </div>
+    <hr>
+    <div class="post-content">
+    <h1>Displaying the adjustment </h1>
+      <table> 
+        <col width=10%>
+        <tr>
+          {% for header in adj_data.headers %}
+              <th> <strong> {{ header }} </strong> </th>
+          {% endfor %}
+        </tr>
+
+        {% for a,b,c,d,e,f,g in adj_data.data %}
+        <tr style="text-align:center;">   
+          <td> {{a}}</td>
+          <td> {{b|floatformat:5}}</td>
+          <td> {{c|floatformat:5}}</td>
+          <td> {{d|floatformat:5}}</td>
+          <td> {{e|floatformat:2}}</td>
+          <td> {{f|floatformat:2}}</td>
+          <td> {{g|floatformat:1}}</td>
+        </tr>
+        {% endfor %}
+        </tr>
+      </table>
+    </div>
+  </div>
+</article>
+
+{% endblock content %}

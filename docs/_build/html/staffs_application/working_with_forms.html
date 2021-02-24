@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with forms &mdash; staff 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Next" href="next.html" />
+    <link rel="prev" title="Building URLs, Views, and Templates" href="create_urls_views.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> staff
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/install-guide.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Building the staffs application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="building_models.html">Building the models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_site.html">Django admin site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_urls_views.html">Building URLs, Views, and Templates</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Working with forms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#django-form-handling-process">Django form handling process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-class"><strong>Form class</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#declaring-a-form">Declaring a Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#form-fields">Form fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modelform">ModelForm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-staff-create-form">Building the Staff Create Form</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#staff-form">Staff form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-function">View function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template">Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#url-configurations">URL Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-a-staff-record">Updating a Staff record</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="next.html">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/deployment.html">Deploying Staff Calibration to production</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">staff</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Building the staffs application</a> &raquo;</li>
+        
+      <li>Working with forms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/staffs_application/working_with_forms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-forms">
+<h1>Working with forms<a class="headerlink" href="#working-with-forms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>An HTML Form is a group of one or more fields/widgets on a web page that is used to collect information from users for submission to a server. Forms are a flexible mechanism for collecting user inputs as they can have various forms of widgets for entering many different types of data, including text boxes, checkboxes, radio buttons, date pickers and so on. Forms are also a relatively secure way of sharing data with the server, as they can send data in POST requests with cross-site request forgery protection.</p>
+<p>While <strong>forms</strong> were not introduced prior to this, they were already part of the Django Admin site — for example, the screenshot below shows a form for editing one of our <strong>Staff</strong> models, comprised of a number of selection lists and text editors. The same records added to the models through the admin site can be collected from the users or clients through HTML forms.</p>
+<div class="figure align-center">
+<img alt="../_images/django_admin_site_form.png" src="../_images/django_admin_site_form.png" />
+</div>
+<p>For more information on <strong>forms</strong> and how django handles forms, refer to <a class="reference external" href="https://docs.djangoproject.com/en/3.1/topics/forms/">https://docs.djangoproject.com/en/3.1/topics/forms/</a>.</p>
+</div>
+<div class="section" id="django-form-handling-process">
+<h2>Django form handling process<a class="headerlink" href="#django-form-handling-process" title="Permalink to this headline">¶</a></h2>
+<p>Django’s technique of handling the form is very much similar to the how the staff_list.html was presented. The <code class="docutils literal notranslate"><span class="pre">view</span></code> gets a request, performs any actions required including reading data from the <code class="docutils literal notranslate"><span class="pre">models</span></code>, then generates and returns a HTML page (from a <code class="docutils literal notranslate"><span class="pre">template</span></code>) by passing a <code class="docutils literal notranslate"><span class="pre">context</span></code>. However, this is a <strong>two-way</strong> process in which the data entered by the user/client is being passed to the server for processing and have mechanisms in place to display simple as well as complicated errors.</p>
+<p>A process flowchart is given below to demonstrate how django handles form requests.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/django_form_handling.png" src="../_images/django_form_handling.png" />
+<p class="caption"><span class="caption-text">Process flowchart for django form handling (<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms">https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms</a>)</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Based on the diagram above, Django form handling performs the following task:</p>
+<ol class="arabic simple">
+<li><p>Display the <em>form</em> to the user/client when requested such as a user sign up or a registration form.</p></li>
+<li><p>Receive data from the user once the user clicks the <em>submit</em> button (or any similar commands).</p></li>
+<li><dl class="simple">
+<dt>Clean and validate the user data to check if the inputs are consistent with the model fields. Examples include:</dt><dd><ul class="simple">
+<li><p>Data cleaning - removing spaces after and before text fields</p></li>
+<li><p>Data validation - checking if phone numbers have the right number of digits</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Re-display the form, if the data entered is invalid, with error messages.</p></li>
+<li><p>Perform the required actions (e.g., save data, process data, upload files, send email or display pages, etc.), if the data entered is valid.</p></li>
+<li><p>When the actions are complete, redirect the user to another page or redirect to the previous page to continue the previous action.</p></li>
+</ol>
+</div>
+<div class="section" id="form-class">
+<h2><strong>Form class</strong><a class="headerlink" href="#form-class" title="Permalink to this headline">¶</a></h2>
+<p>The django <code class="docutils literal notranslate"><span class="pre">Form</span></code> class is the heart of Django’s form handling system. It specifies the fields in the form, their layout, display widgets, labels, initial values, valid values, and (once validated) the error messages associated with invalid fields. The class also provides methods for rendering itself in templates using predefined formats (tables, lists, etc.) or for getting the value of any element (enabling fine-grained manual rendering). Forms can also be split across multiple templates/web pages through the use of <strong>form wizard</strong> application (see, <a class="reference external" href="https://django-formtools.readthedocs.io/en/latest/wizard.html">https://django-formtools.readthedocs.io/en/latest/wizard.html</a>).</p>
+<div class="section" id="declaring-a-form">
+<h3>Declaring a Form<a class="headerlink" href="#declaring-a-form" title="Permalink to this headline">¶</a></h3>
+<p>Forms are constructed in a file called <code class="docutils literal notranslate"><span class="pre">forms.py</span></code> inside the application directory. It is not automatically created by <em>startapp</em>, so it needs to be created manually and import the <code class="docutils literal notranslate"><span class="pre">forms</span></code> library to get the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class. The <strong>staff/staffs/forms.py</strong> given below shows how to build a simple form class to add a new staff record:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+<span class="k">class</span> <span class="nc">StaffCreateForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+        <span class="n">staff_number</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;enter your staff serial number&quot;</span><span class="p">)</span>
+        <span class="n">staff_type</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;enter your staff type. E.g., fibreglass&quot;</span><span class="p">)</span>
+        <span class="n">staff_length</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;enter the length of your staff&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="form-fields">
+<h3>Form fields<a class="headerlink" href="#form-fields" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code> have two <em>String</em> fields and one <em>Float</em> field to store <strong>staff number</strong>, <strong>staff type</strong>, and <strong>staff length</strong>, respectively, and also some help texts to help the users. <code class="docutils literal notranslate"><span class="pre">Forms</span></code> share the same field types (and other arguments) as a <code class="docutils literal notranslate"><span class="pre">Model</span></code> that is found inside the <em>models.py</em> file. See <a class="reference external" href="https://docs.djangoproject.com/en/3.1/ref/forms/fields/">https://docs.djangoproject.com/en/3.1/ref/forms/fields/</a> for more details about the various fields. Some common arguments in most fields include:</p>
+<ul class="simple">
+<li><p><em>required</em>: the field cannot be left blank, if <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><em>label</em>: the label to describe the fields in HTML. If not provided, Django will create it from the field name by capitalizing the first letter and replacing “_” with spaces (e.g., Staff number)</p></li>
+<li><p><em>initial</em>: initial value for the field when the form is displayed</p></li>
+<li><p><em>widget</em>: display widget to use with more options</p></li>
+<li><p><em>help_text</em>: a text can be display in forms to provide more explanation to users</p></li>
+<li><p><em>error_messages</em>: list of error messages for the field</p></li>
+<li><p><em>validators</em>: list of functions that will be called on the field when it is validated</p></li>
+</ul>
+</div>
+<div class="section" id="validation">
+<h3>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h3>
+<p>Django provides numerous places to validate the data on top of displaying help texts and placeholders in the form. It is possible to validate a single field by overiding the method <code class="docutils literal notranslate"><span class="pre">clean_&lt;fieldname&gt;()</span></code> for the field that requires a check. For example, to remove any left or right extra spaces or tabs entered in the <em>staff_number</em> field, the ‘’StaffCreateForm’’ can be modifed as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">StaffCreateForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+        <span class="n">staff_number</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;enter your staff serial number&quot;</span><span class="p">)</span>
+        <span class="o">...</span>
+
+        <span class="k">def</span> <span class="nf">clean_staff_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span>      <span class="c1"># get the required data</span>
+                <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>                           <span class="c1"># clean and return the data</span>
+</pre></div>
+</div>
+<p>It is also possible to raise a <code class="docutils literal notranslate"><span class="pre">ValidationError</span></code> on some fields that has more than one conditions to be fulfilled.</p>
+</div>
+<div class="section" id="modelform">
+<h3>ModelForm<a class="headerlink" href="#modelform" title="Permalink to this headline">¶</a></h3>
+<p>To make the task even more efficient, Django has a <code class="docutils literal notranslate"><span class="pre">ModelForm</span></code> helper class to create the form from a <code class="docutils literal notranslate"><span class="pre">model</span></code>. The <code class="docutils literal notranslate"><span class="pre">ModelForm</span></code> helper class automatically inherits the form fields form the target model and uses all the information in the model to display the form to the users and saves them to the mapped fields once the validation is complete. It is very convenient for mapping the form to a single model and have the values saved almost automatically after cleaning the data. For example, the <code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code> can be modified as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span>                     <span class="c1"># import the model</span>
+
+<span class="k">class</span> <span class="nc">StaffCreateForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>       <span class="c1"># declare the ModelForm subclass</span>
+
+        <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>                               <span class="c1"># add class Meta</span>
+                <span class="n">model</span><span class="p">:</span> <span class="n">Staff</span>                          <span class="c1"># link the model</span>
+                <span class="n">fields</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span>            <span class="c1"># list of fields to be rendered</span>
+
+        <span class="c1"># optional methods</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="building-the-staff-create-form">
+<h2>Building the Staff Create Form<a class="headerlink" href="#building-the-staff-create-form" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="staff-form">
+<h3>Staff form<a class="headerlink" href="#staff-form" title="Permalink to this headline">¶</a></h3>
+<p>With some basic knowledge on Django forms, lets create the first HTML form to allow users to add/create/register a new staff record in the Staff Calibration project. The <code class="docutils literal notranslate"><span class="pre">form</span></code> field values will all be based on the <code class="docutils literal notranslate"><span class="pre">model</span></code> fields, which already has a number of auto validation procedures. For example, <code class="docutils literal notranslate"><span class="pre">staff_length</span></code> has a minimum and maximum length to avoid blunders. By revisiting the <code class="docutils literal notranslate"><span class="pre">ModelForm</span></code> and extending the <code class="docutils literal notranslate"><span class="pre">forms.py</span></code> field:</p>
+<ol class="arabic">
+<li><p>Create a new file in <strong>staffs</strong> application folder with a name <code class="docutils literal notranslate"><span class="pre">forms.py`',</span> <span class="pre">if</span> <span class="pre">not</span> <span class="pre">done</span> <span class="pre">already</span> <span class="pre">and</span> <span class="pre">import</span> <span class="pre">the</span> <span class="pre">``forms</span></code> library into the file.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now import the <code class="docutils literal notranslate"><span class="pre">Staff</span></code> and <code class="docutils literal notranslate"><span class="pre">StaffType</span></code> models, and create the form class with the assoicated model and also include/exclude the fields through the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Meta</span></code> tag as shown below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">StaffType</span>         <span class="c1"># import the model</span>
+
+<span class="k">class</span> <span class="nc">StaffForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>            <span class="c1"># create class</span>
+
+        <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+                <span class="n">model</span> <span class="o">=</span> <span class="n">Staff</span>                                 <span class="c1"># link the model</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">,</span><span class="s1">&#39;staff_type&#39;</span><span class="p">,</span> <span class="s1">&#39;staff_length&#39;</span><span class="p">,</span> <span class="s1">&#39;correction_factor&#39;</span><span class="p">,</span><span class="s1">&#39;calibration_date&#39;</span><span class="p">]</span>
+                <span class="c1"># exclude = [&#39;standard_temperature&#39;]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add the validation process as given in the original <code class="docutils literal notranslate"><span class="pre">Form</span></code> class:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span><span class="p">,</span> <span class="n">StaffType</span>         <span class="c1"># import the model</span>
+
+<span class="k">class</span> <span class="nc">StaffForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>            <span class="c1"># create class</span>
+
+        <span class="k">def</span> <span class="nf">clean_staff_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                     <span class="c1"># add validation function</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">]</span>      <span class="c1"># get the required data</span>
+                <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>                           <span class="c1"># clean and return the data</span>
+
+        <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+                <span class="n">model</span> <span class="o">=</span> <span class="n">Staff</span>                        <span class="c1"># link the model</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;staff_number&#39;</span><span class="p">,</span><span class="s1">&#39;staff_type&#39;</span><span class="p">,</span> <span class="s1">&#39;staff_length&#39;</span><span class="p">,</span> <span class="s1">&#39;correction_factor&#39;</span><span class="p">,</span><span class="s1">&#39;calibration_date&#39;</span><span class="p">]</span>
+                <span class="c1"># exclude = [&#39;standard_temperature&#39;]</span>
+</pre></div>
+</div>
+<p>This is now functionally equivalent to the original <code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code> created by using the <code class="docutils literal notranslate"><span class="pre">Form</span></code> class with a added functionality of automatic mapping to the <code class="docutils literal notranslate"><span class="pre">Staff</span></code> model.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="view-function">
+<h3>View function<a class="headerlink" href="#view-function" title="Permalink to this headline">¶</a></h3>
+<p>HTML forms use <strong>GET</strong> and <strong>POST</strong> methods to deal with forms and data transmission. In a <strong>POST</strong> request, form data are typically encoded and therefore, are used for transmitting data to the server. <strong>GET</strong> requests on the other hand are submitted as Strings and are more suitable for composing URLs.</p>
+<p>As mentioned, the <em>view</em> has to render the form when it is first called and then either re-render it with error messages if the data is invalid, or process the user input data (i.e., <strong>POST</strong> request) and redirect to a new page if the data is valid. The following example is a view function use to <em>render</em> the <code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code>, validate and process data, and <em>redirect</em> to a new page:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filename: views.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>    <span class="c1"># add redirect</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">ListView</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Staff</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">StaffCreateForm</span>               <span class="c1"># import Form</span>
+
+<span class="c1"># Create your views here.</span>
+
+<span class="k">class</span> <span class="nc">StaffListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">staff_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>                       <span class="c1"># create function</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="c1"># create form instance and populate with data from request</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StaffCreateForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>                          <span class="c1"># required as validation procedure</span>
+                <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>                              <span class="c1"># save data</span>
+                <span class="k">return</span> <span class="n">redirect</span> <span class="p">(</span><span class="s1">&#39;/staffs&#39;</span><span class="p">)</span>              <span class="c1"># redirect to the staffs home after saving the data</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># if request is not post, create a blank form</span>
+                <span class="n">form</span> <span class="o">=</span> <span class="n">StaffCreateForm</span><span class="p">()</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span>                              <span class="c1"># pass the form to context</span>
+                <span class="p">}</span>
+
+    <span class="c1"># render the form template with the context</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;staffs/staff_create.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Based on the above code snippet, the process is:</p>
+<ol class="arabic simple">
+<li><p>Import the form (<code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code>) from <code class="docutils literal notranslate"><span class="pre">forms.py</span></code> and a number of django functions to complete the action - <em>render</em> and <em>redirect</em></p></li>
+<li><p>Create the view function (<code class="docutils literal notranslate"><span class="pre">staff_create</span></code>), define the form and call <code class="docutils literal notranslate"><span class="pre">render()</span></code> to render the specified HTML template by passing the <em>form</em> as the <code class="docutils literal notranslate"><span class="pre">context</span></code>.</p></li>
+<li><p>If the request is <strong>POST</strong>, create the <em>form</em> object and get the form data from the request. The form data will then be validated through the <code class="docutils literal notranslate"><span class="pre">is_valid</span></code> function (which includes all the validations set in the model).</p></li>
+<li><p>If the form is not valid, the <code class="docutils literal notranslate"><span class="pre">render</span></code> function is called again and also displays the error messages associated with the errorneous fields.</p></li>
+<li><p>If the form is valid, the form data may undergo further validation and/or data processing or save the data to the database. In this case, the form data is simply saved to the database through the <code class="docutils literal notranslate"><span class="pre">form.save()</span></code> command.</p></li>
+<li><p>After the save, it is then redirected to the <strong>staffs</strong> home page using the <code class="docutils literal notranslate"><span class="pre">redirect</span></code> method.</p></li>
+</ol>
+<p><strong>Note</strong>: The ‘’staff_type’’ field is a <code class="docutils literal notranslate"><span class="pre">ChoiceField</span></code> inherited from the ‘’StaffType`` model, which is a separate model created to record the different staff types - e.g., invar, fibreglass, steel, wood. The <code class="docutils literal notranslate"><span class="pre">Staff</span></code> model inherits them as a ChoiceField and allows to select one. Thus, it is important to add some staff type records before proceeding with the form submission.</p>
+</div>
+<div class="section" id="template">
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>The HTML template associated with the <code class="docutils literal notranslate"><span class="pre">staff_create</span></code> view function is called <em>staff_create.html</em> and is located under <strong>staff/staffs/templates/staffs</strong>. The template design is very similar to the home page but now accepts the <em>form</em> as the context.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &#39;base_generic.html&#39; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-header&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-title text-center&quot;</span><span class="p">&gt;</span>Create a new staff record <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-content&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;site-form&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+                    {% csrf_token %}
+                    <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+                        {{ form.as_table }}
+                    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+
+                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Submit&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+
+{% endblock %}
+</pre></div>
+</div>
+<p>In the code snippet above, the <code class="docutils literal notranslate"><span class="pre">form</span></code> tag (i.e., <code class="docutils literal notranslate"><span class="pre">&lt;form&gt;...&lt;/form&gt;</span></code>) has a <code class="docutils literal notranslate"><span class="pre">method</span></code> for submitting the data (set to <strong>POST</strong>), the <em>form</em> inside the <code class="docutils literal notranslate"><span class="pre">table</span></code> tag and a <code class="docutils literal notranslate"><span class="pre">submit</span></code> button to submit the form data. The <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">csrf_token</span> <span class="pre">%}</span></code> see just below the form open tag is part of Django’s cross-site forgery protection and must be added to all templates that uses the <strong>POST</strong> request method.</p>
+<p>The <em>form</em> itself is accessed by the template by the variable <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">form</span> <span class="pre">}}</span></code> that can be further translated into a table form as <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">form.as_table</span> <span class="pre">}}</span></code>.</p>
+</div>
+<div class="section" id="url-configurations">
+<h3>URL Configurations<a class="headerlink" href="#url-configurations" title="Permalink to this headline">¶</a></h3>
+<p>Open the <strong>staffs</strong> URL configuration file (<strong>staff/staffs/urls.py</strong>) and add the following lines to create the url resource for the <code class="docutils literal notranslate"><span class="pre">staff_create</span></code> view:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file-name: urls.py</span>
+
+<span class="o">...</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staff_create&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">staff_create</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;staff_create&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">staff_create</span></code> is a function-based view that is being added as <code class="docutils literal notranslate"><span class="pre">views.staff_create</span></code> with a name <code class="docutils literal notranslate"><span class="pre">staff_create</span></code> for the local URL path <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/staffs/staff_create</span></code>. If everything worked ok, the final form template will look like this:</p>
+<div class="figure align-center">
+<img alt="../_images/staff_create_view.png" src="../_images/staff_create_view.png" />
+</div>
+<p>Note that the above form has two buttons - (1) <em>Next</em> and (2) <em>Cancel</em> indicating you can either go to the next process of submission or simply cancel the submission. This is done by replacing <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;submit&quot;</span> <span class="pre">value=&quot;Submit&quot;&gt;</span></code> by the following lines:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>/* Add the appropriate styles through CSS */
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;grid-2&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;single-item-container&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;px-2 py-1 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span> Next <span class="ni">&amp;raquo;</span> <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;single-item-container&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;px-2 py-2 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url &#39;staffs:staff_list_home&#39; %}&quot;</span><span class="p">&gt;</span>Cancel<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The first button (<code class="docutils literal notranslate"><span class="pre">Next</span></code>) of type <strong>submit</strong> does the same thing as the previous one. The second button (<code class="docutils literal notranslate"><span class="pre">Cancel</span></code>) is a <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/a&gt;</span></code> tag containing a <code class="docutils literal notranslate"><span class="pre">url</span></code> tag to return to the <strong>staffs</strong> homepage (<strong>/staffs/</strong>) when clicked.</p>
+</div>
+</div>
+<div class="section" id="updating-a-staff-record">
+<h2>Updating a Staff record<a class="headerlink" href="#updating-a-staff-record" title="Permalink to this headline">¶</a></h2>
+<p>The technique of creating a <strong>Update</strong> record page is very similar to building a <strong>Create</strong> record page as described above. The only difference is that Django has to know which record to update. This is done by passing a <code class="docutils literal notranslate"><span class="pre">model</span></code> instance into the <code class="docutils literal notranslate"><span class="pre">form</span></code>. Use the following instructions to create a simple update page:</p>
+<ol class="arabic">
+<li><p><strong>View</strong> - Create a function called <code class="docutils literal notranslate"><span class="pre">staff_update</span></code> in <code class="docutils literal notranslate"><span class="pre">views.py</span></code> and add the following lines:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">get_object_or_404</span>              <span class="c1"># add this line</span>
+
+<span class="k">def</span> <span class="nf">staff_update</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>                              <span class="c1"># add this function</span>
+    <span class="c1"># fetch the object related to object id</span>
+    <span class="n">this_staff</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Staff</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+    <span class="c1"># Pass the staff object as instance in the form</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">StaffCreateForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">this_staff</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;staffs:staff_list_home&#39;</span><span class="p">)</span>                   <span class="c1"># redirect to home page</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span>
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;staffs/staff_update.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">StaffCreateForm</span></code> accepts a new parameter called <code class="docutils literal notranslate"><span class="pre">instance</span></code>, which is a object fetched from the <code class="docutils literal notranslate"><span class="pre">Staff</span></code> model using <code class="docutils literal notranslate"><span class="pre">get_object_or_404</span></code> for a particular record represented by a unique primary key such as <strong>id</strong>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>URL Configuration</strong> - The <strong>id</strong> is passed from the urls.py as:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="p">(</span><span class="s1">&#39;staff_update/&lt;id&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">staff_update</span><span class="p">,</span> <span class="s1">&#39;staff_update&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Template</strong> - The <strong>staff_update.html</strong> template is same as the <em>staff_create.html</em> template except that the button text is changed from “Next” to “Update”.</p></li>
+<li><p><strong>Testing the page</strong> - Add some staff records if not done already and type <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/staffs/staff_update/1/</span></code> to see the details for the <strong>first</strong> staff record. All fields now become editable and can be saved by clicking the <code class="docutils literal notranslate"><span class="pre">Update</span></code> button.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="next.html" class="btn btn-neutral float-right" title="Next" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create_urls_views.html" class="btn btn-neutral float-left" title="Building URLs, Views, and Templates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
