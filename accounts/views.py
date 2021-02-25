@@ -44,7 +44,7 @@ def signup_view(request):
                 # save user
                 user.save()
                 # Get the group and assign them
-                geodesy_group = ['kent.wheeler@landgate.wa.gov.au', 'khandu.k@landgate.wa.gov.au', 
+                geodesy_group = ['kent.wheeler@landgate.wa.gov.au', 'khandu.k@landgate.wa.gov.au', 'khandu@landgate.wa.gov.au', 
                                 'vanessa.ung@landgate.wa.gov.au', 'brendon.hellmund@landgate.wa.gov.au',
                                 'tony.castelli@landgate.wa.gov.au', 'ireneusz.baran@landgate.wa.gov.au']
                 geodesy = Group.objects.get(name='Geodesy')
@@ -58,6 +58,7 @@ def signup_view(request):
                 if email in geodesy_group:
                     user.groups.add(geodesy)
                     user.is_staff = True
+                user.save()
                 # Prepare to send activation code
                 current_site = get_current_site(request)
                 email_subject = 'Activate Your Account'
