@@ -15,12 +15,12 @@ Staff calibration is a web applicaiton for generating calibration parameters for
    :caption: Table of contents:
 
    introduction/contents
-   installation-guide/install-guide
+   installation-guide/contents
    staffs_application/contents
    user_authentication/contents
    range_calibration/contents
    staff_calibration/contents
-   installation-guide/deployment
+   deployment/contents
 
 
 

@@ -141,6 +141,10 @@ def login_view(request):
         form = UserLoginForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+
+def terms_conditions_view(request):
+    return render(request, 'accounts/terms_conditions.html')
+
 def logout_view(request):
     if request.method == 'POST':
         logout(request)

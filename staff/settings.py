@@ -25,8 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
-# DEBUG = False
+# DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
+DEBUG = True
 
 # Set hosts to allow any app on Heroku and the local testing URL
 ALLOWED_HOSTS = ['staffcalibration.herokuapp.com','127.0.0.1']
@@ -143,7 +143,7 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Re-direct non HTTPS requests to HTTPS
-SECURE_SSL_REDIRECT = True
+#SECURE_SSL_REDIRECT = True
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
