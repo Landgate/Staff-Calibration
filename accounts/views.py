@@ -155,7 +155,8 @@ def user_list_view(request):
         return render(request, 'accounts/user_list_view.html', context=context)
     else:
         messages.warning(request, "You do not have any users at the moment.")
-        return redirect('/')
+        return render(request, 'accounts/user_list_view.html', context=context)
+        # return redirect('/')
 
 @staff_member_required
 def user_delete(request, email):
