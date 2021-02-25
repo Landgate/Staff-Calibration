@@ -115,7 +115,7 @@ class StaffUpdateForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(StaffUpdateForm, self).__init__(*args, **kwargs)
         self.fields['staff_type'].queryset = StaffType.objects.all()
-        if not user.is_superuser:
+        if not user.is_staff:
             del self.fields['user']
     
     def clean_staff_number(self):
@@ -159,7 +159,7 @@ class DigitalLevelUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super(DigitalLevelUpdateForm, self).__init__(*args, **kwargs)
-        if not user.is_superuser:
+        if not user.is_staff:
             del self.fields['user']
             
     def clean_level_number(self):
