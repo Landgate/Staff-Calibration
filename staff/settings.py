@@ -26,10 +26,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG_VALUE') == 'True'
-# DEBUG = False
+# DEBUG = True
 
 # Set hosts to allow any app on Heroku and the local testing URL
-ALLOWED_HOSTS = ['staffcalibrate.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['staffcalibration.herokuapp.com','127.0.0.1']
 
 # Set the custom user account
 AUTH_USER_MODEL = 'accounts.CustomUser'
