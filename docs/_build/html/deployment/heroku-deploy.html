@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying the Staff Calibration App on Heroku &mdash; Staff Calibration 2020.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating an application repository in Github" href="github-repo.html" />
+    <link rel="prev" title="Deploying Staff Calibration to production" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Staff Calibration
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/contents.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staffs_application/contents.html">Building the staffs application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_authentication/contents.html">User authentication and permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range_calibration/contents.html">Range Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../staff_calibration/contents.html">Staff Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide/contents.html">Deploying Staff Calibration to production</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Deploying Staff Calibration to production</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deploying the Staff Calibration App on Heroku</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getting-your-website-ready-to-publish">Getting your website ready to publish</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#settings">Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#procfile">Procfile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-configuration">Database configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#whitenoise">Whitenoise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#runtime">Runtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#re-test-the-changes">Re-test the changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-a-heroku-account">Get a Heroku account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#heroku-cli-client">Heroku CLI client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-and-upload-application">Create and upload application</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="github-repo.html">Creating an application repository in Github</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Staff Calibration</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contents.html">Deploying Staff Calibration to production</a> &raquo;</li>
+        
+      <li>Deploying the Staff Calibration App on Heroku</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployment/heroku-deploy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-the-staff-calibration-app-on-heroku">
+<h1>Deploying the Staff Calibration App on Heroku<a class="headerlink" href="#deploying-the-staff-calibration-app-on-heroku" title="Permalink to this headline">¶</a></h1>
+<p>In order to execute your application, Heroku needs the appropriate environment and dependencies. For Django apps we provide this information in a number of text files:</p>
+<ul class="simple">
+<li><p><strong>settings.py</strong>: apply all the settings required by Heroku.</p></li>
+<li><p><strong>runtime.txt</strong>: the programming language and version to use.</p></li>
+<li><p><strong>requirements.txt</strong>: the Python component dependencies, including Django.</p></li>
+<li><p><strong>Procfile</strong>: A list of processes to be executed to start the web application. For Django this will usually be the Gunicorn web application server (with a .wsgi script).</p></li>
+<li><p><strong>wsgi.py</strong>: WSGI configuration to call our Django application in the Heroku environment.</p></li>
+</ul>
+<div class="section" id="getting-your-website-ready-to-publish">
+<h2>Getting your website ready to publish<a class="headerlink" href="#getting-your-website-ready-to-publish" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="settings">
+<h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
+<p>The critical settings that must be checked in <strong>settings.py</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>: This should be set as False in production (<code class="docutils literal notranslate"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">False</span></code>). This stops the sensitive/confidential debug trace and variable information from being displayed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code>: This is a large random value used for CSRF protection. It is important that the key used in production is not in source control or accessible outside the production server. The Django documents suggest that this might best be loaded from an environment variable or read from a server-only file. For example,</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read SECRET_KEY from an environment variable</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span>
+
+<span class="c1"># OR</span>
+
+<span class="c1"># Read secret key from a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/secret_key.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Open the settings file <strong>settings.py</strong> and update the above mentioned settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
+<span class="c1"># SECRET_KEY = &quot;cg#p$g+j9tax!#a3cup@1$8obt2_+&amp;k3q+pmu)5%asj6yjpkag&quot;</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">)</span>
+
+<span class="c1"># SECURITY WARNING: don&#39;t run with debug turned on in production!</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DEBUG_VALUE&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;False&#39;</span>
+
+<span class="c1"># Email settings - Change EMAIL_HOST if not gmail</span>
+<span class="o">...</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.gmail.com&#39;</span>
+<span class="n">EMAIL_USE_SSL</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># use port 465</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">True</span>    <span class="c1"># use port 587</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EMAIL_HOST_USER&quot;</span><span class="p">)</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EMAIL_HOST_PASSWORD&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="procfile">
+<h3>Procfile<a class="headerlink" href="#procfile" title="Permalink to this headline">¶</a></h3>
+<p>Create the file <code class="docutils literal notranslate"><span class="pre">Procfile</span></code> (with no extension) in the project directory to declare the application’s process types and entry points. Copy the following text into it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">web</span><span class="p">:</span> <span class="n">gunicorn</span> <span class="n">locallibrary</span><span class="o">.</span><span class="n">wsgi</span> <span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">web:</span></code> tells Heroku that this is a web dyno and can be sent HTTP traffic. The process to start in this dyno is gunicorn (see, <strong>staff/staff/wsgi.py</strong>), which is a popular web application server that Heroku recommends. And install <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">gunicorn</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="database-configuration">
+<h3>Database configuration<a class="headerlink" href="#database-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The default SQLite database cannot be used on Heroku. From the many other database options available, we can use the free <code class="docutils literal notranslate"><span class="pre">postgres</span></code> database. The database connection information is supplied to the web dyno using a configuration variable named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code>. Install the packages <code class="docutils literal notranslate"><span class="pre">dj-database-url</span></code> and <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code> and update the database section in <strong>settings.py</strong> as shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+
+<span class="c1"># Heroku: Update database configuration from $DATABASE_URL.</span>
+<span class="k">if</span> <span class="s1">&#39;DATABASE_URL&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">dj_database_url</span>
+    <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="n">dj_database_url</span><span class="o">.</span><span class="n">config</span><span class="p">()}</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="p">,</span> <span class="s1">&#39;db.sqlite3&#39;</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="whitenoise">
+<h3>Whitenoise<a class="headerlink" href="#whitenoise" title="Permalink to this headline">¶</a></h3>
+<p>Static files such as CSS, Javascript, and Images are served using a library called <code class="docutils literal notranslate"><span class="pre">WhiteNoise</span></code>. Install the package</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">whitenoise</span>
+</pre></div>
+</div>
+<p>and update the <strong>settings.py</strong> by adding the following lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#filename: staff/staff/settings.py</span>
+
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="o">....</span>
+                        <span class="s1">&#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;</span><span class="p">,</span>
+                        <span class="o">...</span>
+                        <span class="p">]</span>
+
+<span class="c1"># Simplified static file serving.</span>
+<span class="c1"># https://warehouse.python.org/project/whitenoise/</span>
+<span class="n">STATICFILES_STORAGE</span> <span class="o">=</span> <span class="s1">&#39;whitenoise.storage.CompressedManifestStaticFilesStorage&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>Python packages required for the web application must be stored in a file <strong>requirements.txt</strong> in the project directory. Heroku will then install these automatically when it rebuilds the environment. The package list can be produced by the <code class="docutils literal notranslate"><span class="pre">pip</span></code> command like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">freeze</span> <span class="o">&gt;</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>It should be run every time a new package is installed to run the application.</p>
+</div>
+<div class="section" id="runtime">
+<h3>Runtime<a class="headerlink" href="#runtime" title="Permalink to this headline">¶</a></h3>
+<p>We also need a create a file named <strong>runtime.txt</strong> in the project directory to tell Heroku what programming language to use and its version. Check <a class="reference external" href="https://devcenter.heroku.com/articles/python-support#supported-runtimes">https://devcenter.heroku.com/articles/python-support#supported-runtimes</a> to find out what versions of Python is being supported and ensure that the application runs on the supported version. At the time of writing this, Python 3.8.8 is being supported. Add the python version in the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="o">-</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="re-test-the-changes">
+<h3>Re-test the changes<a class="headerlink" href="#re-test-the-changes" title="Permalink to this headline">¶</a></h3>
+<p>Run the web server to ensure that the application is still running fine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-heroku-account">
+<h3>Get a Heroku account<a class="headerlink" href="#get-a-heroku-account" title="Permalink to this headline">¶</a></h3>
+<p>Go to <a class="reference external" href="https://www.heroku.com">https://www.heroku.com</a> and create free account.</p>
+</div>
+<div class="section" id="heroku-cli-client">
+<h3>Heroku CLI client<a class="headerlink" href="#heroku-cli-client" title="Permalink to this headline">¶</a></h3>
+<p>Download and install the Heroku client by following the instructions on Heroku here (<a class="reference external" href="https://devcenter.heroku.com/articles/getting-started-with-python#set-up">https://devcenter.heroku.com/articles/getting-started-with-python#set-up</a>).</p>
+<p>Once installed, type <code class="docutils literal notranslate"><span class="pre">heroku</span></code> in the Command Prompt to see what commands are avaliable.</p>
+</div>
+<div class="section" id="create-and-upload-application">
+<h3>Create and upload application<a class="headerlink" href="#create-and-upload-application" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Log in to Heroku by typing:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">login</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>To create the app we run the <code class="docutils literal notranslate"><span class="pre">heroku</span> <span class="pre">create</span> <span class="pre">&lt;app_name&gt;</span></code> command. This creates a git remote (“pointer to a remote repository”) app_name directory. For example,</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">create</span> <span class="n">staffcalibration</span>
+</pre></div>
+</div>
+<p>Here is the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>»   Warning: heroku update available from 7.41.1 to 7.48.0.
+Creating ⬢ staffcalibration... done
+https://staffcalibration.herokuapp.com/ | https://git.heroku.com/staffcalibration.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now push the application to Heroku by: a</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">init</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s2">&quot;Initial commit&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>If successful, open the web application by typing:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="nb">open</span>
+</pre></div>
+</div>
+<p>or copying the website (<a class="reference external" href="https://staffcalibration.herokuapp.com/">https://staffcalibration.herokuapp.com/</a>) in the web-browser.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="github-repo.html" class="btn btn-neutral float-right" title="Creating an application repository in Github" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral float-left" title="Deploying Staff Calibration to production" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright November 2020, Landgate
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

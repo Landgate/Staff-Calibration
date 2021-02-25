@@ -1,0 +1,187 @@
+Deploying the Staff Calibration App on Heroku 
+==============================================
+
+In order to execute your application, Heroku needs the appropriate environment and dependencies. For Django apps we provide this information in a number of text files:
+
+* **settings.py**: apply all the settings required by Heroku.
+* **runtime.txt**: the programming language and version to use.
+* **requirements.txt**: the Python component dependencies, including Django.
+* **Procfile**: A list of processes to be executed to start the web application. For Django this will usually be the Gunicorn web application server (with a .wsgi script).
+* **wsgi.py**: WSGI configuration to call our Django application in the Heroku environment.
+
+Getting your website ready to publish
+-------------------------------------
+
+Settings
+********
+
+The critical settings that must be checked in **settings.py**:
+
+* ``DEBUG``: This should be set as False in production (``DEBUG = False``). This stops the sensitive/confidential debug trace and variable information from being displayed.
+* ``SECRET_KEY``: This is a large random value used for CSRF protection. It is important that the key used in production is not in source control or accessible outside the production server. The Django documents suggest that this might best be loaded from an environment variable or read from a server-only file. For example,
+
+.. parsed-literal::
+	# Read SECRET_KEY from an environment variable
+	import os
+	SECRET_KEY = os.environ['SECRET_KEY']
+
+	# OR
+
+	# Read secret key from a file
+	with open('/etc/secret_key.txt') as f:
+	    SECRET_KEY = f.read().strip()
+
+Open the settings file **settings.py** and update the above mentioned settings:
+
+.. parsed-literal::
+	# SECURITY WARNING: keep the secret key used in production secret!
+	# SECRET_KEY = "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
+	SECRET_KEY = os.environ.get('SECRET_KEY')
+
+	# SECURITY WARNING: don't run with debug turned on in production!
+	DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
+
+	# Email settings - Change EMAIL_HOST if not gmail
+	...
+	EMAIL_HOST = 'smtp.gmail.com' 
+	EMAIL_USE_SSL = False    # use port 465
+	EMAIL_USE_TLS = True    # use port 587
+	EMAIL_PORT = 587
+	EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+	EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+
+Procfile
+********
+
+Create the file ``Procfile`` (with no extension) in the project directory to declare the application's process types and entry points. Copy the following text into it:
+
+.. parsed-literal::
+	web: gunicorn locallibrary.wsgi --log-file -
+
+The ``web:`` tells Heroku that this is a web dyno and can be sent HTTP traffic. The process to start in this dyno is gunicorn (see, **staff/staff/wsgi.py**), which is a popular web application server that Heroku recommends. And install ``gunicorn``:
+
+.. parsed-literal::
+	pip install gunicorn
+
+Database configuration
+**********************
+
+The default SQLite database cannot be used on Heroku. From the many other database options available, we can use the free ``postgres`` database. The database connection information is supplied to the web dyno using a configuration variable named ``DATABASE_URL``. Install the packages ``dj-database-url`` and ``psycopg2`` using ``pip`` and update the database section in **settings.py** as shown below:
+
+.. code-block:: python
+	
+	#filename: staff/staff/settings.py
+
+	# Heroku: Update database configuration from $DATABASE_URL.
+	if 'DATABASE_URL' in os.environ:
+	    import dj_database_url
+	    DATABASES = {'default': dj_database_url.config()}
+	else:
+	    DATABASES = {
+	        'default': {
+	            'ENGINE': 'django.db.backends.sqlite3',
+	            'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
+	        }
+	    }
+
+Whitenoise
+**********
+
+Static files such as CSS, Javascript, and Images are served using a library called ``WhiteNoise``. Install the package
+
+.. parsed-literal::
+	pip install whitenoise
+
+and update the **settings.py** by adding the following lines:
+
+.. code-block:: python
+	
+	#filename: staff/staff/settings.py
+
+ 	MIDDLEWARE = [
+ 				....
+ 				'whitenoise.middleware.WhiteNoiseMiddleware',
+ 				...
+ 				]
+
+ 	# Simplified static file serving.
+	# https://warehouse.python.org/project/whitenoise/
+	STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+Requirements
+************
+
+Python packages required for the web application must be stored in a file **requirements.txt** in the project directory. Heroku will then install these automatically when it rebuilds the environment. The package list can be produced by the ``pip`` command like this:
+
+.. parsed-literal::
+	pip freeze > requirements.txt
+
+It should be run every time a new package is installed to run the application. 
+
+Runtime
+*******
+
+We also need a create a file named **runtime.txt** in the project directory to tell Heroku what programming language to use and its version. Check https://devcenter.heroku.com/articles/python-support#supported-runtimes to find out what versions of Python is being supported and ensure that the application runs on the supported version. At the time of writing this, Python 3.8.8 is being supported. Add the python version in the file:
+
+.. parsed-literal::
+	python-3.8.8
+
+Re-test the changes
+*******************
+
+Run the web server to ensure that the application is still running fine:
+
+.. parsed-literal::
+	python manage.py runserver
+
+Deployment
+----------
+
+Get a Heroku account
+********************
+
+Go to https://www.heroku.com and create free account.
+
+Heroku CLI client
+*****************
+
+Download and install the Heroku client by following the instructions on Heroku here (https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
+
+Once installed, type ``heroku`` in the Command Prompt to see what commands are avaliable.
+
+Create and upload application
+*****************************
+
+1. Log in to Heroku by typing:
+
+	.. parsed-literal::
+		heroku login 
+
+2. To create the app we run the ``heroku create <app_name>`` command. This creates a git remote ("pointer to a remote repository") app_name directory. For example,
+
+	.. parsed-literal::
+		heroku create staffcalibration
+
+	Here is the output:
+
+	.. parsed-literal::
+		»   Warning: heroku update available from 7.41.1 to 7.48.0.
+		Creating ⬢ staffcalibration... done
+		https://staffcalibration.herokuapp.com/ | https://git.heroku.com/staffcalibration.git
+
+3. Now push the application to Heroku by: a 
+
+	.. parsed-literal::
+		git init
+		git add -A
+		git commit -am "Initial commit"
+		git push heroku main
+
+4. If successful, open the web application by typing:
+
+	.. parsed-literal::
+		heroku open
+
+	or copying the website (https://staffcalibration.herokuapp.com/) in the web-browser. 
+
+
