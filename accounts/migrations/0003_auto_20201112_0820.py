@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.db import migrations
 from accounts.models import CustomUser, Authority
-import sys
+import os, sys
 
 def forwards_func(apps, schema_editor):
     Group = apps.get_model("auth", "Group")
@@ -14,19 +14,19 @@ def forwards_func(apps, schema_editor):
         Group(name='Admin'),
     ])
     
-    uname = input("Enter your email: ")
-    pword1 = input("Enter a password: ")
-    pword2 = input("Re-confirm your password: ")
+##    uname = input("Enter your email: ")
+##    pword1 = input("Enter a password: ")
+##    pword2 = input("Re-confirm your password: ")
     
-    if pword1 == pword2:
-        CustomUser.objects.create_superuser(
-        	email=uname,  
-        	password=pword1,
-            authority= Authority.objects.get(authority_abbrev='LG')
+##    if pword1 == pword2:
+    CustomUser.objects.create_superuser(
+            email=os.environ.get('EMAIL_HOST_USER'),  
+            password=os.environ.get('EMAIL_HOST_PASSWORD'),
+        authority= Authority.objects.get(authority_abbrev='LG')
         	)
-    else:
-        print("Your passwords do not match. Start again!")
-        sys.exit()
+##    else:
+##        print("Your passwords do not match. Start again!")
+##        sys.exit()
 
 def reverse_func(apps, schema_editor):
 	Group = apps.get_model("auth", "Group")
