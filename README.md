@@ -16,7 +16,7 @@ Python 3.8 or higher plus see requirements.txt
 
 Download the ```staff``` package from the github and unzip to your working directory. 
 
-Install ```Python 3``` or ```Anaconda 3```. Note that this application has been tested with ```Python 3.8.3```
+Install ```Python 3``` or ```Anaconda 3```. Note that this application has been tested with ```Python 3.8.8```
 
 Install the python packages from the requirements.txt from the Command Prompt:
 
@@ -25,7 +25,7 @@ Install the python packages from the requirements.txt from the Command Prompt:
 In your Command Prompt, go to the working directory and type the following:
 
 ```	
-	cd staff
+	cd Staff-Calibration
 
 	virtual venv
 
