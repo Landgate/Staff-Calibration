@@ -14,7 +14,7 @@ Python 3.8 or higher plus see requirements.txt
 
 ### Installation
 
-Download the ```staff``` package from the github and unzip to your working directory. 
+Download the [```Staff-Calibration```](https://github.com/Landgate/Staff-Calibration.git) package and unzip to your working directory. 
 
 Install ```Python 3``` or ```Anaconda 3```. Note that this application has been tested with ```Python 3.8.8```
 
