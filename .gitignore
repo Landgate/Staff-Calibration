@@ -1,9 +1,9 @@
 venv
 venv.bak/
 *.pyc
-staticfiles
+staticfiles/
 .env
-db.sqlite3
+*.sqlite3
 getting-started/*
 build/
 __pycache__/

@@ -25,8 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
+DEBUG = True
 
 # Set hosts to allow any app on Heroku and the local testing URL
 ALLOWED_HOSTS = ['staffcalibration.herokuapp.com','127.0.0.1']
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mathfilters',
     'formtools',
+    'corsheaders',
     'staffs',
     'range_calibration',
     'staff_calibration',
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,6 +146,15 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Re-direct non HTTPS requests to HTTPS
 #SECURE_SSL_REDIRECT = True
+
+# CSP Settings
+CSP_SCRIPT_SRC = [
+    "https://cdnjs.cloudflare.com",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com"
+]
+
+CSP_STYLE_SRC = ["https://code.cdn.mozilla.net"]
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
