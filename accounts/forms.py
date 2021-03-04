@@ -121,13 +121,22 @@ class UserLoginForm(forms.Form):
                 # return forms.ValidationError('Login failed! Enter you email and/or password correctly')
         return None
 
-class AuthorityForm(forms.Form):
-    authority_name = forms.CharField(max_length=200)
-    authority_abbrev = forms.CharField(max_length=10)
+class AuthorityForm(forms.ModelForm):
+    class Meta:
+        model = Authority
+        fields = ['authority_name','authority_abbrev']
+        
+        widgets = {
+            'authority_name' : forms.TextInput(attrs={'placeholder':'Enter a company'}),
+            'authority_abbrev' : forms.TextInput(attrs={'placeholder':'Give an abbreviation'}),
+        }
 
     def clean_authority_abbrev(self):
         authority_abbrev = self.cleaned_data['authority_abbrev'].upper()
         return authority_abbrev
+
+        
+        
 
 class ProfileForm(forms.ModelForm):
     authority = forms.ModelChoiceField(queryset=Authority.objects.all(), widget=forms.Select(attrs={"onChange":'admSelectCheck(this)'}))

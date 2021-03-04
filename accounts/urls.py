@@ -12,6 +12,8 @@ urlpatterns = [
     path('activate/<slug:uidb64>/<slug:token>/', views.activate_account, name='activate_account'),
     path('login/', views.login_view, name = 'login'),
     path('logout/', views.logout_view, name = 'logout'),
+    path('authoirty_list/', views.authority_list, name = 'authority_list'),
+    path('authority_create/', views.authority_create, name = 'authority_create'),
     path('terms_conditions/', views.terms_conditions_view, name='terms_conditions'),
     path('password_reset/', auth_views.PasswordResetView.as_view(
     	template_name="registration/password_reset_form.html",
@@ -23,5 +25,7 @@ urlpatterns = [
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view( template_name="registration/password_reset_complete.html"), name='password_reset_complete'),
     path('user_update/<email>/', views.user_update_view, name="user_update"),
     path('user_profile/<id>/', views.user_profile_view, name='user_profile'),
+    path('authority/<id>/delete', views.authority_delete, name = 'authority_delete'),
+    path('authority/<id>/update', views.authority_update, name = 'authority_update'),
     path('<email>/', views.user_delete, name='user_delete'),
 ]

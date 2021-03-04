@@ -159,8 +159,7 @@ def user_list_view(request):
         return render(request, 'accounts/user_list_view.html', context=context)
     else:
         messages.warning(request, "You do not have any users at the moment.")
-        return render(request, 'accounts/user_list_view.html', context=context)
-        # return redirect('/')
+        return render(request, 'accounts/user_list_view.html')
 
 @staff_member_required
 def user_delete(request, email):
@@ -191,7 +190,6 @@ def user_profile_view(request, id):
 
 @login_required(login_url="/accounts/login")
 def user_update_view(request, email):
-    print(email)
     this_user = get_object_or_404(CustomUser, email=email)
     form = ProfileForm(request.POST or None, instance = this_user)
     if form.is_valid():
@@ -202,3 +200,49 @@ def user_update_view(request, email):
         'form': form
         }
     return render(request, 'accounts/user_profile.html', context)
+
+@login_required(login_url="/accounts/login")
+def authority_list(request):
+    authority_list = Authority.objects.all()
+
+    context = {
+        'authority_list': authority_list
+        }
+    return render(request, 'accounts/authority_list.html', context)
+
+@login_required(login_url="accounts/login")
+def authority_create(request):
+    form = AuthorityForm(request.POST or None)
+    if form.is_valid():
+        this_authority = form.save(commit=False)
+        this_authority.user = request.user
+        this_authority.save()
+        if 'next' in request.POST:
+            return redirect(request.POST.get('next'))
+        else:
+            return redirect ('accounts:authority_list')
+    context = {
+        'form': form
+        }
+    return render(request, 'accounts/authority_create.html', context)
+
+@login_required(login_url="/accounts/login")
+def authority_update(request, id):
+    authority = Authority.objects.get(id=id)
+    form = AuthorityForm(request.POST or None, instance = authority)
+    if form.is_valid():
+        form.save()
+        return redirect ('accounts:authority_list')
+    context = {
+        'form': form
+        }
+    return render(request, 'accounts/authority_update.html', context)
+
+@staff_member_required
+def authority_delete(request, id):
+    try:
+        authority = Authority.objects.get(id=id)
+        authority.delete()
+        return redirect('accounts:authority_list')
+    except ObjectDoesNotExist:
+        return redirect('/accounts')

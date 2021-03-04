@@ -115,10 +115,15 @@
         <div>
           <a class="page-link" href="{% url 'accounts:user_list' %}">List of Users</a>
         </div>
-
+        <div>
+          <a class="page-link" href="{% url 'accounts:authority_list' %}">Companies/Authorities</a>
+        </div>
+        <br>
+        <hr>
         <div>
           <a class="page-link" href="/docs/" target=_blank>Software Developer Guide</a>
         </div>
+        <hr>
       {% endif %}
 
       <!-- {% if user.is_authenticated %}
