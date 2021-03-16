@@ -3,25 +3,22 @@
 {% block content %}
 
 <article class="post">
+
+	<div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
+
   	<header class="post-header">
     	<h1 class="post-title text-center"> Please sign in with your email address </h1>
   	</header>
 	<hr>
-	<br>
-	{% if messages %}
-	<div class="post-content">
-	    {% for message in messages %}
-	    <div class="alert {{ message.tags }}">
-	        {% if 'safe' in message.tags %}
-	            <h2> {{ message|safe }} </h2>
-	        {% else %}
-	            <h2> {{ message }} </h2>
-	        {% endif %}
-	    </div>
-	    {% endfor %}
-	</div>
-	{% endif %}
-
 	<br>
 
 	{% if form.errors or form.non_field_errors %}
@@ -36,6 +33,7 @@
 		    <p> {{ error }} </p>
 		{% endfor %}
 		</div>
+		<br>
 	{% endif %}
 
 	<div class="post-content">

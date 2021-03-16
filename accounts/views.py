@@ -33,7 +33,7 @@ def signup_view(request):
                 user = form.save(commit=False)
                 user.is_active=False
                 # Populate and save the user authority if Other
-                if user.authority.authority_name=="Other":
+                if user.authority.authority_abbrev == 'OTH':
                     authority_name = request.POST['authority_name']
                     authority_abbrev = request.POST['authority_abbrev']
                     Authority.objects.update_or_create(
