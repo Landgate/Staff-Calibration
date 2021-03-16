@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG_VALUE') != 'False'
-#DEBUG = True
+# DEBUG = True
 
 # Set hosts to allow any app on Heroku and the local testing URL
 ALLOWED_HOSTS = ['staffcalibration.herokuapp.com','127.0.0.1']
@@ -132,11 +132,11 @@ DOCS_ACCESS = 'staff'
 
 #SECURITY SETTINGS
 #CSRF Protections
-CSRF_COOKIE_SECURE = False
-CSRF_USE_SESSIONS = False
+#CSRF_COOKIE_SECURE = True
+#CSRF_USE_SESSIONS = False
 
 # Delete Sessions
-SESSION_COOKIE_SECURE=False
+#SESSION_COOKIE_SECURE=True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 5*60
 

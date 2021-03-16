@@ -638,6 +638,87 @@ def range_report(request, update_index):
             'adj_data': adj_data
             }
     return render(request, 'range_calibration/adjustment_report.html', context)
+
+###############################################################################
+# delete report
+###############################################################################
+@login_required(login_url="/accounts/login")
+def delete_report(request, update_index):
+    # index = Calibration_Update.objects.exclude(update_index=update_index)
+    # raw_data = RawDataModel.objects.exclude(update_index=update_index)
+    # ht_diff = HeightDifferenceModel.objects.exclude(update_index=update_index) 
+    # adj_data = AdjustedDataModel.objects.exclude(update_index=update_index)
+    
+    # Delete records corresponding to the selected update_index
+    Calibration_Update.objects.filter(update_index=update_index).delete()
+    RawDataModel.objects.filter(update_index=update_index).delete()
+    HeightDifferenceModel.objects.filter(update_index=update_index).delete()
+    AdjustedDataModel.objects.filter(update_index=update_index).delete()
+    
+    # reset range parameters by deleting
+    RangeParameters.objects.all().delete()
+
+    # rows & columns
+    p_list = ['1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9','9-10','10-11','11-12','12-13','13-14','14-15','15-16','16-17','17-18','18-19','19-20','20-21']
+    
+    # Compute the calibration range values
+    index = Calibration_Update.objects.all()
+    if index.exists():
+        index = index.values_list('update_index', 'observation_date')
+        index = np.array(index, dtype=object)
+        monthlist = [[x.strftime('%b'), x.month] for x in index[:,1]]
+        # staff = np.append(staff,np.array(monthlist).T, axis=1)
+        index = np.append(index,np.c_[monthlist], axis=1)
+        monthlist, indices,ncounts  = np.unique(index[:,-1], return_index=True, return_counts=True)
+        month_text = index[indices,2]
+        for i in range(len(monthlist)):
+            m_number = monthlist[i]
+            m_text = month_text[i]
+            n_count = ncounts[i]
+            ht_diff = HeightDifferenceModel.objects.filter(observation_date__month=m_number).values_list(
+                                'pin','adjusted_ht_diff','uncertainty')   
+            ht_diff = np.array(ht_diff, dtype=object)
+            if len(ht_diff)>=1:
+                for p in p_list:
+                    diff = ht_diff[ht_diff[:,0]==p][:,1]
+                    if RangeParameters.objects.filter(pin=p):
+                        if len(diff)==1:
+                            RangeParameters.objects.filter(pin=p).update(**{m_text: round(diff[0],5)})
+                        elif len(diff) == 2:
+                            mdiff = diff.mean()
+                            RangeParameters.objects.filter(pin=p).update(**{m_text: round(mdiff,5)})
+                        elif len(diff) > 2:
+                            mdiff = diff.mean()
+                            mad = np.sum(abs(diff-mdiff))/len(diff)
+                            if mad == 0:
+                                mdiff2 = diff.mean()
+                            else:
+                                madev = 0.6745*(abs(diff-mdiff))/mad
+                                ind = madev.argsort()[:2]
+                                mdiff2 = diff[ind].mean()
+                            RangeParameters.objects.filter(pin=p).update(**{m_text: round(mdiff2,5)})
+                    else:
+                        if len(diff)==1:
+                            obj, created = RangeParameters.objects.update_or_create(pin=p, **{m_text: round(diff[0],5)})
+                        elif len(diff) == 2:
+                            mdiff = diff.mean()
+                            obj, created = RangeParameters.objects.update_or_create(pin=p, **{m_text: round(mdiff,5)})
+                        elif len(diff) > 2:
+                            mdiff = diff.mean()
+                            mad = np.sum(abs(diff-mdiff))/len(diff)
+                            if mad == 0:
+                                mdiff2 = diff.mean()
+                            else:
+                                madev = 0.6745*(abs(diff-mdiff))/mad
+                                ind = madev.argsort()[:2]
+                                mdiff2 = diff[ind].mean()
+                            obj, created = RangeParameters.objects.update_or_create(pin=p, **{m_text: round(mdiff2,5)})
+    
+            messages.info(request, "Updated range parameters for "+m_text+" using "+str(n_count)+" of observation sets") 
+    else:
+        messages.warning(request, "Nothing to display.") 
+    return redirect('range_calibration:range-home')
+
 ###############################################################################
 ######################### PRINT REPORT ########################################
 ###############################################################################
@@ -660,7 +741,7 @@ def print_report(request, update_index):
     # Get the staff readings from RawDataModel
     raw_data = RawDataModel.objects.filter(update_index=update_index)
     average_temperature = RawDataModel.objects.filter(update_index=update_index).aggregate(Avg('temperature'))
-    print(raw_data)
+    # print(raw_data)
     if len(raw_data)>=1:
         raw_data = raw_data.values_list(
                         'obs_set','pin','temperature','frm_pin','to_pin',

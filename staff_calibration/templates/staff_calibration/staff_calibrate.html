@@ -5,20 +5,17 @@
 
 
 <article class="post">
-	{% if messages %}
-		<div class="page-content">
-		    {% for message in messages %}
-		    <div class="alert {{ message.tags }}">
-		        {% if 'safe' in message.tags %}
-		            <p> {{ message|safe }} </p>
-		        {% else %}
-		            <p> {{ message }} </p>
-		        {% endif %}
-		    </div>
-		    <br>
-		    {% endfor %}
-		</div>
-	{% endif %}
+
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
 
 	{% if form.errors %}
 		<div class="post-content alert error">

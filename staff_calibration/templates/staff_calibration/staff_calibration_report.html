@@ -3,21 +3,17 @@
 {% block content %}
 
 <article class="post">
-  {% if messages %}
+ 
   <div class="post-content">
-      {% for message in messages %}
-      <div class="alert {{ message.tags }}">
-          {% if 'safe' in message.tags %}
-              <h2> {{ message|safe }} </h2>
-          {% else %}
-              <h2> {{ message }} </h2>
-          {% endif %}
-      </div>
-      <br>
-      <br>
-      {% endfor %}
+    {% if messages %}
+    <ul class="message-list">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    {% endif %}
   </div>
-  {% endif %}
 
   <header class="post-header">
     <div class="grid-2">
@@ -93,15 +89,15 @@
   <hr>
   <div class="post-content">
     <h3>Staff readings/corrections </h3>
-    <table style="width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  "> 
-      <tr style="border-top:1px solid;border-bottom:1px solid">
+    <table class="table-fullwidth text-sm"> 
+      <tr>
         {% for header in StaffCorrections.headers %}
             <th> <h4> {{ header }} </h4> </th>
         {% endfor %}
       </tr>
 
       {% for data in StaffCorrections.data %}
-        <tr style="text-align:center;">    
+        <tr class="text-center">    
           {% for value in data %}
             {% if not '-' in value %}
               <td>{{ value|floatformat:5 }}</td>
@@ -114,7 +110,8 @@
       </tr>
     </table>
   </div>
-  <hr style="margin-bottom:5px; margin-top: 5px">
+  
+  <hr>
 
   <div>
     <p>
@@ -126,15 +123,15 @@
   <hr class="style1">
   <div class="post-content">
     <h2>Staff corrections </h2>
-    <table style="width:100%; margin-left:2em; border-collapse: collapse; font-size:1.2em;  "> 
-      <tr style="border-top:1px solid;border-bottom:1px solid">
+    <table class="table-quarterwidth text-sm"> 
+      <tr>
         {% for header in CorrectionList.headers %}
             <th> <h4> {{ header }} </h4> </th>
         {% endfor %}
       </tr>
 
       {% for data in CorrectionList.data %}
-        <tr style="text-align:center;">    
+        <tr class="text-center">    
           {% for value in data %}
             <td>{{ value }}</td>
           {% endfor %}

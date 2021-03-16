@@ -52,7 +52,7 @@
 		    <p>	
 		    	Regular measurements were conducted on the range by Landgate over the years to determine any potential seasonal variations and also generate a time-dependent calibration system. From the monitoring, we find that the height changes between pillar 1 and 21 is about 1 mm featuring a seasonal cycle (see the graph below). Thus, in order to compensate for the seasonal fluctuation, Landgate has now developed this online web application to generate a time-dependent correction factor for the digital bar code staves. </p>
 
-		    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+		    
 		    {% if data %}
 			    <div>
 			    	<canvas id="myChart"></canvas>
@@ -63,98 +63,104 @@
 		  		</div>
 		  	{% endif %}
 	  	</div>
-  		
-  		<script>
-		    var ctx = document.getElementById('myChart').getContext('2d');
-		    Chart.defaults.global.defaultFontColor = 'black';
-		    Chart.defaults.global.defaultFontSize = '12';
-		    var myChart = new Chart(ctx, {
-		    type: 'bar',
-		    data: {
-		            labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
-		            datasets: [{
-		                label: 'Difference from mean',
-		                data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
-		                backgroundColor: [
-		                    '#00876c',
-		                    '#39956a',
-		                    '#5ba268',
-		                    '#7caf67',
-		                    '#9dbb66',
-		                    '#bfc669',
-		                    '#e2cf6f',
-		                    '#e5b95d',
-		                    '#e6a250',
-		                    '#e68a49',
-		                    '#e37248',
-		                    '#dd584b',
-		                ],
-		                borderColor: [
-		                    '#00876c',
-		                    '#39956a',
-		                    '#5ba268',
-		                    '#7caf67',
-		                    '#9dbb66',
-		                    '#bfc669',
-		                    '#e2cf6f',
-		                    '#e5b95d',
-		                    '#e6a250',
-		                    '#e68a49',
-		                    '#e37248',
-		                    '#dd584b',
-		                ],
-		                pointRadius: 5,
-		            }]
-		        },
-		        options: {
-		            responsive: true,
-		            legend: {
-		              position: 'bottom',
-		            },
-		            hover: {
-		              mode: 'index'
-		            },
-		            scales: {
-		              xAxes: [{
-		                display: true,
-		                scaleLabel: {
-		                  display: true,
-		                  labelString: 'Month'
-		                }
-		              }],
-		              yAxes: [{
-		                display: true,
-		                scaleLabel: {
-		                  display: true,
-		                  labelString: 'Difference in mm'
-		                }
-		              }]
-		            },
-		            title: {
-		              display: true,
-		              //text: 'Difference from mean height difference between Pin 1 & 21 '
-		            },
-		            tooltips: {
-		                callbacks: {
-		                    label: function(tooltipItem, data) {
-		                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-		                        if (label) {
-		                            label += ': ';
-		                        }
-		                        label += tooltipItem.yLabel.toFixed(2);
-		                        return label;
-		                    }
-		                }
-		            }
-		        }
-		    });
-		</script>
-
-		
-	</div>	
+  	</div>	
 </article>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	Chart.defaults.global.defaultFontColor = 'black';
+	Chart.defaults.global.defaultFontSize = '12';
+	var myChart = new Chart(ctx, {
+	type: 'bar',
+	data: {
+	        labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
+	        datasets: [{
+	            label: {{ labels|safe }},
+	            data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
+	            backgroundColor: [
+	                '#00876c',
+	                '#39956a',
+	                '#5ba268',
+	                '#7caf67',
+	                '#9dbb66',
+	                '#bfc669',
+	                '#e2cf6f',
+	                '#e5b95d',
+	                '#e6a250',
+	                '#e68a49',
+	                '#e37248',
+	                '#dd584b',
+	            ],
+	            borderColor: [
+	                '#00876c',
+	                '#39956a',
+	                '#5ba268',
+	                '#7caf67',
+	                '#9dbb66',
+	                '#bfc669',
+	                '#e2cf6f',
+	                '#e5b95d',
+	                '#e6a250',
+	                '#e68a49',
+	                '#e37248',
+	                '#dd584b',
+	            ],
+	            pointRadius: 5,
+	        }]
+	    },
+	    options: {
+	        responsive: true,
+	        legend: {
+	          position: 'bottom',
+	        },
+	        hover: {
+	          mode: 'index'
+	        },
+	        scales: {
+	          xAxes: [{
+	            display: true,
+	            scaleLabel: {
+	              display: true,
+	              labelString: 'Month'
+	            }
+	          }],
+	          yAxes: [{
+	            display: true,
+	            scaleLabel: {
+	              display: true,
+	              labelString: 'Difference from mean (mm)'
+	            }
+	          }]
+	        },
+	        title: {
+	          // display: true,
+	          // text: 'Difference from mean height difference between Pin 1 & 21 '
+	        },
+	        tooltips: {
+	          custom: function(tooltip) {
+	            if (!tooltip) return;
+	            // disable displaying the color box;
+	            tooltip.displayColors = false;
+	          },
+	          callbacks: {
+	            title: function(tooltipItems, data) {
+	              return;
+	            },
+	            label: function(tooltipItem, data) {
+	              // var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
+	              // if (label) {
+	              //     label += ': ';
+	              // }
+	              label = tooltipItem.xLabel + ': ' + Math.round(tooltipItem.yLabel * 100) / 100;
+	              return label+=" mm";
+
+	            }
+	          }
+	        }
+	    }
+	});
+</script>
 
 {% endblock %}

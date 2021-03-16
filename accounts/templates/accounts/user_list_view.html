@@ -26,7 +26,7 @@
 	<div class="post-content">
 
 		{% if user_list %}
-			<table style="width:100%">
+			<table class="table-fullwidth">
 				<tr>
 					<th>Email address</th>
 					<th>Name</th>
@@ -34,7 +34,7 @@
 	    			<th>Date joined</th>
 				</tr>
 				{% for user in user_list %}
-					<tr style="text-align:left;"> 
+					<tr> 
 						<td>{{ user.email }}</td>
 						<td>{{ user.last_name }}, {{ user.first_name}}</td>
 						<td>{{ user.authority.authority_name }} </td>

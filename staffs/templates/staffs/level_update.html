@@ -2,36 +2,40 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-	<article class="post">
-		{% if messages %}
-		<ul class="alert messages">
-		    {% for message in messages %}
-		    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-		    {% endfor %}
-		</ul>
-		<br>
-		{% endif %}
-		<header class="post-header">
-			<h1 class="post-title text-center">Updating record </h1>
-		</header>
+<article class="post">
 
-		<div class="post-content">
-			<form class="site-form" method="post">
-			    {% csrf_token %}
-			    {{ form.as_p }}
-			    <br>
-			    <div class="grid-2">
-			    	<div>
-			    		<button class="px-3 py-1 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit"> Next </button>
-			    	</div>
-			    	<div>
-					    <a class="px-3 py-2 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:level-delete' level_id %}">Delete</a>
-					</div>
-			    </div>
-			    
-			</form>
-		</div>
-	</article>
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
+
+	<header class="post-header">
+		<h1 class="post-title text-center">Updating record </h1>
+	</header>
+
+	<div class="post-content">
+		<form class="site-form" method="post">
+		    {% csrf_token %}
+		    {{ form.as_p }}
+		    <br>
+		    <div class="grid-2">
+		    	<div>
+		    		<button class="px-3 py-1 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit"> Next </button>
+		    	</div>
+		    	<div>
+				    <a class="px-3 py-2 border border-transparent text-sm leading-1 font-small rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:level-delete' level_id %}">Delete</a>
+				</div>
+		    </div>
+		    
+		</form>
+	</div>
+</article>
 
  {% endblock %}
 

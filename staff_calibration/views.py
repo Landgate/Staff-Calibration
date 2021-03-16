@@ -257,47 +257,51 @@ def generate_report_view(request, update_index):
     # Find the range value from the range database
     month = observation_date.strftime('%b')
     range_value = RangeParameters.objects.values_list('pin', month)
-
-    # extract data
-    staff_reading = raw_data.values_list(
-                        'pin_number','staff_reading','number_of_readings','standard_deviations')
-    staff_reading = [list(x) for x in staff_reading]
-    # preprocess data        
-    staff_reading2 = preprocess_staff(staff_reading)
-            
-    # compute scale factor
-    CF, GradUnc, StaffCorrections, CF0, T_at_CF_1, Correction_Lists = process_correction_factor(staff_reading2, 
-                                                                                                range_value, 
-                                                                                                Staff_Attributes)
-    # Observer
-    if uCalibrationUpdate.objects.get(update_index=update_index).observer:
-        observer = uCalibrationUpdate.objects.get(update_index=update_index).observer
-    else:
-        observer = uCalibrationUpdate.objects.get(update_index=update_index).user
-        if not observer.first_name:
-            observer = observer.email
+    if range_value.exists():
+        # extract data
+        staff_reading = raw_data.values_list(
+                            'pin_number','staff_reading','number_of_readings','standard_deviations')
+        staff_reading = [list(x) for x in staff_reading]
+        # preprocess data        
+        staff_reading2 = preprocess_staff(staff_reading)
+                
+        # compute scale factor
+        CF, GradUnc, StaffCorrections, CF0, T_at_CF_1, Correction_Lists = process_correction_factor(staff_reading2, 
+                                                                                                    range_value, 
+                                                                                                    Staff_Attributes)
+        # Observer
+        if uCalibrationUpdate.objects.get(update_index=update_index).observer:
+            observer = uCalibrationUpdate.objects.get(update_index=update_index).observer
         else:
-            observer = observer.first_name +' '+observer.last_name
-    #print(Correction_Lists)
-    context = {
-                'update_index': update_index,
-                'observation_date': observation_date.strftime('%d/%m/%Y'),
-                'staff_number': staff_number,
-                'staff_length': Staff.objects.get(staff_number=staff_number).staff_length,
-                'staff_type': StaffType.objects.get(staff__staff_number=staff_number).staff_type,
-                'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
-                'level_number': level_number,
-                'observer': observer,
-                'average_temperature': ave_temperature,
-                'ScaleFactor': CF,
-                'GraduationUncertainty': GradUnc,
-                'StaffCorrections': StaffCorrections,
-                'ScaleFactor0': CF0,
-                'Temperatre_at_1': T_at_CF_1,
-                'CorrectionList': Correction_Lists,
-                'today': datetime.now().strftime('%d/%m/%Y  %I:%M:%S %p'),
-            }
-
-    result = generate_pdf('staff_calibration/pdf_staff_report.html', file_object=resp, context=context)
-    return  result
+            observer = uCalibrationUpdate.objects.get(update_index=update_index).user
+            if not observer.first_name:
+                observer = observer.email
+            else:
+                observer = observer.first_name +' '+observer.last_name
+        #print(Correction_Lists)
+        context = {
+                    'update_index': update_index,
+                    'observation_date': observation_date.strftime('%d/%m/%Y'),
+                    'staff_number': staff_number,
+                    'staff_length': Staff.objects.get(staff_number=staff_number).staff_length,
+                    'staff_type': StaffType.objects.get(staff__staff_number=staff_number).staff_type,
+                    'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
+                    'level_number': level_number,
+                    'observer': observer,
+                    'average_temperature': ave_temperature,
+                    'ScaleFactor': CF,
+                    'GraduationUncertainty': GradUnc,
+                    'StaffCorrections': StaffCorrections,
+                    'ScaleFactor0': CF0,
+                    'Temperatre_at_1': T_at_CF_1,
+                    'CorrectionList': Correction_Lists,
+                    'today': datetime.now().strftime('%d/%m/%Y  %I:%M:%S %p'),
+                }
+    
+        result = generate_pdf('staff_calibration/pdf_staff_report.html', file_object=resp, context=context)
+        return  result
+    else:
+        #print("Not range exists")
+        messages.warning(request, 'No range measurements exist for the month of '+month+'. Use the values as shown on the left or try again later.')
+        return redirect('staff_calibration:user-staff-lists')
     # return render(request, 'staff_calibration/staff_calibration_report.html', context)

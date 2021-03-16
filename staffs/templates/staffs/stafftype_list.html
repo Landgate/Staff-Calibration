@@ -2,63 +2,65 @@
 {% load static %}
 {% block content %}
 
-	<article class="post">
-		{% if messages %}
-		<ul class="alert messages">
-		    {% for message in messages %}
-		    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-		    {% endfor %}
-		</ul>
-		<br>
-		{% endif %}
+<article class="post">
+	<div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
 		
-		<header class="post-header">
-	    	<h1 class="post-title text-center">List of staff types and their currently accepted coefficient of expansion. </h1>
-	  	</header>
-	  	{% if user.is_authenticated %}
-			{% if stafftype_lists %}
-				<table style="width:100%; text-align:center">
+	<header class="post-header">
+    	<h1 class="post-title text-center">List of staff types and their currently accepted coefficient of expansion. </h1>
+  	</header>
+  	{% if user.is_authenticated %}
+		{% if stafftype_lists %}
+			<table class="table-fullwidth text-center">
+				<tr>
+        			<th>Staff Type</th>
+        			<th>Thermal coefficient (in ppm)</th>
+        			<th>Created on </th>
+        			<th>Last updated on</th>
+				</tr>
+				{% for staffype in stafftype_lists %}
 					<tr>
-	        			<th>Staff Type</th>
-	        			<th>Thermal coefficient (in ppm)</th>
-	        			<th>Created on </th>
-	        			<th>Last updated on</th>
+						<td class="text-left"> {{ staffype.staff_type }} </td>
+						<td>{{ staffype.thermal_coefficient|floatformat:2 }}</td>
+						<td>{{ staffype.added_on }}</td>
+						<td>{{ staffype.updated_on }}</td>
+						{% if user.is_staff %}
+						<td>
+							<a class="svg-icon edit" href="{% url 'staffs:stafftype-update' staffype.id %}" >
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+									<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+								</svg>
+							</a>
+						</td>
+						{% endif %}
 					</tr>
-					{% for staffype in stafftype_lists %}
-						<tr>
-							<td style="text-align:left"> {{ staffype.staff_type }} </td>
-							<td>{{ staffype.thermal_coefficient|floatformat:2 }}</td>
-							<td>{{ staffype.added_on }}</td>
-							<td>{{ staffype.updated_on }}</td>
-							{% if user.is_staff %}
-							<td>
-								<a class="svg-icon edit" href="{% url 'staffs:stafftype-update' staffype.id %}" >
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-										<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-									</svg>
-								</a>
-							</td>
-							{% endif %}
-						</tr>
-						
-					{% endfor %}
-				</table>
-			{% else %}
-				<p> There is currently no staff types listed </p>
-			{% endif %}
-
-			{% if user.is_staff %}
-			<br>
-			<div class="post-content">
-		        <div class="mt-5 flex justify-left">
-		        	<a class="inline-flex items-center justify-center px-2 py-1 border border-transparent text-sm rounded-md text-black bg-blue-200 hover:bg-blue-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:stafftype-create' %}">Add new staff type &raquo;
-		        	</a>
-		        </div>
-		      </div>
-			<div>
-			{% endif %}
+					
+				{% endfor %}
+			</table>
 		{% else %}
-			<p> Please <a href="{% url 'accounts:login' %}?next={{request.path}}">login</a> or <a href="{% url 'accounts:signup' %}?next={{request.path}}">signup</a> to view this list.</p>
+			<p> There is currently no staff types listed </p>
 		{% endif %}
-	</article>
+
+		{% if user.is_staff %}
+		<br>
+		<div class="post-content">
+	        <div class="mt-5 flex justify-left">
+	        	<a class="inline-flex items-center justify-center px-2 py-1 border border-transparent text-sm rounded-md text-black bg-blue-200 hover:bg-blue-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'staffs:stafftype-create' %}">Add new staff type &raquo;
+	        	</a>
+	        </div>
+	      </div>
+		<div>
+		{% endif %}
+	{% else %}
+		<p> Please <a href="{% url 'accounts:login' %}?next={{request.path}}">login</a> or <a href="{% url 'accounts:signup' %}?next={{request.path}}">signup</a> to view this list.</p>
+	{% endif %}
+</article>
 {% endblock content %}

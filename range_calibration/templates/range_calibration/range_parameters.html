@@ -4,13 +4,17 @@
 {% block content %}
 
 	<article class="post">
-    {% if messages %}
-    <ul class="alert messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
 
     <header class="post-header">
       <div class="grid-2">
@@ -48,12 +52,12 @@
         </tr>
 
         {% for data in param.data %}
-          <tr style="text-align:center">    
+          <tr class="text-center">    
             {% for value in data %}
               {% if "-" in value %}
-                <td style="font-size: 1.0em">{{ value }}</td>
+                <td>{{ value }}</td>
               {% else %}
-                <td style="font-size: 1.0em">{{ value|floatformat:5 }}</td>
+                <td>{{ value|floatformat:5 }}</td>
               {% endif %}
             {% endfor %}
           </tr>
@@ -101,100 +105,111 @@
   {% endif %}
   <hr>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  
   <br> <br>
   {% if isChart %}
-    <div class="post-content" style="width:100%">
+    <div class="post-content">
       <h3> Difference from mean height difference between Pin 1 & 21</h3>
-      <canvas id="myChart" style="background-color:#fff"></canvas>
+      <canvas id="myChart"></canvas>
     </div>
   {% endif %}
-  <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    Chart.defaults.global.defaultFontColor = 'black';
-    Chart.defaults.global.defaultFontSize = '12';
-    var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-            labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
-            datasets: [{
-                label: 'Difference from mean',
-                data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
-                backgroundColor: [
-                    '#00876c',
-                    '#39956a',
-                    '#5ba268',
-                    '#7caf67',
-                    '#9dbb66',
-                    '#bfc669',
-                    '#e2cf6f',
-                    '#e5b95d',
-                    '#e6a250',
-                    '#e68a49',
-                    '#e37248',
-                    '#dd584b',
-                ],
-                borderColor: [
-                    '#00876c',
-                    '#39956a',
-                    '#5ba268',
-                    '#7caf67',
-                    '#9dbb66',
-                    '#bfc669',
-                    '#e2cf6f',
-                    '#e5b95d',
-                    '#e6a250',
-                    '#e68a49',
-                    '#e37248',
-                    '#dd584b',
-                ],
-                pointRadius: 5,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-              position: 'bottom',
-            },
-            hover: {
-              mode: 'index'
-            },
-            scales: {
-              xAxes: [{
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Month'
-                }
-              }],
-              yAxes: [{
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Difference in mm'
-                }
-              }]
-            },
-            title: {
-              display: true,
-              //text: 'Difference from mean height difference between Pin 1 & 21 '
-            },
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItem, data) {
-                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+</article>
 
-                        if (label) {
-                            label += ': ';
-                        }
-                        label += tooltipItem.yLabel.toFixed(2);
-                        return label;
-                    }
-                }
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  Chart.defaults.global.defaultFontColor = 'black';
+  Chart.defaults.global.defaultFontSize = '12';
+  var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+          labels: {{ labels|safe }}, /*['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],*/
+          datasets: [{
+              label: {{ labels|safe }},
+              data: {{ data|safe }},/*[12, 19, 3, 5, 2, 3],*/
+              backgroundColor: [
+                  '#00876c',
+                  '#39956a',
+                  '#5ba268',
+                  '#7caf67',
+                  '#9dbb66',
+                  '#bfc669',
+                  '#e2cf6f',
+                  '#e5b95d',
+                  '#e6a250',
+                  '#e68a49',
+                  '#e37248',
+                  '#dd584b',
+              ],
+              borderColor: [
+                  '#00876c',
+                  '#39956a',
+                  '#5ba268',
+                  '#7caf67',
+                  '#9dbb66',
+                  '#bfc669',
+                  '#e2cf6f',
+                  '#e5b95d',
+                  '#e6a250',
+                  '#e68a49',
+                  '#e37248',
+                  '#dd584b',
+              ],
+              pointRadius: 5,
+          }]
+      },
+      options: {
+          responsive: true,
+          legend: {
+            position: 'bottom',
+          },
+          hover: {
+            mode: 'index'
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Month'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Difference from mean (mm)'
+              }
+            }]
+          },
+          title: {
+            // display: true,
+            // text: 'Difference from mean height difference between Pin 1 & 21 '
+          },
+          tooltips: {
+            custom: function(tooltip) {
+              if (!tooltip) return;
+              // disable displaying the color box;
+              tooltip.displayColors = false;
+            },
+            callbacks: {
+              title: function(tooltipItems, data) {
+                return;
+              },
+              label: function(tooltipItem, data) {
+                // var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                // if (label) {
+                //     label += ': ';
+                // }
+                label = tooltipItem.xLabel + ': ' + Math.round(tooltipItem.yLabel * 100) / 100;
+                return label+=" mm";
+
+              }
             }
-        }
-    });
-  </script>
- </article>
+          }
+      }
+  });
+</script>
 
 {% endblock content %}

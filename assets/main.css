@@ -2208,6 +2208,10 @@ div[data-tabs] {
   transition-duration: 150ms;
 }
 
+.float-right {
+  float:right;
+}
+
 .button {
   display: inline-block;
   padding: 5px 10px;
@@ -2221,6 +2225,14 @@ div[data-tabs] {
   border: none;
   border-radius: 5px;
   width:2em;
+}
+
+button.halfwidth {
+  width:60%;
+}
+
+button.quarterwidth {
+  width:30%;
 }
 
 .button-primary {background-color: #007bff}
@@ -2426,8 +2438,18 @@ input[type="submit"]{
 }
 
 .messages > li {
-  padding: 0.3em;
-  border-radius: 0.5em;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+}
+
+ul.message-list {
+  list-style: none;
+  margin:0;
+}
+
+ul.message-list > li {
+  padding: 0.3rem;
+  border-radius: 0.25rem;
 }
 
 .alert h2 {
@@ -2486,6 +2508,14 @@ input[type="submit"]{
   background-color:#fff;
 }
 
+table.table-fullwidth {
+  width:100%;
+}
+
+table.table-quarterwidth {
+  width:75%;
+}
+
 tr.table-summary {
    background-color:#666; 
    border-top:1px solid; 
@@ -2509,4 +2539,12 @@ tr.table-summary {
 
 :-ms-input-placeholder {
    color: #a8a8a8;
+}
+
+#authorityDiv {
+  display:none;
+}
+
+input[name="authority_abbrev"] {
+  width:20%;
 }

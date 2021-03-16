@@ -3,23 +3,20 @@
 {% block content %}
 
 
-{% if messages %}
-<div class="page-content">
-    {% for message in messages %}
-    <div class="alert {{ message.tags }}">
-        {% if 'safe' in message.tags %}
-            <h2> {{ message|safe }} </h2>
-        {% else %}
-            <h2> {{ message }} </h2>
-        {% endif %}
+  <article class="post">
+    
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
     </div>
     <br>
-    <br>
-    {% endfor %}
-</div>
-{% endif %}
 
-  <article class="post">
     <header class="post-header">
       <div class="grid-2">
         <div class="title-grid">
@@ -65,7 +62,7 @@
     <hr>
     <div class="post-content">
       <h2>Displaying staff readings </h2>
-      <table> 
+      <table class="table-fullwidth"> 
         <col width=10%>
         <tr>
           {% for header in raw_data.headers %}
@@ -74,7 +71,7 @@
         </tr>
 
         {% for a,b,c,d,e,f,g,h in raw_data.data %}
-        <tr style="text-align:center;">   
+        <tr class="text-center">   
           <td> {{a}}</td>
           <td> {{b}}</td>
           <td> {{c}}</td>
@@ -91,7 +88,7 @@
     <hr>
     <div class="page-content">
       <h2>Displaying adjusted height differences</h2>
-      <table style="width:75%; margin-left:auto;margin-right:auto"> 
+      <table class="table-quarterwidth"> 
         <tr>
           {% for header in ht_diff_data.headers %}
               <th> <strong> {{ header }} </strong> </th>
@@ -99,7 +96,7 @@
         </tr>
 
         {% for a,b,c,d in ht_diff_data.data %}
-          <tr style="text-align:center;">    
+          <tr class="text-center">    
              <td>{{ a }}</td>
              <td> {{b|floatformat:5}}</td>
              <td> {{c|floatformat:2}}</td>
@@ -112,7 +109,7 @@
     <hr>
     <div class="post-content">
     <h1>Displaying the adjustment </h1>
-      <table> 
+      <table class="table-fullwidth"> 
         <col width=10%>
         <tr>
           {% for header in adj_data.headers %}
@@ -121,7 +118,7 @@
         </tr>
 
         {% for a,b,c,d,e,f,g in adj_data.data %}
-        <tr style="text-align:center;">   
+        <tr class="text-center">   
           <td> {{a}}</td>
           <td> {{b|floatformat:5}}</td>
           <td> {{c|floatformat:5}}</td>

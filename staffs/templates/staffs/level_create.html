@@ -4,6 +4,18 @@
 {% block content %}
 
 <article class="post">
+	
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
+    </div>
+
 	{% if form.errors %}
 		<div class="post-content alert error">
 	    {% for field in form %}

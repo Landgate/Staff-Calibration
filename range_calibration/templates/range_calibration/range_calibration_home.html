@@ -4,21 +4,18 @@
 {% block content %}
 
 	<article class="post">
-    {% if messages %}
-    <div class="page-content">
-        {% for message in messages %}
-        <div class="alert {{ message.tags }}">
-            {% if 'safe' in message.tags %}
-                <p> {{ message|safe }}  <span class="close">&#10799;</span></p>
-            {% else %}
-                <p> {{ message }}  <span class="close">&#10799;</span></p>
-            {% endif %}
-
-        </div>
-        <br>
-        {% endfor %}
+    
+    <div class="post-content">
+      {% if messages %}
+      <ul class="message-list">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      <br>
+      {% endif %}
     </div>
-    {% endif %}
+    <br>
 
     <header class="post-header">
       <h1 class="post-title text-center">Ready to start the Boya Range Calibration? </h1>
@@ -38,14 +35,14 @@
       {% if user.is_authenticated %}
       <div>
         <h2> Click on the link below to view individual reports </h2>
-      	<table>
-      		<tr style="text-align:center;">
-      			<th> <h3> Unique Index </h3> </th>    	
-  	    		<th> <h3> Observed Date </h3> </th>
-  	    		<th> <h3> Staff Number </h3> </th>
-  	    		<th> <h3> Level Number </h3> </th>
-  	    		<th> <h3> Observer </h3> </th>
-  	    		<th> <h3> Report </h3></th>
+      	<table class="table-fullwidth text-sm">
+      		<tr>
+      			<th> <p> Unique Index </p> </th>    	
+  	    		<th> <p> Observed Date </p> </th>
+  	    		<th> <p> Staff Number </p> </th>
+  	    		<th> <p> Level Number </p> </th>
+  	    		<th> <p> Observer </p> </th>
+  	    		<th> <p> Report </p></th>
       		</tr>
           {% if object_list %}
         		{% for item in object_list %}
@@ -55,7 +52,14 @@
       	    		<td> {{ item.staff_number.staff_number }} </td>
       	    		<td> {{ item.level_number.level_number }} </td>
       	    		<td> {{ item.surveyor }} </td>
-      	    		<td> <a class="px-2 py-1 border border-transparent text-xs leading-2 rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'range_calibration:range-report' item.update_index %}"> Report&raquo;</a> </td>
+      	    		<td> 
+                  <a class="px-1 py-1 border border-transparent text-xs leading-2 rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'range_calibration:range-report' item.update_index %}"> 
+                    Report&raquo;
+                  </a> <span>
+                  <a class="ml-2 px-1 py-1 border border-transparent text-xs leading-2 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'range_calibration:delete-report' item.update_index %}"> 
+                    Delete
+                  </a> </span>
+                </td>
           		</tr>
             {% endfor %}
           {% else %}
@@ -68,13 +72,13 @@
       {% else %}
         <p>Please login or signup to view or calibrate the Boya Staff Range.</p>
         <div class="single-item-container">
-          <button class="mr-4 px-2 py-1 border border-transparent text-xs font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/login/'">Log in</button>
+          <button class="mr-4 px-2 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/login/'">Log in</button>
           or 
-          <button class="ml-4 px-2 py-1 border border-transparent text-xs font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/signup/'">Sign up</button>
+          <button class="ml-4 px-2 py-1 border border-transparent text-sm font-small rounded text-white bg-blue-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onclick="location.href='/accounts/signup/'">Sign up</button>
         </div>
       {% endif %}
       <!--Pagination-->
-
+      <br>
     {% if is_paginated %}
       <div class="grid-3">
       	<!-- <ul class="pagination pg-blue"> -->
@@ -112,5 +116,16 @@
       </div>
     {% endif %}
   </article>
+
+<script type="text/javascript">
+  const lis = [...document.querySelectorAll('.messages li')];
+
+  for (const li of lis) {
+    li.addEventListener('click', function() {
+      this.parentNode.removeChild(this);
+    })
+  }
+</script>
+
 
 {% endblock content %}

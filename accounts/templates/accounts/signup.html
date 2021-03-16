@@ -29,11 +29,11 @@
 		    	{% if field.name == "authority"%}
 		    		<p>{{ field.label_tag }} {{ field }}</p>
 
-			    	<p id="authorityDiv" name="authority_input" style="display:none;">
+			    	<p id="authorityDiv" name="authority_input">
 					    <label for="authority_name">Company Name*:</label> 
 					    <input type="text" name="authority_name" placeholder="">
 					    <label for="authority_abbrev">Abbreviation*:</label> 
-					    <input style="width:15%" type="text" name="authority_abbrev" placeholder="Short name">
+					    <input type="text" name="authority_abbrev" placeholder="Short name">
 					</p>
 			    
 		    	{% else %}
@@ -58,11 +58,13 @@
 		    </div>
 		    <br>
 		    <div class="grid-2">
-		    	<div>
-		    		<button  style="width:6em" class="px-2 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit"> Signup </button>
+		    	<div class="grid-item justify-start">
+		    		<button class="quarterwidth px-3 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit"> Signup 
+		    		</button>
 		    	</div>
-		    	<div>
-		    		<a class="px-2 py-1 border border-transparent text-sm leading-3 font-small rounded text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'accounts:login' %}">Go to Login &#8811;</a>
+		    	
+		    	<div class="grid-item justify-center">
+		    		<a class="px-3 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-gray-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" href="{% url 'accounts:login' %}">Go to Login &#8811;</a>
 		    	</div>
 		    </div>
 		    
@@ -70,6 +72,9 @@
 		</form>
 	</div>
 </article>
+
+
+<!-- <script type="text/javascript" src="{% static 'main.js' %}"></script> -->
 
 <script type="text/javascript">
 	// const log = console.log;
@@ -81,34 +86,15 @@
 	  const value = select.value;
 	  const desc = select.options[select.selectedIndex].text;
 	  // log(`value desc`, value, desc);
-	  if (desc=="Other") {
+	  if (desc=="Others") {
 	  	document.getElementById("authorityDiv").style.display = "block";
 	  } else {
 	  	document.getElementById("authorityDiv").style.display = "none";
 	  }
 	});
 	</script>
+
+
  {% endblock content %}
 
 
- <!-- {% if field.name == "authority"%}
-		    		<p> {{ field.label_tag }}
-		    			<select name="authority_dropdown" onchange="admSelectCheck(this);">
-					        {% for f in field  %}
-					       		<option value="{{ f }}">{{ f.value }}</option>
-					       	{% endfor %}
-					       	<option value="Other">Other</option>
-					    </select>
-		    		</p>
-
-		    		<p id="admDivCheck" name="authority_input" style="display:none;">
-					    <label for="authority_name">Company Name*:</label> 
-					    <input type="text" name="authority_name" placeholder="">
-					    <label for="authority_abbrev">Abbreviation*:</label> 
-					    <input style="width:15%" type="text" name="authority_abbrev" placeholder="Short name">
-					</p>
-		    		
-		    	{% else %} -->
-		    		<!-- <p>{{ field.label_tag }} {{ field }}</p> -->
-
-		    	<!-- {% endif %} -->
