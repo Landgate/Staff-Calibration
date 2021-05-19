@@ -18,9 +18,6 @@ Download the [```Staff-Calibration```](https://github.com/Landgate/Staff-Calibra
 
 Install ```Python 3``` or ```Anaconda 3```. Note that this application has been tested with ```Python 3.8.8```
 
-Install the python packages from the requirements.txt from the Command Prompt:
-
-``` pip install -r requirements.txt```
 
 In your Command Prompt, go to the working directory and type the following:
 
@@ -29,7 +26,7 @@ In your Command Prompt, go to the working directory and type the following:
 
 	virtual venv
 
-	.\venv\Script\activate
+	.\venv\Scripts\activate
 
 	pip install -r requirements.txt
 
