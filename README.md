@@ -14,33 +14,32 @@ Python 3.8 or higher plus see requirements.txt
 
 ### Installation
 
-Download the [```Staff-Calibration```](https://github.com/Landgate/Staff-Calibration.git) package and unzip to your working directory. 
+Download the [```Staff-Calibration```](https://github.com/Landgate/Staff-Calibration.git) package and unzip to your working directory (e.g., "C:/Data/Development/django-projects/"). 
 
 Install ```Python 3``` or ```Anaconda 3```. Note that this application has been tested with ```Python 3.8.8```
 
+Install a python package called "virtualenv" from the command prompt ```pip install virtualenv ```
 
-In your Command Prompt, go to the working directory and type the following:
+In your working directory (e.g., "C:/Data/Development/django-projects/"), create a virtual python environment called "venv" in the command prompt and activate the virtual environment:
+
+```
+	cd C:/Data/Development/django-projects/
+	virtualenv venv
+	.\venv\Scripts\activate
+```
+Navigate to "Staff-Calibration" - install python requirements and migrate the default package. 
 
 ```	
 	cd Staff-Calibration
-
-	virtual venv
-
-	.\venv\Scripts\activate
-
 	pip install -r requirements.txt
-
 	python manage.py makemigrations
-
 	python manage.py migrate
 ```
 
 Type the email address and password when prompted. If migration is successful, type:
 
 ```
-
 	python manage.py runserver
-
 ```
 
 Open the internet browser and copy the development server address to view the website. More information is provided under docs/_build/html
