@@ -30,7 +30,6 @@
 	{% endif %}
 	<header class="post-header">
 	    <h1 class="post-title text-center">Enter the following information </h1>
-	    <p class="text-center">(Note that your input csv/txt file must have a header as described at the end of <a href="{% url 'staff_calibration:staff-guide' %}">this guideline</a>) </p>
 	</header>
 
 	<div class="post-content">
@@ -87,6 +86,7 @@
 			    <tr>
 			    	<td> <h3> Select your csv file: </h3></td>
 			    	<td> {{ form.document }}</td>
+					<td>Format the input file as per <a href="{% url 'staff_calibration:staff-guide' %}" target="_blank">this guideline</a></td>
 			    </tr>
 			</table>
 			<div class="grid-2">
