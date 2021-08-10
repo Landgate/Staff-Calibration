@@ -586,7 +586,7 @@ def range_report(request, update_index):
     # Range measurement attributes
     staff_number = Calibration_Update.objects.get(update_index=update_index).staff_number.staff_number
     level_number = Calibration_Update.objects.get(update_index=update_index).level_number
-    observation_date = datetime.strptime(update_index.split('-')[0],'%Y%m%d').date(),
+    observation_date = datetime.strptime(update_index.split('-')[0],'%Y%m%d').strftime('%d-%m-%Y')
 
     observer = Calibration_Update.objects.get(update_index=update_index).surveyor
     if observer.first_name:
@@ -730,7 +730,7 @@ def print_report(request, update_index):
     # Range measurement attributes
     staff_number = Calibration_Update.objects.get(update_index=update_index).staff_number.staff_number
     level_number = Calibration_Update.objects.get(update_index=update_index).level_number
-    observation_date = datetime.strptime(update_index.split('-')[0],'%Y%m%d').date(),
+    observation_date = datetime.strptime(update_index.split('-')[0],'%Y%m%d').date()
 
     observer = Calibration_Update.objects.get(update_index=update_index).surveyor
     if observer.first_name:
