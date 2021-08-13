@@ -220,10 +220,11 @@ def upload_range_data(apps, schema_editor):
     RangeParameters = apps.get_model("range_calibration", "RangeParameters")
 
 	# Starting to read the files
-    root_dir = "data/range_data"
+    root_dir_key = "data/range_data"
+    root_dir_val = "data/range_data/20172297"
     # Reading the temperature record
-    if os.path.exists(os.path.join(root_dir, 'temperatures.csv')):
-        with open(os.path.join(root_dir, 'temperatures.csv'), 'r', newline='') as f:
+    if os.path.exists(os.path.join(root_dir_key, 'temperatures.csv')):
+        with open(os.path.join(root_dir_key, 'temperatures.csv'), 'r', newline='') as f:
             csv_reader = csv.reader(f, delimiter=',')
             next(csv_reader)
             temperatures = []
@@ -246,11 +247,12 @@ def upload_range_data(apps, schema_editor):
             temperatures = np.array(temperatures, dtype=object)
     # reading thef older    
     k = 0
-    for root, dirs, files in os.walk(root_dir):
+    for root, dirs, files in os.walk(root_dir_val):
         for filename in files:
             if filename.endswith(('.ASC', '.asc')):
                 file_path = os.path.join(root, filename).replace('\\','/')
                 #print(file_path.split('/')[2].split('-')[0])
+                print(file_path)
                 observation_date = datetime.strptime(file_path.split('/')[3].split('-')[0], '%Y%m%d').date()
                 staff_number = Staff.objects.get(staff_number = file_path.split('/')[3].split('-')[1])
                 update_index = observation_date.strftime('%Y%m%d')+'-'+staff_number.staff_number
