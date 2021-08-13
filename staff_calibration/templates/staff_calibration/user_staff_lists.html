@@ -25,11 +25,13 @@
 		{% if staff_lists %}
 			<table>
 				<colgroup>
-					<col span="1" width="20%">
+					<col span="1" width="18%">
 					<col span="1" width="14%">
 					<col span="1" width="14%">
 					<col span="1" width="14%">
 					<col span="1" width="14%">
+					<col span="1" width="14%">
+					<col span="1" width="8%">
 				</colgroup>
 				<tr>
 					<th>Staff ID</th>
@@ -46,17 +48,15 @@
 						<td>{{ staff.staff_number.staff_type }} </td>
 						<td>{{ staff.correction_factor|floatformat:6 }}</td>
 						<td>{{ staff.correction_factor_temperature|floatformat:0 }}&#8451;</td>
-						<td>{{ staff.calibration_date }} 
+						<td>{{ staff.calibration_date }} </td>
+						<td>
 							<a class="px-1 py-1 border border-transparent text-xs rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:generate-report' staff.update_index %}" target="_blank">Print pdf</a></td>
 						</td>
-						<!-- <td>
-							<a style="vertical-align:middle; float:center" href="{% url 'staff_calibration:user-staff-delete' staff.update_index %}" >
-					          	<svg class="trashcan" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" onclick="return confirmation()">
-					 			 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-					 			 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-								</svg>
-							</a>
-						</td> -->
+						<td>
+							<a class="ml-2 px-2 py-1 border border-transparent text-xs rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:user-staff-delete' staff.update_index %}" onclick="return confirmation()"> 
+								Delete
+							  </a>
+						</td>
 					</tr>
 					
 				{% endfor %}
@@ -69,7 +69,7 @@
 
 <script type="text/javascript">
 	function confirmation() {
-      return confirm('Are you sure you want to do this?');
+      return confirm('Are you sure you want to delete this calibration record?');
     }
 </script>
 
