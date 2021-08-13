@@ -1,12 +1,12 @@
 from django.http import HttpResponse #JsonResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.views import generic
-from django.db.models import Avg, Sum
+from django.db.models import Avg
 from datetime import date
 from django.conf import settings
-from django.core.files.storage import DefaultStorage, FileSystemStorage
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
@@ -212,7 +212,7 @@ class RangeCalibrationWizard(LoginRequiredMixin, SessionWizardView):
             raise PermissionDenied()
 
     # directory to store the ascii files
-    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'range_data/uploads')) #
+    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, '/range_data/uploads/')) #
     
     # get the user
     def get_form_kwargs(self, step=1):
