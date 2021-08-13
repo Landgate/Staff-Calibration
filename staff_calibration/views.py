@@ -52,7 +52,7 @@ def user_staff_delete(request, update_index):
 
 # handle data file
 def handle_uploaded_file(f):
-    file_path = "data/"+f.name
+    file_path = "data/client_data/"+f.name
     with open(file_path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -166,14 +166,17 @@ def calibrate(request):
 
             if range_value.exists():
                 # read file and data
-                thisFile = request.FILES['document']
-                if thisFile.name.endswith('.csv') or thisFile.name.endswith('.txt'):
-                    io_string = io.StringIO(thisFile.read().decode('utf-8'))
-                    csv_reader = csv.reader(io_string, delimiter=',', quotechar="|")
-                    next(csv_reader)
-                    staff_reading = []
-                    for row in csv_reader:
-                        staff_reading.append(row)
+                # thisFile = request.FILES['document']
+                thisFile = handle_uploaded_file(data['document'])                                # path to uploaded csv
+                # if thisFile.name.endswith('.csv') or thisFile.name.endswith('.txt'):
+                #     io_string = io.StringIO(thisFile.read().decode('utf-8'))
+                if thisFile.endswith('.csv') or thisFile.endswith('.txt'):
+                    with open(thisFile, 'r') as f:
+                        csv_reader = csv.reader(f, delimiter=',', quotechar="|")
+                        next(csv_reader)
+                        staff_reading = []
+                        for row in csv_reader:
+                            staff_reading.append(row)
                 # save raw data to model
                 if uRawDataModel.objects.filter(update_index=update_index).count()<1:
                     for pin_number, reading, no_of_readings, stdev in staff_reading:
