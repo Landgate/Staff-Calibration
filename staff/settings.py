@@ -125,6 +125,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/data/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'data')
+ 
+UPLOAD_ROOT = os.path.abspath('C:/Data/Work/Staff Calibration - Testing/uploads')
+UPLOAD_URL = '/uploads/'
 
 #DOCS_URL = '/docs/'
 DOCS_ROOT = os.path.join(BASE_DIR, 'docs/_build/html')
