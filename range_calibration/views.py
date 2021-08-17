@@ -46,6 +46,7 @@ def IsNumber(value):
         check = False
     return(check)
 
+# handle data file
 def handle_uploaded_file(f):
     root_dir = os.path.join(settings.UPLOAD_ROOT, 'range_data')
     file_path = os.path.join(root_dir, f.name)
@@ -214,7 +215,7 @@ class RangeCalibrationWizard(LoginRequiredMixin, SessionWizardView):
             raise PermissionDenied()
 
     # directory to store the ascii files
-    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, '/uploads')) #
+    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads')) #
 
     # get the user
     def get_form_kwargs(self, step=1):
