@@ -47,7 +47,9 @@ def IsNumber(value):
     return(check)
 
 def handle_uploaded_file(f):
-    file_path = "data/range_data/uploads/"+f.name
+    root_dir = os.path.join(settings.UPLOAD_ROOT, 'range_data')
+    file_path = os.path.join(root_dir, f.name)
+    # file_path = "/range_data/"+f.name
     if not os.path.exists(file_path):
         with open(file_path, 'wb+') as destination:
             for chunk in f.chunks():
@@ -212,8 +214,8 @@ class RangeCalibrationWizard(LoginRequiredMixin, SessionWizardView):
             raise PermissionDenied()
 
     # directory to store the ascii files
-    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, '/range_data/uploads/')) #
-    
+    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, '/uploads')) #
+
     # get the user
     def get_form_kwargs(self, step=1):
         kwargs = super(RangeCalibrationWizard, self).get_form_kwargs(step)
