@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-import csv, io, numpy as np
+import os, csv, io, numpy as np
 from math import sqrt
 from .forms import StaffForm
 from .models import uCalibrationUpdate, uRawDataModel
@@ -9,9 +9,10 @@ from range_calibration.models import RangeParameters
 from datetime import date
 from django.contrib.auth.decorators import login_required 
 from django.core.exceptions import ObjectDoesNotExist
-from datetime import datetime
+from datetime import datetime, date
 from staffs.models import Staff
 from django.db.models import Q
+from django.conf import settings
 #from accounts.models import CustomUser
 # Create your views here.
 
@@ -52,7 +53,9 @@ def user_staff_delete(request, update_index):
 
 # handle data file
 def handle_uploaded_file(f):
-    file_path = "data/client_data/"+f.name
+    root_dir = os.path.join(settings.UPLOAD_ROOT, 'client_data')
+    file_path = os.path.join(root_dir, f.name[:-4]+'-'+date.today().strftime('%Y%m%d')+'.csv')
+    # file_path = "data/client_data/"+f.name
     with open(file_path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -167,7 +170,7 @@ def calibrate(request):
             if range_value.exists():
                 # read file and data
                 # thisFile = request.FILES['document']
-                thisFile = handle_uploaded_file(data['document'])                                # path to uploaded csv
+                thisFile = handle_uploaded_file(data['document'])                                # Save file to path
                 # if thisFile.name.endswith('.csv') or thisFile.name.endswith('.txt'):
                 #     io_string = io.StringIO(thisFile.read().decode('utf-8'))
                 if thisFile.endswith('.csv') or thisFile.endswith('.txt'):
