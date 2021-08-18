@@ -31,5 +31,5 @@ class RangeForm2(forms.Form):
     start_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
     end_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
     
-    
-    document = forms.FileField()
+    document = forms.FileField(widget=forms.FileInput(attrs={'accept' : '.asc'}))
+    #document = forms.FileField()
