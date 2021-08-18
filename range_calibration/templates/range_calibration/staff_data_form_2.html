@@ -36,20 +36,24 @@
 			        <tr>
 						<td> <h3>Enter start temperature 1:</h3> </td>
 					    <td> <h3> {{ form.start_temperature_1 }} </h3> </td>
+						<td>(in &deg;C)</td>
 					</tr>
 
 					<tr>
 				    	<td> <h3> Enter end temperature 1: </h3> </td>
 				    	<td> <h3> {{ form.end_temperature_1 }} </h3> </td>
+						<td>(in &deg;C)</td>
 				    </tr>
 				    <tr>
 						<td> <h3>Enter start temperature 2:</h3> </td>
 					     <td> <h3> {{ form.start_temperature_2 }} </h3> </td>
+						 <td>(in &deg;C)</td>
 					</tr>
 
 					<tr>
 				    	<td> <h3> Enter end temperature 2: </h3> </td>
 				    	<td> <h3> {{ form.end_temperature_2 }} </h3> </td>
+						<td>(in &deg;C)</td>
 				    </tr>
 			    {% endif %}
 			</table>
@@ -59,7 +63,9 @@
 					<td> {{ form.document }} </td>
 				</tr>
 			</table>
-
+			Important note: Accepts only ASCII files from Leica DNA03 and LS15.
+			<br>
+			<br>
 			{% if wizard.steps.prev %}
 			<div class="grid-3">
 				<button class="halfwidth px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}" formnovalidate="formnovalidate">{% trans "First" %}</button>
