@@ -46,7 +46,7 @@
 					<td> {{ staff.staff_number }} </td>
 					<td>{{ staff.staff_type }} </td>
 					<td>{{ staff.staff_length }}</td>
-					{% if staff.staff_type.staff_type == "Invar" %}
+					{% if staff.correction_factor|abs <= 0.01 %}
 						<td>{{ staff.correction_factor| addition:1|floatformat:7 }}</td>
 					{% else %}
 					 	<td>{{ staff.correction_factor|floatformat:7 }}</td>
