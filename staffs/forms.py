@@ -56,21 +56,23 @@ class StaffForm(forms.ModelForm):
             if correction_factor >= 0.99 or correction_factor <= 1.01:
                 return correction_factor
             else:  
-                raise forms.ValidationError('The scale factor you have entered is not valid')         
+                raise forms.ValidationError('The scale factor you have entered is not valid')     
 
     def clean_calibration_date(self):
         correction_factor = self.cleaned_data['correction_factor']
         calibration_date = self.cleaned_data['calibration_date']
- 
+
         if calibration_date and not correction_factor:
             raise forms.ValidationError('You have a calibration date but did not provide a corrector factor. If you have a calibration record, provide the details.')
         elif correction_factor and not calibration_date:
             raise forms.ValidationError('You have given a scale factor but no calibration date. If you have a calibration record, provide the details.')
-        elif correction_factor < 0.99 or correction_factor > 1.01:
-            raise forms.ValidationError('The scale factor you have entered is not valid')   
-        if calibration_date and calibration_date > date.today():
-            raise forms.ValidationError('Please provide a valid date of your staff calibration')
-        return calibration_date
+        elif correction_factor and calibration_date:
+            if correction_factor < 0.99 or correction_factor > 1.01:
+                raise forms.ValidationError('The scale factor you have entered is not valid')   
+            elif calibration_date and calibration_date > date.today():
+                raise forms.ValidationError('Please provide a valid date of your staff calibration')
+            else:
+                return calibration_date
         
             
 
@@ -131,7 +133,7 @@ class StaffUpdateForm(forms.ModelForm):
             if correction_factor >= 0.99 or correction_factor <= 1.01:
                 return correction_factor
             else:  
-                raise forms.ValidationError('The scale factor you have entered is not valid')         
+                raise forms.ValidationError('The scale factor you have entered is not valid')     
 
     def clean_calibration_date(self):
         correction_factor = self.cleaned_data['correction_factor']
@@ -141,12 +143,14 @@ class StaffUpdateForm(forms.ModelForm):
             raise forms.ValidationError('You have a calibration date but did not provide a corrector factor. If you have a calibration record, provide the details.')
         elif correction_factor and not calibration_date:
             raise forms.ValidationError('You have given a scale factor but no calibration date. If you have a calibration record, provide the details.')
-        elif correction_factor < 0.99 or correction_factor > 1.01:
-            raise forms.ValidationError('The scale factor you have entered is not valid')   
-        if calibration_date and calibration_date > date.today():
-            raise forms.ValidationError('Please provide a valid date of your staff calibration')
-        return calibration_date
-        
+        elif correction_factor and calibration_date:
+            if correction_factor < 0.99 or correction_factor > 1.01:
+                raise forms.ValidationError('The scale factor you have entered is not valid')   
+            elif calibration_date and calibration_date > date.today():
+                raise forms.ValidationError('Please provide a valid date of your staff calibration')
+            else:
+                return calibration_date
+
 class DigitalLevelUpdateForm(forms.ModelForm):
     class Meta:
         model = DigitalLevel
