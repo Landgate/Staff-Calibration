@@ -21,6 +21,17 @@
   	</header>
 	<hr>
 	<br>
+	{% if form.errors %}
+		<div class="post-content alert error">
+	    {% for field in form %}
+	        {% for error in field.errors %}
+	            <p> {{ error }} </p>
+	        {% endfor %}
+	    {% endfor %}
+	    </div>
+	    <br>
+	{% endif %}
+	<br>
 	<div class="post-content">
 		<form class="site-form" method="post">
 		    {% csrf_token %}
