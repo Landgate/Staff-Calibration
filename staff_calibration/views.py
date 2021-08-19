@@ -150,7 +150,17 @@ def calibrate(request):
             staff_number = data['staff_number'].staff_number
             level_number = data['level_number'].level_number
             observation_date = data['calibration_date']
-            observer = data['last_name'] + ', ' + data['first_name']
+            if data['last_name']:
+                observer = data['last_name'] + ', ' + data['first_name']
+            elif request.user.last_name:
+                observer = request.user.last_name + ', '+ request.user.first_name
+            else:
+                observer = request.user.email
+            if request.user.authority:
+                authority =  request.user.authority.authority_name
+            else:
+                authority = 'Langate'
+
             update_index = data['calibration_date'].strftime('%Y%m%d')+'-'+data['staff_number'].staff_number
             st_tmp = data['start_temperature']; end_tmp = data['end_temperature']
             ave_temperature = (float(st_tmp)+float(end_tmp))/2
@@ -211,9 +221,8 @@ def calibrate(request):
                     this_staff.calibration_date = observation_date
                     this_staff.correction_factor = round(CF,6)
                     this_staff.save()
-                if not observer:
-                    observer = request.user.first_name +' ' + request.user.last_name
-
+                
+                # Prepare to populate data
                 context = {
                     'update_index': update_index,
                     'observation_date': observation_date.strftime('%d/%m/%Y'),
@@ -223,6 +232,7 @@ def calibrate(request):
                     'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
                     'level_number': level_number,
                     'observer': observer,
+                    'authority': authority,
                     'average_temperature': ave_temperature,
                     'ScaleFactor': CF,
                     'GraduationUncertainty': GradUnc,
@@ -273,14 +283,15 @@ def generate_report_view(request, update_index):
                                                                                                     range_value, 
                                                                                                     Staff_Attributes)
         # Observer
-        if uCalibrationUpdate.objects.get(update_index=update_index).observer:
-            observer = uCalibrationUpdate.objects.get(update_index=update_index).observer
-        else:
-            observer = uCalibrationUpdate.objects.get(update_index=update_index).user
-            if not observer.first_name:
-                observer = observer.email
+        observer = uCalibrationUpdate.objects.get(update_index=update_index)
+        if observer.observer == ',':
+            if request.user__last_name:
+                observer = request.user__last_name + ', '+ request.user__first_name
             else:
-                observer = observer.first_name +' '+observer.last_name
+                observer = request.user__email
+        else:
+            observer = observer.observer
+        print(observer)
         #print(Correction_Lists)
         context = {
                     'update_index': update_index,
