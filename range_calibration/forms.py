@@ -15,8 +15,8 @@ class RangeForm1(forms.ModelForm):
         model = Calibration_Update
         fields = ['staff_number', 'level_number', 'observation_date']
         widgets = {
-            'staff_number': forms.Select(),
-            'level_number': forms.Select(),
+            'staff_number': forms.Select(attrs={'required': 'true'}),
+            'level_number': forms.Select(attrs={'required': 'true'}),
             'observation_date': forms.DateInput(format=('%d-%m-%Y'), attrs={'class':'django-forms', 'placeholder':'Select a date', 'type':'date'}),
             }
 
@@ -25,11 +25,11 @@ class RangeForm2(forms.Form):
         user = kwargs.pop('user', None)
         super(RangeForm2, self).__init__(*args, **kwargs)
 
-    start_temperature_1 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
-    end_temperature_1 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
+    start_temperature_1 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45','required': 'true'}))
+    end_temperature_1 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45','required': 'true'}))
     
-    start_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
-    end_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45'}))
+    start_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45','required': 'true'}))
+    end_temperature_2 = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder':'Enter 0-45','required': 'true'}))
     
-    document = forms.FileField(widget=forms.FileInput(attrs={'accept' : '.asc'}))
+    document = forms.FileField(widget=forms.FileInput(attrs={'accept' : '.asc','required': 'true'}))
     #document = forms.FileField()
