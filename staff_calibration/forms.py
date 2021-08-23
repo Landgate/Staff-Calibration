@@ -15,8 +15,8 @@ class StaffForm(forms.ModelForm):
         model = uCalibrationUpdate
         fields = ['staff_number', 'level_number', 'calibration_date', 'first_name', 'last_name','start_temperature', 'end_temperature', 'document']
         widgets = {
-            'staff_number': forms.Select(),
-            'level_number': forms.Select(),
+            'staff_number': forms.Select(attrs={'required': 'true'}),
+            'level_number': forms.Select(attrs={'required': 'true'}),
             'calibration_date': forms.DateInput(format=('%d-%m-%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
             }
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder':'Enter first name'}))
