@@ -81,11 +81,11 @@
 						<button class="quarterwidth px-2 py-2 border border-transparent text-sm leading-3 font-small rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit" value="continue"> Continue&#8811; </button> 
 					</div>
 					
-					<a href="{% url 'range_calibration:range-home' %}">
-						<button class="quarterwidth px-2 py-2 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"> Cancel
-						</button>
-					</a>
-					
+					<div class="mt-0 flex justify-left">					
+						<a href="{% url 'range_calibration:range-home' %}" class="px-6 py-2 border border-transparent text-sm leading-3 rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"> 
+							Cancel
+						</a>
+					</div>			
 				</div>
 				{% endif %}
 			
