@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-import csv, io, numpy as np
+import os, csv, io, numpy as np
 from math import sqrt
 from .forms import StaffForm
 from .models import uCalibrationUpdate, uRawDataModel
@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 from staffs.models import Staff
 from django.db.models import Q
+from django.conf import settings
 #from accounts.models import CustomUser
 # Create your views here.
 
@@ -52,7 +53,9 @@ def user_staff_delete(request, update_index):
 
 # handle data file
 def handle_uploaded_file(f):
-    file_path = "data/client_data/"+f.name
+    root_dir = os.path.join(settings.UPLOAD_ROOT, 'client_data')
+    file_path = os.path.join(root_dir, f.name[:-4]+'-'+date.today().strftime('%Y%m%d')+'.csv')
+    # file_path = "data/client_data/"+f.name
     with open(file_path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -284,14 +287,17 @@ def generate_report_view(request, update_index):
                                                                                                     Staff_Attributes)
         # Observer
         observer = uCalibrationUpdate.objects.get(update_index=update_index)
-        if observer.observer == ',':
-            if request.user__last_name:
-                observer = request.user__last_name + ', '+ request.user__first_name
-            else:
-                observer = request.user__email
+        #print(observer.observer)
+        if observer.observer is None or observer.observer == '' or observer.observer == ',':
+            try:
+                if request.user.last_name:
+                    observer = request.user.last_name + ', '+ request.user.first_name
+                else:
+                    observer = request.user.email
+            except:
+                observer = request.user.email
         else:
             observer = observer.observer
-        print(observer)
         #print(Correction_Lists)
         context = {
                     'update_index': update_index,
