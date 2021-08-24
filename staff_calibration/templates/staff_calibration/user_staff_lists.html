@@ -25,13 +25,14 @@
 		{% if staff_lists %}
 			<table>
 				<colgroup>
-					<col span="1" width="18%">
+					<col span="1" width="16%">
+					<col span="1" width="12%">
+					<col span="1" width="12%">
+					<col span="1" width="12%">
+					<col span="1" width="12%">
+					<col span="1" width="12%">
+					<col span="1" width="12%">
 					<col span="1" width="14%">
-					<col span="1" width="14%">
-					<col span="1" width="14%">
-					<col span="1" width="14%">
-					<col span="1" width="14%">
-					<col span="1" width="8%">
 				</colgroup>
 				<tr>
 					<th>Staff ID</th>
@@ -40,6 +41,7 @@
 	    			<th>Correction Factor</th>
 	    			<th>Standard Temperature</th>
 	    			<th>Calibration Date</th>
+					<th>Processed Date</th>
 				</tr>
 				{% for staff in staff_lists %}
 					<tr> 
@@ -48,7 +50,8 @@
 						<td>{{ staff.staff_number.staff_type }} </td>
 						<td>{{ staff.correction_factor|floatformat:6 }}</td>
 						<td>{{ staff.correction_factor_temperature|floatformat:0 }}&#8451;</td>
-						<td>{{ staff.calibration_date }} </td>
+						<td>{{ staff.calibration_date|date:"d/m/Y" }} </td>
+						<td>{{ staff.processed_date|date:"d/m/Y" }} </td>
 						<td>
 							<a class="px-1 py-1 border border-transparent text-xs rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:generate-report' staff.update_index %}" target="_blank">Print pdf</a></td>
 						</td>
