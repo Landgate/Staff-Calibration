@@ -25,14 +25,13 @@
 		{% if staff_lists %}
 			<table>
 				<colgroup>
-					<col span="1" width="16%">
-					<col span="1" width="12%">
-					<col span="1" width="12%">
-					<col span="1" width="12%">
-					<col span="1" width="12%">
-					<col span="1" width="12%">
-					<col span="1" width="12%">
-					<col span="1" width="14%">
+					<col span="1" width="18%">
+					<col span="1" width="11%">
+					<col span="1" width="11%">
+					<col span="1" width="11%">
+					<col span="1" width="11%">
+					<col span="1" width="11%">
+					<col span="1" width="27%">
 				</colgroup>
 				<tr>
 					<th>Staff ID</th>
@@ -51,14 +50,13 @@
 						<td>{{ staff.correction_factor|floatformat:6 }}</td>
 						<td>{{ staff.correction_factor_temperature|floatformat:0 }}&#8451;</td>
 						<td>{{ staff.calibration_date|date:"d/m/Y" }} </td>
-						<td>{{ staff.processed_date|date:"d/m/Y" }} </td>
-						<td>
-							<a class="px-1 py-1 border border-transparent text-xs rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:generate-report' staff.update_index %}" target="_blank">Print pdf</a></td>
-						</td>
-						<td>
-							<a class="ml-2 px-2 py-1 border border-transparent text-xs rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:user-staff-delete' staff.update_index %}" onclick="return confirmation()"> 
+						<td>{{ staff.processed_date|date:"d/m/Y" }} 
+							<a class="ml-1 px-2 py-1 border border-transparent text-xs rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:user-staff-delete' staff.update_index %}" onclick="return confirmation()"> 
 								Delete
-							  </a>
+							</a>
+							<a class="ml-1 px-1 py-1 border border-transparent text-xs rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out float-right" href="{% url 'staff_calibration:generate-report' staff.update_index %}" target="_blank">
+								  Print pdf
+							</a>
 						</td>
 					</tr>
 					
