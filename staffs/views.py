@@ -79,14 +79,24 @@ def staff_update(request, id):
 
 
 def staff_delete(request, id):
-    staff = get_object_or_404(Staff, id=id)
-    if (Calibration_Update.objects.filter(staff_number__staff_number = staff.staff_number).count()>0) or \
-       (uCalibrationUpdate.objects.filter(staff_number__staff_number = staff.staff_number).count()>0):
-       messages.warning(request, "Staff number "+ staff.staff_number+" cannot be deleted!")
-    else:
-       staff.delete()
-       messages.success(request, "Successfully deleted staff: "+ staff.staff_number)
-    return redirect('staffs:staff-list')
+    try:
+        staff = Staff.objects.get(user=request.user, id=id)
+        if staff:
+            print(staff.user)
+            if (Calibration_Update.objects.filter(staff_number__staff_number = staff.staff_number).count()>0) or \
+            (uCalibrationUpdate.objects.filter(staff_number__staff_number = staff.staff_number).count()>0):
+                messages.warning(request, "Staff number "+ staff.staff_number+" cannot be deleted! But you can update them.")
+            else:
+                staff.delete()
+                messages.success(request, "Successfully deleted staff: "+ staff.staff_number)
+            return redirect('staffs:staff-list')
+        else:
+            messages.error(request, "This action cannot be performed!")
+            return redirect('staffs:staff-list')
+    except:
+        messages.error(request, "This action cannot be performed! This staff does not belong to you.")
+        return redirect('staffs:staff-list')
+
 ################################################################################
 @login_required(login_url="/accounts/login")
 def stafftype_create(request):
@@ -189,14 +199,22 @@ def level_update(request, id):
 
 @login_required(login_url="/accounts/login")
 def level_delete(request, id):
-    level = DigitalLevel.objects.get(id=id)
-    if (Calibration_Update.objects.filter(level_number__level_number= level.level_number).count()>0) or \
-       (uCalibrationUpdate.objects.filter(level_number__level_number=level.level_number).count()>0):
-       messages.warning(request, "Level number "+ level.level_number+" cannot be deleted!")
-    else:
-       level.delete()
-       messages.success(request, "Successfully deleted level: "+ level.level_number+"("+level.level_make+")")
-    return redirect('staffs:level-list')
+    try:
+        level = DigitalLevel.objects.get(user=request.user, id=id)
+        if level: 
+            if (Calibration_Update.objects.filter(level_number__level_number= level.level_number).count()>0) or \
+            (uCalibrationUpdate.objects.filter(level_number__level_number=level.level_number).count()>0):
+                messages.warning(request, "Level number "+ level.level_number+" cannot be deleted!")
+            else:
+                level.delete()
+                messages.success(request, "Successfully deleted level: "+ level.level_number+"("+level.level_make+")")
+            return redirect('staffs:level-list')
+        else:
+            messages.error(request, "This action cannot be performed!")
+            return redirect('staffs:level-list')
+    except:
+        messages.error(request, "This action cannot be performed! This staff does not belong to you.")
+        return redirect('staffs:level-list')
 ###############################################################################
 # def surveyor_list(request):
 #     surveyor_list = Surveyors.objects.all()
