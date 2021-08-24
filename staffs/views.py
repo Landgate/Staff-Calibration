@@ -82,7 +82,7 @@ def staff_delete(request, id):
     try:
         staff = Staff.objects.get(user=request.user, id=id)
         if staff:
-            print(staff.user)
+            # print(staff.user)
             if (Calibration_Update.objects.filter(staff_number__staff_number = staff.staff_number).count()>0) or \
             (uCalibrationUpdate.objects.filter(staff_number__staff_number = staff.staff_number).count()>0):
                 messages.warning(request, "Staff number "+ staff.staff_number+" cannot be deleted! But you can update them.")
