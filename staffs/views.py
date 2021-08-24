@@ -82,7 +82,6 @@ def staff_delete(request, id):
     try:
         staff = Staff.objects.get(user=request.user, id=id)
         if staff:
-            # print(staff.user)
             if (Calibration_Update.objects.filter(staff_number__staff_number = staff.staff_number).count()>0) or \
             (uCalibrationUpdate.objects.filter(staff_number__staff_number = staff.staff_number).count()>0):
                 messages.warning(request, "Staff number "+ staff.staff_number+" cannot be deleted! But you can update them.")
@@ -213,7 +212,7 @@ def level_delete(request, id):
             messages.error(request, "This action cannot be performed!")
             return redirect('staffs:level-list')
     except:
-        messages.error(request, "This action cannot be performed! This staff does not belong to you.")
+        messages.error(request, "This action cannot be performed! This level does not belong to you.")
         return redirect('staffs:level-list')
 ###############################################################################
 # def surveyor_list(request):
