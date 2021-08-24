@@ -27,7 +27,7 @@ def guideview(request):
 def user_staff_lists(request):
     #print(request.user.authority)
     staff_filter = request.user.authority
-    staff_lists = uCalibrationUpdate.objects.filter(user__authority = staff_filter).order_by('-calibration_date')[:10]
+    staff_lists = uCalibrationUpdate.objects.filter(user__authority = staff_filter).order_by('-processed_date')[:10]
 
     context = {
         'staff_lists': staff_lists}
@@ -35,21 +35,24 @@ def user_staff_lists(request):
 
 # delete staffs
 def user_staff_delete(request, update_index):
-    try:
-        user_staff = uCalibrationUpdate.objects.get(user= request.user, update_index=update_index)
-        user_staff.delete()
-    except ObjectDoesNotExist:
-        messages.warning('Your staff cannot be deleted.')
     try: 
-        user_staff_data = uRawDataModel.objects.filter(user= request.user, update_index=update_index)
-        user_staff_data.delete()
-    except ObjectDoesNotExist:
-        messages.warning('Your raw data cannot be deleted.')
-    
-    if uCalibrationUpdate.objects.filter(user= request.user).exists():
+        if uCalibrationUpdate.objects.filter(user= request.user).exists():
+            # Delete Calibration update
+            user_staff = uCalibrationUpdate.objects.get(user= request.user, update_index=update_index)
+            user_staff.delete()
+            messages.success(request, 'Calibration record deleted.')
+            # Delete raw data
+            user_staff_data = uRawDataModel.objects.filter(user= request.user, update_index=update_index)
+            user_staff_data.delete()
+            messages.success(request, 'Raw data record deleted.')
+            # return to the registry list
+            return redirect('staff_calibration:user-staff-lists')
+        else:
+            messages.warning(request, 'This staff belongs to another person. You cannot delete it.')
+            return redirect('staff_calibration:user-staff-lists')
+    except:
+        messages.error(request, 'This action cannot be performed. Contact Landgate.')
         return redirect('staff_calibration:user-staff-lists')
-    else:
-        return redirect('/staff_calibration')
 
 # handle data file
 def handle_uploaded_file(f):
