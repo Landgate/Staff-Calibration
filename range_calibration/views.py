@@ -216,7 +216,7 @@ class RangeCalibrationWizard(LoginRequiredMixin, SessionWizardView):
 
     # directory to store the ascii files
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads')) #
-
+    
     # get the user
     def get_form_kwargs(self, step=1):
         kwargs = super(RangeCalibrationWizard, self).get_form_kwargs(step)
@@ -605,7 +605,7 @@ def range_report(request, update_index):
         raw_data = raw_data.values_list(
                         'obs_set','pin','temperature','frm_pin','to_pin',
                         'observed_ht_diff','corrected_ht_diff', 'standard_deviation')
-        raw_data = {'headers': ['SET','PIN','TEMPERATURE','FROM','TO','STD DEV','OBSERVED HEIGHT DIFF','CORRECTED_HEIGHT DIFF'], 'data': [list(x) for x in raw_data]} 
+        raw_data = {'headers': ['SET','PIN','TEMPERATURE','FROM','TO', 'OBSERVED HEIGHT DIFF','CORRECTED_HEIGHT DIFF', 'STD DEV'], 'data': [list(x) for x in raw_data]} 
     else:
         messages.error(request, 'No staff information to display.')
 
@@ -749,7 +749,7 @@ def print_report(request, update_index):
         raw_data = raw_data.values_list(
                         'obs_set','pin','temperature','frm_pin','to_pin',
                         'observed_ht_diff','corrected_ht_diff', 'standard_deviation')
-        raw_data = {'headers': ['SET','PIN','TEMPERATURE','FROM','TO','STD DEV','OBSERVED HEIGHT DIFF','CORRECTED_HEIGHT DIFF'], 'data': [list(x) for x in raw_data]} 
+        raw_data = {'headers': ['SET','PIN','TEMPERATURE','FROM','TO','OBSERVED HEIGHT DIFF','CORRECTED_HEIGHT DIFF','STD DEV'], 'data': [list(x) for x in raw_data]} 
     else:
         messages.error(request, 'No staff information to display.')
 
