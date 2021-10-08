@@ -30,7 +30,7 @@
 				</tr>
 				{% for level in level_lists %}
 					<tr>
-						<td> {{ level.user.authority.authority_name }} </td>
+						<td> {{ level.level_owner }} </td>
 						<td><a href="{{ level.get_absolute_url }}"> {{ level.level_number }} </a> </td>
 						<td>{{ level.level_make }}</td>
 						<td>
