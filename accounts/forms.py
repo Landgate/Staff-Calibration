@@ -14,10 +14,13 @@ class NonstickyTextInput(forms.TextInput):
         return super().get_context(name, value, attrs)
 
 class CustomUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['authority'].queryset = Authority.objects.all()
+
     email = forms.EmailField(widget=NonstickyTextInput())
     first_name = forms.CharField(widget=NonstickyTextInput())
     last_name = forms.CharField(widget=NonstickyTextInput())
-    #phone_number = forms.CharField(widget=NonstickyTextInput())
     password1 = forms.CharField(label='Password', 
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', 
