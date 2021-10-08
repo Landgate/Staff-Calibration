@@ -9,8 +9,12 @@ class StaffForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super(StaffForm, self).__init__(*args, **kwargs)
-        self.fields['staff_number'].queryset = Staff.objects.filter(user__authority = user.authority)
-        self.fields['level_number'].queryset = DigitalLevel.objects.filter(user__authority = user.authority)
+        if user.is_staff:
+            self.fields['staff_number'].queryset = Staff.objects.all()
+            self.fields['level_number'].queryset = DigitalLevel.objects.all()
+        else:
+            self.fields['staff_number'].queryset = Staff.objects.filter(staff_owner = user.authority)
+            self.fields['level_number'].queryset = DigitalLevel.objects.filter(level_owner = user.authority)
     class Meta:
         model = uCalibrationUpdate
         fields = ['staff_number', 'level_number', 'calibration_date', 'first_name', 'last_name','start_temperature', 'end_temperature', 'document']

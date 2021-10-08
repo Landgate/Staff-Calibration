@@ -25,10 +25,10 @@ def guideview(request):
 # Staff lists
 @login_required(login_url="/accounts/login")
 def user_staff_lists(request):
-    #print(request.user.authority)
-    staff_filter = request.user.authority
-    staff_lists = uCalibrationUpdate.objects.filter(user__authority = staff_filter).order_by('-processed_date')[:10]
-
+    if request.user.is_staff:
+        staff_lists = uCalibrationUpdate.objects.all().order_by('-processed_date')[:10]
+    else:
+        staff_lists = uCalibrationUpdate.objects.filter(staff_number__staff_owner = request.user.authority).order_by('-processed_date')[:10]
     context = {
         'staff_lists': staff_lists}
     return render(request, 'staff_calibration/user_staff_lists.html', context=context)
@@ -114,8 +114,8 @@ def process_correction_factor(data_set, reference_set, meta):
         pin, frm, to, diff, std = data_set[i]
         if pin in reference_set[:,0]:
             known_length = reference_set[reference_set[:,0]==pin][0][1]
-            measured_length = float(diff)* (((meta['dObsTemperature']-meta['dStdTemperature'])*
-                                   meta['dThermalCoefficient'])+1)
+            measured_length = float(diff) #* (((meta['dObsTemperature']-meta['dStdTemperature'])*meta['dThermalCoefficient'])+1)
+            corrected_length = float(diff) * (((meta['dObsTemperature']-meta['dStdTemperature'])*meta['dThermalCoefficient'])+1)
             correction = float(known_length) - float(measured_length)
             # squared differences
             sum_sq_diff[j-1,] = (float(known_length) - measured_length)**2
@@ -130,10 +130,11 @@ def process_correction_factor(data_set, reference_set, meta):
     dCorrectionFactor1 = (np.matmul(np.transpose(A), np.matmul(P, W)))/(np.matmul(np.transpose(A), np.matmul(P, A)))
     dCorrectionFactor1 = round(dCorrectionFactor1, 8)
     # Correction Factors
-    dCorrectionFactor0 = round(dCorrectionFactor1/(((meta['dStdTemperature'] - meta['dObsTemperature'])*
-                                 meta['dThermalCoefficient'])+1), 8)            # at 25degC           
-    alt_temperature = round((1+dCorrectionFactor0*(meta['dObsTemperature']*meta['dThermalCoefficient']-1))
-                            /(meta['dThermalCoefficient']*dCorrectionFactor0),1)                             # Correction Factor = 1
+    dCorrectionFactor0 = (((meta['dStdTemperature']-meta['dObsTemperature'])*meta['dThermalCoefficient'])+1)*dCorrectionFactor1
+    # dCorrectionFactor0 = round(dCorrectionFactor1/(((meta['dStdTemperature'] - meta['dObsTemperature'])*
+    #                              meta['dThermalCoefficient'])+1), 8)            # at 25degC           
+    alt_temperature = round((1+dCorrectionFactor1*(meta['dObsTemperature']*meta['dThermalCoefficient']-1))
+                            /(meta['dThermalCoefficient']*dCorrectionFactor1),1)                             # Correction Factor = 1
     # Graduation Uncertainty at 95% Confidence Interval
     graduation_uncertainty = sqrt(np.sum(sum_sq_diff)/(len(W)-1))*1.96
     # tables 1
@@ -142,7 +143,7 @@ def process_correction_factor(data_set, reference_set, meta):
     # tables 2
     list_factors_corrections = {'headers': ['Temperature','Correction Factor','Correction/metre [mm]'], 
                                 'data': generate_correction_factor(dCorrectionFactor1, meta)}
-    return dCorrectionFactor1, graduation_uncertainty, adjusted_corrections, dCorrectionFactor0, alt_temperature, list_factors_corrections   
+    return dCorrectionFactor0, graduation_uncertainty, adjusted_corrections, dCorrectionFactor1, alt_temperature, list_factors_corrections   
   
 # Staff form 
 @login_required(login_url="/accounts/login")     
@@ -265,6 +266,7 @@ def generate_report_view(request, update_index):
     raw_data = uRawDataModel.objects.filter(update_index = update_index)
     ave_temperature = uCalibrationUpdate.objects.get(update_index= update_index).observed_temperature
     staff_number = uCalibrationUpdate.objects.get(update_index=update_index).staff_number.staff_number
+    staff_owner = uCalibrationUpdate.objects.get(update_index=update_index).staff_number.staff_owner
     level_number = uCalibrationUpdate.objects.get(update_index=update_index).level_number
     observation_date = uCalibrationUpdate.objects.get(update_index= update_index).calibration_date
 
@@ -308,6 +310,7 @@ def generate_report_view(request, update_index):
                     'staff_number': staff_number,
                     'staff_length': Staff.objects.get(staff_number=staff_number).staff_length,
                     'staff_type': StaffType.objects.get(staff__staff_number=staff_number).staff_type,
+                    'authority': staff_owner,
                     'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
                     'level_number': level_number,
                     'observer': observer,
