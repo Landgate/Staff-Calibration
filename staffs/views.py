@@ -30,7 +30,6 @@ def index(request):
 @login_required(login_url="/accounts/login")
 def staff_list(request):
     user = request.user
-    print(user.authority)
     if user.is_staff:
         staff_list = Staff.objects.all().order_by('user__authority', '-calibration_date')
     else:
