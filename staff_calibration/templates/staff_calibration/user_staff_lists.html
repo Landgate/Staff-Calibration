@@ -26,25 +26,28 @@
 			<table>
 				<colgroup>
 					<col span="1" width="18%">
+					<col span="1" width="8%">
+					<col span="1" width="9%">
+					<col span="1" width="10%">
+					<col span="1" width="10%">
+					<col span="1" width="9%">
 					<col span="1" width="11%">
-					<col span="1" width="11%">
-					<col span="1" width="11%">
-					<col span="1" width="11%">
-					<col span="1" width="11%">
-					<col span="1" width="27%">
+					<col span="1" width="25%">
 				</colgroup>
 				<tr>
 					<th>Staff ID</th>
+					<th>Staff Owner</th>
 					<th>Staff Number</th>
 	    			<th>Staff Material</th>
 	    			<th>Correction Factor</th>
-	    			<th>Standard Temperature</th>
+	    			<th>Std. Temp.</th>
 	    			<th>Calibration Date</th>
 					<th>Processed Date</th>
 				</tr>
 				{% for staff in staff_lists %}
 					<tr> 
 						<td>{{ staff.update_index }}</td>
+						<td>{{ staff.staff_number.staff_owner.authority_abbrev }}</td>
 						<td>{{ staff.staff_number.staff_number }}</td>
 						<td>{{ staff.staff_number.staff_type }} </td>
 						<td>{{ staff.correction_factor|floatformat:6 }}</td>

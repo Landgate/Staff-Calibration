@@ -37,7 +37,7 @@
 			{% csrf_token %}
 			<table>
 		        <tr>
-					<td> <h3>Select or Enter Staff Number:</h3></td>
+					<td> <h3>Select Staff Number:</h3></td>
 				    <td> <h3> {{ form.staff_number }} </h3></td>
 				    <td> <span> 
 					    	<strong> Add New </strong>
@@ -52,7 +52,7 @@
 				</tr>
 
 				<tr>
-			    	<td> <h3> Select or Enter Digit Level Number: </h3> </td>
+			    	<td> <h3> Select Digit Level Number: </h3> </td>
 			    	<td> <h3> {{ form.level_number }} </h3> </td>
 			    	<td>  
 			    		<span>
@@ -90,7 +90,14 @@
 			    	<td> {{ form.document }}</td>
 					<td>Format the input file as per <a href="{% url 'staff_calibration:staff-guide' %}" target="_blank">this guideline</a></td>
 			    </tr>
+				
 			</table>
+			<div class="grid-1">
+			    <p>
+			    	<input type="checkbox" name="terms" value="Terms&Conditions" required> 
+			    	<label for="terms"> I have performed the two-peg test prior to observing the pins and it can produced upon request. </label><br>
+			    </p>
+		    </div>
 			<div class="grid-2">
 				<div class="single-item-container">
 					<button class="px-3 py-2 border border-transparent text-sm leading-3 rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" type="submit">Submit</button>

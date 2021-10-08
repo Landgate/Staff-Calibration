@@ -20,6 +20,7 @@
 	  		margin-bottom:5px;
 	  	}
 	    p { margin: 0; font-size:9pt; -pdf-keep-with-next: true; }
+		
 
 	    @page {
 	        size: a4 portrait;
@@ -48,6 +49,13 @@
 	    	border-top:1px solid #a9a9a9;
 	    	/*margin-bottom:10px;*/
 	    }
+		.warning {
+			background-color: #FFAA2C;
+		}
+		.success {
+			background-color: #6BBD6E;
+		}
+
 	</style>
 </head>
 
@@ -113,11 +121,15 @@
 	        </tr>
 	        <tr>
 	          <td> Unique ID: <strong>{{ update_index }} </strong> </td>
-	          <td> Staff Number: <strong> {{ staff_number }} </strong> </td>
+	          <td> Staff Number: <strong> {{ staff_number }} </strong> ({{ staff_type }}, {{ staff_length }} m)</td>
+	        </tr>
+			<tr>
+	        	<td>Observation Date: {{ observation_date }}</td>
+	        	<td>Staff Owner: <strong> {{ authority }} </strong></td>
 	        </tr>	
 	        <tr>
-	        	<td>Observation Date: {{observation_date }}</td>
-	        	<td>Level Number: <strong> {{ level_number}} </strong></td>
+	        	<td> </td>
+	        	<td>Level Number: <strong> {{ level_number }} </strong></td>
 	        </tr>
 	    	<tr></tr>
 	    	<tr>
@@ -127,7 +139,12 @@
 	    <table>
 	    <hr>
 	    <p>Correction Factor: <strong>{{ScaleFactor|floatformat:6}} </strong>at 25.0°C. Note that Correction Factor is temperature dependent.</p>
+		<p>Apply the correction factor to your observed height difference (&Delta;H_observed) as <br>
+			&rarr; &Delta;H_corrected = ((((T_observed - 25.0)*CoE)+1)*{{ScaleFactor|floatformat:6}})*&Delta;H_observed, <br> 
+			&rarr; where T_observed is the observed temperature and CoE is the coefficient of expansion of your staff.
+		</p>
 		<p>Graduation Uncertainty: <strong>{{GraduationUncertainty|floatformat:5}} </strong> metres at 95% confidence interval</p>
+		<p>**Check for possible warnings in the next page.**</p>
 		<hr>
 	    <table>
 	    	<tr style="text-align:center;">
@@ -191,11 +208,15 @@
 	        </tr>
 	        <tr>
 	          <td> Unique ID: <strong>{{ update_index }} </strong> </td>
-	          <td> Staff Number: <strong> {{ staff_number }} </strong> </td>
+	          <td> Staff Number: <strong> {{ staff_number }} </strong> ({{ staff_type }}, {{ staff_length }} m)</td>
 	        </tr>	
 	        <tr>
-	        	<td>Observation Date: {{observation_date }}</td>
-	        	<td>Level Number: <strong> {{ level_number}} </strong></td>
+	        	<td>Observation Date: {{ observation_date }}</td>
+	        	<td>Staff Owner: <strong> {{ authority }} </strong></td>
+	        </tr>	
+	        <tr>
+	        	<td> </td>
+	        	<td>Level Number: <strong> {{ level_number }} </strong></td>
 	        </tr>
 	    	<tr></tr>
 	    	<tr>
@@ -205,7 +226,7 @@
 	    <table>
 	    <hr>
 	    <p>Correction Factor = <strong>{{ScaleFactor0|floatformat:6}}(1+({{thermal_coefficient|floatformat:5}}(Temperature-{{average_temperature}}))) </strong></p>
-		<p>Correction Factor = <strong> 1.00000 </strong> when the temperature is <strong>{{ Temperatre_at_1 }}°C</strong></p>
+		<p>Correction Factor = <strong> 1.00000 </strong> when the temperature is <strong>{{ Temperatre_at_1 }}°C</strong>. {% if Temperatre_at_1 > 50.0 or Temperatre_at_1 < -10.0%} <span class="warning"> Warning! The correction factor appears to exceed the excepted temperature range between -10°C and 55°C. Please check for any possible errors in meta data information and staff readings.</span> {% endif %}</p>
 		<hr>
 	    <table width=75%>
 	    	<tr style="text-align:center;">
