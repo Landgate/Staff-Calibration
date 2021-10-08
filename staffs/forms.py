@@ -21,9 +21,16 @@ class StaffTypeForm(forms.ModelForm):
         return self.cleaned_data['staff_type'].strip()
 
 class StaffForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        # super().__init__(*args, **kwargs)
+        user = kwargs.pop('user', None)
+        super(StaffForm, self).__init__(*args, **kwargs)   
+        self.base_fields['staff_owner'].initial = user.authority
+        #self.fields['staff_type'].queryset = StaffType.objects.all()
+
     class Meta:
         model = Staff
-        fields = ['staff_number','staff_type', 'staff_length', 'correction_factor','calibration_date']
+        fields = ['staff_number','staff_type', 'staff_length', 'staff_owner', 'correction_factor','calibration_date']
         
         widgets = {
             'staff_number' : forms.TextInput(attrs={'placeholder':'Enter you staff serial number'}),
@@ -43,9 +50,6 @@ class StaffForm(forms.ModelForm):
                 'invalid': 'Please enter a scale factor, if known'
             },
         }
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['staff_type'].queryset = StaffType.objects.all()
 
     def clean_staff_number(self):
         return self.cleaned_data['staff_number'].strip()
@@ -77,9 +81,16 @@ class StaffForm(forms.ModelForm):
             
 
 class DigitalLevelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        # super().__init__(*args, **kwargs)
+        user = kwargs.pop('user', None)
+        super(DigitalLevelForm, self).__init__(*args, **kwargs)   
+        self.base_fields['level_owner'].initial = user.authority
+        #self.fields['staff_type'].queryset = StaffType.objects.all()
+
     class Meta:
         model = DigitalLevel
-        fields = ['level_number','level_make', 'level_model']
+        fields = ['level_number','level_make', 'level_model', 'level_owner']
         
         widgets = {
             'level_number' : forms.TextInput(attrs={'placeholder':'Enter you level serial number'}),
@@ -99,7 +110,7 @@ class StaffUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Staff
-        fields = ['user', 'staff_number','staff_type', 'staff_length']
+        fields = ['user', 'staff_number','staff_type', 'staff_length', 'staff_owner']
         readonly = ['correction_factor','calibration_date']
         widgets = {
             'staff_number' : forms.TextInput(attrs={'placeholder':'Enter you staff serial number'}),
@@ -126,6 +137,13 @@ class StaffUpdateForm(forms.ModelForm):
     
     def clean_staff_number(self):
         return self.cleaned_data['staff_number'].strip()
+
+    def clean_staff_length(self):
+        staff_length = self.cleaned_data['staff_length']
+        if staff_length < 3 and staff_length > 7:
+            raise forms.ValidationError('Your staff may be too short or too long') 
+        else:
+            return staff_length # return self.cleaned_data['staff_length'].strip()
 
     def clean_correction_factor(self):
         correction_factor = self.cleaned_data['correction_factor']
@@ -154,7 +172,7 @@ class StaffUpdateForm(forms.ModelForm):
 class DigitalLevelUpdateForm(forms.ModelForm):
     class Meta:
         model = DigitalLevel
-        fields = ['user', 'level_number','level_make', 'level_model']
+        fields = ['user', 'level_number','level_make', 'level_model', 'level_owner']
         
         widgets = {
             'level_number' : forms.TextInput(attrs={'placeholder':'Enter you level serial number'}),

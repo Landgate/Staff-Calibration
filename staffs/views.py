@@ -30,10 +30,12 @@ def index(request):
 @login_required(login_url="/accounts/login")
 def staff_list(request):
     user = request.user
+    print(user.authority)
     if user.is_staff:
         staff_list = Staff.objects.all().order_by('user__authority', '-calibration_date')
     else:
-        staff_list = Staff.objects.filter(user__authority = user.authority).order_by('-calibration_date')
+        # staff_list = Staff.objects.filter(user__authority = user.authority).order_by('-calibration_date')
+        staff_list = Staff.objects.filter(staff_owner = user.authority).order_by('-calibration_date')
 
     context = {
         'staff_lists': staff_list
@@ -50,7 +52,7 @@ def staff_detail(request, id):
 
 @login_required(login_url="/accounts/login")
 def staff_create(request):
-    form = StaffForm(request.POST or None)
+    form = StaffForm(request.POST or None, user= request.user)
     if form.is_valid():
         this_staff = form.save(commit=False)
         this_staff.user = request.user
@@ -155,7 +157,8 @@ def level_list(request):
     if user.is_staff:
         level_list = DigitalLevel.objects.all()
     else:
-        level_list = DigitalLevel.objects.filter(user__authority = user.authority).order_by('level_number')[:10]
+        #level_list = DigitalLevel.objects.filter(user__authority = user.authority).order_by('level_number')[:10]
+        level_list = DigitalLevel.objects.filter(level_owner = user.authority).order_by('level_number')[:10]
     context = {
         'level_lists': level_list
         }
@@ -171,7 +174,7 @@ def level_detail(request, id):
 
 @login_required(login_url="/accounts/login")
 def level_create(request):
-    form = DigitalLevelForm(request.POST or None)
+    form = DigitalLevelForm(request.POST or None, user= request.user)
     if form.is_valid():
         this_level = form.save(commit=False)
         this_level.user = request.user

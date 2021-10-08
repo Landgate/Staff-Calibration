@@ -33,6 +33,7 @@ class Staff(models.Model):
     staff_length = models.FloatField(
         validators = [MinValueValidator(1.0), MaxValueValidator(7.0)], 
         help_text="Staff length in meters")
+    staff_owner = models.ForeignKey(Authority, on_delete = models.SET_NULL, null = True)
     standard_temperature = models.FloatField(default=25.0)
     correction_factor = models.FloatField(null=True, blank=True)
     calibration_date = models.DateField(null=True, blank=True)
@@ -56,7 +57,7 @@ class DigitalLevel(models.Model):
     level_number = models.CharField(max_length=15, help_text="Enter the instrument serial number", unique=True)
     level_make = models.CharField(max_length=15, help_text="e.g., Leica")
     level_model = models.CharField(max_length=15, help_text="e.g., LS15 or DNA03")
-
+    level_owner = models.ForeignKey(Authority, on_delete = models.SET_NULL, null = True)
     class Meta:
         ordering = ['level_number','level_make']
     
