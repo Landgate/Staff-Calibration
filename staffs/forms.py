@@ -26,12 +26,13 @@ class StaffForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(StaffForm, self).__init__(*args, **kwargs)   
         self.base_fields['staff_owner'].initial = user.authority
-        #self.fields['staff_type'].queryset = StaffType.objects.all()
+        if not user.is_staff:
+            self.fields['staff_owner'].disabled = True
 
     class Meta:
         model = Staff
         fields = ['staff_number','staff_type', 'staff_length', 'staff_owner', 'correction_factor','calibration_date']
-        
+        readonly = ['correction_factor','calibration_date']
         widgets = {
             'staff_number' : forms.TextInput(attrs={'placeholder':'Enter you staff serial number'}),
             'staff_length' : forms.TextInput(attrs={'placeholder':'Enter length in meters. E.g., 4'}),
@@ -86,6 +87,8 @@ class DigitalLevelForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(DigitalLevelForm, self).__init__(*args, **kwargs)   
         self.base_fields['level_owner'].initial = user.authority
+        if not user.is_staff:
+            self.fields['level_owner'].disabled = True
         #self.fields['staff_type'].queryset = StaffType.objects.all()
 
     class Meta:
