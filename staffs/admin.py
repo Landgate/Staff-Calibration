@@ -8,7 +8,7 @@ from .models import (
 # Register your models here.
 @admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
-    list_display = ('user','staff_number', 'staff_type', 'staff_length','calibration_date')
+    list_display = ('user','staff_number', 'staff_owner', 'staff_type', 'staff_length','calibration_date')
 
 @admin.register(StaffType)
 class StaffTypeAdmin(admin.ModelAdmin):
