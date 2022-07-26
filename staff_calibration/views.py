@@ -13,6 +13,7 @@ from datetime import datetime
 from staffs.models import Staff
 from django.db.models import Q
 from django.conf import settings
+from django.db import IntegrityError
 #from accounts.models import CustomUser
 # Create your views here.
 
@@ -241,46 +242,49 @@ def calibrate(request):
                 staff_reading2 = preprocess_staff(staff_reading)
                 
                 # compute scale factor
-                CF, GradUnc, StaffCorrections, CF0, T_at_CF_1, Correction_Lists = process_correction_factor(staff_reading2, 
+                try:
+                    CF, GradUnc, StaffCorrections, CF0, T_at_CF_1, Correction_Lists = process_correction_factor(staff_reading2, 
                                                                                                             range_value, 
                                                                                                             Staff_Attributes)
-                # update calibration_update table
-                if not uCalibrationUpdate.objects.filter(update_index=update_index):
-                    uCalibrationUpdate.objects.create(
-                                    user = request.user,
-                                    staff_number=data['staff_number'], 
-                                    level_number=data['level_number'], 
-                                    calibration_date = observation_date, 
-                                    observer = observer,
-                                    processed_date = date.today(), 
-                                    correction_factor = round(CF,6), 
-                                    observed_temperature = ave_temperature,
-                                    correction_factor_temperature = this_staff.standard_temperature)
+                    # update calibration_update table
+                    if not uCalibrationUpdate.objects.filter(update_index=update_index):
+                        uCalibrationUpdate.objects.create(
+                                        user = request.user,
+                                        staff_number=data['staff_number'], 
+                                        level_number=data['level_number'], 
+                                        calibration_date = observation_date, 
+                                        observer = observer,
+                                        processed_date = date.today(), 
+                                        correction_factor = round(CF,6), 
+                                        observed_temperature = ave_temperature,
+                                        correction_factor_temperature = this_staff.standard_temperature)
 
-                    this_staff.calibration_date = observation_date
-                    this_staff.correction_factor = round(CF,6)
-                    this_staff.save()
-                
-                # Prepare to populate data
-                context = {
-                    'update_index': update_index,
-                    'observation_date': observation_date.strftime('%d/%m/%Y'),
-                    'staff_number': staff_number,
-                    'staff_length': Staff.objects.get(staff_number=staff_number).staff_length,
-                    'staff_type': StaffType.objects.get(staff__staff_number=staff_number).staff_type,
-                    'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
-                    'level_number': level_number,
-                    'observer': observer,
-                    'authority': authority,
-                    'average_temperature': ave_temperature,
-                    'ScaleFactor': CF,
-                    'GraduationUncertainty': GradUnc,
-                    'StaffCorrections': StaffCorrections,
-                    'ScaleFactor0': CF0,
-                    'Temperatre_at_1': T_at_CF_1,
-                    'CorrectionList': Correction_Lists,
-                }
-                return render(request, 'staff_calibration/staff_calibration_report.html', context)
+                        this_staff.calibration_date = observation_date
+                        this_staff.correction_factor = round(CF,6)
+                        this_staff.save()
+                    # Prepare to populate data
+                    context = {
+                        'update_index': update_index,
+                        'observation_date': observation_date.strftime('%d/%m/%Y'),
+                        'staff_number': staff_number,
+                        'staff_length': Staff.objects.get(staff_number=staff_number).staff_length,
+                        'staff_type': StaffType.objects.get(staff__staff_number=staff_number).staff_type,
+                        'thermal_coefficient':StaffType.objects.get(staff__staff_number=staff_number).thermal_coefficient*10**-6,
+                        'level_number': level_number,
+                        'observer': observer,
+                        'authority': authority,
+                        'average_temperature': ave_temperature,
+                        'ScaleFactor': CF,
+                        'GraduationUncertainty': GradUnc,
+                        'StaffCorrections': StaffCorrections,
+                        'ScaleFactor0': CF0,
+                        'Temperatre_at_1': T_at_CF_1,
+                        'CorrectionList': Correction_Lists,
+                    }
+                    return render(request, 'staff_calibration/staff_calibration_report.html', context)
+                except IntegrityError:
+                    messages.warning(request, '** Processing error! Please check your csv file to confirm with the requirements.')
+                    return render(request, 'staff_calibration/staff_calibrate.html', {'form':form})
                 #return redirect('staff_calibration:staff-guide')
             else:
                 messages.warning(request, 'No range measurements exist for the month of '+month+'. Please try again later or contact Landgate')
