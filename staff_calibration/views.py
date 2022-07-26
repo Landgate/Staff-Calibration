@@ -108,6 +108,29 @@ def generate_correction_factor(uncorrected_scale_factor, staff_meta):
 def process_correction_factor(data_set, reference_set, meta):
     data_set = np.array(data_set, dtype=object)
     reference_set = np.array(reference_set, dtype=object)
+
+    # order of pins
+    order = reference_set[:,0]
+    
+    # Find common pin numbers
+    arr, ref_ind, dat_ind = np.intersect1d(reference_set[:,0], data_set[:,0], return_indices=True)
+    reference_set = reference_set[ref_ind,:]
+    data_set = data_set[dat_ind,:]
+
+    # order them as per pin numbers
+    ref_set2 = []
+    dat_set2 = []
+    for row in order:
+        try:
+            ref_set2.append(reference_set[reference_set[:,0]==row][0].tolist())
+            dat_set2.append(data_set[data_set[:,0]==row][0].tolist())
+        except:
+            pass
+    del reference_set
+    del data_set
+    # array them
+    reference_set = np.array(ref_set2,dtype=object)
+    data_set = np.array(dat_set2,dtype=object)
     # output tables
     adjusted_corrections = []
     #allocate arrays
@@ -287,6 +310,7 @@ def generate_report_view(request, update_index):
     # Find the range value from the range database
     month = observation_date.strftime('%b')
     range_value = RangeParameters.objects.values_list('pin', month)
+
     if range_value.exists():
         # extract data
         staff_reading = raw_data.values_list(
@@ -294,7 +318,7 @@ def generate_report_view(request, update_index):
         staff_reading = [list(x) for x in staff_reading]
         # preprocess data        
         staff_reading2 = preprocess_staff(staff_reading)
-                
+
         # compute scale factor
         CF, GradUnc, StaffCorrections, CF0, T_at_CF_1, Correction_Lists = process_correction_factor(staff_reading2, 
                                                                                                     range_value, 
