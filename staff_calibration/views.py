@@ -54,6 +54,13 @@ def user_staff_delete(request, update_index):
         messages.error(request, 'This action cannot be performed. Contact Landgate.')
         return redirect('staff_calibration:user-staff-lists')
 
+# Check if its number 
+def isnumber(x):
+    try:
+        return type(int(x)) == int
+    except ValueError:
+        return False
+
 # handle data file
 def handle_uploaded_file(f):
     root_dir = os.path.join(settings.UPLOAD_ROOT, 'client_data')
@@ -188,12 +195,14 @@ def calibrate(request):
                 # if thisFile.name.endswith('.csv') or thisFile.name.endswith('.txt'):
                 #     io_string = io.StringIO(thisFile.read().decode('utf-8'))
                 if thisFile.endswith('.csv') or thisFile.endswith('.txt'):
+                    has_header = True
                     with open(thisFile, 'r') as f:
+                        # read csv
                         csv_reader = csv.reader(f, delimiter=',', quotechar="|")
-                        next(csv_reader)
                         staff_reading = []
                         for row in csv_reader:
-                            staff_reading.append(row)
+                            if isnumber(row[0]):
+                                staff_reading.append(row)
                 # save raw data to model
                 if uRawDataModel.objects.filter(update_index=update_index).count()<1:
                     for pin_number, reading, no_of_readings, stdev in staff_reading:
