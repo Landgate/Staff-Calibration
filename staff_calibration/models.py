@@ -57,7 +57,7 @@ class uRawDataModel(models.Model):
     update_index = models.CharField(max_length=50)
     
     class Meta:
-        ordering = ['calibration_date']
+        ordering = ['-calibration_date', 'pin_number']
         indexes = [
             models.Index(fields=['update_index']), 
         ]
