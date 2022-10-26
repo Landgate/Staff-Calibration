@@ -20,7 +20,7 @@ Install ```Python 3``` or ```Anaconda 3```. Note that this application has been 
 
 Install a python package called "virtualenv" from the command prompt
 ```
-pip install virtualenv 
+	pip install virtualenv 
 ```
 
 In your working directory (e.g., "C:/Data/Development/django-projects/"), create a virtual python environment called "venv" in the command prompt and activate the virtual environment:
