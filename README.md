@@ -61,7 +61,7 @@ Open the internet browser and copy the development server address to view the we
 
 ### License
 
-Copyright 2020-2021 Landgate
+Copyright 2020-2021 Western Australian Land Information Authority
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
